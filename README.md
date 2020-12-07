@@ -1,1 +1,1 @@
-# azure-governance-made-simple
+# Azure Governance made simple
