@@ -12,13 +12,13 @@ It will be divided into two parts, the first dealing with more basic topics and 
  * [Why is governance necessary?](guide/basics.md)
  * [Overview of Azure native features for cloud governance](guide/storage.md)
  * [Governance architecture in Azure](guide/networking.md)
-5. [Azure Active Directory](guide/monitoring.md)
-6. [Naming standards](guide/disasterrecovery.md)
-7. [Azure subscription](guide/governance.md)
-8. [Resource Groups](guide/automation.md)
-9. [Resource Tags](guide/security.md)
-10. [RBAC](guide/misc.md)
-11. [Resource Lock](guide/misc.md)
+2. [Azure Active Directory](guide/monitoring.md)
+3. [Naming standards](guide/disasterrecovery.md)
+4. [Azure subscription](guide/governance.md)
+5. [Resource Groups](guide/automation.md)
+6. [Resource Tags](guide/security.md)
+7. [RBAC](guide/misc.md)
+8. [Resource Lock](guide/misc.md)
 
 ## Advanced governance topics
 
