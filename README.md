@@ -22,17 +22,17 @@ It will be divided into two parts, the first dealing with more basic topics and 
 
 ## Advanced governance topics
 
-12. [Azure Policy](guide/misc.md)
-13. [Azure policy best practices](guide/misc.md)
-14. [ARM Templates](guide/misc.md)
-15. [Azure Blueprints](guide/misc.md)
-16. [Azure Resource Graph](guide/misc.md)
-17. [Azure Management Group](guide/misc.md)
-18. [Azure Cost Management](guide/misc.md)
+9. [Azure Policy](guide/misc.md)
+   * [Azure policy best practices](guide/misc.md)
+10. [ARM Templates](guide/misc.md)
+11. [Azure Blueprints](guide/misc.md)
+12. [Azure Resource Graph](guide/misc.md)
+13. [Azure Management Group](guide/misc.md)
+14. [Azure Cost Management](guide/misc.md)
 
 ## Conclusion
 
-19. [Conclusion](guide/misc.md)
+15. [Conclusion](guide/misc.md)
 
 > [@ricmmartins](http://twitter.com/ricmmartins)
 
