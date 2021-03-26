@@ -9,9 +9,9 @@ It will be divided into two parts, the first dealing with more basic topics and 
 ## Basic governance topics
 
 1. [Governance Overview](guide/datacenters.md)
- * [Why is governance necessary?](guide/basics.md)
- * [Overview of Azure native features for cloud governance](guide/storage.md)
- * [Governance architecture in Azure](guide/networking.md)
+   * [Why is governance necessary?](guide/basics.md)
+   * [Overview of Azure native features for cloud governance](guide/storage.md)
+   * [Governance architecture in Azure](guide/networking.md)
 2. [Azure Active Directory](guide/monitoring.md)
 3. [Naming standards](guide/disasterrecovery.md)
 4. [Azure subscription](guide/governance.md)
