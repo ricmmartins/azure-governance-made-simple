@@ -8,31 +8,31 @@ It will be divided into two parts, the first dealing with more basic topics and 
 
 ## Basic governance topics
 
-1. [Governance Overview](guide/datacenters.md)
-   * [Why is governance necessary?](guide/basics.md)
-   * [Overview of Azure native features for cloud governance](guide/storage.md)
-   * [Governance architecture in Azure](guide/networking.md)
-2. [Azure Active Directory](guide/monitoring.md)
-3. [Naming standards](guide/disasterrecovery.md)
-4. [Azure subscription](guide/governance.md)
-5. [Resource Groups](guide/automation.md)
-6. [Resource Tags](guide/security.md)
-7. [RBAC](guide/misc.md)
-8. [Resource Lock](guide/misc.md)
+1. [Governance Overview](guide/governance-overview.md)
+   * [Why is governance needed?](guide/governance-needed.md)
+   * [Overview of Azure native features for cloud governance](guide/overview-native-features.md)
+   * [Governance architecture in Azure](guide/governance-architecture.md)
+2. [Azure Active Directory](guide/aad.md)
+3. [Naming standards](guide/naming.md)
+4. [Azure subscription](guide/subscription.md)
+5. [Resource Groups](guide/resource-groups.md)
+6. [Resource Tags](guide/resource-tags.md)
+7. [RBAC](guide/rbac.md)
+8. [Resource Lock](guide/resource-lock.md)
 
 ## Advanced governance topics
 
-9. [Azure Policy](guide/misc.md)
-   * [Azure policy best practices](guide/misc.md)
-10. [ARM Templates](guide/misc.md)
-11. [Azure Blueprints](guide/misc.md)
-12. [Azure Resource Graph](guide/misc.md)
-13. [Azure Management Group](guide/misc.md)
-14. [Azure Cost Management](guide/misc.md)
+9. [Azure Policy](guide/policy.md)
+   * [Azure policy best practices](guide/policy-best-practices.md)
+10. [ARM Templates](guide/arm.md)
+11. [Azure Blueprints](guide/blueprints.md)
+12. [Azure Resource Graph](guide/resource-graph.md)
+13. [Azure Management Group](guide/management-group.md)
+14. [Azure Cost Management](guide/cost-management.md)
 
 ## Conclusion
 
-15. [Conclusion](guide/misc.md)
+15. [Conclusion](guide/conclusion.md)
 
 
 
