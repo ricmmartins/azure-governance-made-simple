@@ -1,7 +1,7 @@
 # Governance Overview
 
-## Why is governance needed?
 
+## Why is governance needed?
 
 ![Why is governance needed?](../images/governance-needed.png)
 
