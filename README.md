@@ -34,7 +34,6 @@ It will be divided into two parts, the first dealing with more basic topics and 
 
 15. [Conclusion](guide/misc.md)
 
-> [@ricmmartins](http://twitter.com/ricmmartins)
 
 
 
