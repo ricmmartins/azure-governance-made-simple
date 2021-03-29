@@ -8,8 +8,8 @@ It will be divided into two parts, the first dealing with more basic topics and 
 
 ## Basic governance topics
 
-1. [Governance Overview](guide/governance-overview.md)
-   * [Why is governance needed?](guide/governance-needed.md)
+1. [Governance Overview](guide/governance-overview.md#governance-overview)
+   * [Why is governance needed?](guide/governance-overview.md#why-is-governance-needed)
    * [Overview of Azure native features for cloud governance](guide/overview-native-features.md)
    * [Governance architecture in Azure](guide/governance-architecture.md)
 2. [Azure Active Directory](guide/aad.md)
