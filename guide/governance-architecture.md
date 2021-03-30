@@ -2,7 +2,7 @@
 
 Let's add these governance features to a diagram:
 
-![governance-diagram](../images/governance-diagram.svg)
+![governance-diagram](../images/governance-diagram.png)
 
 Think of multiple development teams or business units that want to consume Azure resources to meet their specific business requirements. How many of these people, especially DevOps, will readily know how to properly design and configure network components?
 
