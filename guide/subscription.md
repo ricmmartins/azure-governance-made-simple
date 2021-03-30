@@ -31,13 +31,13 @@ As described in [this link](https://docs.microsoft.com/en-us/azure/cloud-adoptio
 
 Basically, the landing zone will deal with a set of considerations and recommendations based on some [critical design areas](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/design-guidelines#critical-design-areas).
 
-In the landing zone, the choice of network topology used is also an important point in the governance structuring process, as a topology such as Hub & Spoke, for example, may be inserted in the context of signatures as follows:
+In the landing zone, the choice of network topology used is also an important point in the governance structuring process, as a topology such as Hub and Spoke for example may be inserted in the context of subscriptions as follows:
 
 ![hub-spoke](../images/hub-spoke.png)
 
-* Subscription to **shared services** (Hub Virtual Network)
-* Subscription to the **production** environment (Spoke 1 Virtual Network)
-* Subscription to the **non-production** environment (Spoke2 Virtual Network)
+* A first subscription to **shared services** (Hub Virtual Network)
+* A second subscription to the **production** environment (Spoke 1 Virtual Network)
+* A third subscription to the **non-production** environment (Spoke2 Virtual Network)
 * Some references about Hub and Spoke topology:
   - [https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke ](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke )
   - [https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/software-defined-network/hub-spoke](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/software-defined-network/hub-spoke)
