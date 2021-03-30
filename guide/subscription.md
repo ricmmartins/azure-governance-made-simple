@@ -36,8 +36,8 @@ In the landing zone, the choice of network topology used is also an important po
 ![hub-spoke](../images/hub-spoke.png)
 
 * Subscription to **shared services** (Hub Virtual Network)
-*	Subscription to the **production** environment (Spoke 1 Virtual Network)
-*	Subscription to the **non-production** environment (Spoke2 Virtual Network)
-*	Some references about the Hub & Spoke topology:
-   - [https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke ](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke )
-   - [https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/software-defined-network/hub-spoke](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/software-defined-network/hub-spoke)
+* Subscription to the **production** environment (Spoke 1 Virtual Network)
+* Subscription to the **non-production** environment (Spoke2 Virtual Network)
+* Some references about the Hub & Spoke topology:
+  - [https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke ](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke )
+  - [https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/software-defined-network/hub-spoke](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/software-defined-network/hub-spoke)
