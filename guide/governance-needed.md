@@ -2,31 +2,16 @@
 
 ## Why is governance needed?
 
-![Why is governance needed?](../images/governance-needed.png)
+![native tools](../images/overview-native-tools.png)
 
-Companies are adopting the cloud to be more agile and save money. There is pressure to transform and innovate digitally, so that you no longer have time to focus on your own infrastructure. You want to focus on making your customers happy by providing high quality services with the support of your engineering teams. So there is a natural shift to DevOps in a cloud environment, where engineers will more quickly provide the resources needed to support a solution.
+The resources we have in the Azure portfolio to deliver this level of control are what you see in the image above. All of these are native features of the platform, in other words, nothing here is a different product that you need to purchase or deploy in your cloud environment. The moment you create your first subscription, these features are there for you to use right away and are completely free.
 
-However, this agility and easy access to resources comes at a price and many companies are struggling to control this Cloud Sprawl. We have seen this before, in early 2000, with the introduction of virtualization and the proliferation of virtualization.
+**Policy:** This is where you will define what can and cannot be deployed in the cloud. He will constantly check your signatures and resources to ensure that everything complies with corporate rules.
 
-How did the industry react to this expansion? We jumped in front of the developers and the operations teams and stopped them before things got out of hand. We then introduced a formal process for these teams to follow where they should fill out a form so that the infra team could set up everything and in 2 weeks they would have access to their environment.
+**Blueprints:** It helps you to configure your cloud environment so that it is managed properly and deployed in a repeatable manner. It allows a kind of implementation of governance as a code. Subscriptions are made available to development teams or departments as they are created. The goal here is that, when teams are presented with a subscription controlled by Blueprints, the amount of time they need to take from initial subscription settings, permits, policies, etc. to the implementation of the project in production decreases dramatically.
 
-However, this approach in the cloud age slows things down and you sacrifice speed to be in control.
-In a cloud-native governance model, you get both speed and control at the same time. So instead of jumping in front of the DevOps team to make sure they’re doing the right things, the cloud platform itself will enforce that control on your behalf. This allows them to have full access to the platform through a self-service model that is essential to maintain agility and speed.
+**Resource Graph:** This is a Big Data technology where we bring the configurations of all your resources from your cloud environment and offer you, through a structured query language, the ability to explore your environment very quickly, allowing visibility at scale over all your environment.
+Management Group: If your organization has many subscriptions, you may need a way to efficiently manage access, policies and compliance for those subscriptions. This can be done through the Management Group.
 
-You can guarantee that your teams will deploy only approved resources and anything outside these rules will be effectively denied. That way, you keep your costs predictable and more in line with your budget.
-
-![Traditional approach](../images/traditional-approach.png)
-
-:bookmark: *Traditional approach, sacrificing speed for control*
-
-However, this approach in the cloud age slows things down and you sacrifice speed to be in control.
-In a cloud-native governance model, you get both speed and control at the same time. So instead of jumping in front of the DevOps team to make sure they’re doing the right things, the cloud platform itself will enforce that control on your behalf. This allows them to have full access to the platform through a self-service model that is essential to maintain agility and speed.
-
-
-You can guarantee that your teams will deploy only approved resources and anything outside these rules will be effectively denied. That way, you keep your costs predictable and more in line with your budget.
-
-![Cloud Governance Approach](../images/cloud-governance-approach.png)
-
-:bookmark: *Native cloud governance model, with speed and control together*
-
+**Cost Management:** Helps you understand your Azure invoice, monitor and control spending, and optimize resource usage. It allows you to analyze costs, create and manage budgets, export data, examine recommendations and act on them.
 
