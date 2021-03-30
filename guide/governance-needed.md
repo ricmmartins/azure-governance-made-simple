@@ -9,8 +9,7 @@ However, this agility and easy access to resources comes at a price and many com
 How did the industry react to this expansion? We jumped in front of the developers and the operations teams and stopped them before things got out of hand. We then introduced a formal process for these teams to follow where they should fill out a form so that the infra team could set up everything and in 2 weeks they would have access to their environment.
 
 ![traditional-approach](../images/traditional-approach.png)
-
-<div align="center">Traditional approach, sacrificing speed for control</div>
+<div align="center"><em>Traditional approach, sacrificing speed for control</em></div>
 
 However, this approach in the cloud age slows things down and you sacrifice speed to be in control.
 
@@ -19,5 +18,4 @@ In a cloud-native governance model, you get both speed and control at the same t
 You can guarantee that your teams will deploy only approved resources and anything outside these rules will be effectively denied. That way, you keep your costs predictable and more in line with your budget.
 
 ![cloud-governance-approach](../images/cloud-governance-approach.png)
-
-> *Native cloud governance model, with speed and control together*
+<div align="center"><em>Native cloud governance model, with speed and control together</em></div>
