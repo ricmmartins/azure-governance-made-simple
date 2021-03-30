@@ -1,5 +1,7 @@
 ## Resource Locks
 
+Resource Locks are a feature that allows you to avoid accidentally deleting or modifying critical resources. The lock overrides any permissions the user might have.
+
 ![resource-lock](../images/resource-lock.png)
 
 When you apply a lock on a parent scope, all resources within that scope inherit the same lock. Even the features you add later inherit the parent's lock. The most restrictive block on inheritance takes precedence.
