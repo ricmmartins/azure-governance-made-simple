@@ -13,7 +13,7 @@ Even within Cost Management, you can view [Azure Advisor](https://docs.microsoft
 In addition to all this, an additional feature that may be interesting if you are in a multi-cloud strategy is to allow you to log in to your AWS account and manage multi-cloud billing through a single tool.
 
 References:
-[https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview](https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview) 
-[https://docs.microsoft.com/en-us/azure/architecture/framework/cost](https://docs.microsoft.com/en-us/azure/architecture/framework/cost)
+* [https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview](https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview) 
+* [https://docs.microsoft.com/en-us/azure/architecture/framework/cost](https://docs.microsoft.com/en-us/azure/architecture/framework/cost)
 
 
