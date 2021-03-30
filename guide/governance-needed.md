@@ -16,6 +16,7 @@ In a cloud-native governance model, you get both speed and control at the same t
 You can guarantee that your teams will deploy only approved resources and anything outside these rules will be effectively denied. That way, you keep your costs predictable and more in line with your budget.
 
 ![Traditional approach](../images/traditional-approach.png)
+
 *Traditional approach, sacrificing speed for control*
 
 However, this approach in the cloud age slows things down and you sacrifice speed to be in control.
@@ -25,6 +26,7 @@ In a cloud-native governance model, you get both speed and control at the same t
 You can guarantee that your teams will deploy only approved resources and anything outside these rules will be effectively denied. That way, you keep your costs predictable and more in line with your budget.
 
 ![Cloud Governance Approach](../images/cloud-governance-approach.png)
+
 *Native cloud governance model, with speed and control together*
 
 
