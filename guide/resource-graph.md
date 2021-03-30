@@ -8,7 +8,7 @@ There are a few challenges today when it comes to getting visibility of all your
 * Query resources (without worrying about timeouts & throttling), including filtering, grouping and sorting of resources by resource properties
 * Resource graph provides a way to interactively explore resources, so you can assess the impact of applying policies in vast cloud environment
 
-Resource Graph is the tool that comes to cover those needs allowing you to query and explore your resources in realtime.
+Resource Graph is the tool that comes to cover those needs allowing you to query and explore your resources in real time.
 
 ![resource-graph-2](../images/resource-graph-2.png)
 
