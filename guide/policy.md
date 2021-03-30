@@ -25,31 +25,28 @@ Azure Policy takes action and scans
 
 ![azure-policy-4](../images/azure-policy-4.png)
 
-**Evaluation order**
+**Order of evaluation**
 
-Requests to create or update a resource through Azure Resource Manager are evaluated first by the Policy. The policy creates a list of all the assignments that apply to the resource and evaluates the resource against each definition. The policy processes several of the effects before forwarding the request to the appropriate Resource Provider. This avoids unnecessary processing by a Resource Provider when a resource does not meet the Policy's projected governance controls.
+Requests to create or update a resource through Azure Resource Manager are evaluated by Policy first. Policy creates a list of all assignments that apply to the resource and then evaluates the resource against each definition. Policy processes several of the effects before handing the request to the appropriate Resource Provider. Doing so prevents unnecessary processing by a Resource Provider when a resource doesn't meet the designed governance controls of Policy.
 
 **Disabled** is checked first to determine whether the policy rule should be evaluated.
 
-**Append** is then evaluated. Since append can change the request, a change made by append can prevent an audit or denial effect from triggering.
+**Append** is then evaluated. Since append can change the request, a change made by append can prevent an audit or denial effect from triggering. Append is used to add additional fields to the requested resource during creation or update. A common example is to add tags to resources such as costCenter or to specify allowed IPs for a storage resource.
 
-Append is used to add additional fields to the requested resource during creation or update. A common example is to add tags to resources such as costCenter or to specify allowed IPs for a storage resource.
+**Deny** is then evaluated. When assessing denial before the audit, double registration of an unwanted appeal is avoided. Deny is used to avoid a resource request that does not match the standards set through a policy definition and the request fails.
 
-**Deny** is then evaluated. When assessing denial before the audit, double registration of an unwanted appeal is avoided.
+**Audit** is then evaluated before the request goes to the Resource Provider. The audit is used to create a warning event in the activity log when evaluating an unsupported resource, but not for the request.
 
-Deny is used to avoid a resource request that does not match the standards set through a policy definition and the request fails.
-
-**Audit** is then evaluated before the request goes to the Resource Provider.
-The audit is used to create a warning event in the activity log when evaluating an unsupported resource, but not for the request.
 After the resource provider returns a success code, AuditIfNotExists and DeployIfNotExists evaluate to determine whether additional compliance logging or action is required.
 
 **AuditIfNotExists**
 
-AuditIfNotExists enables auditing on resources that match the if condition, but does not have the components specified in the details of the then condition.
+AuditIfNotExists enables auditing on resources that match the **if** condition, but does not have the components specified in the **details** of the **then** condition.
 
 **DeployIfNotExists**
 
 Similar to AuditIfNotExists, DeployIfNotExists performs a model deployment when the condition is met.
+
 Reference: [https://docs.microsoft.com/en-us/azure/governance/policy/overview](https://docs.microsoft.com/en-us/azure/governance/policy/overview) 
 
 
