@@ -13,7 +13,7 @@ The policy focuses on the properties of resources during deployment and for exis
 
 A very interesting new feature is the VM guest policy which extends the policy's capacity to the resources running within your VMs.
 
-![azure-policy-1](../images/azure-policy-1.png =350x)
+![azure-policy-1](../images/azure-policy-1.png)
 
 This is how Azure Policy can help with governance.
 
