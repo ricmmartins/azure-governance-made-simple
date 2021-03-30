@@ -3,7 +3,9 @@
 
 ## Why is governance needed?
 
-<img src="../images/governance-needed.png">
+<img src="../images/governance-needed.png">{
+  float:center;
+}
 
 ![Why is governance needed?](../images/governance-needed.png)
 
