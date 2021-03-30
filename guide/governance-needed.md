@@ -10,7 +10,7 @@ How did the industry react to this expansion? We jumped in front of the develope
 
 ![traditional-approach](../images/traditional-approach.png)
 
-> *Traditional approach, sacrificing speed for control*
+<center>Traditional approach, sacrificing speed for control</center>
 
 However, this approach in the cloud age slows things down and you sacrifice speed to be in control.
 
