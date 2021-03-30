@@ -15,8 +15,9 @@ Below a sample on how Azure Policy can help with governance.
 
 ![azure-policy-1](../images/azure-policy-1.png)
 
-Your DevOps request to deploy resources in Azure for a given project using a pre-built JSON model to make things easier and faster. Let's say they want to deploy 5 G series VMs in Europe (high ratio of memory to CPU and are ideal for database servers) and 5 Ls in the USA (high disk transfer rate, ideal for big data and SQL)
-Azure Policy takes action and verifies
+Your DevOps request to deploy resources in Azure for a given project using a pre-built JSON model to make things easier and faster. Let's say they want to deploy 5 G series VMs in Europe (high ratio of memory to CPU and are ideal for database servers) and 5 Ls in the USA (high disk transfer rate, ideal for big data and SQL).
+
+Azure Policy takes action and verifies:
 
 ![azure-policy-2](../images/azure-policy-2.png)
 
