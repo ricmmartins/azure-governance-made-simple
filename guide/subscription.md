@@ -13,7 +13,7 @@ This image can help you understand a little about how the functions of Azure and
 
 ![ad-rbac-roles](../images/ad-rbac-roles.png)
 
-An Azure subscription has a trust relationship with the ADF to authenticate and authorize users, services and devices.
+An Azure subscription has a trust relationship with the AAD to authenticate and authorize users, services and devices.
 
 It is important to know that the same AAD tenant can have multiple signatures trusting him, but each signature can only confirm on a single AAD tenant. It means that you can have the same user base on the AAD tenant for different subscriptions.
 
