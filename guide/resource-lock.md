@@ -1,3 +1,4 @@
+## Resource Locks
 
 ![resource-lock](../images/resource-lock.png)
 
