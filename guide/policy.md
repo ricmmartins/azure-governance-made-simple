@@ -9,13 +9,11 @@ Through policies, you can control the types of resources that can be provisioned
 
 Azure Policy is a service that you use to create, assign and manage policy definitions. Policy definitions impose different rules and actions on your resources, so that those resources remain in compliance with your corporate standards and service level agreements.
 
-The policy focuses on the properties of resources during deployment and for existing resources. It performs an assessment of your resources, checking those that do not conform to the policy definitions you have.
+The policy focuses on the properties of resources during deployment and for existing resources. It performs an assessment of your resources, checking those that do not conform to the policy definitions you have. A very interesting new feature is the VM guest policy which extends the policy's capacity to the resources running within your VMs.
 
-A very interesting new feature is the VM guest policy which extends the policy's capacity to the resources running within your VMs.
+Below a sample on how Azure Policy can help with governance.
 
 ![azure-policy-1](../images/azure-policy-1.png)
-
-This is how Azure Policy can help with governance.
 
 Your DevOps request to deploy resources in Azure for a given project using a pre-built JSON model to make things easier and faster. Let's say they want to deploy 5 G series VMs in Europe (high ratio of memory to CPU and are ideal for database servers) and 5 Ls in the USA (high disk transfer rate, ideal for big data and SQL)
 Azure Policy takes action and verifies
