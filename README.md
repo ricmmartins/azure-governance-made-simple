@@ -1,7 +1,7 @@
 # Azure Governance made simple
 >Main topics about Azure Governance in a structured opensource "e-book" 
 
-![azure_governance](../images/azure_governance.png)
+![azure_governance](/images/azure_governance.png)
 
 This content was made with the aim of raising awareness about the resources available in Azure that will help organizations to be more agile in implementing controls as well as taking a more proactive approach when dealing with governance.
 
