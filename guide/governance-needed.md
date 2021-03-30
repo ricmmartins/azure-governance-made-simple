@@ -2,9 +2,8 @@
 
 ## Why is governance needed?
 
-<div align="center">
 ![Why is governance needed?](../images/governance-needed.png)
-</div>
+
 
 Companies are adopting the cloud to be more agile and save money. There is pressure to transform and innovate digitally, so that you no longer have time to focus on your own infrastructure. You want to focus on making your customers happy by providing high quality services with the support of your engineering teams. So there is a natural shift to DevOps in a cloud environment, where engineers will more quickly provide the resources needed to support a solution.
 
@@ -26,6 +25,6 @@ In a cloud-native governance model, you get both speed and control at the same t
 You can guarantee that your teams will deploy only approved resources and anything outside these rules will be effectively denied. That way, you keep your costs predictable and more in line with your budget.
 
 ![Cloud Governance Approach](../images/cloud-governance-approach.png)
->Native cloud governance model, with speed and control together
+<div align="center">Native cloud governance model, with speed and control together</div>
 
 
