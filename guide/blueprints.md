@@ -1,5 +1,7 @@
 ## Azure Blueprints
 
+![azure-blueprints-1](../images/azure-blueprints-1.png)
+
 How can you bring everything that has already been discussed in a structured way, so that you can configure your environment in a consistent and automated way, at scale in the shortest possible time?
 
 For a developer, there is a lot to do when setting up an Azure subscription for the first time. As you might say, Azure is an empty canvas and if you are not an artist, there is a lot to draw. And trying to fill that screen with a base image is what Blueprint really is about. He tries to create a fundamental foundation for the appearance of his environment.
@@ -15,3 +17,9 @@ So, here are some of the main challenges for customers when designing and config
 Therefore, to address these key challenges faced by customers, Azure Blueprints was created where you have an automated and easy-to-deploy solution to help set up Azure Subscriptions in line with a governance strategy.
 
 Azure Blueprints allows you to implement Governance as Code.
+
+![azure-blueprints-2](../images/azure-blueprints-2.png)
+
+### How Azure BLueprints works
+
+![azure-blueprints-3](../images/azure-blueprints-3.png)
