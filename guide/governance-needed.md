@@ -10,7 +10,7 @@ How did the industry react to this expansion? We jumped in front of the develope
 
 ![traditional-approach](../images/traditional-approach.png)
 <div align="center"><em>Traditional approach, sacrificing speed for control</em></div>
-
+<br>
 However, this approach in the cloud age slows things down and you sacrifice speed to be in control.
 
 In a cloud-native governance model, you get both speed and control at the same time. So instead of jumping in front of the DevOps team to make sure they’re doing the right things, the cloud platform itself will enforce that control on your behalf. This allows them to have full access to the platform through a self-service model that is essential to maintain agility and speed.
