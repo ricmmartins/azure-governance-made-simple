@@ -19,6 +19,7 @@ You can guarantee that your teams will deploy only approved resources and anythi
 
 ![cloud-governance-approach](../images/cloud-governance-approach.png)
 <div align="center"><em>Native cloud governance model, with speed and control together</em></div>
+<br>
 
 Aligned with governance it's important to have a well defined structure around responsabilities across different teams, specially if you are migrating from an tradittional approach to cloud approach. That said, you shoud take a look into those references to help yuu mature team structures and align responsabilities within them:
 
