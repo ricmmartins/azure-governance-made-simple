@@ -28,7 +28,7 @@ Aligned with governance it's important to have a well defined structure around r
 
 Also, if Cloud is something new for you I have some suggestions to help you start to build your technical skills:
 
-* [Building technical skilss](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/suggested-skills)
+* [Building technical skills](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/suggested-skills)
 * [Azure Fundamentals part 1: Describe core Azure concepts](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/)
 * [Azure Fundamentals part 2: Describe core Azure services](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-core-azure-services/)
 * [Azure Fundamentals part 3: Describe core solutions and management tools on Azure](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-core-solutions-management-tools-azure/)
