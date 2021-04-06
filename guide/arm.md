@@ -10,3 +10,5 @@ If you are interested in knowing more about ARM Templates and how to use them, a
 
 We currently have about 1000 templates ready and available for use in Azure Quickstart Templates, check out [https://azure.microsoft.com/en-us/resources/templates/](https://azure.microsoft.com/en-us/resources/templates/) 
 
+In ither hand, if you are more familiar with opensource tools like Terraform to automte deployments on your IaC strategy, you can find a lot of useful resources here: [https://docs.microsoft.com/en-us/azure/developer/terraform/](https://docs.microsoft.com/en-us/azure/developer/terraform/)
+
