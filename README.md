@@ -36,6 +36,8 @@ It will be divided into two parts, the first dealing with more basic topics and 
 ## Conclusion
 
 15. [Conclusion](guide/conclusion.md)
+   * [Azure DevOps Governance Generator](guide/conclusion.md#azure-devops-governance-generator)
+   * [Azure Governance Visualizer](guide/conclusion.md#azure-governance-visualizer)
 
 
 
