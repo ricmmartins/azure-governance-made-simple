@@ -31,11 +31,9 @@ As described in [this link](https://docs.microsoft.com/en-us/azure/cloud-adoptio
 
 ![landing-zone](../images/landing-zone.png)
 
-Basically, the landing zone will deal with a set of considerations and recommendations based on some [critical design areas](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/design-guidelines#critical-design-areas).
-
 The Microsoft [Cloud Adopt Framework](http://aka.ms/caf) describes in details about several topics over the enterprise-scale landing zone architecture, which offers a modular design and not only makes it simple to deploy existing and new applications but also allows organizations to start with a lighter deployment implementation and scale depending on their business needs.
 
-This architecture considers several design areas:
+Basically, the landing zone will deal with a set of considerations and recommendations based on some design areas: 
 
 * [Enterprise agreement (EA) enrolment and Azure Active Directory tenants](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/enterprise-scale/enterprise-enrollment-and-azure-ad-tenants/)
 * [Identity and access management](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/enterprise-scale/identity-and-access-management/)
@@ -46,7 +44,7 @@ This architecture considers several design areas:
 * [Security, governance, and compliance](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/enterprise-scale/security-governance-and-compliance)
 * [Platform automation and DevOps](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/platform-automation-and-devops)
 
-In the landing zone, the choice of network topology used is also an important point in the governance structuring process, as a topology such as Hub and Spoke for example may be inserted in the context of subscriptions as follows:
+In the landing zone, the choice of network topology to be used is important for the process of governance defitinition. As example, the Hub and Spoke topology may be inserted in the context of subscriptions as follows:
 
 ![hub-spoke](../images/hub-spoke.png)
 
