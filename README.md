@@ -17,7 +17,7 @@ It will be divided into two parts, the first dealing with more basic topics and 
 2. [Azure Active Directory](guide/aad.md)
 3. [Naming standards](guide/naming.md)
 4. [Azure subscription](guide/subscription.md)
-   * [Briefly description about Azure Landing Zones](https://github.com/ricmmartins/azure-governance-made-simple/blob/main/guide/subscription.md#briefly-description-about-azure-landing-zones)
+   * [Briefly description about Azure Landing Zones](guide/subscription.md#briefly-description-about-azure-landing-zones)
 6. [Resource Groups](guide/resource-groups.md)
 7. [Resource Tags](guide/resource-tags.md)
 8. [RBAC](guide/rbac.md)
