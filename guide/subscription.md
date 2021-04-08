@@ -25,6 +25,8 @@ A subscription serves different purposes because it is a legal contract, a payme
 
 It is important to define an architecture on the use of signatures so that there is a better organization and management of resources, especially on the segregation of permission and control of [existing limits on signatures](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits). To help with this, there is a documented [decision guide](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/subscriptions/) that is super interesting to understand the best way to model your organization and define signature design strategies.
 
+### Briefly description about Azure Landing Zones
+
 As described in [this link](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/initial-subscriptions), the recommendation is that there are at least two signatures, one for the productive environment and the other for the non-productive environment. Depending on the size of your environment or the strategy of your company, it may be necessary to create more signatures and in addition to combine the design of signatures with the definition of the [landing zone](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/) to be created.
 
 ![landing-zone](../images/landing-zone.png)
