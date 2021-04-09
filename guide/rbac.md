@@ -26,6 +26,6 @@ Scopes can be Management Groups**, Subscriptions, Resource Group or a Resource i
 
 Reference: [https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview)
 
-** Management Group is a feature of Azure to facilitate the management of access and policies in environments with multiple signatures. We will cover it in more detail in the advanced governance topics.
+** Management Group is a feature of Azure to facilitate the management of access and policies in environments with multiple subscriptions. We will cover it in more detail in the advanced governance topics.
 
 
