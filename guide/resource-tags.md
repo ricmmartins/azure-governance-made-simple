@@ -1,6 +1,6 @@
 ## Resource Tag
 
-Associated with a good name pattern strategy is the use of tags on objects. Tags are applied to resources, resource groups and signatures to logically organize them into a taxonomy. The tags consist of a name/value pair. Here are some examples of tags that you can consider using in your environment:
+Associated with a good name pattern strategy is the use of tags on objects. Tags are applied to resources, resource groups and subscriptions to logically organize them into a taxonomy. The tags consist of a name/value pair. Here are some examples of tags that you can consider using in your environment:
 
 ![resource-tag](../images/resource-tag.png)
 
