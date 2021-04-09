@@ -21,7 +21,7 @@ You can guarantee that your teams will deploy only approved resources and anythi
 <div align="center"><em>Native cloud governance model, with speed and control together</em></div>
 <br>
 
-Aligned with governance it's important to have a well defined structure around responsabilities across different teams, specially if you are migrating from an tradittional approach to cloud approach. That said, you shoud take a look into those references to help yuu mature team structures and align responsabilities within them:
+Aligned with governance it's important to have a well defined structure around responsibilities across different teams, especially if you are migrating from an traditional approach to an cloud approach. That said, you should take a look into those references to help you mature team structures and align responsibilities within them:
 
 * [Mature team structures](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/organization-structures)
 * [Align responsibilities across teams](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/raci-alignment)
