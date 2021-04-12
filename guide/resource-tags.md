@@ -7,3 +7,9 @@ Associated with a good name pattern strategy is the use of tags on objects. Tags
 Going beyond support in governance, the use of tags can also be used in automation and cost control strategies. Use the links below to access a tag decision and resource naming guide and excellent material to assist you in defining the tag strategy:
 * [https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/resource-tagging/](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/resource-tagging/)
 * [https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging)
+
+---
+
+Previous| Next | 
+:----- |-----:
+[Resource Groups](/guide/resource-groups.md)| [RBAC](/guide/rbac.md)
