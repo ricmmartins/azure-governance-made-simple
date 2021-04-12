@@ -40,9 +40,9 @@ Also, if Cloud is something new for you I have some suggestions to help you star
 
 ---
 
-→ Previous| Next → | 
-:----- |-----:
-Left   | Right
+| Next → | 
+|-----:
+| Right
 
 
 
