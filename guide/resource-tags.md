@@ -11,5 +11,5 @@ Going beyond support in governance, the use of tags can also be used in automati
 ---
 
 Previous| Next | 
-:----- |-----:
+:----- |:-----
 [Resource Groups](/guide/resource-groups.md)| [RBAC](/guide/rbac.md)
