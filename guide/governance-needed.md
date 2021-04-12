@@ -37,3 +37,7 @@ Also, if Cloud is something new for you I have some suggestions to help you star
 * [Azure Fundamentals part 6: Describe Azure cost management and service level agreements](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-azure-cost-management-service-level-agreements/)
 * [Prerequisites for Azure administrators](https://docs.microsoft.com/en-us/learn/paths/azure-administrator-prerequisites/)
 * [Build great solutions with the Microsoft Azure Well-Architected Framework](https://docs.microsoft.com/en-us/learn/paths/azure-well-architected-framework/)
+
+<div style="text-align: right">[https://github.com/ricmmartins/azure-governance-made-simple/blob/main/guide/overview-native-features.md](Overview of Azure native features for cloud governance)</div>
+
+
