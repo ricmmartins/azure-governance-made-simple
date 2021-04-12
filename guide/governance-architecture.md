@@ -15,5 +15,5 @@ Finally, you can take advantage of the Resource Graph to check the environment a
 ---
 
 Previous| Next | 
-:----- |-----:
+:----- |:-----
 [Overview of Azure native features for cloud governance](/guide/overview-native-features.md)| [Azure Active Directory](/guide/aad.md)
