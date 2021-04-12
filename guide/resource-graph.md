@@ -13,3 +13,9 @@ Resource Graph is the tool that comes to cover those needs allowing you to query
 ![resource-graph-2](../images/resource-graph-2.png)
 
 Reference: [https://docs.microsoft.com/en-us/azure/governance/resource-graph/overview](https://docs.microsoft.com/en-us/azure/governance/resource-graph/overview)
+
+---
+
+Previous| Next | 
+:----- |:-----
+[Azure Blueprints](/guide/blueprints.md)| [Azure Management Group](/guide/management-group.md)
