@@ -14,6 +14,8 @@ Applying ReadOnly can lead to unexpected results because some operations that lo
 
 Reference: [https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) 
 
+---
+
 Previous| Next | 
 :----- |-----:
 [RBAC](/guide/rbac.md)| [Azure Policy](/guide/policy.md)
