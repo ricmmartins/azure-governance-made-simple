@@ -12,3 +12,8 @@ Recently we've introduced a new language for developing ARM templates. The langu
 
 In ither hand, if you are more familiar with opensource tools like Terraform to automte deployments on your IaC strategy, you can find a lot of useful resources here: [https://docs.microsoft.com/en-us/azure/developer/terraform/](https://docs.microsoft.com/en-us/azure/developer/terraform/)
 
+---
+
+Previous| Next | 
+:----- |:-----
+[Azure Policy](/guide/policy.md)| [Azure Blueprints](/guide/blueprints.md)
