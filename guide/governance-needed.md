@@ -42,6 +42,7 @@ Also, if Cloud is something new for you I have some suggestions to help you star
 
 | Next → [Overview of Azure native features for cloud governance](/guide/overview-native-features.md)| 
 :----- |-----:
+Left   | Right
 
 
 
