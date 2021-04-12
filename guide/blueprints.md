@@ -25,3 +25,9 @@ Azure Blueprints allows you to implement Governance as Code.
 ![azure-blueprints-3](../images/azure-blueprints-3.png)
 
 Reference: [https://docs.microsoft.com/en-us/azure/governance/blueprints/overview](https://docs.microsoft.com/en-us/azure/governance/blueprints/overview)
+
+---
+
+Previous| Next | 
+:----- |:-----
+[ARM Templates](/guide/arm.md)| [Azure Resource Graph](/guide/resource-graph.md)
