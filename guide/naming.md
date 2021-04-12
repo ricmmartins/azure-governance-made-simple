@@ -6,3 +6,8 @@ There is a very comprehensive documentation on defining naming conventions avail
 
 Likewise, you can find a list of recommended abbreviations for the most diverse types of Azure resources at this link: [https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations)
 
+---
+
+Previous| Next | 
+:----- |-----:
+[Azure Active Directory](/guide/aad.md)| [Azure subscription](/guide/subscription.md)
