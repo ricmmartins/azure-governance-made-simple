@@ -16,5 +16,5 @@ Management Group: If your organization has many subscriptions, you may need a wa
 ---
 
 Previous| Next | 
-:----- |-----:
+:----- |:-----
 [Why is Governance needed?](/guide/governance-needed.md)  | [Governance architecture in Azure](/guide/governance-architecture.md)
