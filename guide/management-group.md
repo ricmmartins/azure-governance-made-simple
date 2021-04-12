@@ -21,3 +21,8 @@ Obviously, in addition to using Management Groups to manage policy enforcement i
 
 Reference: [https://docs.microsoft.com/en-us/azure/governance/management-groups/overview](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview)
 
+---
+
+Previous| Next | 
+:----- |:-----
+[Azure Resource Graph](/guide/resource-graph.md)| [Azure Cost Management](/guide/cost-management.md)
