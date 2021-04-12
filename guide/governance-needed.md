@@ -40,9 +40,9 @@ Also, if Cloud is something new for you I have some suggestions to help you star
 
 ---
 
-:arrow_backward: Previous| Next :arrow_forward:| 
+:arrow_backward: Previous| Next → | 
 :----- |-----:
-Left   | Right
+Left   | [Overview of Azure native features for cloud governance](/guide/overview-native-features.md)
 
 
 
