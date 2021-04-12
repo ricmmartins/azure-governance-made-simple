@@ -39,8 +39,6 @@ Also, if Cloud is something new for you I have some suggestions to help you star
 * [Build great solutions with the Microsoft Azure Well-Architected Framework](https://docs.microsoft.com/en-us/learn/paths/azure-well-architected-framework/)
 
 ---
-### Navigation
-
 | Next | 
 |:-----
 | [Overview of Azure native features for cloud governance](/guide/overview-native-features.md)
