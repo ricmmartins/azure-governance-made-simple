@@ -14,3 +14,9 @@ Additional references:
 
 * [https://docs.microsoft.com/en-us/learn/modules/control-and-organize-with-azure-resource-manager/2-principles-of-resource-groups](https://docs.microsoft.com/en-us/learn/modules/control-and-organize-with-azure-resource-manager/2-principles-of-resource-groups)
 * [https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#create-resource-groups](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#create-resource-groups)
+
+---
+
+Previous| Next | 
+:----- |-----:
+[Azure Subscription](/guide/subscription.md)| [Resource Tags](/guide/resource-tags.md)
