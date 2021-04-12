@@ -13,3 +13,6 @@ Management Group: If your organization has many subscriptions, you may need a wa
 
 **Cost Management:** Helps you understand your Azure invoice, monitor and control spending, and optimize resource usage. It allows you to analyze costs, create and manage budgets, export data, examine recommendations and act on them.
 
+Previous| Next | 
+:----- |-----:
+Left   | Right
