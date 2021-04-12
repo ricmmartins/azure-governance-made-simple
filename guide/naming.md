@@ -9,5 +9,5 @@ Likewise, you can find a list of recommended abbreviations for the most diverse 
 ---
 
 Previous| Next | 
-:----- |-----:
+:----- |:-----
 [Azure Active Directory](/guide/aad.md)| [Azure subscription](/guide/subscription.md)
