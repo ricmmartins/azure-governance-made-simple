@@ -16,4 +16,8 @@ References:
 * [https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview](https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview) 
 * [https://docs.microsoft.com/en-us/azure/architecture/framework/cost](https://docs.microsoft.com/en-us/azure/architecture/framework/cost)
 
+---
 
+Previous| Next | 
+:----- |:-----
+[Azure Management Group](/guide/management-group.md)| [Conclusion](/guide/conclusion.md)
