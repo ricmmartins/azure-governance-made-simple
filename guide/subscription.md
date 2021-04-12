@@ -65,5 +65,5 @@ Currently, enterprise-scale offers [three different reference implementations](h
 
 Previous| Next | 
 :----- |:-----
-[Naming standards](/guide/naming.md)| [Resource Groups](/guide/resource-groups.md)
+[Naming Standards](/guide/naming.md)| [Resource Groups](/guide/resource-groups.md)
 
