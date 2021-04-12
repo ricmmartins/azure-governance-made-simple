@@ -13,3 +13,7 @@ Resource Manager locks apply only to operations that take place in the managemen
 Applying ReadOnly can lead to unexpected results because some operations that look like read operations actually require additional actions. For example, placing a ReadOnly lock on a storage account prevents all users from listing keys. The operation of list keys is handled through a POST request because the returned keys are available for write operations. For another example, placing a ReadOnly lock on an application service resource prevents Visual Studio Server Explorer from displaying files for the resource because that interaction requires write access.
 
 Reference: [https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) 
+
+Previous| Next | 
+:----- |-----:
+[RBAC](/guide/rbac.md)| [Azure Policy](/guide/policy.md)
