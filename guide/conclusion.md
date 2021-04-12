@@ -19,3 +19,9 @@ The AzGovViz (Azure governance visualizer) is a PowerShell script that iterates 
 
 
 ![azgovviz](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting/blob/master/img/HierarchyMap.png)
+
+---
+
+Previous|  
+:----- 
+[Azure Cost Management](/guide/cost-management.md)| 
