@@ -40,4 +40,9 @@ Also, if Cloud is something new for you I have some suggestions to help you star
 
 [Overview of Azure native features for cloud governance](https://github.com/ricmmartins/azure-governance-made-simple/blob/main/guide/overview-native-features.md)
 
+<ul class="pager"> <!--this is the style of the button-->
+<li><a href="#">Back to Summary</a></li> <!--This button takes me to the table of contents-->
+<li><a href="#render-document">Next</a></li> <!--This button takes me to the previous page-->
+</ul>
+
 
