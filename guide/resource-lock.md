@@ -17,5 +17,5 @@ Reference: [https://docs.microsoft.com/en-us/azure/azure-resource-manager/manage
 ---
 
 Previous| Next | 
-:----- |-----:
+:----- |:-----
 [RBAC](/guide/rbac.md)| [Azure Policy](/guide/policy.md)
