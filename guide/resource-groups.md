@@ -18,5 +18,5 @@ Additional references:
 ---
 
 Previous| Next | 
-:----- |-----:
+:----- |:-----
 [Azure Subscription](/guide/subscription.md)| [Resource Tags](/guide/resource-tags.md)
