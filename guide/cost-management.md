@@ -16,6 +16,10 @@ References:
 * [https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview](https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview) 
 * [https://docs.microsoft.com/en-us/azure/architecture/framework/cost](https://docs.microsoft.com/en-us/azure/architecture/framework/cost)
 
+### Pro Tip!
+
+✔️ [Control Azure spending and manage bills with Azure Cost Management + Billing](https://docs.microsoft.com/en-us/learn/paths/control-spending-manage-bills/)
+
 ---
 
 Previous| Next | 
