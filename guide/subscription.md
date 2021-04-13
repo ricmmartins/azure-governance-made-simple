@@ -2,7 +2,7 @@
 
 As stated earlier, when creating an Azure subscription an AAD tenant is automatically created for you. With this, after creating and/or synchronizing users in Azure Active Directory, you can now allow your ADF users to subscribe to your subscription and its existing resources.
 
-If necessary, you can also create additional subscriptions or [associate other existing subscriptions](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory) with your Azure Active Directory tenant. Even having at least two signatures, one for the productive environment and the other for non-productive ones, is a good practice, both for segregation of the environment and for [scalability](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/scale-subscriptions).
+According with the size of your cloud environment, you can also create additional subscriptions or [associate other existing subscriptions](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory) with your Azure Active Directory tenant. Having at least two signatures, one for the productive environment and the other for non-productive ones, is a good practice for segregation of the environment and for [scalability](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/scale-subscriptions).
 
 An important point to be taken into account about permissioning is that there are two types of functions/attributions that are distinct but totally related to each other:
 
