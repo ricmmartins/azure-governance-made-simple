@@ -10,8 +10,8 @@ Within your AAD tenant you will have your AAD directory which is where you will 
 So basically, the main difference from Active Directory to Azure Active Directory is that AAD aims to work exclusively on the authorization and authentication of its users, groups and applications in Azure services. In contrast, Active Directory performs authorization and authentication in the on-premises environment in addition to many other tasks such as managing GPOS and Windows servers. In [this link](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-compare-azure-ad-to-ad) there is a broader comparison between them.
 
 Pro tip!
-✔️ [Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
 
+✔️ [Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
 ✔️[Azure AD access reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview)
 
 ---
