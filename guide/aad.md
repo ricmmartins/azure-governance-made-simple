@@ -7,7 +7,11 @@ AAD is the cloud-based identity and access management service that will allow yo
 When creating an Azure subscription, an AAD tenant is automatically created. The tenant is nothing more than the representation of your company's domain within Azure Active Directory. Note that by default you will always get a name.onmicrosoft.com that you can then customize for yourdomain.com.
 Within your AAD tenant you will have your AAD directory which is where you will create your users and groups. Note that you can also sync your existing users in your existing Active Directory to Azure Active Directory via Azure AD Connect, but this topic will not be covered here.
 
-So basically, the main difference from Active Directory to Azure Active Directory is that AAD aims to work exclusively on the authorization and authentication of its users, groups and applications in Azure services. In contrast, Active Directory performs authorization and authentication in the on-premises environment in addition to many other tasks such as managing GPOS and Windows servers. In this link there is a broader comparison between them: [https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-compare-azure-ad-to-ad](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-compare-azure-ad-to-ad)
+So basically, the main difference from Active Directory to Azure Active Directory is that AAD aims to work exclusively on the authorization and authentication of its users, groups and applications in Azure services. In contrast, Active Directory performs authorization and authentication in the on-premises environment in addition to many other tasks such as managing GPOS and Windows servers. In [this link](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-compare-azure-ad-to-ad) there is a broader comparison between them.
+
+Pro tip!
+✔️ [Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
+✔️[Azure AD access reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview)
 
 ---
 
