@@ -24,6 +24,7 @@ Reference: [https://docs.microsoft.com/en-us/azure/governance/management-groups/
 ### Pro tip!
 
 ✔️ [Manage users and groups in Azure Active Directory](https://docs.microsoft.com/en-us/learn/modules/manage-users-and-groups-in-aad/)
+
 ---
 
 Previous| Next | 
