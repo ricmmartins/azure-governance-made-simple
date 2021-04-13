@@ -21,22 +21,24 @@ You can guarantee that your teams will deploy only approved resources and anythi
 <div align="center"><em>Native cloud governance model, with speed and control together</em></div>
 <br>
 
-Aligned with governance it's important to have a well defined structure around responsabilities across different teams, specially if you are migrating from an tradittional approach to cloud approach. That said, you shoud take a look into those references to help yuu mature team structures and align responsabilities within them:
+Aligned with governance it's important to have a well defined structure around responsabilities across different teams, specially if you are migrating from an tradittional approach to cloud approach. That said, you shoud take a look into those references to help you mature team structures and align responsabilities within them:
 
 * [Mature team structures](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/organization-structures)
 * [Align responsibilities across teams](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/raci-alignment)
 
-Also, if Cloud is something new for you I have some suggestions to help you start to build your technical skills:
+### Pro tip!
 
-* [Building technical skills](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/suggested-skills)
-* [Azure Fundamentals part 1: Describe core Azure concepts](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/)
-* [Azure Fundamentals part 2: Describe core Azure services](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-core-azure-services/)
-* [Azure Fundamentals part 3: Describe core solutions and management tools on Azure](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-core-solutions-management-tools-azure/)
-* [Azure Fundamentals part 4: Describe general security and network security features](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-general-security-network-security-features/)
-* [Azure Fundamentals part 5: Describe identity, governance, privacy, and compliance features](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-identity-governance-privacy-compliance-features/)
-* [Azure Fundamentals part 6: Describe Azure cost management and service level agreements](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-azure-cost-management-service-level-agreements/)
-* [Prerequisites for Azure administrators](https://docs.microsoft.com/en-us/learn/paths/azure-administrator-prerequisites/)
-* [Build great solutions with the Microsoft Azure Well-Architected Framework](https://docs.microsoft.com/en-us/learn/paths/azure-well-architected-framework/)
+If cloud is something new for you, I have some suggestions to help you start to build your technical skills:
+
+✔️ [Building technical skills](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/organize/suggested-skills)
+✔️ [Azure Fundamentals part 1: Describe core Azure concepts](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/)
+✔️ [Azure Fundamentals part 2: Describe core Azure services](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-core-azure-services/)
+✔️ [Azure Fundamentals part 3: Describe core solutions and management tools on Azure](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-core-solutions-management-tools-azure/)
+✔️ [Azure Fundamentals part 4: Describe general security and network security features](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-general-security-network-security-features/)
+✔️ [Azure Fundamentals part 5: Describe identity, governance, privacy, and compliance features](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-identity-governance-privacy-compliance-features/)
+✔️ [Azure Fundamentals part 6: Describe Azure cost management and service level agreements](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-azure-cost-management-service-level-agreements/)
+✔️ [Prerequisites for Azure administrators](https://docs.microsoft.com/en-us/learn/paths/azure-administrator-prerequisites/)
+✔️ [Build great solutions with the Microsoft Azure Well-Architected Framework](https://docs.microsoft.com/en-us/learn/paths/azure-well-architected-framework/)
 
 ---
 | Next | 
