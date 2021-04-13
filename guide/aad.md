@@ -11,6 +11,7 @@ So basically, the main difference from Active Directory to Azure Active Director
 
 Pro tip!
 ✔️ [Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
+
 ✔️[Azure AD access reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview)
 
 ---
