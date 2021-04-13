@@ -28,6 +28,12 @@ Reference: [https://docs.microsoft.com/pt-br/azure/role-based-access-control/ove
 
 ** Management Group is a feature of Azure to facilitate the management of access and policies in environments with multiple signatures. We will cover it in more detail in the advanced governance topics.
 
+### Pro tip!
+
+✔️ [Manage access to an Azure subscription by using Azure role-based access control](https://docs.microsoft.com/en-us/learn/modules/manage-subscription-access-azure-rbac/)
+
+---
+
 Previous| Next | 
 :----- |:-----
 [Resource Tags](/guide/resource-tags.md)| [Resource Lock](/guide/resource-lock.md)
