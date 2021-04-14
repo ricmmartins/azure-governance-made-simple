@@ -61,6 +61,11 @@ Currently, enterprise-scale offers [three different reference implementations](h
 * [Enterprise-scale hub and spoke](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/adventureworks/README.md)
 * [Enterprise-scale Virtual WAN](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/contoso/Readme.md)
 
+
+### Pro tip!
+
+✔️ [Enterprise-Scale - Reference Implementation](https://github.com/Azure/Enterprise-Scale)
+
 ---
 
 Previous| Next | 
