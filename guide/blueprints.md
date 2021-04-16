@@ -12,7 +12,7 @@ What happens today is that you provide them with a giant document with all the r
 
 So, here are some of the main challenges for customers when designing and configuring the governance of their subscriptions:
 * **Challenging to configure the basic infrastructure**: It becomes complex to create and redistribute the infrastructure.
-* **Inability to create governed signatures**: Absence of a centralized way of defining and ensuring that what is created or made available in a signature will be applied. The client uses a ton of scripts to try to do this.
+* **Inability to create governed subscriptions**: Absence of a centralized way of defining and ensuring that what is created or made available in a subscription will be applied. The client uses a ton of scripts to try to do this.
 * **Protection of critical resources**: Subscription owners can modify resources and remove policies in violation of best practices defined by cloud architects.
 Therefore, to address these key challenges faced by customers, Azure Blueprints was created where you have an automated and easy-to-deploy solution to help set up Azure Subscriptions in line with a governance strategy.
 
