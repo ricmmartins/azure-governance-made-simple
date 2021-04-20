@@ -1,5 +1,5 @@
 # Azure Governance made simple
->Main topics about Azure Governance in a structured "e-book"
+>Main topics about Azure Governance in a structured "e-book" to serve as a Learning Path for Governance.
 
 ![azure_governance](/images/azure_governance.png)
 
