@@ -53,4 +53,4 @@ Reference: [https://docs.microsoft.com/en-us/azure/governance/policy/overview](h
 
 Previous| Next | 
 :----- |:-----
-[Resource Lock](/guide/resource-lock.md)| [ARM Templates](/guide/arm.md)
+[Resource Lock](/guide/resource-lock.md)| [Policy Best Practices](/guide/policy-best-practices.md)
