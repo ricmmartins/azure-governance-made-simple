@@ -20,4 +20,4 @@ In ither hand, if you are more familiar with opensource tools like Terraform to 
 
 Previous| Next | 
 :----- |:-----
-[Azure Policy](/guide/policy.md)| [Azure Blueprints](/guide/blueprints.md)
+[Policy Best Practices](/guide/policy-best-practices.md)| [Azure Blueprints](/guide/blueprints.md)
