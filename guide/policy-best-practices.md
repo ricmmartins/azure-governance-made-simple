@@ -26,6 +26,8 @@ Ask yourself these 3 questions and work from them when defining your policies
 
 These questions need to be asked from time to time as compliance is an evolving thing. You need to adjust your policies according to your current priorities, not only for compliance, but also for different projects that might require more powerful resources deployed that are currently blocked by policy, for example.
 
+---
+
 Previous| Next | 
 :----- |:-----
 [Azure Policy](/guide/policy.md)| [ARM Templates](/guide/arm.md)
