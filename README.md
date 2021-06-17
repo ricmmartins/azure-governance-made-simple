@@ -7,7 +7,7 @@ This content was made with the aim of raising awareness about the resources avai
 
 It will be divided into two parts, the first dealing with more basic topics and the second part dealing with advanced topics within this context.
 
-***✔️ A Brazilian Portuguese version form this material is [available here](https://github.com/ricmmartins/guia-pratico-governanca-azure).***
+***✔️ A Brazilian-Portuguese version form this material is [available here](https://github.com/ricmmartins/guia-pratico-governanca-azure).***
 
 ## Basic governance topics
 
