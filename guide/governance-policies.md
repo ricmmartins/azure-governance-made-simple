@@ -6,4 +6,4 @@
 
 Previous| Next | 
 :----- |:-----
-[Azure Policy](/guide/policy.md)| [ARM Templates](/guide/arm.md)
+[Azure Policy Best Practices](/guide/policy-best-practices.md)| [ARM Templates](/guide/arm.md)
