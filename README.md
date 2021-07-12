@@ -28,6 +28,7 @@ It will be divided into two parts, the first dealing with more basic topics and 
 
 9. [Azure Policy](guide/policy.md)
    * [Azure policy best practices](guide/policy-best-practices.md)
+   * [Governance suggested policies](guide/governance-policies.md)
 10. [ARM Templates](guide/arm.md)
 11. [Azure Blueprints](guide/blueprints.md)
 12. [Azure Resource Graph](guide/resource-graph.md)
