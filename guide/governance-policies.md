@@ -6,7 +6,7 @@ Here are a list of suggested policies you can apply in your environment in order
 ---
 **Allowed virtual machine size SKUs:** This policy enables you to specify a set of virtual machine size SKUs that your organization can deploy.
 
-|[Portal](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fcccc23c7-8427-4f53-ad12-b6a63eb452b3)|[JSON](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Compute/VMSkusAllowed_Deny.json)|
+|[Click here to see on Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fcccc23c7-8427-4f53-ad12-b6a63eb452b3)|[Click here to see the JSON file](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Compute/VMSkusAllowed_Deny.json)|
 |--- |--- |
 ### ☑️ General
 ---
