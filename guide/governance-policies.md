@@ -1,6 +1,6 @@
 ## Governance suggested policies
 
-Here are a list of suggested policies to help with your governance approach.
+Here are a list of suggested policies which can be applied in your environment in order to help in your governance approach.
 
 ### Compute
 ---
