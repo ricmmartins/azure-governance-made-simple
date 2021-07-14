@@ -31,7 +31,7 @@ As described in [this link](https://docs.microsoft.com/en-us/azure/cloud-adoptio
 
 ![landing-zone](../images/landing-zone.png)
 
-The Microsoft [Cloud Adopt Framework](http://aka.ms/caf) describes in details about several topics over the enterprise-scale landing zone architecture, which offers a modular design and not only makes it simple to deploy existing and new applications but also allows organizations to start with a lighter deployment implementation and scale depending on their business needs.
+The Microsoft [Cloud Adoption Framework](http://aka.ms/caf) describes in details about several topics over the enterprise-scale landing zone architecture, which offers a modular design and not only makes it simple to deploy existing and new applications but also allows organizations to start with a lighter deployment implementation and scale depending on their business needs.
 
 Basically, the landing zone will deal with a set of considerations and recommendations based on some design areas: 
 
