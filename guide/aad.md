@@ -19,4 +19,4 @@ So basically, the main difference from Active Directory to Azure Active Director
 
 Previous| Next | 
 :----- |:-----
-[Governance architecture in Azure](/guide/aad.md)| [Naming Standards](/guide/naming.md)
+[Governance architecture in Azure](/guide/governance-architecture.md)| [Naming Standards](/guide/naming.md)
