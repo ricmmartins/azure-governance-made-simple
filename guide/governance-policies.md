@@ -45,6 +45,8 @@ Here are a list of suggested policies you can apply in your environment in order
 |--- |--- |
 
 ### ☑️ Security
+✔️ *Please note that if you decides to enable the Azure Security Center built-in initiatives, be on the lookout for overlapping conflicts. [See here](https://docs.microsoft.com/en-us/azure/security-center/policy-reference) the Azure Policy built-in definitions for Azure Security Center*
+
 **A maximum of 3 owners should be designated for your subscription:** It is recommended to designate up to 3 subscription owners in order to reduce the potential for breach by a compromised owner.
 
 |[Click here to see on Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F4f11b553-d42e-4e3a-89be-32ca364cad4c) | [Click here to see the JSON file](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_DesignateLessThanXOwners_Audit.json)|
@@ -64,8 +66,6 @@ Here are a list of suggested policies you can apply in your environment in order
 
 |[Click here to see on Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F09024ccc-0c5f-475e-9457-b7c0d9ed487b) | [Click here to see the JSON file](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_DesignateMoreThanOneOwner_Audit.json)|
 |--- |--- |
-
-✔️ *Please note that if you decides to enable the Azure Security Center built-in initiatives, be on the lookout for overlapping conflicts. [See here](https://docs.microsoft.com/en-us/azure/security-center/policy-reference) the Azure Policy built-in definitions for Azure Security Center*
 
 ### ☑️ Tags
 **Require a tag on resource groups:** Enforces existence of a tag on resource groups.	
