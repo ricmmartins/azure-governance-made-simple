@@ -9,7 +9,7 @@ It will be divided into two parts, the first dealing with more basic topics and 
 
 ***✔️ A Brazilian-Portuguese version from this material is [available here](https://github.com/ricmmartins/guia-pratico-governanca-azure).***
 
-***✔️ You can download this e-book in PDF, EPUB or MOBI formats at [Leanpub](https://leanpub.com/azuregovernancemadesimple)***
+***✔️ You can download this e-book in PDF, EPUB or MOBI formats at [Leanpub](https://leanpub.com/azuregovernancemadesimple).***
 
 ## Basic governance topics
 
