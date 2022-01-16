@@ -13,7 +13,7 @@ So come on. Visit [https://aka.ms/azgovernancereadiness](https://aka.ms/azgovern
 
 ### Azure Governance Visualizer
 
-What you think about a have a graphical representation on your Governance implementation?  Let me present you one of my favorite tools: [AzGovViz](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting).
+What do you think about having a graphical representation on your Governance implementation?  Let me present you one of my favorite tools: [AzGovViz](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting).
 
 The AzGovViz (Azure governance visualizer) is a PowerShell script that iterates through an Azure tenant's management group hierarchy down to the subscription level. It captures data from the most relevant Azure governance capabilities such as Azure Policy, Azure role-based access control (Azure RBAC), and Azure Blueprints. From the collected data, the visualizer shows your hierarchy map, creates a tenant summary, and builds granular scope insights about your management groups and subscriptions.
 
