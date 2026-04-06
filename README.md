@@ -42,8 +42,6 @@ All content is aligned with the [Microsoft Cloud Adoption Framework](https://lea
 
 **Download:** [PDF, EPUB, or MOBI on Leanpub](https://leanpub.com/azuregovernancemadesimple)
 
-**🇧🇷 Português:** [Uma versão em Português está disponível aqui](https://github.com/ricmmartins/guia-pratico-governanca-azure)
-
 ---
 
 ## Table of Contents
