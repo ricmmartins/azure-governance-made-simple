@@ -1,92 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="Policy Git Branching" id="git-branch-1">
     <mxGraphModel dx="1000" dy="300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="300">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="gb-main-start" value="" style="ellipse;whiteSpace=wrap;fillColor=#2C3E50;strokeColor=#1A252F;" vertex="1" parent="1">
-          <mxGeometry x="20" y="130" width="20" height="20" as="geometry"/>
+          <mxGeometry x="30.0" y="195.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-label" value="main branch" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=11;fontColor=#2C3E50;" vertex="1" parent="1">
-          <mxGeometry x="10" y="100" width="90" height="30" as="geometry"/>
+          <mxGeometry x="15.0" y="150.0" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-m1" value="" style="ellipse;whiteSpace=wrap;fillColor=#2C3E50;strokeColor=#1A252F;" vertex="1" parent="1">
-          <mxGeometry x="200" y="130" width="20" height="20" as="geometry"/>
+          <mxGeometry x="300.0" y="195.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-m2" value="" style="ellipse;whiteSpace=wrap;fillColor=#2C3E50;strokeColor=#1A252F;" vertex="1" parent="1">
-          <mxGeometry x="460" y="130" width="20" height="20" as="geometry"/>
+          <mxGeometry x="690.0" y="195.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-m3" value="" style="ellipse;whiteSpace=wrap;fillColor=#2C3E50;strokeColor=#1A252F;" vertex="1" parent="1">
-          <mxGeometry x="680" y="130" width="20" height="20" as="geometry"/>
+          <mxGeometry x="1020.0" y="195.0" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gb-prod" value="Production&#xa;policies" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#58D68D;fontSize=11;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="830" y="120" width="130" height="40" as="geometry"/>
+        <mxCell id="gb-prod" value="Production&#10;policies" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#58D68D;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1245.0" y="180.0" width="130" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-e1" style="strokeColor=#2C3E50;strokeWidth=3;" edge="1" source="gb-main-start" target="gb-main-m1" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-e2" style="strokeColor=#2C3E50;strokeWidth=3;" edge="1" source="gb-main-m1" target="gb-main-m2" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-e3" style="strokeColor=#2C3E50;strokeWidth=3;" edge="1" source="gb-main-m2" target="gb-main-m3" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-main-e4" style="strokeColor=#2C3E50;strokeWidth=3;" edge="1" source="gb-main-m3" target="gb-prod" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f1-branch" value="" style="ellipse;whiteSpace=wrap;fillColor=#E74C3C;strokeColor=#C0392B;" vertex="1" parent="1">
-          <mxGeometry x="100" y="30" width="16" height="16" as="geometry"/>
+          <mxGeometry x="150.0" y="45.0" width="16" height="16" as="geometry" />
         </mxCell>
         <mxCell id="gb-f1-label" value="feature/add-network-policy" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#E74C3C;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="120" y="23" width="160" height="30" as="geometry"/>
+          <mxGeometry x="180.0" y="34.5" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-f1-pr" value="PR → Review" style="rounded=1;whiteSpace=wrap;fillColor=#FADBD8;strokeColor=#E74C3C;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="280" y="20" width="100" height="30" as="geometry"/>
+          <mxGeometry x="420.0" y="30.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-f1-e1" style="strokeColor=#E74C3C;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="gb-main-start" target="gb-f1-branch" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f1-e2" style="strokeColor=#E74C3C;strokeWidth=2;" edge="1" source="gb-f1-branch" target="gb-f1-pr" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f1-merge" style="strokeColor=#E74C3C;strokeWidth=2;dashed=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="gb-f1-pr" target="gb-main-m1" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f2-branch" value="" style="ellipse;whiteSpace=wrap;fillColor=#F39C12;strokeColor=#D68910;" vertex="1" parent="1">
-          <mxGeometry x="300" y="230" width="16" height="16" as="geometry"/>
+          <mxGeometry x="450.0" y="345.0" width="16" height="16" as="geometry" />
         </mxCell>
         <mxCell id="gb-f2-label" value="feature/update-tag-initiative" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#F39C12;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="320" y="223" width="170" height="30" as="geometry"/>
+          <mxGeometry x="480.0" y="334.5" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-f2-pr" value="PR → Review" style="rounded=1;whiteSpace=wrap;fillColor=#FDEBD0;strokeColor=#F39C12;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="490" y="223" width="100" height="30" as="geometry"/>
+          <mxGeometry x="735.0" y="334.5" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-f2-e1" style="strokeColor=#F39C12;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="gb-main-m1" target="gb-f2-branch" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f2-e2" style="strokeColor=#F39C12;strokeWidth=2;" edge="1" source="gb-f2-branch" target="gb-f2-pr" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f2-merge" style="strokeColor=#F39C12;strokeWidth=2;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="gb-f2-pr" target="gb-main-m2" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f3-branch" value="" style="ellipse;whiteSpace=wrap;fillColor=#8E44AD;strokeColor=#6C3483;" vertex="1" parent="1">
-          <mxGeometry x="520" y="30" width="16" height="16" as="geometry"/>
+          <mxGeometry x="780.0" y="45.0" width="16" height="16" as="geometry" />
         </mxCell>
         <mxCell id="gb-f3-label" value="feature/exempt-projectx" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#8E44AD;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="540" y="23" width="140" height="30" as="geometry"/>
+          <mxGeometry x="810.0" y="34.5" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-f3-pr" value="PR → Review" style="rounded=1;whiteSpace=wrap;fillColor=#E8DAEF;strokeColor=#8E44AD;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="680" y="20" width="100" height="30" as="geometry"/>
+          <mxGeometry x="1020.0" y="30.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gb-f3-e1" style="strokeColor=#8E44AD;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="gb-main-m2" target="gb-f3-branch" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f3-e2" style="strokeColor=#8E44AD;strokeWidth=2;" edge="1" source="gb-f3-branch" target="gb-f3-pr" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gb-f3-merge" style="strokeColor=#8E44AD;strokeWidth=2;dashed=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="gb-f3-pr" target="gb-main-m3" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,32 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="RBAC Scope Hierarchy" id="rbac-scope-1">
     <mxGraphModel dx="500" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="rbac-mg" value="Management Group" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="150" y="30" width="200" height="50" as="geometry"/>
+          <mxGeometry x="225.0" y="45.0" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="rbac-sub" value="Subscription" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="150" y="120" width="200" height="50" as="geometry"/>
+          <mxGeometry x="225.0" y="180.0" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="rbac-rg" value="Resource Group" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C8860A;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="150" y="210" width="200" height="50" as="geometry"/>
+          <mxGeometry x="225.0" y="315.0" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="rbac-res" value="Resource" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#FFFFFF;strokeColor=#888888;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="150" y="300" width="200" height="50" as="geometry"/>
+          <mxGeometry x="225.0" y="450.0" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="rbac-e1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="rbac-mg" target="rbac-sub" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rbac-e2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="rbac-sub" target="rbac-rg" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rbac-e3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="rbac-rg" target="rbac-res" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rbac-label" value="RBAC assignments inherit downward" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=2;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="120" y="370" width="260" height="30" as="geometry"/>
+          <mxGeometry x="180.0" y="555.0" width="260" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

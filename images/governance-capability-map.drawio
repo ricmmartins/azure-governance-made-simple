@@ -1,186 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
   <diagram name="Governance Capability Map" id="gov-capability-map">
     <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
 
         <mxCell id="title" value="Azure Governance Capability Map" style="text;html=1;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="350" y="15" width="500" height="35" as="geometry"/>
+          <mxGeometry x="525.0" y="22.5" width="500" height="35" as="geometry" />
         </mxCell>
         <mxCell id="subtitle" value="Native capabilities organized by scope level" style="text;html=1;fontSize=11;fontColor=#555555;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="350" y="46" width="500" height="20" as="geometry"/>
+          <mxGeometry x="525.0" y="69.0" width="500" height="20" as="geometry" />
         </mxCell>
 
         <mxCell id="tenant" value="MICROSOFT ENTRA ID TENANT" style="swimlane;startSize=32;fillColor=#0078D4;fontColor=#FFFFFF;strokeColor=#005A9E;fontSize=14;fontStyle=1;rounded=1;arcSize=6;swimlaneLine=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="80" width="1120" height="780" as="geometry"/>
+          <mxGeometry x="60.0" y="120.0" width="1680.0" height="1170.0" as="geometry" />
         </mxCell>
 
         <mxCell id="iam_bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FD;strokeColor=#4A90D9;arcSize=8;container=1;pointerEvents=0;" vertex="1" parent="tenant">
-          <mxGeometry x="25" y="45" width="1070" height="80" as="geometry"/>
+          <mxGeometry x="37.5" y="67.5" width="1605.0" height="120.0" as="geometry" />
         </mxCell>
         <mxCell id="iam_title" value="Identity &amp; Access Management" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#0078D4;align=left;verticalAlign=top;" vertex="1" parent="iam_bar">
-          <mxGeometry x="15" y="8" width="250" height="20" as="geometry"/>
+          <mxGeometry x="22.5" y="12.0" width="250" height="20" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip1" value="👤 Users &amp; Groups" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="15" y="35" width="120" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="52.5" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip2" value="🤖 Service Principals" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="145" y="35" width="130" height="30" as="geometry"/>
+          <mxGeometry x="217.5" y="52.5" width="130" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip3" value="🔗 Managed Identities" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="285" y="35" width="135" height="30" as="geometry"/>
+          <mxGeometry x="427.5" y="52.5" width="135" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip4" value="🔒 Conditional Access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="430" y="35" width="135" height="30" as="geometry"/>
+          <mxGeometry x="645.0" y="52.5" width="135" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip5" value="⏫ PIM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="575" y="35" width="70" height="30" as="geometry"/>
+          <mxGeometry x="862.5" y="52.5" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip6" value="✅ Access Reviews" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="655" y="35" width="120" height="30" as="geometry"/>
+          <mxGeometry x="982.5" y="52.5" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iam_chip7" value="🛡️ Entra Permissions Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=20;" vertex="1" parent="iam_bar">
-          <mxGeometry x="785" y="35" width="170" height="30" as="geometry"/>
+          <mxGeometry x="1177.5" y="52.5" width="170" height="30" as="geometry" />
         </mxCell>
 
         <mxCell id="rootmg" value="ROOT MANAGEMENT GROUP" style="swimlane;startSize=30;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=13;fontStyle=1;rounded=1;arcSize=6;swimlaneLine=0;" vertex="1" parent="tenant">
-          <mxGeometry x="25" y="145" width="1070" height="510" as="geometry"/>
+          <mxGeometry x="37.5" y="217.5" width="1605.0" height="765.0" as="geometry" />
         </mxCell>
 
         <mxCell id="rootmg_tools" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495E;strokeColor=#2C3E50;arcSize=15;container=1;pointerEvents=0;" vertex="1" parent="rootmg">
-          <mxGeometry x="20" y="38" width="1030" height="35" as="geometry"/>
+          <mxGeometry x="30.0" y="57.0" width="1545.0" height="52.5" as="geometry" />
         </mxCell>
         <mxCell id="rt1" value="🛡️ Azure Policy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5DADE2;strokeColor=#2E86C1;fontColor=#FFFFFF;fontSize=9;fontStyle=1;arcSize=20;" vertex="1" parent="rootmg_tools">
-          <mxGeometry x="10" y="5" width="110" height="25" as="geometry"/>
+          <mxGeometry x="15.0" y="7.5" width="110" height="25" as="geometry" />
         </mxCell>
         <mxCell id="rt2" value="🔐 RBAC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5DADE2;strokeColor=#2E86C1;fontColor=#FFFFFF;fontSize=9;fontStyle=1;arcSize=20;" vertex="1" parent="rootmg_tools">
-          <mxGeometry x="130" y="5" width="80" height="25" as="geometry"/>
+          <mxGeometry x="195.0" y="7.5" width="80" height="25" as="geometry" />
         </mxCell>
         <mxCell id="rt3" value="💰 Azure Cost Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5DADE2;strokeColor=#2E86C1;fontColor=#FFFFFF;fontSize=9;fontStyle=1;arcSize=20;" vertex="1" parent="rootmg_tools">
-          <mxGeometry x="220" y="5" width="180" height="25" as="geometry"/>
+          <mxGeometry x="330.0" y="7.5" width="180" height="25" as="geometry" />
         </mxCell>
         <mxCell id="rt4" value="🛡️ Microsoft Defender for Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5DADE2;strokeColor=#2E86C1;fontColor=#FFFFFF;fontSize=9;fontStyle=1;arcSize=20;" vertex="1" parent="rootmg_tools">
-          <mxGeometry x="410" y="5" width="210" height="25" as="geometry"/>
+          <mxGeometry x="615.0" y="7.5" width="210" height="25" as="geometry" />
         </mxCell>
 
         <mxCell id="platformmg" value="Platform MG" style="swimlane;startSize=26;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="rootmg">
-          <mxGeometry x="20" y="90" width="490" height="400" as="geometry"/>
+          <mxGeometry x="30.0" y="135.0" width="735.0" height="600.0" as="geometry" />
         </mxCell>
         <mxCell id="plat_desc" value="Identity · Management · Connectivity" style="text;html=1;fontSize=9;fontColor=#D6EAF8;fontStyle=2;align=center;" vertex="1" parent="platformmg">
-          <mxGeometry x="100" y="28" width="250" height="18" as="geometry"/>
+          <mxGeometry x="150.0" y="42.0" width="250" height="18" as="geometry" />
         </mxCell>
 
         <mxCell id="plat_sub" value="Subscription" style="swimlane;startSize=24;fillColor=#D4EDDA;strokeColor=#28A745;fontColor=#155724;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="platformmg">
-          <mxGeometry x="25" y="55" width="440" height="155" as="geometry"/>
+          <mxGeometry x="37.5" y="82.5" width="660.0" height="232.5" as="geometry" />
         </mxCell>
         <mxCell id="ps_chip1" value="🔒 Resource Locks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="plat_sub">
-          <mxGeometry x="15" y="32" width="125" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="48.0" width="125" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ps_chip2" value="💰 Budgets / Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="plat_sub">
-          <mxGeometry x="155" y="32" width="130" height="30" as="geometry"/>
+          <mxGeometry x="232.5" y="48.0" width="130" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ps_chip3" value="📦 Deployment Stacks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="plat_sub">
-          <mxGeometry x="300" y="32" width="130" height="30" as="geometry"/>
+          <mxGeometry x="450.0" y="48.0" width="130" height="30" as="geometry" />
         </mxCell>
 
         <mxCell id="plat_rg" value="Resource Group" style="swimlane;startSize=22;fillColor=#FFFDE7;strokeColor=#F9A825;fontColor=#856404;fontSize=10;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="plat_sub">
-          <mxGeometry x="15" y="75" width="410" height="65" as="geometry"/>
+          <mxGeometry x="22.5" y="112.5" width="615.0" height="97.5" as="geometry" />
         </mxCell>
         <mxCell id="prg1" value="🏷️ Tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontColor=#856404;fontSize=9;arcSize=15;" vertex="1" parent="plat_rg">
-          <mxGeometry x="10" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="15.0" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
         <mxCell id="prg2" value="🔐 RBAC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontColor=#856404;fontSize=9;arcSize=15;" vertex="1" parent="plat_rg">
-          <mxGeometry x="90" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="135.0" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
         <mxCell id="prg3" value="🖥️ VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="plat_rg">
-          <mxGeometry x="185" y="27" width="50" height="28" as="geometry"/>
+          <mxGeometry x="277.5" y="40.5" width="50" height="28" as="geometry" />
         </mxCell>
         <mxCell id="prg4" value="🌐 VNet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="plat_rg">
-          <mxGeometry x="245" y="27" width="55" height="28" as="geometry"/>
+          <mxGeometry x="367.5" y="40.5" width="55" height="28" as="geometry" />
         </mxCell>
         <mxCell id="prg5" value="🔥 Firewall" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="plat_rg">
-          <mxGeometry x="310" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="465.0" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
 
         <mxCell id="plat_arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#28A745;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="platformmg" source="plat_desc" target="plat_sub">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
         <mxCell id="inherit_down_plat" value="↓ Inherits policies &amp; RBAC" style="text;html=1;fontSize=9;fontColor=#27AE60;fontStyle=2;align=center;" vertex="1" parent="platformmg">
-          <mxGeometry x="130" y="225" width="180" height="16" as="geometry"/>
+          <mxGeometry x="195.0" y="337.5" width="180" height="16" as="geometry" />
         </mxCell>
 
         <mxCell id="lzmg" value="Landing Zones MG" style="swimlane;startSize=26;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="rootmg">
-          <mxGeometry x="540" y="90" width="510" height="400" as="geometry"/>
+          <mxGeometry x="810.0" y="135.0" width="765.0" height="600.0" as="geometry" />
         </mxCell>
         <mxCell id="lz_desc" value="Corp · Online" style="text;html=1;fontSize=9;fontColor=#D6EAF8;fontStyle=2;align=center;" vertex="1" parent="lzmg">
-          <mxGeometry x="150" y="28" width="200" height="18" as="geometry"/>
+          <mxGeometry x="225.0" y="42.0" width="200" height="18" as="geometry" />
         </mxCell>
 
         <mxCell id="lz_sub" value="Subscription" style="swimlane;startSize=24;fillColor=#D4EDDA;strokeColor=#28A745;fontColor=#155724;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="lzmg">
-          <mxGeometry x="25" y="55" width="460" height="155" as="geometry"/>
+          <mxGeometry x="37.5" y="82.5" width="690.0" height="232.5" as="geometry" />
         </mxCell>
         <mxCell id="ls_chip1" value="🔒 Resource Locks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="lz_sub">
-          <mxGeometry x="15" y="32" width="125" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="48.0" width="125" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ls_chip2" value="💰 Budgets / Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="lz_sub">
-          <mxGeometry x="155" y="32" width="130" height="30" as="geometry"/>
+          <mxGeometry x="232.5" y="48.0" width="130" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ls_chip3" value="📦 Deployment Stacks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="lz_sub">
-          <mxGeometry x="300" y="32" width="145" height="30" as="geometry"/>
+          <mxGeometry x="450.0" y="48.0" width="145" height="30" as="geometry" />
         </mxCell>
 
         <mxCell id="lz_rg" value="Resource Group" style="swimlane;startSize=22;fillColor=#FFFDE7;strokeColor=#F9A825;fontColor=#856404;fontSize=10;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="lz_sub">
-          <mxGeometry x="15" y="75" width="430" height="65" as="geometry"/>
+          <mxGeometry x="22.5" y="112.5" width="645.0" height="97.5" as="geometry" />
         </mxCell>
         <mxCell id="lrg1" value="🏷️ Tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontColor=#856404;fontSize=9;arcSize=15;" vertex="1" parent="lz_rg">
-          <mxGeometry x="10" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="15.0" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
         <mxCell id="lrg2" value="🔐 RBAC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontColor=#856404;fontSize=9;arcSize=15;" vertex="1" parent="lz_rg">
-          <mxGeometry x="90" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="135.0" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
         <mxCell id="lrg3" value="🌐 App Svc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="lz_rg">
-          <mxGeometry x="185" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="277.5" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
         <mxCell id="lrg4" value="🗄️ SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="lz_rg">
-          <mxGeometry x="265" y="27" width="55" height="28" as="geometry"/>
+          <mxGeometry x="397.5" y="40.5" width="55" height="28" as="geometry" />
         </mxCell>
         <mxCell id="lrg5" value="📦 Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="lz_rg">
-          <mxGeometry x="330" y="27" width="70" height="28" as="geometry"/>
+          <mxGeometry x="495.0" y="40.5" width="70" height="28" as="geometry" />
         </mxCell>
 
         <mxCell id="lz_arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#28A745;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="lzmg" source="lz_desc" target="lz_sub">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
         <mxCell id="inherit_down_lz" value="↓ Inherits policies &amp; RBAC" style="text;html=1;fontSize=9;fontColor=#27AE60;fontStyle=2;align=center;" vertex="1" parent="lzmg">
-          <mxGeometry x="150" y="225" width="180" height="16" as="geometry"/>
+          <mxGeometry x="225.0" y="337.5" width="180" height="16" as="geometry" />
         </mxCell>
 
         <mxCell id="crosscut" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;arcSize=8;container=1;pointerEvents=0;" vertex="1" parent="tenant">
-          <mxGeometry x="25" y="675" width="1070" height="85" as="geometry"/>
+          <mxGeometry x="37.5" y="1012.5" width="1605.0" height="127.5" as="geometry" />
         </mxCell>
         <mxCell id="cc_title" value="CROSS-CUTTING CAPABILITIES" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#6C3483;align=left;verticalAlign=top;" vertex="1" parent="crosscut">
-          <mxGeometry x="15" y="8" width="300" height="22" as="geometry"/>
+          <mxGeometry x="22.5" y="12.0" width="300" height="22" as="geometry" />
         </mxCell>
         <mxCell id="cc1" value="📊 Azure Monitor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=9;arcSize=20;" vertex="1" parent="crosscut">
-          <mxGeometry x="15" y="40" width="115" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="60.0" width="115" height="30" as="geometry" />
         </mxCell>
         <mxCell id="cc2" value="🔍 Azure Resource Graph" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=9;arcSize=20;" vertex="1" parent="crosscut">
-          <mxGeometry x="140" y="40" width="160" height="30" as="geometry"/>
+          <mxGeometry x="210.0" y="60.0" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="cc3" value="📈 Governance Visualizer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=9;arcSize=20;" vertex="1" parent="crosscut">
-          <mxGeometry x="310" y="40" width="160" height="30" as="geometry"/>
+          <mxGeometry x="465.0" y="60.0" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="cc4" value="🏗️ Bicep / Terraform (IaC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=9;arcSize=20;" vertex="1" parent="crosscut">
-          <mxGeometry x="480" y="40" width="170" height="30" as="geometry"/>
+          <mxGeometry x="720.0" y="60.0" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="cc5" value="📛 Naming Conventions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=9;arcSize=20;" vertex="1" parent="crosscut">
-          <mxGeometry x="660" y="40" width="145" height="30" as="geometry"/>
+          <mxGeometry x="990.0" y="60.0" width="145" height="30" as="geometry" />
         </mxCell>
         <mxCell id="cc6" value="🏷️ Tagging Strategy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=9;arcSize=20;" vertex="1" parent="crosscut">
-          <mxGeometry x="815" y="40" width="130" height="30" as="geometry"/>
+          <mxGeometry x="1222.5" y="60.0" width="130" height="30" as="geometry" />
         </mxCell>
 
       </root>

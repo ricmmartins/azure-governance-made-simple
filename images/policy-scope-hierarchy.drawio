@@ -1,41 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="Policy Scope Hierarchy" id="pol-scope-1">
     <mxGraphModel dx="500" dy="450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="450">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="ps-tenant" value="Tenant Root Group" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="20" width="240" height="50" as="geometry"/>
+          <mxGeometry x="195.0" y="30.0" width="240" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ps-mg" value="Management Group" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="110" width="240" height="50" as="geometry"/>
+          <mxGeometry x="195.0" y="165.0" width="240" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ps-sub" value="Subscription" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="200" width="240" height="50" as="geometry"/>
+          <mxGeometry x="195.0" y="300.0" width="240" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ps-rg" value="Resource Group" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C8860A;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="290" width="240" height="50" as="geometry"/>
+          <mxGeometry x="195.0" y="435.0" width="240" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ps-res" value="Resource" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#FFFFFF;strokeColor=#888888;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="380" width="240" height="50" as="geometry"/>
+          <mxGeometry x="195.0" y="570.0" width="240" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ps-e1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="ps-tenant" target="ps-mg" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ps-e2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="ps-mg" target="ps-sub" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ps-e3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="ps-sub" target="ps-rg" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ps-e4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="ps-rg" target="ps-res" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ps-label" value="Policy assignments&#xa;inherit downward" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=2;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="380" y="195" width="120" height="50" as="geometry"/>
+        <mxCell id="ps-label" value="Policy assignments&#10;inherit downward" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=2;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="570.0" y="292.5" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ps-arrow" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#999999;strokeWidth=1;dashed=1;" edge="1" source="ps-label" target="ps-sub" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

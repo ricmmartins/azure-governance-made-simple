@@ -1,32 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="Bicep Param Structure" id="diag-bps-1">
     <mxGraphModel dx="500" dy="250" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="250">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="bps-main" value="├── main.bicep" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="30" y="20" width="220" height="35" as="geometry"/>
+          <mxGeometry x="45.0" y="30.0" width="220" height="35" as="geometry" />
         </mxCell>
         <mxCell id="bps-folder" value="├── parameters/" style="rounded=1;whiteSpace=wrap;fillColor=#EAECEE;fontColor=#333333;strokeColor=#BDC3C7;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="30" y="70" width="220" height="35" as="geometry"/>
+          <mxGeometry x="45.0" y="105.0" width="220" height="35" as="geometry" />
         </mxCell>
         <mxCell id="bps-dev" value="├── dev.bicepparam" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="80" y="120" width="220" height="35" as="geometry"/>
+          <mxGeometry x="120.0" y="180.0" width="220" height="35" as="geometry" />
         </mxCell>
         <mxCell id="bps-stg" value="├── staging.bicepparam" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="80" y="165" width="220" height="35" as="geometry"/>
+          <mxGeometry x="120.0" y="247.5" width="220" height="35" as="geometry" />
         </mxCell>
         <mxCell id="bps-prd" value="└── production.bicepparam" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;fontColor=#333333;strokeColor=#A9DFBF;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="80" y="210" width="220" height="35" as="geometry"/>
+          <mxGeometry x="120.0" y="315.0" width="220" height="35" as="geometry" />
         </mxCell>
         <mxCell id="bps-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="bps-folder" target="bps-dev" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="bps-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="bps-folder" target="bps-stg" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="bps-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="bps-folder" target="bps-prd" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

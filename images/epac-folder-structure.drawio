@@ -1,77 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="EPAC Folder Structure" id="epac-folder-1">
     <mxGraphModel dx="600" dy="450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="450">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="ep-root" value="📂 Definitions/" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="20" y="10" width="200" height="36" as="geometry"/>
+          <mxGeometry x="30.0" y="15.0" width="200" height="36" as="geometry" />
         </mxCell>
         <mxCell id="ep-pd" value="📂 policyDefinitions/" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="66" width="200" height="32" as="geometry"/>
+          <mxGeometry x="90.0" y="99.0" width="200" height="32" as="geometry" />
         </mxCell>
         <mxCell id="ep-pd-org" value="📂 MyOrg/" style="rounded=1;whiteSpace=wrap;fillColor=#5DADE2;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="112" width="140" height="28" as="geometry"/>
+          <mxGeometry x="150.0" y="168.0" width="140" height="28" as="geometry" />
         </mxCell>
         <mxCell id="ep-pd-file" value="require-https-storage.jsonc" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="140" y="152" width="220" height="28" as="geometry"/>
+          <mxGeometry x="210.0" y="228.0" width="220" height="28" as="geometry" />
         </mxCell>
         <mxCell id="ep-psd" value="📂 policySetDefinitions/" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="198" width="220" height="32" as="geometry"/>
+          <mxGeometry x="90.0" y="297.0" width="220" height="32" as="geometry" />
         </mxCell>
         <mxCell id="ep-psd-org" value="📂 MyOrg/" style="rounded=1;whiteSpace=wrap;fillColor=#5DADE2;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="244" width="140" height="28" as="geometry"/>
+          <mxGeometry x="150.0" y="366.0" width="140" height="28" as="geometry" />
         </mxCell>
         <mxCell id="ep-psd-file" value="security-baseline.jsonc" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="140" y="284" width="220" height="28" as="geometry"/>
+          <mxGeometry x="210.0" y="426.0" width="220" height="28" as="geometry" />
         </mxCell>
         <mxCell id="ep-pa" value="📂 policyAssignments/" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="328" width="200" height="32" as="geometry"/>
+          <mxGeometry x="90.0" y="492.0" width="200" height="32" as="geometry" />
         </mxCell>
         <mxCell id="ep-pa-file" value="security-baseline-assignment.jsonc" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="372" width="260" height="28" as="geometry"/>
+          <mxGeometry x="150.0" y="558.0" width="260" height="28" as="geometry" />
         </mxCell>
         <mxCell id="ep-pe" value="📂 policyExemptions/" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="340" y="66" width="200" height="32" as="geometry"/>
+          <mxGeometry x="510.0" y="99.0" width="200" height="32" as="geometry" />
         </mxCell>
         <mxCell id="ep-pe-file" value="temporary-exemption-projectx.jsonc" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="340" y="112" width="250" height="28" as="geometry"/>
+          <mxGeometry x="510.0" y="168.0" width="250" height="28" as="geometry" />
         </mxCell>
         <mxCell id="ep-gs" value="global-settings.jsonc" style="rounded=1;whiteSpace=wrap;fillColor=#F8F9FA;strokeColor=#CCCCCC;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="340" y="160" width="200" height="32" as="geometry"/>
+          <mxGeometry x="510.0" y="240.0" width="200" height="32" as="geometry" />
         </mxCell>
         <mxCell id="ep-te1" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-root" target="ep-pd" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te2" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-pd" target="ep-pd-org" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te3" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-pd-org" target="ep-pd-file" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te4" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-root" target="ep-psd" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te5" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-psd" target="ep-psd-org" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te6" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-psd-org" target="ep-psd-file" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te7" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-root" target="ep-pa" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te8" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-pa" target="ep-pa-file" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te9" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-root" target="ep-pe" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te10" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-pe" target="ep-pe-file" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ep-te11" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#888888;strokeWidth=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ep-root" target="ep-gs" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

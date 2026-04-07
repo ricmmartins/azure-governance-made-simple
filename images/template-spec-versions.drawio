@@ -1,32 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="Template Spec Versions" id="diag-tsv-1">
     <mxGraphModel dx="800" dy="300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="300">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="tsv-rg" value="Resource Group: rg-templates" style="swimlane;startSize=30;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2C6FAC;rounded=1;whiteSpace=wrap;fontSize=13;fontStyle=1;container=1;" vertex="1" parent="1">
-          <mxGeometry x="20" y="20" width="760" height="260" as="geometry"/>
+          <mxGeometry x="30.0" y="30.0" width="1140.0" height="390.0" as="geometry" />
         </mxCell>
         <mxCell id="tsv-spec" value="Template Spec: governance-baseline" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;" vertex="1" parent="tsv-rg">
-          <mxGeometry x="20" y="50" width="260" height="50" as="geometry"/>
+          <mxGeometry x="30.0" y="75.0" width="260" height="50" as="geometry" />
         </mxCell>
         <mxCell id="tsv-v10" value="Version 1.0 — initial governance baseline" style="rounded=1;whiteSpace=wrap;fillColor=#F8F9FA;fontColor=#333333;strokeColor=#CCCCCC;fontSize=11;" vertex="1" parent="tsv-rg">
-          <mxGeometry x="400" y="40" width="320" height="40" as="geometry"/>
+          <mxGeometry x="600.0" y="60.0" width="320" height="40" as="geometry" />
         </mxCell>
         <mxCell id="tsv-v11" value="Version 1.1 — added tag policy" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;" vertex="1" parent="tsv-rg">
-          <mxGeometry x="400" y="100" width="320" height="40" as="geometry"/>
+          <mxGeometry x="600.0" y="150.0" width="320" height="40" as="geometry" />
         </mxCell>
         <mxCell id="tsv-v20" value="Version 2.0 — added deployment stack support" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;fontColor=#333333;strokeColor=#A9DFBF;fontSize=11;" vertex="1" parent="tsv-rg">
-          <mxGeometry x="400" y="160" width="320" height="40" as="geometry"/>
+          <mxGeometry x="600.0" y="240.0" width="320" height="40" as="geometry" />
         </mxCell>
         <mxCell id="tsv-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="tsv-spec" target="tsv-v10" parent="tsv-rg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tsv-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="tsv-spec" target="tsv-v11" parent="tsv-rg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tsv-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="tsv-spec" target="tsv-v20" parent="tsv-rg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

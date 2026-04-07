@@ -1,134 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile>
   <diagram name="Resource Hierarchy Detailed" id="rhd-1">
     <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="tenant" value="Microsoft Entra ID Tenant" style="swimlane;startSize=30;fillColor=#0078D4;fontColor=#FFFFFF;strokeColor=#005A9E;fontSize=13;fontStyle=1;swimlaneLine=1;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="10" y="10" width="1180" height="640" as="geometry"/>
+          <mxGeometry x="15.0" y="15.0" width="1770.0" height="960.0" as="geometry" />
         </mxCell>
         <mxCell id="rootmg" value="Root Management Group" style="swimlane;startSize=28;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;rounded=1;" vertex="1" parent="tenant">
-          <mxGeometry x="10" y="40" width="1160" height="550" as="geometry"/>
+          <mxGeometry x="15.0" y="60.0" width="1740.0" height="825.0" as="geometry" />
         </mxCell>
         <mxCell id="platformmg" value="Platform MG" style="swimlane;startSize=26;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="rootmg">
-          <mxGeometry x="10" y="38" width="370" height="500" as="geometry"/>
+          <mxGeometry x="15.0" y="57.0" width="555.0" height="750.0" as="geometry" />
         </mxCell>
         <mxCell id="idsub" value="Identity Sub" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=10;" vertex="1" parent="platformmg">
-          <mxGeometry x="15" y="36" width="100" height="35" as="geometry"/>
+          <mxGeometry x="22.5" y="54.0" width="100" height="35" as="geometry" />
         </mxCell>
         <mxCell id="idrg" value="Identity RG" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=9;" vertex="1" parent="platformmg">
-          <mxGeometry x="15" y="86" width="100" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="129.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="idres" value="AAD DS, Key Vault" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=8;" vertex="1" parent="platformmg">
-          <mxGeometry x="15" y="131" width="100" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="196.5" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="e_id1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="idsub" target="idrg" parent="platformmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_id2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="idrg" target="idres" parent="platformmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="mgtsub" value="Management Sub" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=10;" vertex="1" parent="platformmg">
-          <mxGeometry x="135" y="36" width="105" height="35" as="geometry"/>
+          <mxGeometry x="202.5" y="54.0" width="105" height="35" as="geometry" />
         </mxCell>
         <mxCell id="mgtrg" value="Mgmt RG" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=9;" vertex="1" parent="platformmg">
-          <mxGeometry x="135" y="86" width="105" height="30" as="geometry"/>
+          <mxGeometry x="202.5" y="129.0" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="mgtres" value="Log Analytics, Automation" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=8;" vertex="1" parent="platformmg">
-          <mxGeometry x="135" y="131" width="105" height="30" as="geometry"/>
+          <mxGeometry x="202.5" y="196.5" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="e_mg1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="mgtsub" target="mgtrg" parent="platformmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_mg2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="mgtrg" target="mgtres" parent="platformmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="connsub" value="Connectivity Sub" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=10;" vertex="1" parent="platformmg">
-          <mxGeometry x="260" y="36" width="100" height="35" as="geometry"/>
+          <mxGeometry x="390.0" y="54.0" width="100" height="35" as="geometry" />
         </mxCell>
         <mxCell id="connrg" value="Network RG" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=9;" vertex="1" parent="platformmg">
-          <mxGeometry x="260" y="86" width="100" height="30" as="geometry"/>
+          <mxGeometry x="390.0" y="129.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="connres" value="VNet, Firewall, VPN GW" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=8;" vertex="1" parent="platformmg">
-          <mxGeometry x="260" y="131" width="100" height="30" as="geometry"/>
+          <mxGeometry x="390.0" y="196.5" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="e_cn1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="connsub" target="connrg" parent="platformmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_cn2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="connrg" target="connres" parent="platformmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lzmg" value="Landing Zones MG" style="swimlane;startSize=26;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="rootmg">
-          <mxGeometry x="400" y="38" width="460" height="500" as="geometry"/>
+          <mxGeometry x="600.0" y="57.0" width="690.0" height="750.0" as="geometry" />
         </mxCell>
         <mxCell id="corpmg" value="Corp MG" style="swimlane;startSize=24;fillColor=#5DADE2;fontColor=#FFFFFF;strokeColor=#3498DB;fontSize=10;fontStyle=1;rounded=1;" vertex="1" parent="lzmg">
-          <mxGeometry x="10" y="36" width="210" height="150" as="geometry"/>
+          <mxGeometry x="15.0" y="54.0" width="315.0" height="225.0" as="geometry" />
         </mxCell>
         <mxCell id="prodsub" value="Prod Sub" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=10;" vertex="1" parent="corpmg">
-          <mxGeometry x="10" y="34" width="90" height="30" as="geometry"/>
+          <mxGeometry x="15.0" y="51.0" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="prodrg" value="App RG" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=9;" vertex="1" parent="corpmg">
-          <mxGeometry x="110" y="34" width="90" height="30" as="geometry"/>
+          <mxGeometry x="165.0" y="51.0" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="prodres" value="App Svc, SQL DB" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=8;" vertex="1" parent="corpmg">
-          <mxGeometry x="55" y="80" width="100" height="30" as="geometry"/>
+          <mxGeometry x="82.5" y="120.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="e_p1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="prodsub" target="prodrg" parent="corpmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_p2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="prodrg" target="prodres" parent="corpmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="onlinemg" value="Online MG" style="swimlane;startSize=24;fillColor=#5DADE2;fontColor=#FFFFFF;strokeColor=#3498DB;fontSize=10;fontStyle=1;rounded=1;" vertex="1" parent="lzmg">
-          <mxGeometry x="240" y="36" width="210" height="150" as="geometry"/>
+          <mxGeometry x="360.0" y="54.0" width="315.0" height="225.0" as="geometry" />
         </mxCell>
         <mxCell id="websub" value="Web Sub" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=10;" vertex="1" parent="onlinemg">
-          <mxGeometry x="10" y="34" width="90" height="30" as="geometry"/>
+          <mxGeometry x="15.0" y="51.0" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="webrg" value="Web RG" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=9;" vertex="1" parent="onlinemg">
-          <mxGeometry x="110" y="34" width="90" height="30" as="geometry"/>
+          <mxGeometry x="165.0" y="51.0" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="webres" value="Front Door, Static Web" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=8;" vertex="1" parent="onlinemg">
-          <mxGeometry x="55" y="80" width="100" height="30" as="geometry"/>
+          <mxGeometry x="82.5" y="120.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="e_w1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="websub" target="webrg" parent="onlinemg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_w2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="webrg" target="webres" parent="onlinemg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="sandboxmg" value="Sandbox MG" style="swimlane;startSize=26;fillColor=#8E44AD;fontColor=#FFFFFF;strokeColor=#6C3483;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="rootmg">
-          <mxGeometry x="880" y="38" width="130" height="170" as="geometry"/>
+          <mxGeometry x="1320.0" y="57.0" width="195.0" height="255.0" as="geometry" />
         </mxCell>
         <mxCell id="devsub" value="Dev Sub" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=10;" vertex="1" parent="sandboxmg">
-          <mxGeometry x="15" y="36" width="100" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="54.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="devrg" value="Sandbox RG" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=9;" vertex="1" parent="sandboxmg">
-          <mxGeometry x="15" y="81" width="100" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="121.5" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="devres" value="Test VMs" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=8;" vertex="1" parent="sandboxmg">
-          <mxGeometry x="15" y="126" width="100" height="30" as="geometry"/>
+          <mxGeometry x="22.5" y="189.0" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="e_d1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="devsub" target="devrg" parent="sandboxmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_d2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#555555;" edge="1" source="devrg" target="devres" parent="sandboxmg">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="decommmg" value="Decommissioned MG" style="swimlane;startSize=26;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="rootmg">
-          <mxGeometry x="1030" y="38" width="120" height="60" as="geometry"/>
+          <mxGeometry x="1545.0" y="57.0" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="inherit_lbl" value="Inheritance: Policy &amp; RBAC flow DOWN the tree" style="text;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=3;fontColor=#0078D4;" vertex="1" parent="1">
-          <mxGeometry x="350" y="660" width="500" height="30" as="geometry"/>
+          <mxGeometry x="525.0" y="990.0" width="500" height="30" as="geometry" />
         </mxCell>
         <mxCell id="legend_arrow" value="" style="shape=flexArrow;fillColor=#0078D4;strokeColor=#005A9E;arrowWidth=10;arrowSize=8;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="200" y="670" as="sourcePoint"/>
-            <mxPoint x="340" y="670" as="targetPoint"/>
+            <mxPoint x="300.0" y="1005.0" as="sourcePoint" />
+            <mxPoint x="510.0" y="1005.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="legend_txt" value="Tenant → MG → Subscription → Resource Group → Resource" style="text;align=left;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
-          <mxGeometry x="10" y="670" width="190" height="25" as="geometry"/>
+          <mxGeometry x="15.0" y="1005.0" width="190" height="25" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
