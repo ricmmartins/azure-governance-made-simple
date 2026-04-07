@@ -10,7 +10,6 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    logo: '/images/azure_governance.png',
 
     nav: [
       { text: 'Home', link: '/' },

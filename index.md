@@ -5,9 +5,6 @@ hero:
   name: Azure Governance
   text: Made Simple
   tagline: The comprehensive, open-source reference guide — from foundations to enterprise scale.
-  image:
-    src: /images/azure_governance.png
-    alt: Azure Governance
   actions:
     - theme: brand
       text: Start Reading →

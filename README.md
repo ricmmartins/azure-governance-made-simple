@@ -6,8 +6,6 @@
 
 > **The comprehensive, open-source reference guide to Azure Governance — from foundations to enterprise scale.**
 
-![Azure Governance](/images/azure_governance.png)
-
 ## About This Book
 
 **Azure Governance Made Simple** is a practitioner-oriented guide to designing, implementing, and operating cloud governance on Microsoft Azure. Written for Azure architects, platform engineers, Cloud Center of Excellence (CCoE) teams, and IT leaders, it provides the depth needed to build governance frameworks that balance developer agility with organizational control.
