@@ -315,4 +315,4 @@ resource lawLock 'Microsoft.Authorization/locks@2020-05-01' = {
 
 Previous | Next
 :--- | :---
-[Chapter 11 — Microsoft Defender for Cloud](/guide/part-3-policy-compliance/ch11-defender-for-cloud.md) | [Chapter 13 — Infrastructure as Code](/guide/part-4-iac-deployment/ch13-infrastructure-as-code.md)
+[Chapter 11 — Microsoft Defender for Cloud](/guide/part-3-policy-compliance/ch11-defender-for-cloud.md) | [Chapter 13 — Bicep & AVM](/guide/part-4-iac-deployment/ch13-bicep-avm.md)

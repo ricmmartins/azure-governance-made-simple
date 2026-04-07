@@ -304,4 +304,4 @@ Managed identities are easy to create — perhaps too easy. Without governance, 
 
 Previous | Next
 :--- | :---
-[Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md) | [Part 3 — Policy & Compliance](../part-3-policy-compliance/)
+[Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md) | [Part 3 — Policy & Compliance](../part-3-policy-compliance/ch09-azure-policy.md)

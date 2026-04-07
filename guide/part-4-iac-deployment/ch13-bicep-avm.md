@@ -434,4 +434,4 @@ output keyVaultUri string = keyVault.outputs.uri
 
 | Previous | Next |
 |:---------|:-----|
-| [Governance Suggested Policies](../governance-policies.md) | [Deployment Stacks](ch14-deployment-stacks.md) |
+| [Governance Suggested Policies](../part-3-policy-compliance/ch09-azure-policy.md) | [Deployment Stacks](ch14-deployment-stacks.md) |

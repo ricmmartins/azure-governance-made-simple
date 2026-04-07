@@ -348,4 +348,4 @@ resourcecontainers
 
 | Previous | Next |
 |:---|:---|
-| [Part 7 — At Scale](../part-7-at-scale/) | [Azure Arc](ch24-azure-arc.md) |
+| [Chapter 22 — AzGovViz](../part-6-observability/ch22-azgovviz.md) | [Chapter 24 — Azure Arc](ch24-azure-arc.md) |

@@ -195,4 +195,4 @@ authorizationresources
 
 Previous | Next
 :--- | :---
-[Part 1 — Foundations](../part-1-foundations/) | [Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md)
+[Part 1 — Foundations](../part-1-foundations/ch01-why-governance-matters.md) | [Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md)

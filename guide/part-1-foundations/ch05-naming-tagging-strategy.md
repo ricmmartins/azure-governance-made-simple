@@ -448,4 +448,4 @@ resources
 
 | Previous | Next |
 |:---|:---|
-| [Chapter 4 — Resource Hierarchy](ch04-resource-hierarchy.md) | [Part 2 — Identity and Access](../part-2-identity-access/) |
+| [Chapter 4 — Resource Hierarchy](ch04-resource-hierarchy.md) | [Part 2 — Identity and Access](../part-2-identity-access/ch06-rbac.md) |

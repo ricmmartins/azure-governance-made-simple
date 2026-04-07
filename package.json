@@ -1,0 +1,26 @@
+{
+  "name": "azure-governance-made-simple",
+  "version": "1.0.0",
+  "description": "[![Book](https://img.shields.io/badge/📖_Read_Online-book.azgovernance.com-blue?style=for-the-badge)](https://book.azgovernance.com/)\r [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-green.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricmmartins/azure-governance-made-simple.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ricmmartins/azure-governance-made-simple/issues"
+  },
+  "homepage": "https://github.com/ricmmartins/azure-governance-made-simple#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

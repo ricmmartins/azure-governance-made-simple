@@ -159,7 +159,7 @@ Please read the [Contributing Guide](CONTRIBUTING.md) before submitting a pull r
 
 ## License
 
-This project is licensed under the **GPL-3.0 License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GPL-3.0 License** — see the LICENSE file at the repository root for details.
 
 ---
 

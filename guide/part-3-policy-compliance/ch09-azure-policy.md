@@ -899,4 +899,4 @@ PolicyResources
 
 Previous | Next
 :--- | :---
-[Chapter 8 — Microsoft Entra ID & RBAC](/guide/part-2-identity-access/ch08-rbac.md) | [Chapter 10 — Regulatory Compliance](/guide/part-3-policy-compliance/ch10-regulatory-compliance.md)
+[Chapter 6 — RBAC](/guide/part-2-identity-access/ch06-rbac.md) | [Chapter 10 — Regulatory Compliance](/guide/part-3-policy-compliance/ch10-regulatory-compliance.md)
