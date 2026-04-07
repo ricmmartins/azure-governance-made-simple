@@ -1,0 +1,40 @@
+<mxfile>
+  <diagram name="Managed Identity Flow" id="mi-flow-1">
+    <mxGraphModel dx="900" dy="350" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="350">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="mi-app" value="Azure Resource (e.g., App Service)" style="rounded=1;whiteSpace=wrap;fillColor=#0078D4;fontColor=#FFFFFF;strokeColor=#005A9E;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="500" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-imds" value="Azure Instance Metadata Service (IMDS)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="140" width="440" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-sql" value="Azure SQL" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="270" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-kv" value="Key Vault" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;strokeColor=#F0C040;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="270" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-stor" value="Storage" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#58D68D;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="270" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-e1" value="Has a Managed Identity" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;fontSize=10;fontStyle=2;" edge="1" source="mi-app" target="mi-imds" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-e2" value="Requests token" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=2;fontSize=10;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="680" y="100" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-e3" value="Token granted" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;fontSize=10;fontStyle=2;" edge="1" source="mi-imds" target="mi-kv" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-e4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="mi-imds" target="mi-sql" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mi-e5" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="mi-imds" target="mi-stor" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

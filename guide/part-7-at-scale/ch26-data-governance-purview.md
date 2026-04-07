@@ -50,14 +50,7 @@ Purview automatically classifies data as it scans, identifying sensitive informa
 - **Custom classifiers** — Create classifiers based on regular expressions, dictionary lists, or specific column patterns
 - **Classification rules** — Define which classifiers run against which data sources
 
-```
-┌─────────────┐    ┌──────────────┐    ┌───────────────────┐
-│ Data Source  │───►│ Purview Scan  │───►│ Classifications   │
-│ (SQL, Lake)  │    │              │    │ • SSN detected    │
-│              │    │              │    │ • Email detected  │
-└─────────────┘    └──────────────┘    │ • Credit card     │
-                                       └───────────────────┘
-```
+![Purview Scan Flow](/images/purview-scan-flow.svg)
 
 ### Sensitivity Labels — Protecting Sensitive Data
 

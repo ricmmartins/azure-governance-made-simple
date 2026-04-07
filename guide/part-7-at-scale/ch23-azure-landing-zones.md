@@ -19,27 +19,7 @@ The ALZ conceptual architecture provides:
 - **Centralized logging and monitoring** through a management subscription
 - **Identity integration** with Microsoft Entra ID
 
-```
-                    ┌─────────────────────┐
-                    │   Tenant Root Group  │
-                    └──────────┬──────────┘
-                               │
-                    ┌──────────┴──────────┐
-                    │     Organization     │
-                    │  (Top-Level MG)      │
-                    └──────────┬──────────┘
-                               │
-          ┌────────────────────┼────────────────────┐
-          │                    │                     │
-   ┌──────┴──────┐    ┌───────┴───────┐    ┌───────┴───────┐
-   │  Platform   │    │  Landing      │    │  Decomm /     │
-   │             │    │  Zones        │    │  Sandbox      │
-   └──────┬──────┘    └───────┬───────┘    └───────────────┘
-          │                   │
-   ┌──────┼──────┐     ┌─────┴──────┐
-   │      │      │     │            │
- Mgmt  Conn  Identity  Corp      Online
-```
+![Azure Landing Zone Hierarchy](/images/alz-hierarchy-tree.svg)
 
 ---
 

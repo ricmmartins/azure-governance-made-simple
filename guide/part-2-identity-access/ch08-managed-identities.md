@@ -20,15 +20,7 @@ Together, these capabilities form the foundation of a **secretless** authenticat
 
 A managed identity is a service principal in Microsoft Entra ID whose lifecycle is tied to an Azure resource. Azure handles credential creation, rotation, and deletion automatically.
 
-```
-Azure Resource (e.g., App Service)
-    │
-    ├── Has a Managed Identity (service principal in Entra ID)
-    │
-    └── Requests tokens from the Azure Instance Metadata Service (IMDS)
-            │
-            └── Token grants access to target resources (e.g., Azure SQL, Key Vault)
-```
+![Managed Identity Flow](/images/managed-identity-flow.svg)
 
 There is no password or certificate for you to manage — Azure rotates the underlying credentials automatically.
 
@@ -59,15 +51,7 @@ Workload Identity Federation lets external identity providers (IdPs) issue token
 
 ### How It Works
 
-```
-External Workload (e.g., GitHub Actions)
-    │
-    ├── Obtains an OIDC token from its native IdP (e.g., GitHub's OIDC provider)
-    │
-    └── Exchanges the token for a Microsoft Entra ID access token
-            │
-            └── Access token grants access to Azure resources
-```
+![Workload Identity Federation Flow](/images/workload-identity-flow.svg)
 
 No client secret. No certificate. The trust is based on the token's issuer (`iss`) and subject (`sub`) claims matching the federated credential configuration.
 

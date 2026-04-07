@@ -1,0 +1,31 @@
+<mxfile>
+  <diagram name="Lifecycle Workflow Flow" id="lifecycle-flow-1">
+    <mxGraphModel dx="1000" dy="200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="lc-s1" value="HR System" style="rounded=1;whiteSpace=wrap;fillColor=#E8DAEF;strokeColor=#BB8FCE;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc-s2" value="Inbound&#xa;Provisioning" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc-s3" value="Microsoft Entra ID&#xa;(attributes updated)" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="70" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc-s4" value="Lifecycle Workflow&#xa;fires" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#58D68D;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="70" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc-e1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="lc-s1" target="lc-s2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc-e2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="lc-s2" target="lc-s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc-e3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="lc-s3" target="lc-s4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,37 @@
+<mxfile>
+  <diagram name="PIM Activation Flow" id="pim-flow-1">
+    <mxGraphModel dx="1000" dy="200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="pim-s1" value="Eligible&#xa;Assignment" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="70" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-s2" value="Activation&#xa;Request" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;strokeColor=#F0C040;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="70" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-s3" value="Approval&#xa;(Optional)" style="rounded=1;whiteSpace=wrap;fillColor=#FAE5D3;strokeColor=#E59866;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="70" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-s4" value="Time-Bound&#xa;Active Assignment" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#58D68D;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-s5" value="Expiry" style="rounded=1;whiteSpace=wrap;fillColor=#F8F9FA;strokeColor=#CCCCCC;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="70" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-e1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pim-s1" target="pim-s2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-e2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pim-s2" target="pim-s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-e3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pim-s3" target="pim-s4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pim-e4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pim-s4" target="pim-s5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

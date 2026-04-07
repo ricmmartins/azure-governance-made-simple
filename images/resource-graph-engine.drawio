@@ -1,0 +1,28 @@
+<mxfile>
+  <diagram name="Resource Graph Engine" id="diag-rge-1">
+    <mxGraphModel dx="600" dy="450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="450">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="rge-query" value="Your Query (KQL)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="30" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="rge-engine" value="Resource Graph Query Engine" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2C6FAC;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="170" width="360" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="rge-note" value="Pre-indexed cache,&lt;br&gt;updated near real-time" style="text;whiteSpace=wrap;fillColor=none;fontColor=#7F8C8D;fontSize=11;fontStyle=2;align=left;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="260" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="rge-results" value="Results (returned in seconds)" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;fontColor=#333333;strokeColor=#A9DFBF;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="350" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="rge-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rge-query" target="rge-engine" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rge-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rge-engine" target="rge-results" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

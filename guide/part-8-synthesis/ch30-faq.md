@@ -102,17 +102,7 @@ If you currently use Blueprints, plan your migration to Deployment Stacks. See C
 
 **No more than six levels** (Azure enforces this limit). Most organizations need only **three to four levels**:
 
-```
-Tenant Root Group
-└── Organization (Level 1)
-    ├── Platform (Level 2)
-    │   ├── Management (Level 3)
-    │   ├── Connectivity (Level 3)
-    │   └── Identity (Level 3)
-    └── Landing Zones (Level 2)
-        ├── Corp (Level 3)
-        └── Online (Level 3)
-```
+![Management Group Hierarchy](/images/faq-mg-hierarchy.svg)
 
 **Common mistake:** Creating management groups that mirror the org chart (one per department, one per team). This leads to excessive depth and policy complexity. Management groups should represent *governance boundaries*, not organizational hierarchy.
 

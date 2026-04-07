@@ -27,19 +27,7 @@ Resource Graph uses the **Kusto Query Language (KQL)** — the same language use
 
 Resource Graph indexes data from Azure Resource Manager (ARM) and various resource providers. When you submit a query, it runs against this pre-built index rather than calling individual resource providers:
 
-```
-Your Query (KQL)
-    │
-    ▼
-┌────────────────────┐
-│  Resource Graph     │  ← Pre-indexed cache
-│  Query Engine       │     updated near real-time
-└────────┬───────────┘
-         │
-    ┌────▼────┐
-    │ Results │  ← Returned in seconds
-    └─────────┘
-```
+![Resource Graph Query Engine](/images/resource-graph-engine.svg)
 
 ### Resource Graph Tables
 

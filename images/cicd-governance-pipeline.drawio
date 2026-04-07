@@ -1,0 +1,37 @@
+<mxfile>
+  <diagram name="CI/CD Governance Pipeline" id="diag-cicd-1">
+    <mxGraphModel dx="1100" dy="200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="cicd-s1" value="Commit &amp; Push" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-s2" value="Lint &amp; Test" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2C6FAC;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-s3" value="What-If Preview" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-s4" value="Approval Gate" style="rounded=1;whiteSpace=wrap;fillColor=#E67E22;fontColor=#FFFFFF;strokeColor=#CA6F1E;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-s5" value="Deploy" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="70" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="cicd-s1" target="cicd-s2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="cicd-s2" target="cicd-s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="cicd-s3" target="cicd-s4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd-e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="cicd-s4" target="cicd-s5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

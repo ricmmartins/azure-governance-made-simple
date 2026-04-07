@@ -26,13 +26,7 @@ Key benefits:
 
 A Template Spec is an Azure resource of type `Microsoft.Resources/templateSpecs` that lives in a resource group. Each version is a child resource (`Microsoft.Resources/templateSpecs/versions`) containing the actual template content.
 
-```
-Resource Group: rg-templates
-└── Template Spec: governance-baseline (Microsoft.Resources/templateSpecs)
-    ├── Version 1.0 — initial governance baseline
-    ├── Version 1.1 — added tag policy
-    └── Version 2.0 — added deployment stack support
-```
+![Template Spec Versions](/images/template-spec-versions.svg)
 
 ### Creating a Template Spec
 

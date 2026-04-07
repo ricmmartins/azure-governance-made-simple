@@ -88,13 +88,7 @@ A **policy assignment** is the act of attaching a policy definition or initiativ
 
 Policy assignments follow the Azure resource hierarchy:
 
-```
-Tenant Root Group
-  └── Management Group
-        └── Subscription
-              └── Resource Group
-                    └── Resource
-```
+![Policy Scope Hierarchy](/images/policy-scope-hierarchy.svg)
 
 Policies assigned at a higher scope are **inherited** by all child scopes. A policy assigned to a management group applies to every subscription and resource group beneath it.
 
@@ -188,12 +182,7 @@ Azure Machine Configuration uses the following architecture:
 
 The evaluation flow:
 
-```
-Azure Policy Assignment
-    → Machine Configuration Extension (on VM)
-        → Evaluates DSC configuration package
-            → Reports compliance back to Azure Policy
-```
+![Machine Configuration Flow](/images/machine-config-flow.svg)
 
 ### Built-in Machine Configuration Policies
 
@@ -266,20 +255,7 @@ Key features of EPAC:
 
 An EPAC policy definition structure looks like:
 
-```
-📂 Definitions/
-├── 📂 policyDefinitions/
-│   └── 📂 MyOrg/
-│       └── require-https-storage.jsonc
-├── 📂 policySetDefinitions/
-│   └── 📂 MyOrg/
-│       └── security-baseline.jsonc
-├── 📂 policyAssignments/
-│   └── security-baseline-assignment.jsonc
-├── 📂 policyExemptions/
-│   └── temporary-exemption-projectx.jsonc
-└── global-settings.jsonc
-```
+![EPAC Folder Structure](/images/epac-folder-structure.svg)
 
 > **Reference:** [Enterprise Policy as Code (EPAC)](https://aka.ms/epac)
 
@@ -287,9 +263,7 @@ An EPAC policy definition structure looks like:
 
 A robust Policy as Code pipeline follows this workflow:
 
-```
-Author → Validate → Plan → Review → Deploy → Monitor
-```
+![Policy Lifecycle](/images/policy-lifecycle.svg)
 
 #### Stage 1: Author
 
@@ -409,15 +383,7 @@ Exemptions should be tracked in source control alongside policies:
 
 ### Git-Based Policy Management Workflow
 
-```
-main branch ─────────────────────────────────────► Production policies
-  │
-  ├── feature/add-network-policy ──► PR ──► Review ──► Merge
-  │
-  ├── feature/update-tag-initiative ──► PR ──► Review ──► Merge
-  │
-  └── feature/exempt-projectx ──► PR ──► Review ──► Merge
-```
+![Git-Based Policy Management](/images/policy-git-branching.svg)
 
 Each pull request triggers:
 1. Schema validation of policy JSON.

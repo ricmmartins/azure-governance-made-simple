@@ -24,12 +24,7 @@ Why governance needs CI/CD:
 
 A governance deployment pipeline typically follows this flow:
 
-```
-┌──────────┐    ┌──────────┐    ┌───────────┐    ┌──────────┐    ┌──────────┐
-│  Commit   │───▶│   Lint   │───▶│  What-If  │───▶│ Approval │───▶│  Deploy  │
-│  & Push   │    │  & Test  │    │  Preview  │    │   Gate   │    │          │
-└──────────┘    └──────────┘    └───────────┘    └──────────┘    └──────────┘
-```
+![CI/CD Governance Pipeline](/images/cicd-governance-pipeline.svg)
 
 **Stage 1: Lint & Test**
 - Bicep linter validates templates
@@ -96,9 +91,7 @@ Governance drift occurs when the actual state of resources diverges from the des
 
 Governance configurations should follow the same promotion path as application code:
 
-```
-dev  ──▶  staging  ──▶  production
-```
+![Environment Promotion Flow](/images/env-promotion-flow.svg)
 
 | Stage | Purpose | Approval |
 |-------|---------|----------|
@@ -108,13 +101,7 @@ dev  ──▶  staging  ──▶  production
 
 Use separate parameter files for each environment:
 
-```
-├── main.bicep
-├── parameters/
-│   ├── dev.bicepparam
-│   ├── staging.bicepparam
-│   └── production.bicepparam
-```
+![Bicep Parameter Structure](/images/bicep-param-structure.svg)
 
 ---
 

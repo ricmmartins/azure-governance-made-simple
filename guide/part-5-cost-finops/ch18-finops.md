@@ -24,21 +24,7 @@ Why governance teams should care about FinOps:
 
 The FinOps Foundation defines three phases that organizations cycle through continuously:
 
-```
-     ┌───────────┐
-     │  INFORM   │  ← Visibility and allocation
-     └─────┬─────┘
-           │
-     ┌─────▼─────┐
-     │ OPTIMIZE  │  ← Rates and usage
-     └─────┬─────┘
-           │
-     ┌─────▼─────┐
-     │  OPERATE  │  ← Continuous improvement
-     └───────────┘
-           │
-           └──── (cycle back to INFORM)
-```
+![FinOps Lifecycle](/images/finops-lifecycle.svg)
 
 #### Phase 1: Inform
 

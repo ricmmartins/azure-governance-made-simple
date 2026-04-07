@@ -1,0 +1,61 @@
+<mxfile>
+  <diagram name="FAQ MG Hierarchy" id="diag-faq-1">
+    <mxGraphModel dx="800" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="400">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="faq-root" value="Tenant Root Group" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="10" width="240" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-org" value="Organization (Level 1)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="90" width="240" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-plat" value="Platform (Level 2)" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="170" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-lz" value="Landing Zones (Level 2)" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="170" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-mgmt" value="Management (Level 3)" style="rounded=1;whiteSpace=wrap;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="260" width="170" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-conn" value="Connectivity (Level 3)" style="rounded=1;whiteSpace=wrap;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="260" width="170" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-iden" value="Identity (Level 3)" style="rounded=1;whiteSpace=wrap;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="260" width="170" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-corp" value="Corp (Level 3)" style="rounded=1;whiteSpace=wrap;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="340" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-online" value="Online (Level 3)" style="rounded=1;whiteSpace=wrap;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="340" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-root" target="faq-org" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-org" target="faq-plat" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-org" target="faq-lz" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-plat" target="faq-mgmt" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-plat" target="faq-conn" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-plat" target="faq-iden" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-lz" target="faq-corp" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="faq-e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="faq-lz" target="faq-online" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

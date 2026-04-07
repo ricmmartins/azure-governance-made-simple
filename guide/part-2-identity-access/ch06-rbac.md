@@ -28,12 +28,7 @@ Every RBAC assignment is the intersection of three things:
 
 Permissions are **inherited** top-down. A role assigned at the subscription scope applies to every resource group and resource beneath it.
 
-```
-Management Group
-  └─ Subscription
-       └─ Resource Group
-            └─ Resource
-```
+![RBAC Scope Hierarchy](/images/rbac-scope-hierarchy.svg)
 
 ![scope](../../images/scope.png)
 

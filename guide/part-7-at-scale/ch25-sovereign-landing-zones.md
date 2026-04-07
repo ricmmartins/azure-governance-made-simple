@@ -81,17 +81,7 @@ Azure provides several mechanisms for data residency:
 
 The Sovereign Landing Zone architecture extends the standard ALZ with additional controls:
 
-```
-Standard ALZ Architecture
-    │
-    ├── + Restricted region policies (Allowed Locations)
-    ├── + Customer-managed key requirements
-    ├── + Confidential computing policies
-    ├── + Network isolation (no cross-border peering)
-    ├── + Data classification and labeling requirements
-    ├── + Audit logging with sovereign log retention
-    └── + Operational access controls (Lockbox, sovereign operations)
-```
+![Sovereign Landing Zone Additions](/images/sovereign-lz-additions.svg)
 
 **Key architectural additions:**
 

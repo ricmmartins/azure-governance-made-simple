@@ -1,0 +1,43 @@
+<mxfile>
+  <diagram name="Policy Lifecycle" id="pol-life-1">
+    <mxGraphModel dx="1100" dy="180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="180">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="pl-s1" value="Author" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#5DADE2;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="60" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-s2" value="Validate" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;strokeColor=#F0C040;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="195" y="60" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-s3" value="Plan" style="rounded=1;whiteSpace=wrap;fillColor=#FAE5D3;strokeColor=#E59866;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="60" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-s4" value="Review" style="rounded=1;whiteSpace=wrap;fillColor=#E8DAEF;strokeColor=#BB8FCE;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="545" y="60" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-s5" value="Deploy" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#58D68D;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="60" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-s6" value="Monitor" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#3A7BC8;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="895" y="60" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-e1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pl-s1" target="pl-s2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-e2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pl-s2" target="pl-s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-e3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pl-s3" target="pl-s4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-e4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pl-s4" target="pl-s5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="pl-e5" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;" edge="1" source="pl-s5" target="pl-s6" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,25 @@
+<mxfile>
+  <diagram name="Environment Promotion Flow" id="diag-epf-1">
+    <mxGraphModel dx="700" dy="150" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="150">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="epf-dev" value="dev" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="35" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="epf-stg" value="staging" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="35" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="epf-prd" value="production" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;fontColor=#333333;strokeColor=#A9DFBF;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="35" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="epf-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="epf-dev" target="epf-stg" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="epf-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="epf-stg" target="epf-prd" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

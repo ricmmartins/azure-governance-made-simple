@@ -1,0 +1,34 @@
+<mxfile>
+  <diagram name="Purview Scan Flow" id="diag-psf-1">
+    <mxGraphModel dx="900" dy="250" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="250">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="psf-src" value="Data Source&lt;br&gt;(SQL, Lake)" style="shape=cylinder3;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2C6FAC;fontSize=12;fontStyle=1;boundedLbl=1;size=15;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="160" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-scan" value="Purview Scan" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="85" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-class" value="Classifications" style="swimlane;startSize=28;fillColor=#D5F5E3;fontColor=#333333;strokeColor=#A9DFBF;fontSize=12;fontStyle=1;rounded=1;container=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="40" width="280" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-ssn" value="SSN detected" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFFF;fontColor=#333333;strokeColor=#A9DFBF;fontSize=11;" vertex="1" parent="psf-class">
+          <mxGeometry x="20" y="38" width="240" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-email" value="Email detected" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFFF;fontColor=#333333;strokeColor=#A9DFBF;fontSize=11;" vertex="1" parent="psf-class">
+          <mxGeometry x="20" y="83" width="240" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-cc" value="Credit card" style="rounded=1;whiteSpace=wrap;fillColor=#FFFFFF;fontColor=#333333;strokeColor=#A9DFBF;fontSize=11;" vertex="1" parent="psf-class">
+          <mxGeometry x="20" y="128" width="240" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="psf-src" target="psf-scan" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="psf-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="psf-scan" target="psf-class" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

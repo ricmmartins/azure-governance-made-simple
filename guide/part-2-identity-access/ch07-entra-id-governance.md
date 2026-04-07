@@ -32,9 +32,7 @@ Think of it this way: instead of giving someone a master key they carry around 2
 
 ### How It Works
 
-```
-Eligible Assignment → Activation Request → (Optional) Approval → Time-Bound Active Assignment → Expiry
-```
+![PIM Activation Flow](/images/pim-activation-flow.svg)
 
 1. **Eligible assignment** — the user is *eligible* for a role but doesn't have it active. No permissions until they activate.
 2. **Activation** — the user requests activation through the Azure portal, Microsoft Graph API, or PowerShell. They must satisfy any configured requirements (MFA, justification, approval).
@@ -160,9 +158,7 @@ As of 2026, Microsoft has expanded the set of supported trigger attributes, incl
 
 Lifecycle Workflows are most powerful when combined with **inbound provisioning from HR systems** (Workday, SAP SuccessFactors, or custom HR via the inbound provisioning API). The HR system becomes the authoritative source of lifecycle events:
 
-```
-HR System → Inbound Provisioning → Microsoft Entra ID (attributes updated) → Lifecycle Workflow fires
-```
+![Lifecycle Workflow Flow](/images/lifecycle-workflow-flow.svg)
 
 ### Best Practices
 
