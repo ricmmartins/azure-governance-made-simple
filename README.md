@@ -1,6 +1,6 @@
 # Azure Governance Made Simple
 
-[![Book](https://img.shields.io/badge/📖_Read_Online-book.azgovernance.com-blue?style=for-the-badge)](https://book.azgovernance.com/)
+[![Book](https://img.shields.io/badge/📖_Read_Online-azgovernance.com-blue?style=for-the-badge)](https://azgovernance.com/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-green.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
 
@@ -38,7 +38,7 @@ All content is aligned with the [Microsoft Cloud Adoption Framework](https://lea
 
 ## 📖 Read the Book
 
-**Online:** [book.azgovernance.com](https://book.azgovernance.com/)
+**Online:** [azgovernance.com](https://azgovernance.com/)
 
 ---
 
