@@ -1,66 +1,66 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<mxfile>
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
   <diagram name="ALZ Hierarchy Tree" id="diag-alz-1">
-    <mxGraphModel dx="1100" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500">
+    <mxGraphModel dx="900" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="500">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
         <mxCell id="alz-root" value="Tenant Root Group" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="615.0" y="30.0" width="280" height="50" as="geometry" />
+          <mxGeometry x="340" y="20" width="240" height="50" as="geometry"/>
         </mxCell>
         <mxCell id="alz-org" value="Organization (Top-Level MG)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="585.0" y="180.0" width="320" height="50" as="geometry" />
+          <mxGeometry x="310" y="130" width="300" height="50" as="geometry"/>
         </mxCell>
         <mxCell id="alz-platform" value="Platform" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="120.0" y="345.0" width="200" height="45" as="geometry" />
+          <mxGeometry x="60" y="250" width="180" height="45" as="geometry"/>
         </mxCell>
         <mxCell id="alz-lz" value="Landing Zones" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="675.0" y="345.0" width="200" height="45" as="geometry" />
+          <mxGeometry x="370" y="250" width="180" height="45" as="geometry"/>
         </mxCell>
         <mxCell id="alz-decomm" value="Decomm / Sandbox" style="rounded=1;whiteSpace=wrap;fillColor=#6C3483;fontColor=#FFFFFF;strokeColor=#5B2C6F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1245.0" y="345.0" width="200" height="45" as="geometry" />
+          <mxGeometry x="680" y="250" width="180" height="45" as="geometry"/>
         </mxCell>
         <mxCell id="alz-mgmt" value="Management" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="30.0" y="495.0" width="140" height="40" as="geometry" />
+          <mxGeometry x="20" y="370" width="120" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="alz-conn" value="Connectivity" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="270.0" y="495.0" width="140" height="40" as="geometry" />
+          <mxGeometry x="170" y="370" width="120" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="alz-iden" value="Identity" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="510.0" y="495.0" width="140" height="40" as="geometry" />
+          <mxGeometry x="320" y="370" width="100" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="alz-corp" value="Corp" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="750.0" y="495.0" width="140" height="40" as="geometry" />
+          <mxGeometry x="470" y="370" width="100" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="alz-online" value="Online" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333333;strokeColor=#AED6F1;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="990.0" y="495.0" width="140" height="40" as="geometry" />
+          <mxGeometry x="610" y="370" width="100" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="alz-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-root" target="alz-org" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="alz-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-org" target="alz-platform" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="alz-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-org" target="alz-platform" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="alz-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-org" target="alz-lz" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="alz-e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-org" target="alz-decomm" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="alz-e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-org" target="alz-decomm" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="alz-e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-platform" target="alz-mgmt" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="alz-e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-platform" target="alz-conn" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="alz-e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-platform" target="alz-conn" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="alz-e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-platform" target="alz-iden" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="alz-e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-platform" target="alz-iden" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="alz-e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-lz" target="alz-corp" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="alz-e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-lz" target="alz-corp" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="alz-e9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-lz" target="alz-online" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="alz-e9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.65;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="alz-lz" target="alz-online" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>

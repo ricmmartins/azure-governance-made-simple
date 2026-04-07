@@ -1,147 +1,130 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
   <diagram name="Governance Maturity Model" id="maturity-model">
-    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+    <mxGraphModel dx="1200" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
         <mxCell id="title" value="Cloud Governance Maturity Model" style="text;html=1;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="450.0" y="22.5" width="500" height="30" as="geometry" />
+          <mxGeometry x="350" y="15" width="400" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="subtitle" value="Aligned with CAF Govern Methodology — Incremental Approach" style="text;html=1;fontSize=11;fontColor=#555555;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="450.0" y="63.0" width="500" height="20" as="geometry" />
+        <mxCell id="subtitle" value="Aligned with CAF Govern Methodology — Incremental Approach" style="text;html=1;fontSize=11;fontColor=#555;align=center;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="300" y="48" width="500" height="20" as="geometry"/>
         </mxCell>
-
-        <mxCell id="run_block" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B4F72;strokeColor=#154360;arcSize=6;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="60.0" y="120.0" width="1020" height="170" as="geometry" />
+        <mxCell id="run_block" value="" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;strokeColor=#154360;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="85" width="1060" height="175" as="geometry"/>
         </mxCell>
-        <mxCell id="run_level" value="LEVEL 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#005A9E;fontColor=#FFFFFF;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="90.0" y="135.0" width="70" height="24" as="geometry" />
+        <mxCell id="run_level" value="LEVEL 3" style="rounded=1;whiteSpace=wrap;fillColor=#0078D4;strokeColor=#005A9E;fontColor=#FFF;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="50" y="98" width="70" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="run_title" value="RUN (Optimized)" style="text;html=1;fontSize=18;fontStyle=1;fontColor=#FFFFFF;align=left;" vertex="1" parent="1">
-          <mxGeometry x="210.0" y="129.0" width="250" height="30" as="geometry" />
+        <mxCell id="run_title" value="RUN (Optimized)" style="text;html=1;fontSize=17;fontStyle=1;fontColor=#FFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="140" y="95" width="250" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="run_desc" value="Automated · Proactive · Self-healing · Data-driven" style="text;html=1;fontSize=11;fontColor=#AED6F1;fontStyle=2;align=left;" vertex="1" parent="1">
-          <mxGeometry x="210.0" y="168.0" width="350" height="20" as="geometry" />
+        <mxCell id="run_desc" value="Automated · Proactive · Self-healing · Data-driven" style="text;html=1;fontSize=10;fontColor=#AED6F1;fontStyle=2;align=left;" vertex="1" parent="1">
+          <mxGeometry x="140" y="124" width="350" height="16" as="geometry"/>
         </mxCell>
-        <mxCell id="run_id" value="🔐 Zero standing access&#10;Managed identities only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="90.0" y="210.0" width="155" height="42" as="geometry" />
+        <mxCell id="run_id" value="Zero standing access&#10;Managed identities only" style="rounded=1;whiteSpace=wrap;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="155" width="180" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="run_pol" value="🛡️ Policy-as-code in CI/CD&#10;Custom policies + exemptions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="337.5" y="210.0" width="185" height="42" as="geometry" />
+        <mxCell id="run_pol" value="Policy-as-code in CI/CD&#10;Custom policies + exemptions" style="rounded=1;whiteSpace=wrap;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="155" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="run_cost" value="💰 FinOps mature&#10;Anomaly detection + chargeback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="630.0" y="210.0" width="195" height="42" as="geometry" />
+        <mxCell id="run_cost" value="FinOps mature&#10;Anomaly detection + chargeback" style="rounded=1;whiteSpace=wrap;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="460" y="155" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="run_sec" value="🛡️ Secure Score &gt;80%&#10;Auto-remediation + SIEM/SOAR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="937.5" y="210.0" width="195" height="42" as="geometry" />
+        <mxCell id="run_sec" value="Secure Score &gt;80%&#10;Auto-remediation + SIEM/SOAR" style="rounded=1;whiteSpace=wrap;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="155" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="run_ops" value="⚙️ Full IaC + CI/CD&#10;Drift detection + sub vending" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1245.0" y="210.0" width="195" height="42" as="geometry" />
+        <mxCell id="run_ops" value="Full IaC + CI/CD&#10;Drift detection + sub vending" style="rounded=1;whiteSpace=wrap;fillColor=#154360;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="880" y="155" width="190" height="42" as="geometry"/>
         </mxCell>
         <mxCell id="run_char" value="Dozens to hundreds of subscriptions · Mature CCoE · Governance KPIs reported to leadership" style="text;html=1;fontSize=9;fontColor=#85C1E9;fontStyle=2;align=center;" vertex="1" parent="1">
-          <mxGeometry x="300.0" y="292.5" width="700" height="16" as="geometry" />
+          <mxGeometry x="200" y="210" width="700" height="16" as="geometry"/>
         </mxCell>
-        <mxCell id="run_badge" value="🏆" style="text;html=1;fontSize=28;align=center;" vertex="1" parent="1">
-          <mxGeometry x="1485.0" y="127.5" width="50" height="40" as="geometry" />
-        </mxCell>
-
         <mxCell id="arrow_walk_run" value="" style="shape=mxgraph.arrows2.arrow;dy=0.6;dx=20;notch=0;fillColor=#27AE60;strokeColor=#1E8449;opacity=70;rotation=-90;" vertex="1" parent="1">
-          <mxGeometry x="757.5" y="360.0" width="40" height="50" as="geometry" />
+          <mxGeometry x="530" y="267" width="40" height="40" as="geometry"/>
         </mxCell>
-
-        <mxCell id="walk_block" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E86C1;strokeColor=#1B4F72;arcSize=6;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="60.0" y="420.0" width="1020" height="170" as="geometry" />
+        <mxCell id="walk_block" value="" style="rounded=1;whiteSpace=wrap;fillColor=#2E86C1;strokeColor=#1B4F72;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="315" width="1060" height="175" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_level" value="LEVEL 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5DADE2;strokeColor=#2E86C1;fontColor=#FFFFFF;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="90.0" y="435.0" width="70" height="24" as="geometry" />
+        <mxCell id="walk_level" value="LEVEL 2" style="rounded=1;whiteSpace=wrap;fillColor=#5DADE2;strokeColor=#2E86C1;fontColor=#FFF;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="50" y="328" width="70" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_title" value="WALK (Defined)" style="text;html=1;fontSize=18;fontStyle=1;fontColor=#FFFFFF;align=left;" vertex="1" parent="1">
-          <mxGeometry x="210.0" y="429.0" width="250" height="30" as="geometry" />
+        <mxCell id="walk_title" value="WALK (Defined)" style="text;html=1;fontSize=17;fontStyle=1;fontColor=#FFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="140" y="325" width="250" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_desc" value="Standardized · Enforced · Measured · Documented" style="text;html=1;fontSize=11;fontColor=#D6EAF8;fontStyle=2;align=left;" vertex="1" parent="1">
-          <mxGeometry x="210.0" y="468.0" width="350" height="20" as="geometry" />
+        <mxCell id="walk_desc" value="Standardized · Enforced · Measured · Documented" style="text;html=1;fontSize=10;fontColor=#D6EAF8;fontStyle=2;align=left;" vertex="1" parent="1">
+          <mxGeometry x="140" y="354" width="350" height="16" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_id" value="🔐 Least-privilege RBAC&#10;PIM enabled · Quarterly reviews" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="90.0" y="510.0" width="185" height="42" as="geometry" />
+        <mxCell id="walk_id" value="Least-privilege RBAC&#10;PIM enabled · Quarterly reviews" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="385" width="180" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_pol" value="🛡️ MG hierarchy + foundational&#10;policies (regions, tags, SKUs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="382.5" y="510.0" width="185" height="42" as="geometry" />
+        <mxCell id="walk_pol" value="MG hierarchy + foundational&#10;policies (regions, tags, SKUs)" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="385" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_cost" value="💰 Budgets + alerts per sub&#10;Tags for cost allocation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="675.0" y="510.0" width="170" height="42" as="geometry" />
+        <mxCell id="walk_cost" value="Budgets + alerts per sub&#10;Tags for cost allocation" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="460" y="385" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_sec" value="🛡️ Defender enhanced tier&#10;Central Log Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="945.0" y="510.0" width="170" height="42" as="geometry" />
+        <mxCell id="walk_sec" value="Defender enhanced tier&#10;Central Log Analytics" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="385" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_ops" value="⚙️ Naming convention defined&#10;Bicep/Terraform for core infra" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1215.0" y="510.0" width="195" height="42" as="geometry" />
+        <mxCell id="walk_ops" value="Naming convention defined&#10;Bicep/Terraform for core infra" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;strokeColor=#5DADE2;fontColor=#D6EAF8;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="880" y="385" width="190" height="42" as="geometry"/>
         </mxCell>
         <mxCell id="walk_char" value="MG hierarchy in place · CCoE established or emerging · Governance is a workstream" style="text;html=1;fontSize=9;fontColor=#AED6F1;fontStyle=2;align=center;" vertex="1" parent="1">
-          <mxGeometry x="300.0" y="592.5" width="700" height="16" as="geometry" />
+          <mxGeometry x="200" y="440" width="700" height="16" as="geometry"/>
         </mxCell>
-        <mxCell id="walk_badge" value="📈" style="text;html=1;fontSize=28;align=center;" vertex="1" parent="1">
-          <mxGeometry x="1485.0" y="427.5" width="50" height="40" as="geometry" />
-        </mxCell>
-
         <mxCell id="arrow_crawl_walk" value="" style="shape=mxgraph.arrows2.arrow;dy=0.6;dx=20;notch=0;fillColor=#F39C12;strokeColor=#D68910;opacity=70;rotation=-90;" vertex="1" parent="1">
-          <mxGeometry x="757.5" y="660.0" width="40" height="50" as="geometry" />
+          <mxGeometry x="530" y="497" width="40" height="40" as="geometry"/>
         </mxCell>
-
-        <mxCell id="crawl_block" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7F8C8D;strokeColor=#616A6B;arcSize=6;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="60.0" y="720.0" width="1020" height="170" as="geometry" />
+        <mxCell id="crawl_block" value="" style="rounded=1;whiteSpace=wrap;fillColor=#7F8C8D;strokeColor=#616A6B;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="545" width="1060" height="175" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_level" value="LEVEL 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#95A5A6;strokeColor=#7F8C8D;fontColor=#FFFFFF;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="90.0" y="735.0" width="70" height="24" as="geometry" />
+        <mxCell id="crawl_level" value="LEVEL 1" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;strokeColor=#7F8C8D;fontColor=#FFF;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="50" y="558" width="70" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_title" value="CRAWL (Ad-Hoc)" style="text;html=1;fontSize=18;fontStyle=1;fontColor=#FFFFFF;align=left;" vertex="1" parent="1">
-          <mxGeometry x="210.0" y="729.0" width="250" height="30" as="geometry" />
+        <mxCell id="crawl_title" value="CRAWL (Ad-Hoc)" style="text;html=1;fontSize=17;fontStyle=1;fontColor=#FFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="140" y="555" width="250" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_desc" value="Reactive · Manual · Inconsistent · No formal strategy" style="text;html=1;fontSize=11;fontColor=#D5D8DC;fontStyle=2;align=left;" vertex="1" parent="1">
-          <mxGeometry x="210.0" y="768.0" width="350" height="20" as="geometry" />
+        <mxCell id="crawl_desc" value="Reactive · Manual · Inconsistent · No formal strategy" style="text;html=1;fontSize=10;fontColor=#D5D8DC;fontStyle=2;align=left;" vertex="1" parent="1">
+          <mxGeometry x="140" y="584" width="350" height="16" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_id" value="🔐 Standing privileged access&#10;Shared accounts · No reviews" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="90.0" y="810.0" width="185" height="42" as="geometry" />
+        <mxCell id="crawl_id" value="Standing privileged access&#10;Shared accounts · No reviews" style="rounded=1;whiteSpace=wrap;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="615" width="180" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_pol" value="🛡️ Few or no policies&#10;Ad-hoc decisions per team" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="382.5" y="810.0" width="170" height="42" as="geometry" />
+        <mxCell id="crawl_pol" value="Few or no policies&#10;Ad-hoc decisions per team" style="rounded=1;whiteSpace=wrap;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="615" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_cost" value="💰 No budgets or alerts&#10;Surprises at invoice time" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="652.5" y="810.0" width="170" height="42" as="geometry" />
+        <mxCell id="crawl_cost" value="No budgets or alerts&#10;Surprises at invoice time" style="rounded=1;whiteSpace=wrap;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="460" y="615" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_sec" value="🛡️ Defender free tier&#10;Inconsistent NSGs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="922.5" y="810.0" width="155" height="42" as="geometry" />
+        <mxCell id="crawl_sec" value="Defender free tier&#10;Inconsistent NSGs" style="rounded=1;whiteSpace=wrap;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="615" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_ops" value="⚙️ Manual portal clicks&#10;No naming · No IaC · No tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1170.0" y="810.0" width="195" height="42" as="geometry" />
+        <mxCell id="crawl_ops" value="Manual portal clicks&#10;No naming · No IaC · No tags" style="rounded=1;whiteSpace=wrap;fillColor=#616A6B;strokeColor=#95A5A6;fontColor=#D5D8DC;fontSize=9;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="880" y="615" width="190" height="42" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_char" value="1–5 subscriptions · No CCoE · &quot;It works&quot; is the success criterion" style="text;html=1;fontSize=9;fontColor=#BDC3C7;fontStyle=2;align=center;" vertex="1" parent="1">
-          <mxGeometry x="300.0" y="892.5" width="700" height="16" as="geometry" />
+        <mxCell id="crawl_char" value="1-5 subscriptions · No CCoE · &quot;It works&quot; is the success criterion" style="text;html=1;fontSize=9;fontColor=#BDC3C7;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="200" y="670" width="700" height="16" as="geometry"/>
         </mxCell>
-        <mxCell id="crawl_badge" value="🐢" style="text;html=1;fontSize=28;align=center;" vertex="1" parent="1">
-          <mxGeometry x="1485.0" y="727.5" width="50" height="40" as="geometry" />
+        <mxCell id="dim_header" value="" style="rounded=1;whiteSpace=wrap;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="30" y="750" width="1060" height="40" as="geometry"/>
         </mxCell>
-
-        <mxCell id="dim_header" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=8;container=1;pointerEvents=0;" vertex="1" parent="1">
-          <mxGeometry x="60.0" y="997.5" width="1530.0" height="42.0" as="geometry" />
+        <mxCell id="dh1" value="Identity" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="1">
+          <mxGeometry x="60" y="760" width="170" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="dh1" value="🔐 Identity" style="text;html=1;fontSize=9;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="dim_header">
-          <mxGeometry x="30.0" y="6.0" width="160" height="20" as="geometry" />
+        <mxCell id="dh2" value="Policy" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="1">
+          <mxGeometry x="260" y="760" width="180" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="dh2" value="🛡️ Policy" style="text;html=1;fontSize=9;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="dim_header">
-          <mxGeometry x="300.0" y="6.0" width="170" height="20" as="geometry" />
+        <mxCell id="dh3" value="Cost" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="1">
+          <mxGeometry x="470" y="760" width="180" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="dh3" value="💰 Cost" style="text;html=1;fontSize=9;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="dim_header">
-          <mxGeometry x="585.0" y="6.0" width="170" height="20" as="geometry" />
+        <mxCell id="dh4" value="Security" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="1">
+          <mxGeometry x="680" y="760" width="180" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="dh4" value="🛡️ Security" style="text;html=1;fontSize=9;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="dim_header">
-          <mxGeometry x="855.0" y="6.0" width="170" height="20" as="geometry" />
+        <mxCell id="dh5" value="Operations" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="1">
+          <mxGeometry x="890" y="760" width="180" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="dh5" value="⚙️ Operations" style="text;html=1;fontSize=9;fontStyle=1;fontColor=#495057;align=center;" vertex="1" parent="dim_header">
-          <mxGeometry x="1140.0" y="6.0" width="200" height="20" as="geometry" />
-        </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>

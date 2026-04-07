@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
+  <diagram name="Meridian Financial MG Hierarchy" id="diag-mfh-1">
+    <mxGraphModel dx="900" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="500">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="mf-top" value="Meridian Financial (Top-Level)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="300" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-platform" value="Platform" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="140" width="160" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-lz" value="Landing Zones" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="140" width="160" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-sandbox" value="Sandbox" style="rounded=1;whiteSpace=wrap;fillColor=#6C3483;fontColor=#FFFFFF;strokeColor=#5B2C6F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="140" width="140" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-decomm" value="Decommissioned" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="140" width="160" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-mgmt" value="Management" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="20" y="260" width="110" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-conn" value="Connectivity" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="150" y="260" width="110" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-iden" value="Identity" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="100" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-corp" value="Corp" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="260" width="80" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-online" value="Online" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="260" width="80" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-desc-mgmt" value="logging, monitoring" style="text;fontSize=8;fontColor=#7F8C8D;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="110" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-desc-conn" value="hub networking" style="text;fontSize=8;fontColor=#7F8C8D;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="150" y="300" width="110" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-desc-iden" value="domain controllers" style="text;fontSize=8;fontColor=#7F8C8D;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="300" width="100" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-desc-corp" value="internal apps, PCI" style="text;fontSize=8;fontColor=#7F8C8D;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="390" y="300" width="100" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf-desc-online" value="public-facing" style="text;fontSize=8;fontColor=#7F8C8D;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="490" y="300" width="100" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="mfe1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.2;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-top" target="mf-platform" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.4;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-top" target="mf-lz" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.65;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-top" target="mf-sandbox" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.85;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-top" target="mf-decomm" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-platform" target="mf-mgmt" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-platform" target="mf-conn" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=1;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-platform" target="mf-iden" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.35;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-lz" target="mf-corp" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="mfe9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.65;exitY=1;entryX=0.5;entryY=0;" edge="1" source="mf-lz" target="mf-online" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

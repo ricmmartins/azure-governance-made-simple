@@ -121,18 +121,7 @@ The cloud platform team spent three months implementing a formal governance fram
 **Organization:**
 - Designed management group hierarchy:
 
-  ```
-  Meridian Financial (Top-Level)
-  ├── Platform
-  │   ├── Management (logging, monitoring)
-  │   ├── Connectivity (hub networking)
-  │   └── Identity (domain controllers)
-  ├── Landing Zones
-  │   ├── Corp (internal apps, PCI workloads)
-  │   └── Online (public-facing apps)
-  ├── Sandbox (developer experimentation)
-  └── Decommissioned
-  ```
+  ![Meridian Financial MG Hierarchy](/images/meridian-mg-hierarchy.svg)
 
 - Moved all 10 subscriptions into the appropriate management groups
 - Created 2 new subscriptions: Management and Connectivity
@@ -224,24 +213,7 @@ GlobalTech operates a mature governance framework with continuous improvement:
 **Organization:**
 - Full ALZ management group hierarchy with per-region landing zones:
 
-  ```
-  GlobalTech (Top-Level)
-  ├── Platform
-  │   ├── Management
-  │   ├── Connectivity
-  │   └── Identity
-  ├── Landing Zones
-  │   ├── Corp
-  │   │   ├── North America
-  │   │   ├── Europe (GDPR controls)
-  │   │   └── Asia Pacific
-  │   ├── Online
-  │   └── Regulated
-  │       ├── HIPAA (health benefits)
-  │       └── PCI (payment processing)
-  ├── Sandbox
-  └── Decommissioned
-  ```
+  ![GlobalTech MG Hierarchy](/images/globaltech-mg-hierarchy.svg)
 
 - Subscription vending fully automated via Terraform module + ServiceNow integration
 - Average time from subscription request to ready-to-use: 45 minutes

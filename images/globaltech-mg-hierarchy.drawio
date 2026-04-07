@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
+  <diagram name="GlobalTech MG Hierarchy" id="diag-gth-1">
+    <mxGraphModel dx="1000" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="550">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="gt-top" value="GlobalTech (Top-Level)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFF;strokeColor=#1A252F;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="20" width="260" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-platform" value="Platform" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="140" width="150" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-lz" value="Landing Zones" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFF;strokeColor=#154360;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="140" width="160" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-sandbox" value="Sandbox" style="rounded=1;whiteSpace=wrap;fillColor=#6C3483;fontColor=#FFF;strokeColor=#5B2C6F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="140" width="130" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-decomm" value="Decommissioned" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFF;strokeColor=#7F8C8D;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="140" width="150" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-mgmt" value="Management" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="20" y="260" width="100" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-conn" value="Connectivity" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="140" y="260" width="100" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-iden" value="Identity" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="260" y="260" width="80" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-corp" value="Corp" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="120" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-online" value="Online" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;fontColor=#333;strokeColor=#AED6F1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="560" y="260" width="80" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-regulated" value="Regulated" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333;strokeColor=#F5B7B1;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="260" width="120" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-na" value="North America" style="rounded=1;whiteSpace=wrap;fillColor=#EBF5FB;fontColor=#333;strokeColor=#AED6F1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="250" y="370" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-eu" value="Europe (GDPR)" style="rounded=1;whiteSpace=wrap;fillColor=#EBF5FB;fontColor=#333;strokeColor=#AED6F1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="370" y="370" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-apac" value="Asia Pacific" style="rounded=1;whiteSpace=wrap;fillColor=#EBF5FB;fontColor=#333;strokeColor=#AED6F1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="490" y="370" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-hipaa" value="HIPAA" style="rounded=1;whiteSpace=wrap;fillColor=#FDEBD0;fontColor=#333;strokeColor=#F5CBA7;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="640" y="370" width="80" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="gt-pci" value="PCI" style="rounded=1;whiteSpace=wrap;fillColor=#FDEBD0;fontColor=#333;strokeColor=#F5CBA7;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="740" y="370" width="80" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="gte1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.15;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-top" target="gt-platform" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.4;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-top" target="gt-lz" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.7;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-top" target="gt-sandbox" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;exitX=0.9;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-top" target="gt-decomm" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-platform" target="gt-mgmt" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-platform" target="gt-conn" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=1;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-platform" target="gt-iden" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.2;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-lz" target="gt-corp" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-lz" target="gt-online" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.8;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-lz" target="gt-regulated" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-corp" target="gt-na" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-corp" target="gt-eu" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-corp" target="gt-apac" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.35;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-regulated" target="gt-hipaa" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gte15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;exitX=0.65;exitY=1;entryX=0.5;entryY=0;" edge="1" source="gt-regulated" target="gt-pci" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

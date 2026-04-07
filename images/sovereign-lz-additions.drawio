@@ -1,39 +1,39 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<mxfile>
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
   <diagram name="Sovereign LZ Additions" id="diag-slz-1">
-    <mxGraphModel dx="800" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="400">
+    <mxGraphModel dx="800" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="450">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
         <mxCell id="slz-left" value="Standard ALZ&lt;br&gt;Architecture" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2C6FAC;fontSize=16;fontStyle=1;html=1;" vertex="1" parent="1">
-          <mxGeometry x="45.0" y="120.0" width="250" height="240" as="geometry" />
+          <mxGeometry x="30" y="100" width="200" height="200" as="geometry"/>
         </mxCell>
         <mxCell id="slz-right" value="Sovereign Additions" style="swimlane;startSize=30;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=13;fontStyle=1;rounded=1;container=1;" vertex="1" parent="1">
-          <mxGeometry x="645.0" y="30.0" width="510.0" height="540.0" as="geometry" />
+          <mxGeometry x="370" y="20" width="380" height="400" as="geometry"/>
         </mxCell>
-        <mxCell id="slz-c1" value="Restricted region policies" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="60.0" width="300" height="35" as="geometry" />
+        <mxCell id="slz-c1" value="Restricted region policies (Allowed Locations)" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
+          <mxGeometry x="20" y="45" width="340" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="slz-c2" value="Customer-managed keys" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="127.5" width="300" height="35" as="geometry" />
+        <mxCell id="slz-c2" value="Customer-managed key requirements" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
+          <mxGeometry x="20" y="95" width="340" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="slz-c3" value="Confidential computing" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="195.0" width="300" height="35" as="geometry" />
+        <mxCell id="slz-c3" value="Confidential computing policies" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
+          <mxGeometry x="20" y="145" width="340" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="slz-c4" value="Network isolation" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="262.5" width="300" height="35" as="geometry" />
+        <mxCell id="slz-c4" value="Network isolation (no cross-border peering)" style="rounded=1;whiteSpace=wrap;fillColor=#FDEDEC;fontColor=#333333;strokeColor=#F5B7B1;fontSize=11;" vertex="1" parent="slz-right">
+          <mxGeometry x="20" y="195" width="340" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="slz-c5" value="Data classification" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="337.5" width="300" height="35" as="geometry" />
+        <mxCell id="slz-c5" value="Data classification and labeling" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=11;" vertex="1" parent="slz-right">
+          <mxGeometry x="20" y="250" width="340" height="35" as="geometry"/>
         </mxCell>
-        <mxCell id="slz-c6" value="Sovereign log retention" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="405.0" width="300" height="35" as="geometry" />
+        <mxCell id="slz-c6" value="Sovereign audit log retention" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=11;" vertex="1" parent="slz-right">
+          <mxGeometry x="20" y="300" width="340" height="35" as="geometry"/>
         </mxCell>
         <mxCell id="slz-c7" value="Operational access controls (Lockbox)" style="rounded=1;whiteSpace=wrap;fillColor=#FFF3CD;fontColor=#333333;strokeColor=#FFE69C;fontSize=11;" vertex="1" parent="slz-right">
-          <mxGeometry x="30.0" y="472.5" width="300" height="35" as="geometry" />
+          <mxGeometry x="20" y="350" width="340" height="35" as="geometry"/>
         </mxCell>
         <mxCell id="slz-e1" value="+" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;fontSize=14;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="slz-left" target="slz-right" parent="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
