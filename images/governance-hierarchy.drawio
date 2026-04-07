@@ -1,0 +1,187 @@
+<mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
+  <diagram name="Governance Hierarchy" id="gov-hierarchy">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Azure Governance Hierarchy &amp; Inheritance Model" style="text;html=1;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="520" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="Based on CAF Landing Zone Architecture — Policies, RBAC &amp; Budgets inherit downward" style="text;html=1;fontSize=11;fontColor=#555555;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="280" y="55" width="520" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="tenant" value="Microsoft Entra ID Tenant" style="swimlane;startSize=30;fillColor=#0078D4;fontColor=#FFFFFF;strokeColor=#005A9E;fontSize=14;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="100" width="960" height="620" as="geometry"/>
+        </mxCell>
+        <mxCell id="rootmg" value="Root Management Group" style="swimlane;startSize=28;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2E6DB4;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="tenant">
+          <mxGeometry x="30" y="50" width="900" height="550" as="geometry"/>
+        </mxCell>
+        <mxCell id="gov_badge" value="🛡️ Azure Policy  ·  🔐 RBAC  ·  💰 Budgets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="rootmg">
+          <mxGeometry x="230" y="35" width="310" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="platformmg" value="Platform Management Group" style="swimlane;startSize=28;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="rootmg">
+          <mxGeometry x="30" y="80" width="400" height="440" as="geometry"/>
+        </mxCell>
+        <mxCell id="identity_sub" value="Identity Subscription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FD;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=11;fontStyle=1;arcSize=10;" vertex="1" parent="platformmg">
+          <mxGeometry x="30" y="45" width="340" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="identity_desc" value="Entra ID, Domain Controllers, MFA" style="text;html=1;fontSize=9;fontColor=#666666;align=center;" vertex="1" parent="platformmg">
+          <mxGeometry x="30" y="90" width="340" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="mgmt_sub" value="Management Subscription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FD;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=11;fontStyle=1;arcSize=10;" vertex="1" parent="platformmg">
+          <mxGeometry x="30" y="125" width="340" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mgmt_desc" value="Log Analytics, Monitor, Automation" style="text;html=1;fontSize=9;fontColor=#666666;align=center;" vertex="1" parent="platformmg">
+          <mxGeometry x="30" y="170" width="340" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="conn_sub" value="Connectivity Subscription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FD;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=11;fontStyle=1;arcSize=10;" vertex="1" parent="platformmg">
+          <mxGeometry x="30" y="205" width="340" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="conn_desc" value="Hub VNet, Firewall, ExpressRoute, DNS" style="text;html=1;fontSize=9;fontColor=#666666;align=center;" vertex="1" parent="platformmg">
+          <mxGeometry x="30" y="250" width="340" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="inherit_arrow_plat" value="" style="shape=mxgraph.arrows2.arrow;dy=0.39;dx=25;notch=0;fillColor=#FFC107;strokeColor=#D4A017;opacity=40;rotation=90;" vertex="1" parent="platformmg">
+          <mxGeometry x="170" y="290" width="60" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="inherit_label_plat" value="Policies inherited ↓" style="text;html=1;fontSize=9;fontColor=#856404;fontStyle=2;align=center;rotation=0;" vertex="1" parent="platformmg">
+          <mxGeometry x="120" y="310" width="160" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="lzmg" value="Landing Zones Management Group" style="swimlane;startSize=28;fillColor=#6BA5E7;fontColor=#FFFFFF;strokeColor=#4A90D9;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="rootmg">
+          <mxGeometry x="460" y="80" width="420" height="440" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_sub" value="Production Subscription" style="swimlane;startSize=26;fillColor=#D4EDDA;strokeColor=#28A745;fontColor=#155724;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="lzmg">
+          <mxGeometry x="20" y="45" width="380" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_rg1" value="Resource Group A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=10;arcSize=10;" vertex="1" parent="prod_sub">
+          <mxGeometry x="15" y="35" width="165" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_rg2" value="Resource Group B" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=10;arcSize=10;" vertex="1" parent="prod_sub">
+          <mxGeometry x="200" y="35" width="165" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_res1" value="🖥️ VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="prod_sub">
+          <mxGeometry x="15" y="80" width="50" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_res2" value="🗄️ SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="prod_sub">
+          <mxGeometry x="73" y="80" width="50" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_res3" value="📦 Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="prod_sub">
+          <mxGeometry x="131" y="80" width="55" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_res4" value="🌐 App Svc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="prod_sub">
+          <mxGeometry x="200" y="80" width="60" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_res5" value="🔑 KV" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="prod_sub">
+          <mxGeometry x="268" y="80" width="50" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_governed" value="✅ Governed by Policy" style="text;html=1;fontSize=9;fontColor=#28A745;fontStyle=3;align=center;" vertex="1" parent="prod_sub">
+          <mxGeometry x="90" y="118" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_sub" value="Non-Production Subscription" style="swimlane;startSize=26;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="lzmg">
+          <mxGeometry x="20" y="235" width="380" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_rg1" value="Resource Group Dev" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#FFC107;fontColor=#856404;fontSize=10;arcSize=10;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="15" y="35" width="165" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_rg2" value="Resource Group Test" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#FFC107;fontColor=#856404;fontSize=10;arcSize=10;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="200" y="35" width="165" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_res1" value="🖥️ VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="15" y="80" width="50" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_res2" value="🗄️ SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="73" y="80" width="50" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_res3" value="📦 Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="131" y="80" width="55" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_res4" value="🌐 App Svc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="200" y="80" width="60" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="nonprod_governed" value="✅ Governed by Policy" style="text;html=1;fontSize=9;fontColor=#856404;fontStyle=3;align=center;" vertex="1" parent="nonprod_sub">
+          <mxGeometry x="90" y="118" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="caf_panel" value="CAF Five Disciplines of Governance" style="swimlane;startSize=28;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="100" width="260" height="310" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1" value="💰 Cost Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5F5E3;strokeColor=#27AE60;fontColor=#1E8449;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="caf_panel">
+          <mxGeometry x="15" y="40" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="d2" value="🛡️ Security Baseline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2E86C1;fontColor=#1B4F72;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="caf_panel">
+          <mxGeometry x="15" y="85" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="d3" value="🔐 Identity Baseline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9EBEA;strokeColor=#C0392B;fontColor=#922B21;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="caf_panel">
+          <mxGeometry x="15" y="130" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="d4" value="📦 Resource Consistency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAE5D3;strokeColor=#E67E22;fontColor=#A04000;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="caf_panel">
+          <mxGeometry x="15" y="175" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="d5" value="🚀 Deployment Acceleration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8DAEF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="caf_panel">
+          <mxGeometry x="15" y="220" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="caf_note" value="Start with areas of greatest risk and expand over time" style="text;html=1;fontSize=9;fontColor=#BDC3C7;fontStyle=2;align=center;whiteSpace=wrap;" vertex="1" parent="caf_panel">
+          <mxGeometry x="15" y="268" width="230" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="enforce_panel" value="Policy Enforcement Flow" style="swimlane;startSize=28;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="440" width="260" height="280" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="1. Define policies (JSON/Bicep)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF5FB;strokeColor=#2E86C1;fontColor=#1B4F72;fontSize=9;arcSize=10;" vertex="1" parent="enforce_panel">
+          <mxGeometry x="15" y="38" width="230" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="2. Assign at MG / Subscription scope" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF5FB;strokeColor=#2E86C1;fontColor=#1B4F72;fontSize=9;arcSize=10;" vertex="1" parent="enforce_panel">
+          <mxGeometry x="15" y="80" width="230" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="3. ARM evaluates every deployment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF5FB;strokeColor=#2E86C1;fontColor=#1B4F72;fontSize=9;arcSize=10;" vertex="1" parent="enforce_panel">
+          <mxGeometry x="15" y="122" width="230" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="4. Non-compliant requests → DENIED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#E74C3C;fontColor=#922B21;fontSize=9;fontStyle=1;arcSize=10;" vertex="1" parent="enforce_panel">
+          <mxGeometry x="15" y="164" width="230" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="5. Continuous compliance scanning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5F5E3;strokeColor=#27AE60;fontColor=#1E8449;fontSize=9;arcSize=10;" vertex="1" parent="enforce_panel">
+          <mxGeometry x="15" y="206" width="230" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="enforce_note" value="Guardrails, not gates — shift-left governance" style="text;html=1;fontSize=9;fontColor=#AED6F1;fontStyle=3;align=center;whiteSpace=wrap;" vertex="1" parent="enforce_panel">
+          <mxGeometry x="15" y="248" width="230" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="ea1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#85C1E9;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="enforce_panel" source="e1" target="e2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ea2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#85C1E9;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="enforce_panel" source="e2" target="e3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ea3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#85C1E9;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="enforce_panel" source="e3" target="e4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ea4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#85C1E9;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="enforce_panel" source="e4" target="e5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="Legend" style="swimlane;startSize=22;fillColor=#F8F9FA;strokeColor=#DEE2E6;fontColor=#495057;fontSize=10;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="740" width="960" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1" value="Tenant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#005A9E;fontColor=#FFFFFF;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="28" width="70" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2" value="Mgmt Group" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4A90D9;strokeColor=#2E6DB4;fontColor=#FFFFFF;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="90" y="28" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3" value="Platform Sub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FD;strokeColor=#4A90D9;fontColor=#1A1A2E;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="180" y="28" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4" value="Prod Sub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D4EDDA;strokeColor=#28A745;fontColor=#155724;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="270" y="28" width="70" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg5" value="Non-Prod Sub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="350" y="28" width="85" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg6" value="Resources" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="445" y="28" width="70" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg7" value="Governance Controls" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=9;arcSize=15;" vertex="1" parent="legend">
+          <mxGeometry x="525" y="28" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg8" value="↓ = Policy Inheritance (parent → child scopes)" style="text;html=1;fontSize=9;fontColor=#666666;fontStyle=2;align=left;" vertex="1" parent="legend">
+          <mxGeometry x="660" y="28" width="280" height="20" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

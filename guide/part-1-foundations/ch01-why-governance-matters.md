@@ -71,19 +71,7 @@ These five disciplines are not independent silos — they interconnect. For exam
 
 Cloud governance does not exist in isolation — it is woven into every layer of the Azure resource hierarchy. The diagram below shows how governance policies flow from the top of the hierarchy downward:
 
-```
-Microsoft Entra ID Tenant
-  └── Root Management Group
-        ├── Platform Management Group
-        │     ├── Identity Subscription
-        │     ├── Management Subscription
-        │     └── Connectivity Subscription
-        └── Landing Zones Management Group
-              ├── Production Subscription
-              │     └── Resource Groups → Resources (governed by policy)
-              └── Non-Production Subscription
-                    └── Resource Groups → Resources (governed by policy)
-```
+![Azure Governance Hierarchy & Inheritance Model](/images/governance-hierarchy.svg)
 
 Governance controls — policies, RBAC role assignments, budgets — are applied at the management group or subscription level and **inherited** by all child scopes. This inheritance model is what makes cloud-native governance scalable.
 
