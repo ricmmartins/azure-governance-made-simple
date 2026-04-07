@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Azure Governance Made Simple',
+  title: 'Azure Governance',
   description: 'The comprehensive, open-source reference guide to Azure Governance — from foundations to enterprise scale.',
 
   head: [
