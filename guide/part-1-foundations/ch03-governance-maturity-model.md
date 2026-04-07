@@ -16,17 +16,7 @@ The model is aligned with the [CAF Govern methodology](https://learn.microsoft.c
 
 ## Architecture: The Three Maturity Levels
 
-```
-  ┌───────────────────────────────────────────────────────────────────┐
-  │                                                                   │
-  │   RUN (Optimized)       Automated · Proactive · Self-healing      │
-  │   ──────────────────────────────────────────────────────────────── │
-  │   WALK (Defined)        Standardized · Enforced · Measured        │
-  │   ──────────────────────────────────────────────────────────────── │
-  │   CRAWL (Ad-Hoc)        Reactive · Manual · Inconsistent          │
-  │                                                                   │
-  └───────────────────────────────────────────────────────────────────┘
-```
+![Cloud Governance Maturity Model — Crawl, Walk, Run](/images/governance-maturity-model.svg)
 
 ---
 
