@@ -88,21 +88,7 @@ Governance capabilities do not operate in isolation. Here is how they connect ac
 
 When you assign an Azure Policy at a management group, every subscription, resource group, and resource beneath that management group inherits the policy. The same applies to RBAC role assignments. This inheritance model is the engine that makes governance scalable:
 
-```
-Root Management Group
-  ├── Policy: "Require tags on all resources"          ← inherited by ALL subscriptions
-  ├── RBAC: "Security Reader" for SOC team             ← inherited by ALL subscriptions
-  │
-  ├── Production MG
-  │     ├── Policy: "Deny public IP addresses"         ← inherited by Production subs only
-  │     └── Subscription: Prod-App-01
-  │           └── Resource Group: rg-app01-prod-westeu
-  │                 └── Resources inherit ALL policies from above
-  │
-  └── Sandbox MG
-        ├── Policy: "Budget limit $500/month"          ← inherited by Sandbox subs only
-        └── Subscription: Sandbox-Dev-Team
-```
+![Policy & RBAC Inheritance Flow](/images/governance-inheritance-flow.svg)
 
 ### The Governance Data Flow
 

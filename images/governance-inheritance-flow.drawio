@@ -1,0 +1,200 @@
+<mxfile host="app.diagrams.net" agent="Copilot" version="26.0.0">
+  <diagram name="Inheritance Flow" id="inheritance-flow">
+    <mxGraphModel dx="1200" dy="860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="860" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Policy &amp; RBAC Inheritance — Flows Downward" style="text;html=1;fontSize=18;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="250" y="15" width="500" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rootmg" value="Root Management Group" style="swimlane;startSize=32;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=14;fontStyle=1;rounded=1;arcSize=6;swimlaneLine=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="1020" height="740" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="root_policy" value="🛡️ Policy: &quot;Require tags on all resources&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="rootmg">
+          <mxGeometry x="30" y="45" width="290" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="root_scope1" value="← inherited by ALL subscriptions" style="text;html=1;fontSize=9;fontColor=#E74C3C;fontStyle=3;align=left;" vertex="1" parent="rootmg">
+          <mxGeometry x="330" y="50" width="200" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="root_rbac" value="🔐 RBAC: &quot;Security Reader&quot; for SOC team" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2E86C1;fontColor=#1B4F72;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="rootmg">
+          <mxGeometry x="30" y="85" width="290" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="root_scope2" value="← inherited by ALL subscriptions" style="text;html=1;fontSize=9;fontColor=#E74C3C;fontStyle=3;align=left;" vertex="1" parent="rootmg">
+          <mxGeometry x="330" y="90" width="200" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="inherit_bar" value="⬇ Inheritance flows downward to all child scopes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FADBD8;strokeColor=#E74C3C;fontColor=#922B21;fontSize=10;fontStyle=1;arcSize=20;" vertex="1" parent="rootmg">
+          <mxGeometry x="200" y="130" width="350" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prodmg" value="Production MG" style="swimlane;startSize=28;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="rootmg">
+          <mxGeometry x="30" y="180" width="460" height="530" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_policy" value="🛡️ Policy: &quot;Deny public IP addresses&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="prodmg">
+          <mxGeometry x="20" y="40" width="260" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_scope" value="← Production subs only" style="text;html=1;fontSize=9;fontColor=#E74C3C;fontStyle=3;align=left;" vertex="1" parent="prodmg">
+          <mxGeometry x="290" y="45" width="150" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_inherited_label" value="Also inherits from Root MG:" style="text;html=1;fontSize=9;fontColor=#AED6F1;fontStyle=2;align=left;" vertex="1" parent="prodmg">
+          <mxGeometry x="20" y="80" width="180" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_inh1" value="Require tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495E;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=8;fontStyle=2;arcSize=20;dashed=1;" vertex="1" parent="prodmg">
+          <mxGeometry x="20" y="98" width="85" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="prod_inh2" value="Security Reader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495E;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=8;fontStyle=2;arcSize=20;dashed=1;" vertex="1" parent="prodmg">
+          <mxGeometry x="115" y="98" width="100" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#28A745;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="prodmg" source="prod_inh2" target="prodsub">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prodsub" value="Subscription: Prod-App-01" style="swimlane;startSize=26;fillColor=#D4EDDA;strokeColor=#28A745;fontColor=#155724;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="prodmg">
+          <mxGeometry x="30" y="140" width="400" height="370" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prodsub_note" value="Effective policies at this scope:" style="text;html=1;fontSize=9;fontColor=#155724;fontStyle=2;align=left;" vertex="1" parent="prodsub">
+          <mxGeometry x="15" y="30" width="200" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="eff1" value="✅ Require tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=8;arcSize=20;" vertex="1" parent="prodsub">
+          <mxGeometry x="15" y="50" width="100" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="eff2" value="✅ Security Reader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=8;arcSize=20;" vertex="1" parent="prodsub">
+          <mxGeometry x="125" y="50" width="115" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="eff3" value="✅ Deny public IPs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF0;strokeColor=#28A745;fontColor=#155724;fontSize=8;arcSize=20;" vertex="1" parent="prodsub">
+          <mxGeometry x="250" y="50" width="120" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sub_arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#28A745;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="prodsub" source="eff2" target="prodrg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prodrg" value="Resource Group: rg-app01-prod-westeu" style="swimlane;startSize=24;fillColor=#FFFDE7;strokeColor=#F9A825;fontColor=#856404;fontSize=10;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="prodsub">
+          <mxGeometry x="15" y="90" width="370" height="260" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rg_note" value="Resources inherit ALL policies from above" style="text;html=1;fontSize=10;fontColor=#922B21;fontStyle=1;align=center;" vertex="1" parent="prodrg">
+          <mxGeometry x="30" y="30" width="310" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="res_row1_label" value="Compliant deployment:" style="text;html=1;fontSize=9;fontColor=#155724;fontStyle=2;align=left;" vertex="1" parent="prodrg">
+          <mxGeometry x="15" y="58" width="140" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="res_ok1" value="🖥️ VM (tagged, private IP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5F5E3;strokeColor=#27AE60;fontColor=#1E8449;fontSize=9;arcSize=12;" vertex="1" parent="prodrg">
+          <mxGeometry x="15" y="78" width="165" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="res_ok2" value="🗄️ SQL (tagged, private)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5F5E3;strokeColor=#27AE60;fontColor=#1E8449;fontSize=9;arcSize=12;" vertex="1" parent="prodrg">
+          <mxGeometry x="195" y="78" width="155" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="res_ok_check" value="✅ Allowed" style="text;html=1;fontSize=9;fontColor=#27AE60;fontStyle=1;align=center;" vertex="1" parent="prodrg">
+          <mxGeometry x="120" y="114" width="120" height="16" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="res_row2_label" value="Non-compliant deployment:" style="text;html=1;fontSize=9;fontColor=#922B21;fontStyle=2;align=left;" vertex="1" parent="prodrg">
+          <mxGeometry x="15" y="142" width="160" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="res_bad1" value="🌐 VM with public IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#E74C3C;fontColor=#922B21;fontSize=9;arcSize=12;" vertex="1" parent="prodrg">
+          <mxGeometry x="15" y="162" width="140" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="res_bad2" value="📦 Storage (no tags)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#E74C3C;fontColor=#922B21;fontSize=9;arcSize=12;" vertex="1" parent="prodrg">
+          <mxGeometry x="170" y="162" width="130" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="res_bad_check" value="🚫 DENIED by Policy" style="text;html=1;fontSize=9;fontColor=#E74C3C;fontStyle=1;align=center;" vertex="1" parent="prodrg">
+          <mxGeometry x="100" y="198" width="160" height="16" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sandmg" value="Sandbox MG" style="swimlane;startSize=28;fillColor=#6C3483;fontColor=#FFFFFF;strokeColor=#512E5F;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="rootmg">
+          <mxGeometry x="530" y="180" width="460" height="530" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sand_policy" value="💰 Policy: &quot;Budget limit $500/month&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=10;fontStyle=1;arcSize=12;" vertex="1" parent="sandmg">
+          <mxGeometry x="20" y="40" width="260" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="sand_scope" value="← Sandbox subs only" style="text;html=1;fontSize=9;fontColor=#E74C3C;fontStyle=3;align=left;" vertex="1" parent="sandmg">
+          <mxGeometry x="290" y="45" width="150" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sand_inherited_label" value="Also inherits from Root MG:" style="text;html=1;fontSize=9;fontColor=#D7BDE2;fontStyle=2;align=left;" vertex="1" parent="sandmg">
+          <mxGeometry x="20" y="80" width="180" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="sand_inh1" value="Require tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#512E5F;strokeColor=#AF7AC5;fontColor=#D7BDE2;fontSize=8;fontStyle=2;arcSize=20;dashed=1;" vertex="1" parent="sandmg">
+          <mxGeometry x="20" y="98" width="85" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="sand_inh2" value="Security Reader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#512E5F;strokeColor=#AF7AC5;fontColor=#D7BDE2;fontSize=8;fontStyle=2;arcSize=20;dashed=1;" vertex="1" parent="sandmg">
+          <mxGeometry x="115" y="98" width="100" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sand_arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#AF7AC5;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="sandmg" source="sand_inh2" target="sandsub">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sandsub" value="Subscription: Sandbox-Dev-Team" style="swimlane;startSize=26;fillColor=#E8DAEF;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=11;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=0;" vertex="1" parent="sandmg">
+          <mxGeometry x="30" y="140" width="400" height="200" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sandsub_note" value="Effective policies at this scope:" style="text;html=1;fontSize=9;fontColor=#6C3483;fontStyle=2;align=left;" vertex="1" parent="sandsub">
+          <mxGeometry x="15" y="30" width="200" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="seff1" value="✅ Require tags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=8;arcSize=20;" vertex="1" parent="sandsub">
+          <mxGeometry x="15" y="50" width="100" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="seff2" value="✅ Security Reader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=8;arcSize=20;" vertex="1" parent="sandsub">
+          <mxGeometry x="125" y="50" width="115" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="seff3" value="✅ Budget $500/mo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;fontColor=#6C3483;fontSize=8;arcSize=20;" vertex="1" parent="sandsub">
+          <mxGeometry x="250" y="50" width="120" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sand_note_diff" value="⚠️ No &quot;Deny public IPs&quot; policy here — sandbox allows experimentation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F9A825;fontColor=#856404;fontSize=9;fontStyle=2;arcSize=12;" vertex="1" parent="sandsub">
+          <mxGeometry x="15" y="90" width="370" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sand_resources" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#AF7AC5;arcSize=10;container=1;pointerEvents=0;" vertex="1" parent="sandsub">
+          <mxGeometry x="15" y="135" width="370" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="sr1" value="🖥️ VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="sand_resources">
+          <mxGeometry x="10" y="10" width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="sr2" value="🌐 Public IP ✓" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5F5E3;strokeColor=#27AE60;fontColor=#1E8449;fontSize=9;arcSize=15;" vertex="1" parent="sand_resources">
+          <mxGeometry x="70" y="10" width="95" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="sr3" value="📦 Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="sand_resources">
+          <mxGeometry x="175" y="10" width="70" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="sr4" value="🧪 Dev/Test" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AAAAAA;fontColor=#333333;fontSize=9;arcSize=15;" vertex="1" parent="sand_resources">
+          <mxGeometry x="255" y="10" width="75" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="legend_bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=10;container=1;pointerEvents=0;" vertex="1" parent="rootmg">
+          <mxGeometry x="570" y="45" width="420" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_title" value="Legend" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#495057;align=left;" vertex="1" parent="legend_bar">
+          <mxGeometry x="10" y="5" width="60" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1" value="Policy assigned here" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;fontColor=#856404;fontSize=8;arcSize=20;" vertex="1" parent="legend_bar">
+          <mxGeometry x="10" y="25" width="120" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2" value="RBAC assigned here" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2E86C1;fontColor=#1B4F72;fontSize=8;arcSize=20;" vertex="1" parent="legend_bar">
+          <mxGeometry x="140" y="25" width="120" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3" value="Inherited (dashed)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495E;strokeColor=#5DADE2;fontColor=#AED6F1;fontSize=8;arcSize=20;dashed=1;" vertex="1" parent="legend_bar">
+          <mxGeometry x="270" y="25" width="120" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4" value="✅ Compliant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5F5E3;strokeColor=#27AE60;fontColor=#1E8449;fontSize=8;arcSize=20;" vertex="1" parent="legend_bar">
+          <mxGeometry x="10" y="48" width="90" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg5" value="🚫 Denied" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#E74C3C;fontColor=#922B21;fontSize=8;arcSize=20;" vertex="1" parent="legend_bar">
+          <mxGeometry x="110" y="48" width="80" height="18" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
