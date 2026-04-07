@@ -5,7 +5,8 @@ export default defineConfig({
   description: 'The comprehensive, open-source reference guide to Azure Governance — from foundations to enterprise scale.',
 
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/images/azure_governance.png' }]
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }]
   ],
 
   themeConfig: {
