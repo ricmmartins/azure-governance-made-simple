@@ -10,13 +10,7 @@ Every Azure deployment — from a single virtual machine to a multi-region enter
 
 The hierarchy has four levels:
 
-```
-Microsoft Entra ID Tenant
-  └── Management Groups
-        └── Subscriptions
-              └── Resource Groups
-                    └── Resources
-```
+![Azure Resource Hierarchy](/images/resource-hierarchy-simple.svg)
 
 **Governance controls — RBAC role assignments, Azure Policy, budgets — are applied at any level and inherited downward.** This inheritance model is what makes Azure governance scalable. A policy assigned at a management group automatically applies to every subscription, resource group, and resource beneath it.
 
@@ -28,29 +22,7 @@ This chapter covers each level in detail: what it is, how to design it, and the 
 
 The Azure resource hierarchy is a tree structure with four levels. Governance controls applied at any level are inherited by all child levels:
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Microsoft Entra ID Tenant (Identity Boundary)               │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │  Root Management Group                                  │  │
-│  │  ├── Platform MG                                        │  │
-│  │  │     ├── Identity Sub ── RG ── Resources              │  │
-│  │  │     ├── Management Sub ── RG ── Resources            │  │
-│  │  │     └── Connectivity Sub ── RG ── Resources          │  │
-│  │  ├── Landing Zones MG                                   │  │
-│  │  │     ├── Corp MG                                      │  │
-│  │  │     │     └── Prod Sub ── RG ── Resources            │  │
-│  │  │     └── Online MG                                    │  │
-│  │  │           └── Web Sub ── RG ── Resources             │  │
-│  │  ├── Sandbox MG                                         │  │
-│  │  │     └── Dev Sub ── RG ── Resources                   │  │
-│  │  └── Decommissioned MG                                  │  │
-│  └────────────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────┘
-
-Inheritance: Policy & RBAC flow DOWN the tree
-            Tenant → MG → Subscription → Resource Group → Resource
-```
+![Azure Resource Hierarchy — Detailed CAF Landing Zone Structure](/images/resource-hierarchy-detailed.svg)
 
 Each level serves a distinct purpose. The sections below cover them in detail.
 
@@ -144,39 +116,11 @@ Management groups solve a critical problem: without them, governance controls mu
 
 The Cloud Adoption Framework recommends the following hierarchy as a starting point. You can adapt it to your organization's needs, but this structure has been validated across thousands of enterprise deployments:
 
-```
-Tenant Root Group
-  └── Organization Root (e.g., mg-contoso)
-        ├── Platform
-        │     ├── Identity          ← Microsoft Entra ID infrastructure, domain controllers
-        │     ├── Management        ← Log Analytics, Automation, monitoring
-        │     └── Connectivity      ← Hub networking, DNS, firewalls, ExpressRoute
-        │
-        ├── Landing Zones
-        │     ├── Corp              ← Internal/private workloads (connected to hub)
-        │     └── Online            ← Internet-facing workloads
-        │
-        ├── Sandbox                 ← Developer experimentation (relaxed policies, cost limits)
-        │
-        └── Decommissioned          ← Subscriptions pending cleanup and deletion
-```
+![CAF Recommended Management Group Hierarchy](/images/caf-mg-hierarchy.svg)
 
 ### Governance Inheritance in Action
 
-```
-mg-contoso (Root)
-  ├── Policy: "Require Owner tag on all resource groups"      ← applies to ALL
-  ├── RBAC: "Reader" for Audit team                           ← applies to ALL
-  │
-  ├── mg-platform
-  │     └── Policy: "Deny public IP creation"                 ← platform only
-  │
-  └── mg-landingzones
-        ├── mg-corp
-        │     └── Policy: "Require private endpoints for PaaS" ← corp only
-        └── mg-online
-              └── Policy: "Allow public endpoints with WAF"    ← online only
-```
+![Governance Inheritance in Action](/images/governance-inheritance-action.svg)
 
 A key benefit: if a subscription owner tries to remove an inherited policy or role assignment, **they cannot**. Inherited controls are immutable at child scopes. This ensures that security controls applied by a central team (e.g., a SOC) remain in place regardless of what subscription owners do.
 

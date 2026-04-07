@@ -1,0 +1,40 @@
+<mxfile>
+  <diagram name="Resource Hierarchy Simple" id="rhs-1">
+    <mxGraphModel dx="600" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="n1" value="Microsoft Entra ID Tenant" style="rounded=1;whiteSpace=wrap;fillColor=#0078D4;fontColor=#FFFFFF;strokeColor=#005A9E;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="30" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n2" value="Management Groups" style="rounded=1;whiteSpace=wrap;fillColor=#4A90D9;fontColor=#FFFFFF;strokeColor=#2E6DA4;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="120" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n3" value="Subscriptions" style="rounded=1;whiteSpace=wrap;fillColor=#28A745;fontColor=#FFFFFF;strokeColor=#1E7E34;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="210" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4" value="Resource Groups" style="rounded=1;whiteSpace=wrap;fillColor=#F9A825;fontColor=#333333;strokeColor=#C17900;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="300" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n5" value="Resources" style="rounded=1;whiteSpace=wrap;fillColor=#AAAAAA;fontColor=#333333;strokeColor=#888888;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="390" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#333333;" edge="1" source="n1" target="n2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#333333;" edge="1" source="n2" target="n3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#333333;" edge="1" source="n3" target="n4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#333333;" edge="1" source="n4" target="n5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl1" value="Governance controls&#xa;inherited downward ↓" style="text;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="430" y="200" width="150" height="60" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

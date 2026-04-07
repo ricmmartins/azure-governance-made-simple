@@ -19,23 +19,7 @@ Together, they form the **organizational backbone** of your governance strategy.
 
 ## Architecture: How Naming and Tagging Fit into Governance
 
-```
-Azure Policy (Enforcement Layer)
-  ├── Deny resources that don't match naming convention
-  ├── Require mandatory tags on resource groups
-  ├── Inherit tags from resource group to child resources
-  └── Audit resources with missing recommended tags
-
-Resource Deployment
-  ├── Name: rg-payments-prod-westeu         ← follows naming convention
-  └── Tags:
-        ├── Environment: prod
-        ├── Owner: payments-team@contoso.com
-        ├── CostCenter: CC-4521
-        ├── Application: payments-api
-        ├── CreatedBy: bicep-pipeline
-        └── CreatedDate: 2026-04-06
-```
+![Naming and Tagging Architecture](/images/naming-tagging-architecture.svg)
 
 ---
 

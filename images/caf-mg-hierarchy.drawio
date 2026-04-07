@@ -1,0 +1,103 @@
+<mxfile>
+  <diagram name="CAF MG Hierarchy" id="caf-1">
+    <mxGraphModel dx="1000" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="550" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="trg" value="Tenant Root Group" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="20" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="trg_ann" value="← Azure built-in, cannot be moved" style="text;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#7F8C8D;" vertex="1" parent="1">
+          <mxGeometry x="590" y="25" width="200" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="orgroot" value="mg-contoso&#xa;(Organization Root)" style="rounded=1;whiteSpace=wrap;fillColor=#2C3E50;fontColor=#FFFFFF;strokeColor=#1A252F;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="orgroot_ann" value="← Top-level org policies here" style="text;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="590" y="105" width="180" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_trg_org" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#2C3E50;" edge="1" source="trg" target="orgroot" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="platform" value="Platform" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="platform_ann" value="← Shared infrastructure" style="text;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="10" y="245" width="140" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="landingzones" value="Landing Zones" style="rounded=1;whiteSpace=wrap;fillColor=#1B4F72;fontColor=#FFFFFF;strokeColor=#154360;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="200" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="lz_ann" value="← Workload subscriptions" style="text;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="545" y="205" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="sandbox" value="Sandbox" style="rounded=1;whiteSpace=wrap;fillColor=#6C3483;fontColor=#FFFFFF;strokeColor=#5B2C6F;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="200" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="sandbox_ann" value="← Developer experimentation" style="text;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="825" y="205" width="170" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="decomm" value="Decommissioned" style="rounded=1;whiteSpace=wrap;fillColor=#95A5A6;fontColor=#FFFFFF;strokeColor=#7F8C8D;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="290" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="decomm_ann" value="← Pending cleanup" style="text;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#7F8C8D;" vertex="1" parent="1">
+          <mxGeometry x="825" y="295" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_org_plat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#1B4F72;" edge="1" source="orgroot" target="platform" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_org_lz" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#1B4F72;" edge="1" source="orgroot" target="landingzones" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_org_sb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#6C3483;" edge="1" source="orgroot" target="sandbox" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_org_dc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#95A5A6;" edge="1" source="orgroot" target="decomm" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="identity" value="Identity" style="rounded=1;whiteSpace=wrap;fillColor=#2E86C1;fontColor=#FFFFFF;strokeColor=#2471A3;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="identity_ann" value="AAD DS, Key Vault" style="text;align=center;verticalAlign=middle;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="20" y="340" width="110" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="management" value="Management" style="rounded=1;whiteSpace=wrap;fillColor=#2E86C1;fontColor=#FFFFFF;strokeColor=#2471A3;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="145" y="300" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="management_ann" value="Log Analytics, Automation" style="text;align=center;verticalAlign=middle;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="140" y="340" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="connectivity" value="Connectivity" style="rounded=1;whiteSpace=wrap;fillColor=#2E86C1;fontColor=#FFFFFF;strokeColor=#2471A3;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="270" y="300" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="connectivity_ann" value="Hub VNet, Firewall, VPN" style="text;align=center;verticalAlign=middle;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="265" y="340" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_plat_id" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#2E86C1;" edge="1" source="platform" target="identity" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_plat_mg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#2E86C1;" edge="1" source="platform" target="management" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_plat_cn" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#2E86C1;" edge="1" source="platform" target="connectivity" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="corp" value="Corp" style="rounded=1;whiteSpace=wrap;fillColor=#2E86C1;fontColor=#FFFFFF;strokeColor=#2471A3;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="370" y="300" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="online" value="Online" style="rounded=1;whiteSpace=wrap;fillColor=#2E86C1;fontColor=#FFFFFF;strokeColor=#2471A3;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="300" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_lz_corp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#2E86C1;" edge="1" source="landingzones" target="corp" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_lz_online" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#2E86C1;" edge="1" source="landingzones" target="online" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="title" value="CAF Recommended Management Group Hierarchy" style="text;align=center;verticalAlign=middle;fontSize=14;fontStyle=5;fontColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="250" y="500" width="460" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
