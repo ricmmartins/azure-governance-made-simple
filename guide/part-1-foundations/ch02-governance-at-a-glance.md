@@ -16,45 +16,7 @@ This chapter provides a comprehensive map of every Azure governance capability, 
 
 The following diagram shows all major Azure governance capabilities organized by the scope at which they operate:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        MICROSOFT ENTRA ID TENANT                          │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │  Identity & Access: Users, Groups, Service Principals, Managed IDs  │  │
-│  │  Conditional Access · PIM · Access Reviews · Entra Permissions Mgmt │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│                                                                           │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                     ROOT MANAGEMENT GROUP                           │  │
-│  │  Azure Policy │ RBAC │ Azure Cost Management │ Microsoft Defender   │  │
-│  │                                                                     │  │
-│  │  ┌──────────────────────────┐  ┌──────────────────────────────────┐ │  │
-│  │  │  Platform MG             │  │  Landing Zones MG                │ │  │
-│  │  │  (Identity, Mgmt, Conn.) │  │  (Corp, Online)                 │ │  │
-│  │  └──────────┬───────────────┘  └──────────────┬───────────────────┘ │  │
-│  │             │                                  │                    │  │
-│  │  ┌──────────▼───────────────┐  ┌──────────────▼───────────────────┐ │  │
-│  │  │  Subscription            │  │  Subscription                    │ │  │
-│  │  │  ├─ Resource Locks       │  │  ├─ Resource Locks               │ │  │
-│  │  │  ├─ Budgets / Alerts     │  │  ├─ Budgets / Alerts            │ │  │
-│  │  │  └─ Deployment Stacks    │  │  └─ Deployment Stacks           │ │  │
-│  │  └──────────┬───────────────┘  └──────────────┬───────────────────┘ │  │
-│  │             │                                  │                    │  │
-│  │  ┌──────────▼───────────────┐  ┌──────────────▼───────────────────┐ │  │
-│  │  │  Resource Group          │  │  Resource Group                  │ │  │
-│  │  │  ├─ Tags                 │  │  ├─ Tags                        │ │  │
-│  │  │  ├─ RBAC                 │  │  ├─ RBAC                        │ │  │
-│  │  │  └─ Resources            │  │  └─ Resources                   │ │  │
-│  │  └──────────────────────────┘  └──────────────────────────────────┘ │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│                                                                           │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                    CROSS-CUTTING CAPABILITIES                       │  │
-│  │  Azure Monitor · Azure Resource Graph · Azure Governance Visualizer │  │
-│  │  Bicep / Terraform (IaC) · Naming Conventions · Tagging Strategy   │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+![Azure Governance Capability Map](/images/governance-capability-map.svg)
 
 ---
 
