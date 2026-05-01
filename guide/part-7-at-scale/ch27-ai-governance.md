@@ -1,32 +1,32 @@
-# Chapter 27 — AI Governance
+# Capítulo 27 — Governança de IA
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-As organizations adopt AI services — particularly generative AI and large language models (LLMs) — a new governance discipline is required. AI workloads introduce unique risks: uncontrolled data exposure, biased or harmful outputs, runaway costs from token consumption, and regulatory non-compliance. **AI governance** is the set of policies, controls, and processes that ensure AI workloads are used responsibly, securely, and in compliance with organizational and regulatory requirements.
+À medida que as organizações adotam serviços de IA — particularmente IA generativa e modelos de linguagem de grande porte (LLMs) — uma nova disciplina de governança é necessária. Cargas de trabalho de IA introduzem riscos únicos: exposição descontrolada de dados, saídas tendenciosas ou prejudiciais, custos descontrolados de consumo de tokens e não conformidade regulatória. **Governança de IA** é o conjunto de políticas, controles e processos que garantem que cargas de trabalho de IA sejam usadas de forma responsável, segura e em conformidade com requisitos organizacionais e regulatórios.
 
-This chapter focuses on governing AI workloads within Azure, particularly Azure OpenAI Service, and the broader challenge of ensuring that AI adoption does not undermine your existing governance posture.
+Este capítulo foca em governar cargas de trabalho de IA dentro do Azure, particularmente o Azure OpenAI Service, e o desafio mais amplo de garantir que a adoção de IA não comprometa sua postura de governança existente.
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Azure OpenAI Service Access Controls and Policies
+### Controles de Acesso e Políticas do Azure OpenAI Service
 
-Azure OpenAI Service provides enterprise-grade access to models like GPT-4, GPT-4o, and others. Governing access to these models requires controls at multiple levels:
+O Azure OpenAI Service fornece acesso de nível empresarial a modelos como GPT-4, GPT-4o e outros. Governar o acesso a esses modelos requer controles em múltiplos níveis:
 
-**Model access and deployment:**
+**Acesso e implantação de modelos:**
 
-| Control | Description |
+| Controle | Descrição |
 |---|---|
-| **Subscription-level access** | Azure OpenAI requires an approved subscription; not all subscriptions have access by default |
-| **Resource-level RBAC** | Assign `Cognitive Services OpenAI User` for inference, `Cognitive Services OpenAI Contributor` for deployment management |
-| **Model deployment policies** | Control which models can be deployed and in which regions using Azure Policy |
-| **API key vs. Microsoft Entra ID auth** | Prefer Microsoft Entra ID authentication over API keys for production workloads |
-| **Private endpoints** | Restrict network access to Azure OpenAI resources |
+| **Acesso no nível de subscription** | Azure OpenAI requer uma subscription aprovada; nem todas as subscriptions têm acesso por padrão |
+| **RBAC no nível de recurso** | Atribua `Cognitive Services OpenAI User` para inferência, `Cognitive Services OpenAI Contributor` para gerenciamento de implantação |
+| **Políticas de implantação de modelos** | Controle quais modelos podem ser implantados e em quais regiões usando Azure Policy |
+| **API key vs. autenticação Microsoft Entra ID** | Prefira autenticação Microsoft Entra ID sobre API keys para cargas de trabalho de produção |
+| **Private endpoints** | Restrinja acesso de rede a recursos Azure OpenAI |
 
 ```bicep
 // RBAC: Grant a managed identity the OpenAI User role
@@ -44,27 +44,27 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### Content Safety Filters and Configuration
+### Filtros de Segurança de Conteúdo e Configuração
 
-Azure OpenAI includes built-in content safety filters that screen both prompts (inputs) and completions (outputs):
+O Azure OpenAI inclui filtros de segurança de conteúdo integrados que analisam tanto prompts (entradas) quanto completions (saídas):
 
-**Default content filter categories:**
+**Categorias padrão do filtro de conteúdo:**
 
-| Category | Description |
+| Categoria | Descrição |
 |---|---|
-| Hate | Content that attacks or discriminates against groups |
-| Sexual | Sexually explicit content |
-| Violence | Descriptions of physical harm |
-| Self-harm | Content about self-injury |
-| Jailbreak detection | Attempts to bypass safety filters |
-| Protected material | Copyrighted text or code |
+| Ódio | Conteúdo que ataca ou discrimina grupos |
+| Sexual | Conteúdo sexualmente explícito |
+| Violência | Descrições de dano físico |
+| Autolesão | Conteúdo sobre automutilação |
+| Detecção de jailbreak | Tentativas de burlar filtros de segurança |
+| Material protegido | Texto ou código protegido por direitos autorais |
 
-**Governance considerations:**
+**Considerações de governança:**
 
-- Content filters are **enabled by default** at medium severity — do not disable them without a documented business justification and compliance review
-- Custom content filters can be configured to be more or less restrictive based on use case
-- **Blocklists** allow you to prevent specific terms or phrases from appearing in inputs or outputs
-- Filter results are logged and can be monitored via Azure Monitor
+- Filtros de conteúdo são **habilitados por padrão** em severidade média — não os desabilite sem uma justificativa de negócio documentada e revisão de conformidade
+- Filtros de conteúdo customizados podem ser configurados para serem mais ou menos restritivos com base no caso de uso
+- **Listas de bloqueio** permitem impedir que termos ou frases específicos apareçam em entradas ou saídas
+- Resultados dos filtros são registrados e podem ser monitorados via Azure Monitor
 
 ```json
 // Example: Custom content filter configuration
@@ -84,104 +84,104 @@ Azure OpenAI includes built-in content safety filters that screen both prompts (
 }
 ```
 
-### Microsoft Entra ID for AI Agent Identities
+### Microsoft Entra ID para Identidades de Agentes de IA
 
-As AI agents become more autonomous — making API calls, accessing data, and performing actions on behalf of users — they need proper identities. In 2026, Microsoft introduced **Agent ID** capabilities within Microsoft Entra ID:
+À medida que agentes de IA se tornam mais autônomos — fazendo chamadas de API, acessando dados e realizando ações em nome dos usuários — eles precisam de identidades adequadas. Em 2026, a Microsoft introduziu capacidades de **Agent ID** dentro do Microsoft Entra ID:
 
-- **Workload identity for AI agents** — Assign managed identities to AI agents, enabling fine-grained RBAC for what data and services each agent can access
-- **Agent authorization boundaries** — Define what actions an AI agent can perform, with Conditional Access policies that apply to agent identities
-- **Audit trail** — All agent actions are logged under the agent's identity, providing a clear audit trail separate from human user activity
-- **Token scoping** — Limit the permissions granted to agent tokens, applying the principle of least privilege to AI workloads
+- **Identidade de carga de trabalho para agentes de IA** — Atribua managed identities a agentes de IA, habilitando RBAC granular sobre quais dados e serviços cada agente pode acessar
+- **Limites de autorização de agentes** — Defina quais ações um agente de IA pode realizar, com políticas de Conditional Access que se aplicam a identidades de agentes
+- **Trilha de auditoria** — Todas as ações dos agentes são registradas sob a identidade do agente, fornecendo uma trilha de auditoria clara separada da atividade de usuários humanos
+- **Escopo de tokens** — Limite as permissões concedidas a tokens de agentes, aplicando o princípio do menor privilégio a cargas de trabalho de IA
 
-### Responsible AI Principles as Governance Mandates
+### Princípios de IA Responsável como Mandatos de Governança
 
-Microsoft's Responsible AI principles provide a framework for governing AI workloads:
+Os princípios de IA Responsável da Microsoft fornecem um framework para governar cargas de trabalho de IA:
 
-| Principle | Governance Implementation |
+| Princípio | Implementação de Governança |
 |---|---|
-| **Fairness** | Test models for bias; monitor outputs for discriminatory patterns |
-| **Reliability & Safety** | Implement content filters, rate limits, and human-in-the-loop for critical decisions |
-| **Privacy & Security** | Use private endpoints, customer-managed keys, and data loss prevention |
-| **Inclusiveness** | Ensure AI services are accessible and serve diverse populations |
-| **Transparency** | Log all AI interactions; provide explanations for AI-driven decisions |
-| **Accountability** | Assign owners to AI workloads; implement access reviews for AI resource access |
+| **Equidade** | Testar modelos para viés; monitorar saídas para padrões discriminatórios |
+| **Confiabilidade e Segurança** | Implementar filtros de conteúdo, limites de taxa e human-in-the-loop para decisões críticas |
+| **Privacidade e Segurança** | Usar private endpoints, chaves gerenciadas pelo cliente e prevenção contra perda de dados |
+| **Inclusividade** | Garantir que serviços de IA sejam acessíveis e atendam populações diversas |
+| **Transparência** | Registrar todas as interações de IA; fornecer explicações para decisões orientadas por IA |
+| **Responsabilização** | Atribuir proprietários a cargas de trabalho de IA; implementar revisões de acesso para acesso a recursos de IA |
 
-### Azure AI Governance Tooling
+### Ferramentas de Governança de IA do Azure
 
-Azure provides several tools for governing AI workloads:
+O Azure fornece várias ferramentas para governar cargas de trabalho de IA:
 
-**Rate limits and quotas:**
+**Limites de taxa e cotas:**
 
-- Azure OpenAI enforces **Tokens Per Minute (TPM)** and **Requests Per Minute (RPM)** limits
-- Allocate quota across deployments to prevent a single application from consuming all capacity
-- Monitor usage against limits to prevent throttling
+- O Azure OpenAI aplica limites de **Tokens Por Minuto (TPM)** e **Requisições Por Minuto (RPM)**
+- Aloque cotas entre implantações para impedir que uma única aplicação consuma toda a capacidade
+- Monitore o uso em relação aos limites para prevenir throttling
 
-**Model access policies:**
+**Políticas de acesso a modelos:**
 
-- Use Azure Policy to restrict which Azure OpenAI models can be deployed
-- Enforce that only approved model versions are used in production
-- Require specific content filter configurations on all deployments
+- Use Azure Policy para restringir quais modelos do Azure OpenAI podem ser implantados
+- Aplique que apenas versões aprovadas de modelos sejam usadas em produção
+- Exija configurações específicas de filtro de conteúdo em todas as implantações
 
-**Azure API Management as an AI Gateway:**
+**Azure API Management como Gateway de IA:**
 
-- Place Azure API Management in front of Azure OpenAI to add centralized governance
-- Implement token counting, rate limiting, and cost tracking at the gateway level
-- Enable semantic caching to reduce costs and latency
-- Log all requests and responses for audit purposes
+- Coloque o Azure API Management na frente do Azure OpenAI para adicionar governança centralizada
+- Implemente contagem de tokens, limitação de taxa e rastreamento de custos no nível do gateway
+- Habilite cache semântico para reduzir custos e latência
+- Registre todas as requisições e respostas para fins de auditoria
 
-### Shadow AI Detection
+### Detecção de Shadow AI
 
-**Shadow AI** refers to the use of unauthorized AI services by employees — using personal ChatGPT accounts, third-party AI tools, or unapproved APIs to process corporate data.
+**Shadow AI** refere-se ao uso de serviços de IA não autorizados por funcionários — usando contas pessoais do ChatGPT, ferramentas de IA de terceiros ou APIs não aprovadas para processar dados corporativos.
 
-Microsoft Entra ID now provides capabilities to detect and govern shadow AI:
+O Microsoft Entra ID agora fornece capacidades para detectar e governar shadow AI:
 
-- **App discovery** — Identify when users access unauthorized AI services through Conditional Access and Microsoft Defender for Cloud Apps
-- **Data exfiltration detection** — Monitor for sensitive data being sent to external AI services
-- **Approved AI catalog** — Publish a catalog of approved AI services and require users to go through sanctioned channels
-- **Conditional Access for AI services** — Block or warn when users attempt to access unapproved AI services
-
----
-
-## Best Practices
-
-1. **Use Microsoft Entra ID authentication, not API keys** — API keys are shared secrets that are easily leaked. Use managed identities for service-to-service and Microsoft Entra ID tokens for user-facing applications.
-
-2. **Never disable content filters without governance approval** — Content filters exist to prevent harmful outputs. Any modification should go through a formal review process.
-
-3. **Implement rate limits before they become a problem** — AI services can generate significant costs. Set TPM/RPM limits at the deployment level and monitor usage.
-
-4. **Treat AI agents as first-class identities** — Give AI agents their own managed identities with least-privilege RBAC. Never run agents under a human user's identity.
-
-5. **Log everything** — AI interactions should be logged for audit, compliance, and debugging. Use diagnostic settings to send Azure OpenAI logs to Log Analytics.
-
-6. **Use Azure API Management as an AI gateway** — Centralize access to AI models through APIM for consistent policy enforcement, logging, and cost tracking.
-
-7. **Address shadow AI proactively** — Publish an approved AI catalog, educate employees, and use Defender for Cloud Apps to detect unauthorized AI usage.
-
-8. **Establish an AI governance board** — Create a cross-functional team (IT, legal, compliance, business) to review AI use cases and approve deployments.
-
-9. **Monitor for model drift and bias** — Regularly evaluate AI outputs for quality, bias, and accuracy. Governance does not stop at deployment.
-
-10. **Plan for regulatory changes** — AI regulations (EU AI Act, NIST AI RMF, and others) are evolving rapidly. Build governance processes that can adapt to new requirements.
+- **Descoberta de aplicativos** — Identifique quando usuários acessam serviços de IA não autorizados através de Conditional Access e Microsoft Defender for Cloud Apps
+- **Detecção de exfiltração de dados** — Monitore dados sensíveis sendo enviados a serviços de IA externos
+- **Catálogo de IA aprovada** — Publique um catálogo de serviços de IA aprovados e exija que os usuários passem por canais sancionados
+- **Conditional Access para serviços de IA** — Bloqueie ou alerte quando usuários tentam acessar serviços de IA não aprovados
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
+1. **Use autenticação Microsoft Entra ID, não API keys** — API keys são secrets compartilhados que são facilmente vazados. Use managed identities para serviço-a-serviço e tokens Microsoft Entra ID para aplicações voltadas ao usuário.
+
+2. **Nunca desabilite filtros de conteúdo sem aprovação de governança** — Filtros de conteúdo existem para prevenir saídas prejudiciais. Qualquer modificação deve passar por um processo formal de revisão.
+
+3. **Implemente limites de taxa antes que se tornem um problema** — Serviços de IA podem gerar custos significativos. Defina limites TPM/RPM no nível de implantação e monitore o uso.
+
+4. **Trate agentes de IA como identidades de primeira classe** — Dê a agentes de IA suas próprias managed identities com RBAC de menor privilégio. Nunca execute agentes sob a identidade de um usuário humano.
+
+5. **Registre tudo** — Interações de IA devem ser registradas para auditoria, conformidade e depuração. Use diagnostic settings para enviar logs do Azure OpenAI ao Log Analytics.
+
+6. **Use Azure API Management como gateway de IA** — Centralize o acesso a modelos de IA através do APIM para aplicação consistente de políticas, logging e rastreamento de custos.
+
+7. **Aborde shadow AI proativamente** — Publique um catálogo de IA aprovada, eduque funcionários e use o Defender for Cloud Apps para detectar uso não autorizado de IA.
+
+8. **Estabeleça um comitê de governança de IA** — Crie uma equipe multifuncional (TI, jurídico, conformidade, negócios) para revisar casos de uso de IA e aprovar implantações.
+
+9. **Monitore drift e viés de modelos** — Avalie regularmente as saídas de IA quanto a qualidade, viés e precisão. A governança não para na implantação.
+
+10. **Planeje para mudanças regulatórias** — Regulamentações de IA (EU AI Act, NIST AI RMF e outras) estão evoluindo rapidamente. Construa processos de governança que possam se adaptar a novos requisitos.
+
+---
+
+## Armadilhas Comuns
+
+| Armadilha | Impacto | Mitigação |
 |---|---|---|
-| Using API keys in source code | Key leakage leads to unauthorized access and cost exposure | Use managed identities and Microsoft Entra ID auth |
-| No rate limits on AI deployments | A single runaway application exhausts quota and budget | Set TPM/RPM limits per deployment; implement budgets and alerts |
-| Disabling content filters for "flexibility" | Harmful or inappropriate content in production outputs | Keep filters enabled; use custom configurations for specific use cases |
-| Ignoring shadow AI | Sensitive corporate data sent to unauthorized AI services | Deploy Defender for Cloud Apps; create an approved AI catalog |
-| No audit logging for AI interactions | Cannot demonstrate compliance or investigate incidents | Enable diagnostic settings on all Azure OpenAI resources |
-| Treating AI governance as an IT-only concern | Business and legal risks are not addressed | Establish a cross-functional AI governance board |
+| Usar API keys no código-fonte | Vazamento de chave leva a acesso não autorizado e exposição de custos | Use managed identities e autenticação Microsoft Entra ID |
+| Sem limites de taxa em implantações de IA | Uma única aplicação descontrolada esgota cota e orçamento | Defina limites TPM/RPM por implantação; implemente orçamentos e alertas |
+| Desabilitar filtros de conteúdo por "flexibilidade" | Conteúdo prejudicial ou inapropriado em saídas de produção | Mantenha filtros habilitados; use configurações customizadas para casos de uso específicos |
+| Ignorar shadow AI | Dados corporativos sensíveis enviados a serviços de IA não autorizados | Implante Defender for Cloud Apps; crie um catálogo de IA aprovada |
+| Sem logging de auditoria para interações de IA | Não é possível demonstrar conformidade ou investigar incidentes | Habilite diagnostic settings em todos os recursos Azure OpenAI |
+| Tratar governança de IA como preocupação apenas de TI | Riscos de negócios e jurídicos não são abordados | Estabeleça um comitê multifuncional de governança de IA |
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Azure Policy — Require Private Endpoints for Azure OpenAI
+### Azure Policy — Exigir Private Endpoints para Azure OpenAI
 
 ```json
 {
@@ -210,7 +210,7 @@ Microsoft Entra ID now provides capabilities to detect and govern shadow AI:
 }
 ```
 
-### Azure Policy — Restrict Azure OpenAI to Specific Regions
+### Azure Policy — Restringir Azure OpenAI a Regiões Específicas
 
 ```json
 {
@@ -241,7 +241,7 @@ Microsoft Entra ID now provides capabilities to detect and govern shadow AI:
 }
 ```
 
-### Monitor Azure OpenAI Usage with Log Analytics
+### Monitorar Uso do Azure OpenAI com Log Analytics
 
 ```kusto
 // Azure OpenAI request volume and token consumption
@@ -259,7 +259,7 @@ AzureDiagnostics
 
 ---
 
-## References
+## Referências
 
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
 - [Azure OpenAI RBAC Roles](https://learn.microsoft.com/azure/ai-services/openai/how-to/role-based-access-control)
@@ -273,6 +273,6 @@ AzureDiagnostics
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Data Governance with Purview](ch26-data-governance-purview.md) | [Governance Roadmap](../part-8-synthesis/ch28-governance-roadmap.md) |
+| [Governança de Dados com Purview](ch26-data-governance-purview.md) | [Roteiro de Governança](../part-8-synthesis/ch28-governance-roadmap.md) |

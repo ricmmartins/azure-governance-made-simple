@@ -1,155 +1,155 @@
-# Chapter 17 — Cost Management
+# Capítulo 17 — Cost Management
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Azure Cost Management + Billing** is the central service for monitoring, allocating, and optimizing Azure spending. For governance teams, it provides the controls needed to prevent budget overruns, enforce accountability, and build a culture of cost awareness across the organization.
+**Azure Cost Management + Billing** é o serviço central para monitorar, alocar e otimizar os gastos no Azure. Para equipes de governança, ele fornece os controles necessários para prevenir estouros de orçamento, garantir responsabilidade e construir uma cultura de consciência de custos em toda a organização.
 
-Cost governance is not just about reducing spend — it's about ensuring that *every dollar spent delivers business value* and that *spending is predictable, accountable, and aligned with organizational policy*.
+Governança de custos não é apenas sobre reduzir gastos — é sobre garantir que *cada real gasto entregue valor ao negócio* e que *os gastos sejam previsíveis, rastreáveis e alinhados com as políticas organizacionais*.
 
-Key capabilities:
+Capacidades principais:
 
-- **Cost analysis** — interactive exploration of costs by service, resource group, tag, subscription, and custom dimensions
-- **Budgets** — set spending thresholds with automated alerts and actions
-- **Anomaly detection** — AI-powered identification of unexpected cost spikes
-- **Cost allocation** — rules for splitting shared costs across teams and cost centers
-- **Exports** — scheduled data exports to storage accounts for external analysis
-- **Advisor recommendations** — actionable cost-saving suggestions
-- **Savings Plans and Reservations** — commit-to-use pricing models for significant discounts
-- **Multi-cloud support** — view AWS costs alongside Azure in a single pane
+- **Análise de custos** — exploração interativa de custos por serviço, grupo de recursos, tag, assinatura e dimensões customizadas
+- **Orçamentos** — definição de limites de gastos com alertas e ações automatizadas
+- **Detecção de anomalias** — identificação de picos de custo inesperados com inteligência artificial
+- **Alocação de custos** — regras para distribuir custos compartilhados entre equipes e centros de custo
+- **Exportações** — exportações programadas de dados para contas de armazenamento para análise externa
+- **Recomendações do Advisor** — sugestões acionáveis para economia de custos
+- **Savings Plans e Reservations** — modelos de preço com compromisso de uso para descontos significativos
+- **Suporte multi-cloud** — visualize custos da AWS junto com os do Azure em um único painel
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Cost Analysis
+### Análise de Custos
 
-Cost analysis is the primary investigative tool. It answers questions like *"Why did spending increase last month?"* and *"Which team is consuming the most compute?"*
+A análise de custos é a principal ferramenta investigativa. Ela responde perguntas como *"Por que os gastos aumentaram no mês passado?"* e *"Qual equipe está consumindo mais computação?"*
 
-Key views:
+Visões principais:
 
-| View | Purpose |
-|------|---------|
-| **Accumulated costs** | Running total over a period |
-| **Daily costs** | Day-by-day breakdown for trend analysis |
-| **Cost by service** | Which Azure services cost the most |
-| **Cost by resource** | Which individual resources cost the most |
-| **Cost by tag** | Cost allocation by business dimensions (CostCenter, Team, Project) |
+| Visão | Propósito |
+|-------|-----------|
+| **Custos acumulados** | Total acumulado ao longo de um período |
+| **Custos diários** | Detalhamento dia a dia para análise de tendências |
+| **Custo por serviço** | Quais serviços do Azure custam mais |
+| **Custo por recurso** | Quais recursos individuais custam mais |
+| **Custo por tag** | Alocação de custos por dimensões de negócio (CostCenter, Team, Project) |
 
-Cost analysis supports grouping by:
-- Subscription, resource group, resource
-- Service name, meter category
-- Tag key/value
-- Location (region)
-- Pricing model (On-demand, Reservation, Savings Plan, Spot)
+A análise de custos suporta agrupamento por:
+- Assinatura, grupo de recursos, recurso
+- Nome do serviço, categoria de medidor
+- Chave/valor de tag
+- Localização (região)
+- Modelo de preço (On-demand, Reservation, Savings Plan, Spot)
 
-### Budgets and Alerts
+### Orçamentos e Alertas
 
-Budgets define spending limits at any scope (management group, subscription, or resource group) and trigger alerts when actual or forecasted spending crosses defined thresholds.
+Orçamentos definem limites de gastos em qualquer escopo (management group, assinatura ou grupo de recursos) e disparam alertas quando os gastos reais ou previstos ultrapassam os limites definidos.
 
-**Budget alert types:**
+**Tipos de alerta de orçamento:**
 
-| Type | Trigger | Use Case |
-|------|---------|----------|
-| **Actual** | Fires when actual spend reaches the threshold | React to current overruns |
-| **Forecast** | Fires when projected spend is expected to exceed the threshold | Proactive intervention before overspend |
+| Tipo | Gatilho | Caso de Uso |
+|------|---------|-------------|
+| **Actual** | Dispara quando o gasto real atinge o limite | Reagir a estouros atuais |
+| **Forecast** | Dispara quando o gasto projetado deve exceder o limite | Intervenção proativa antes do estouro |
 
-**Alert actions:**
+**Ações de alerta:**
 
-- Email notifications to budget owners
-- Action group triggers (Azure Functions, Logic Apps, webhooks)
-- Automated responses (e.g., shut down dev/test VMs, send Slack/Teams alerts)
+- Notificações por e-mail para responsáveis pelo orçamento
+- Acionamento de action groups (Azure Functions, Logic Apps, webhooks)
+- Respostas automatizadas (ex.: desligar VMs de dev/test, enviar alertas no Slack/Teams)
 
-### Cost Anomaly Detection
+### Detecção de Anomalias de Custo
 
-Azure Cost Management includes built-in **anomaly detection** that uses machine learning to identify unusual spending patterns. Anomalies are surfaced in:
+O Azure Cost Management inclui **detecção de anomalias** integrada que utiliza machine learning para identificar padrões de gastos incomuns. As anomalias são exibidas em:
 
-- **Cost analysis** — visual indicators on the cost chart
-- **Anomaly alerts** — configurable email and action group notifications
-- **Cost Management API** — programmatic access for custom dashboards
+- **Análise de custos** — indicadores visuais no gráfico de custos
+- **Alertas de anomalia** — notificações configuráveis por e-mail e action groups
+- **API do Cost Management** — acesso programático para dashboards personalizados
 
-Anomaly detection considers seasonality, growth trends, and historical patterns to minimize false positives.
+A detecção de anomalias considera sazonalidade, tendências de crescimento e padrões históricos para minimizar falsos positivos.
 
-### Cost Allocation Rules
+### Regras de Alocação de Custos
 
-**Cost allocation rules** distribute shared costs (e.g., a shared virtual network, a Log Analytics workspace) across consuming teams based on defined criteria:
+**Regras de alocação de custos** distribuem custos compartilhados (ex.: uma rede virtual compartilhada, um workspace do Log Analytics) entre equipes consumidoras com base em critérios definidos:
 
-- **Fixed proportion** — split costs by percentage (e.g., 60/40 between two teams)
-- **Even split** — divide equally among targets
-- **Proportional** — allocate based on actual resource consumption ratios
+- **Proporção fixa** — dividir custos por percentual (ex.: 60/40 entre duas equipes)
+- **Divisão igualitária** — dividir igualmente entre os destinos
+- **Proporcional** — alocar com base nas proporções reais de consumo de recursos
 
-Cost allocation rules are applied retroactively and appear in cost analysis and exports, making chargeback and showback models possible.
+As regras de alocação de custos são aplicadas retroativamente e aparecem na análise de custos e exportações, tornando possíveis modelos de chargeback e showback.
 
 ### Azure Savings Plans
 
-**Azure Savings Plans** (launched October 2022) offer discounted pricing in exchange for a commitment to spend a fixed hourly amount on eligible compute services for 1 or 3 years.
+**Azure Savings Plans** (lançados em outubro de 2022) oferecem preços com desconto em troca de um compromisso de gastar um valor fixo por hora em serviços de computação elegíveis por 1 ou 3 anos.
 
-| Feature | Savings Plans | Reservations |
-|---------|--------------|--------------|
-| **Scope** | Compute across regions and SKUs | Specific SKU in a specific region |
-| **Flexibility** | Automatically applies to qualifying usage | Must match exact resource type and region |
-| **Discount** | Up to 65% off pay-as-you-go | Up to 72% off pay-as-you-go |
-| **Services** | VMs, App Service, Container Instances, Azure Functions Premium, Azure Dedicated Hosts | VMs, SQL, Cosmos DB, Storage, and many more |
+| Característica | Savings Plans | Reservations |
+|----------------|--------------|--------------|
+| **Escopo** | Computação entre regiões e SKUs | SKU específica em uma região específica |
+| **Flexibilidade** | Aplica-se automaticamente ao uso qualificado | Deve corresponder exatamente ao tipo de recurso e região |
+| **Desconto** | Até 65% de desconto sobre pay-as-you-go | Até 72% de desconto sobre pay-as-you-go |
+| **Serviços** | VMs, App Service, Container Instances, Azure Functions Premium, Azure Dedicated Hosts | VMs, SQL, Cosmos DB, Storage e muitos outros |
 
-**Best practice:** Use Savings Plans for compute workloads that may change SKU or region, and Reservations for stable, predictable workloads.
+**Melhor prática:** Use Savings Plans para cargas de trabalho de computação que podem mudar de SKU ou região, e Reservations para cargas de trabalho estáveis e previsíveis.
 
 ### Reservations
 
-**Azure Reservations** provide discounted pricing when you commit to a specific resource type and configuration for 1 or 3 years:
+**Azure Reservations** fornecem preços com desconto quando você se compromete com um tipo de recurso e configuração específicos por 1 ou 3 anos:
 
-- **Virtual Machines** — commit to a specific VM family and region
-- **SQL Database** — reserve vCores or DTUs
-- **Cosmos DB** — reserve throughput (RU/s)
-- **Storage** — reserve capacity for blob, file, and Data Lake
-- **Many more** — App Service, Synapse, Redis, Databricks, etc.
+- **Virtual Machines** — compromisso com uma família de VM e região específicas
+- **SQL Database** — reservar vCores ou DTUs
+- **Cosmos DB** — reservar throughput (RU/s)
+- **Storage** — reservar capacidade para blob, file e Data Lake
+- **Muitos outros** — App Service, Synapse, Redis, Databricks, etc.
 
-### Azure Advisor Cost Recommendations
+### Recomendações de Custo do Azure Advisor
 
-**Azure Advisor** continuously analyzes resource utilization and provides actionable recommendations:
+O **Azure Advisor** analisa continuamente a utilização de recursos e fornece recomendações acionáveis:
 
-- **Right-size or shut down underutilized VMs**
-- **Purchase Reservations or Savings Plans** based on usage patterns
-- **Delete unused resources** (orphaned disks, unused public IPs)
-- **Use Spot VMs** for fault-tolerant workloads
-- **Optimize storage tiers** (move infrequently accessed data to cool/archive)
-
----
-
-## Best Practices
-
-1. **Set budgets at every scope** — management group, subscription, and resource group; alert at 50%, 75%, 90%, and 100%
-2. **Use tags for cost allocation** — require `CostCenter`, `Team`, and `Environment` tags via Azure Policy
-3. **Enable anomaly alerts** — configure action groups to notify FinOps leads on anomalies
-4. **Review Advisor recommendations weekly** — assign owners to act on right-sizing and reservation recommendations
-5. **Automate dev/test shutdowns** — use auto-shutdown schedules or budget-triggered actions to stop non-production resources after hours
-6. **Export cost data** — schedule daily exports to a storage account for integration with Power BI, custom dashboards, or FinOps tools
-7. **Combine Savings Plans and Reservations** — use Savings Plans for flexible compute and Reservations for predictable workloads
-8. **Use cost allocation rules** — distribute shared infrastructure costs to consuming teams for accountability
-9. **Review costs monthly** — conduct monthly cost reviews with stakeholders; compare actual vs. budget
-10. **Use management group budgets** — set enterprise-wide spending limits in addition to subscription-level budgets
+- **Redimensionar ou desligar VMs subutilizadas**
+- **Comprar Reservations ou Savings Plans** com base em padrões de uso
+- **Excluir recursos não utilizados** (discos órfãos, IPs públicos não utilizados)
+- **Usar Spot VMs** para cargas de trabalho tolerantes a falhas
+- **Otimizar camadas de armazenamento** (mover dados acessados com pouca frequência para cool/archive)
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| No budgets set | Spending goes unnoticed until the bill arrives | Set budgets with forecast alerts at every scope |
-| Tags not enforced | Cannot allocate costs to business units | Use Azure Policy to require tags before resource creation |
-| Ignoring Advisor recommendations | Wasted spend on underutilized resources | Review Advisor weekly; track recommendation adoption |
-| Over-committing on Reservations | Paying for capacity you don't use | Start with Savings Plans for flexibility; reserve only stable workloads |
-| Not using anomaly detection | Cost spikes go undetected for days | Enable anomaly alerts with action groups |
-| Manual cost reviews only | Slow, error-prone, infrequent | Automate exports and dashboards |
-| Shared resources without allocation | Teams have no visibility into their true costs | Configure cost allocation rules |
+1. **Defina orçamentos em cada escopo** — management group, assinatura e grupo de recursos; alerte em 50%, 75%, 90% e 100%
+2. **Use tags para alocação de custos** — exija as tags `CostCenter`, `Team` e `Environment` via Azure Policy
+3. **Habilite alertas de anomalia** — configure action groups para notificar líderes de FinOps sobre anomalias
+4. **Revise as recomendações do Advisor semanalmente** — atribua responsáveis para atuar nas recomendações de redimensionamento e reservas
+5. **Automatize desligamentos de dev/test** — use agendamentos de auto-shutdown ou ações acionadas por orçamento para parar recursos de não-produção fora do horário
+6. **Exporte dados de custo** — agende exportações diárias para uma conta de armazenamento para integração com Power BI, dashboards personalizados ou ferramentas de FinOps
+7. **Combine Savings Plans e Reservations** — use Savings Plans para computação flexível e Reservations para cargas de trabalho previsíveis
+8. **Use regras de alocação de custos** — distribua custos de infraestrutura compartilhada para equipes consumidoras para garantir responsabilidade
+9. **Revise custos mensalmente** — conduza revisões mensais de custos com stakeholders; compare real vs. orçamento
+10. **Use orçamentos de management group** — defina limites de gastos corporativos além dos orçamentos no nível de assinatura
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Creating a Budget via Azure CLI
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Nenhum orçamento definido | Gastos passam despercebidos até a fatura chegar | Defina orçamentos com alertas de previsão em cada escopo |
+| Tags não aplicadas | Impossível alocar custos para unidades de negócio | Use Azure Policy para exigir tags antes da criação de recursos |
+| Ignorar recomendações do Advisor | Gastos desperdiçados em recursos subutilizados | Revise o Advisor semanalmente; acompanhe a adoção de recomendações |
+| Comprometimento excessivo com Reservations | Pagando por capacidade que não utiliza | Comece com Savings Plans para flexibilidade; reserve apenas cargas de trabalho estáveis |
+| Não usar detecção de anomalias | Picos de custo passam despercebidos por dias | Habilite alertas de anomalia com action groups |
+| Revisões de custos apenas manuais | Lento, propenso a erros, infrequente | Automatize exportações e dashboards |
+| Recursos compartilhados sem alocação | Equipes não têm visibilidade dos custos reais | Configure regras de alocação de custos |
+
+---
+
+## Exemplos de Código
+
+### Criando um Orçamento via Azure CLI
 
 ```bash
 # Create a monthly budget with alerts at 80% and 100%
@@ -179,9 +179,9 @@ az consumption budget create \
   }'
 ```
 
-### Creating a Budget with Action Group via Bicep
+### Criando um Orçamento com Action Group via Bicep
 
-This Bicep template creates a budget with an action group that triggers an email and a Logic App when the budget threshold is exceeded:
+Este template Bicep cria um orçamento com um action group que dispara um e-mail e um Logic App quando o limite do orçamento é excedido:
 
 ```bicep
 // budget-with-alerts.bicep
@@ -263,7 +263,7 @@ output budgetId string = budget.id
 output actionGroupId string = actionGroup.id
 ```
 
-### Querying Cost Anomalies via Azure CLI
+### Consultando Anomalias de Custo via Azure CLI
 
 ```bash
 # List recent cost anomalies for a subscription
@@ -277,7 +277,7 @@ az costmanagement query \
 
 ---
 
-## References
+## Referências
 
 - [Azure Cost Management + Billing overview](https://learn.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview)
 - [Create and manage budgets](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets)
@@ -292,6 +292,6 @@ az costmanagement query \
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [Governance CI/CD](../part-4-iac-deployment/ch16-governance-cicd.md) | [FinOps](ch18-finops.md) |

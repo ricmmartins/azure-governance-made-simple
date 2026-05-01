@@ -1,143 +1,143 @@
-# Chapter 16 — Governance CI/CD
+# Capítulo 16 — Governança CI/CD
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-Governance that exists only as documentation or portal configurations is fragile. It drifts, it's inconsistent, and it doesn't scale. **Governance CI/CD** applies software engineering practices — version control, automated testing, peer review, and continuous deployment — to governance artifacts like Bicep templates, policy definitions, and RBAC assignments.
+Governança que existe apenas como documentação ou configurações no portal é frágil. Ela sofre drift, é inconsistente e não escala. **Governança CI/CD** aplica práticas de engenharia de software — controle de versão, testes automatizados, revisão por pares e implantação contínua — a artefatos de governança como templates Bicep, definições de policy e atribuições RBAC.
 
-Why governance needs CI/CD:
+Por que governança precisa de CI/CD:
 
-- **Consistency** — every environment receives the same governance baseline
-- **Auditability** — all changes are tracked in source control with approvals
-- **Speed** — new subscriptions can be governed in minutes, not days
-- **Safety** — What-If previews and approval gates prevent accidental damage
-- **Drift prevention** — scheduled pipeline runs detect and correct configuration drift
+- **Consistência** — todo ambiente recebe o mesmo baseline de governança
+- **Auditabilidade** — todas as alterações são rastreadas em controle de versão com aprovações
+- **Velocidade** — novas subscriptions podem ser governadas em minutos, não dias
+- **Segurança** — previews What-If e gates de aprovação previnem danos acidentais
+- **Prevenção de drift** — execuções agendadas de pipeline detectam e corrigem drift de configuração
 
 ---
 
-## How It Works
+## Como Funciona
 
-### IaC Deployment Pipelines with Approval Gates
+### Pipelines de Implantação IaC com Gates de Aprovação
 
-A governance deployment pipeline typically follows this flow:
+Um pipeline de implantação de governança tipicamente segue este fluxo:
 
 ![CI/CD Governance Pipeline](/images/cicd-governance-pipeline.svg)
 
-**Stage 1: Lint & Test**
-- Bicep linter validates templates
-- Unit tests check parameter constraints and resource configurations
-- Schema validation ensures required tags and naming conventions
+**Estágio 1: Lint & Testes**
+- O Bicep linter valida os templates
+- Testes unitários verificam restrições de parâmetros e configurações de recursos
+- Validação de schema garante tags obrigatórias e convenções de nomenclatura
 
-**Stage 2: What-If Preview**
-- `az deployment sub what-if` previews all changes
-- The output is posted as a pull request comment for human review
+**Estágio 2: Preview What-If**
+- `az deployment sub what-if` visualiza todas as alterações
+- A saída é postada como comentário no pull request para revisão humana
 
-**Stage 3: Approval Gate**
-- Required reviewers approve or reject the deployment
-- GitHub Environments with protection rules enforce this
+**Estágio 3: Gate de Aprovação**
+- Revisores obrigatórios aprovam ou rejeitam a implantação
+- GitHub Environments com regras de proteção impõem isso
 
-**Stage 4: Deploy**
-- `az deployment sub create` or `az stack sub create` applies the changes
-- Post-deployment validation confirms resources are in the expected state
+**Estágio 4: Implantação**
+- `az deployment sub create` ou `az stack sub create` aplica as alterações
+- Validação pós-implantação confirma que os recursos estão no estado esperado
 
-### Policy as Code with EPAC
+### Policy as Code com EPAC
 
-The **Enterprise Policy as Code (EPAC)** framework automates the lifecycle of Azure Policy definitions, assignments, and exemptions through CI/CD. EPAC uses a declarative JSON/CSV-based configuration stored in source control.
+O framework **Enterprise Policy as Code (EPAC)** automatiza o ciclo de vida de definições, atribuições e isenções do Azure Policy através de CI/CD. O EPAC usa uma configuração declarativa baseada em JSON/CSV armazenada em controle de versão.
 
-EPAC workflow:
+Fluxo de trabalho EPAC:
 
-1. **Define** — policy definitions, initiatives, and assignments are declared in JSON files
-2. **Plan** — EPAC computes the desired state vs. current state and generates a deployment plan
-3. **Deploy** — the plan is applied, creating, updating, or deleting policy resources
-4. **Exempt** — policy exemptions are managed as code alongside definitions
+1. **Definir** — definições de policy, initiatives e atribuições são declaradas em arquivos JSON
+2. **Planejar** — o EPAC calcula o estado desejado vs. estado atual e gera um plano de implantação
+3. **Implantar** — o plano é aplicado, criando, atualizando ou excluindo recursos de policy
+4. **Isentar** — isenções de policy são gerenciadas como código junto com as definições
 
-Key EPAC concepts:
+Conceitos-chave do EPAC:
 
-- **Global settings** — define management group hierarchy, default locations, and scope
-- **Policy definitions** — custom policy rules stored as JSON
-- **Policy set definitions (initiatives)** — groups of policies assigned together
-- **Policy assignments** — bind definitions/initiatives to scopes with parameters
-- **Exemptions** — time-bound exceptions tracked in source control
+- **Configurações globais** — definem a hierarquia de management groups, localizações padrão e escopo
+- **Definições de policy** — regras de policy customizadas armazenadas como JSON
+- **Definições de policy set (initiatives)** — grupos de policies atribuídos juntos
+- **Atribuições de policy** — vinculam definições/initiatives a escopos com parâmetros
+- **Isenções** — exceções com prazo determinado rastreadas em controle de versão
 
-See: [EPAC on GitHub](https://github.com/Azure/enterprise-azure-policy-as-code)
+Veja: [EPAC no GitHub](https://github.com/Azure/enterprise-azure-policy-as-code)
 
-### Drift Detection and Remediation
+### Detecção e Remediação de Drift
 
-Governance drift occurs when the actual state of resources diverges from the desired state. Common causes:
+Drift de governança ocorre quando o estado real dos recursos diverge do estado desejado. Causas comuns:
 
-- Manual portal changes
-- Emergency fixes that bypass pipelines
-- RBAC changes made outside of IaC
+- Alterações manuais no portal
+- Correções de emergência que ignoram pipelines
+- Alterações de RBAC feitas fora do IaC
 
-**Detection strategies:**
+**Estratégias de detecção:**
 
-| Strategy | Tool | Frequency |
-|----------|------|-----------|
-| Scheduled What-If | Azure CLI in CI/CD | Daily or weekly |
-| Policy compliance scan | Azure Policy | Continuous (built-in) |
-| Resource Graph queries | Azure Resource Graph | On-demand or scheduled |
-| Deployment Stack drift | `az stack sub show` | On-demand |
+| Estratégia | Ferramenta | Frequência |
+|------------|-----------|------------|
+| What-If agendado | Azure CLI no CI/CD | Diário ou semanal |
+| Verificação de conformidade de policy | Azure Policy | Contínua (integrada) |
+| Consultas ao Resource Graph | Azure Resource Graph | Sob demanda ou agendada |
+| Drift de Deployment Stack | `az stack sub show` | Sob demanda |
 
-**Remediation approaches:**
+**Abordagens de remediação:**
 
-- **Automatic remediation** — re-run the deployment pipeline to overwrite manual changes
-- **Policy remediation tasks** — Azure Policy can auto-remediate non-compliant resources via `deployIfNotExists` and `modify` effects
-- **Alert-based remediation** — Activity Log alerts trigger Logic Apps or Azure Functions to correct drift
+- **Remediação automática** — reexecute o pipeline de implantação para sobrescrever alterações manuais
+- **Tarefas de remediação de policy** — o Azure Policy pode remediar automaticamente recursos não conformes via efeitos `deployIfNotExists` e `modify`
+- **Remediação baseada em alertas** — alertas do Activity Log acionam Logic Apps ou Azure Functions para corrigir drift
 
-### Environment Promotion
+### Promoção de Ambientes
 
-Governance configurations should follow the same promotion path as application code:
+Configurações de governança devem seguir o mesmo caminho de promoção que o código de aplicação:
 
 ![Environment Promotion Flow](/images/env-promotion-flow.svg)
 
-| Stage | Purpose | Approval |
-|-------|---------|----------|
-| **dev** | Validate templates compile and lint | Automatic |
-| **staging** | What-If against a staging subscription; integration testing | Team lead approval |
-| **production** | Deploy to production management group/subscriptions | Governance board approval |
+| Estágio | Propósito | Aprovação |
+|---------|-----------|-----------|
+| **dev** | Validar que templates compilam e passam no lint | Automática |
+| **staging** | What-If contra uma subscription de staging; testes de integração | Aprovação do líder técnico |
+| **production** | Implantar no management group/subscriptions de produção | Aprovação do comitê de governança |
 
-Use separate parameter files for each environment:
+Use arquivos de parâmetros separados para cada ambiente:
 
 ![Bicep Parameter Structure](/images/bicep-param-structure.svg)
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Store all governance artifacts in source control** — policies, RBAC, Bicep templates, and parameter files
-2. **Require pull request reviews for governance changes** — enforce branch protection rules
-3. **Use What-If in every pipeline** — never deploy governance changes without previewing them
-4. **Separate concerns** — use different pipelines for infrastructure, policy, and RBAC
-5. **Use GitHub Environments** — configure protection rules, required reviewers, and deployment secrets per environment
-6. **Schedule drift detection** — run What-If on a cron schedule to detect manual changes
-7. **Use workload identity federation** — authenticate pipelines to Azure using OIDC, not client secrets
-8. **Implement least privilege for pipeline identities** — the service principal should only have the permissions needed for governance deployment
-9. **Tag deployments** — include pipeline run ID, commit SHA, and deployer in resource tags for traceability
-10. **Monitor pipeline health** — alert on pipeline failures to prevent governance gaps
-
----
-
-## Common Pitfalls
-
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Using long-lived client secrets | Security risk if secrets are compromised | Use workload identity federation (OIDC) |
-| No approval gates on production | Accidental production changes | Configure required reviewers on GitHub Environments |
-| Skipping What-If | Unexpected resource deletions | Make What-If a mandatory pipeline step |
-| Monolithic pipeline | Slow, fragile, hard to debug | Separate infrastructure, policy, and RBAC pipelines |
-| Not handling pipeline failures | Governance drift accumulates | Alert on failures; auto-retry transient errors |
-| Manual drift fixes | Fixes not captured in code | Always fix drift by updating IaC, not the portal |
+1. **Armazene todos os artefatos de governança em controle de versão** — policies, RBAC, templates Bicep e arquivos de parâmetros
+2. **Exija revisões de pull request para alterações de governança** — imponha regras de branch protection
+3. **Use What-If em todo pipeline** — nunca implante alterações de governança sem visualizá-las
+4. **Separe responsabilidades** — use pipelines diferentes para infraestrutura, policy e RBAC
+5. **Use GitHub Environments** — configure regras de proteção, revisores obrigatórios e secrets de implantação por ambiente
+6. **Agende detecção de drift** — execute What-If em um cron schedule para detectar alterações manuais
+7. **Use workload identity federation** — autentique pipelines no Azure usando OIDC, não client secrets
+8. **Implemente least privilege para identidades de pipeline** — o service principal deve ter apenas as permissões necessárias para implantação de governança
+9. **Aplique tags nas implantações** — inclua ID de execução do pipeline, SHA do commit e deployer nas tags de recursos para rastreabilidade
+10. **Monitore a saúde dos pipelines** — alerte sobre falhas de pipeline para prevenir lacunas de governança
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### GitHub Actions Workflow: Bicep Deployment with What-If
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Usar client secrets de longa duração | Risco de segurança se secrets forem comprometidos | Use workload identity federation (OIDC) |
+| Sem gates de aprovação em produção | Alterações acidentais em produção | Configure revisores obrigatórios nos GitHub Environments |
+| Pular What-If | Exclusões inesperadas de recursos | Torne o What-If um passo obrigatório do pipeline |
+| Pipeline monolítico | Lento, frágil, difícil de debugar | Separe pipelines de infraestrutura, policy e RBAC |
+| Não tratar falhas de pipeline | Drift de governança se acumula | Alerte sobre falhas; auto-retry em erros transientes |
+| Correções de drift manuais | Correções não capturadas em código | Sempre corrija drift atualizando o IaC, não o portal |
 
-This workflow deploys a governance baseline using Bicep, with linting, What-If preview, manual approval, and deployment stages.
+---
+
+## Exemplos de Código
+
+### Workflow GitHub Actions: Implantação Bicep com What-If
+
+Este workflow implanta um baseline de governança usando Bicep, com linting, preview What-If, aprovação manual e estágios de implantação.
 
 ```yaml
 # .github/workflows/governance-deploy.yml
@@ -245,7 +245,7 @@ jobs:
             --output table
 ```
 
-### GitHub Actions Workflow: Scheduled Drift Detection
+### Workflow GitHub Actions: Detecção de Drift Agendada
 
 ```yaml
 # .github/workflows/drift-detection.yml
@@ -302,19 +302,19 @@ jobs:
 
 ---
 
-## References
+## Referências
 
-- [Bicep CI/CD with GitHub Actions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-github-actions)
-- [Azure deployment What-If operation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if)
-- [GitHub Actions for Azure](https://learn.microsoft.com/en-us/azure/developer/github/github-actions)
+- [Bicep CI/CD com GitHub Actions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-github-actions)
+- [Operação What-If de implantação Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if)
+- [GitHub Actions para Azure](https://learn.microsoft.com/en-us/azure/developer/github/github-actions)
 - [Workload identity federation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation)
-- [GitHub Environments and protection rules](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
+- [GitHub Environments e regras de proteção](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
 - [Enterprise Policy as Code (EPAC)](https://github.com/Azure/enterprise-azure-policy-as-code)
-- [Azure Policy as Code workflow](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-as-code)
+- [Fluxo de trabalho Azure Policy as Code](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-as-code)
 - [Deployment Stacks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks)
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
-| [Template Specs](ch15-template-specs.md) | [Cost Management](../part-5-cost-finops/ch17-cost-management.md) |
+| Anterior | Próximo |
+|:---------|:--------|
+| [Template Specs](ch15-template-specs.md) | [Gerenciamento de Custos](../part-5-cost-finops/ch17-cost-management.md) |

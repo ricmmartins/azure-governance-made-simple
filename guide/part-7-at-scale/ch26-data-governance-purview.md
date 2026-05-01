@@ -1,140 +1,140 @@
-# Chapter 26 — Data Governance with Microsoft Purview
+# Capítulo 26 — Governança de Dados com Microsoft Purview
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Microsoft Purview** is a unified data governance platform that helps organizations discover, classify, protect, and manage their data across on-premises, multi-cloud, and SaaS environments. While the previous chapters focused on governing Azure *infrastructure*, this chapter addresses governing the *data* that lives within that infrastructure.
+O **Microsoft Purview** é uma plataforma unificada de governança de dados que ajuda organizações a descobrir, classificar, proteger e gerenciar seus dados em ambientes on-premises, multi-cloud e SaaS. Enquanto os capítulos anteriores focaram em governar a *infraestrutura* Azure, este capítulo aborda a governança dos *dados* que residem dentro dessa infraestrutura.
 
-Data governance answers questions like:
+A governança de dados responde a perguntas como:
 
-- *What data do we have, and where does it live?*
-- *Is sensitive data properly classified and protected?*
-- *Who has access to critical data?*
-- *How does data flow through our systems?*
-- *Are we meeting regulatory requirements for data handling?*
+- *Quais dados temos e onde eles residem?*
+- *Os dados sensíveis estão devidamente classificados e protegidos?*
+- *Quem tem acesso a dados críticos?*
+- *Como os dados fluem através dos nossos sistemas?*
+- *Estamos atendendo aos requisitos regulatórios para o tratamento de dados?*
 
-Microsoft Purview brings together what were previously separate products — Azure Purview (data catalog and lineage) and Microsoft 365 Compliance (information protection and data loss prevention) — into a single governance platform.
+O Microsoft Purview reúne o que antes eram produtos separados — Azure Purview (catálogo de dados e linhagem) e Microsoft 365 Compliance (proteção de informações e prevenção contra perda de dados) — em uma única plataforma de governança.
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Data Catalog — Discovering and Understanding Data Assets
+### Catálogo de Dados — Descobrindo e Entendendo Ativos de Dados
 
-The Purview Data Catalog provides a searchable inventory of all data assets across your organization.
+O Purview Data Catalog fornece um inventário pesquisável de todos os ativos de dados em sua organização.
 
-**Key capabilities:**
+**Principais capacidades:**
 
-- **Automated scanning** — Purview scans data sources (Azure SQL, Azure Data Lake, Azure Blob Storage, AWS S3, on-premises SQL Server, and many more) to discover data assets
-- **Data asset inventory** — Every table, file, database, and schema is registered in the catalog with metadata
-- **Business glossary** — Define standard business terms and map them to technical data assets
-- **Data stewardship** — Assign owners and stewards to data assets
+- **Varredura automatizada** — O Purview escaneia fontes de dados (Azure SQL, Azure Data Lake, Azure Blob Storage, AWS S3, SQL Server on-premises e muitas outras) para descobrir ativos de dados
+- **Inventário de ativos de dados** — Cada tabela, arquivo, banco de dados e schema é registrado no catálogo com metadados
+- **Glossário de negócios** — Defina termos de negócios padrão e mapeie-os para ativos de dados técnicos
+- **Administração de dados** — Atribua proprietários e administradores aos ativos de dados
 
-**Supported data sources include:**
+**Fontes de dados suportadas incluem:**
 
-| Category | Sources |
+| Categoria | Fontes |
 |---|---|
 | Azure | SQL Database, Synapse Analytics, Data Lake Storage, Blob Storage, Cosmos DB, Databricks |
 | AWS | S3, RDS, Glue, Redshift |
 | On-premises | SQL Server, Oracle, SAP, Teradata, Hive |
 | SaaS | Power BI, Salesforce, Dataverse |
 
-### Data Classification — Automatic and Manual Classification
+### Classificação de Dados — Classificação Automática e Manual
 
-Purview automatically classifies data as it scans, identifying sensitive information types:
+O Purview classifica dados automaticamente durante a varredura, identificando tipos de informações sensíveis:
 
-- **System classifiers** — Over 200 built-in classifiers for common sensitive data patterns (credit card numbers, Social Security numbers, passport numbers, medical record numbers, etc.)
-- **Custom classifiers** — Create classifiers based on regular expressions, dictionary lists, or specific column patterns
-- **Classification rules** — Define which classifiers run against which data sources
+- **Classificadores do sistema** — Mais de 200 classificadores integrados para padrões comuns de dados sensíveis (números de cartão de crédito, números de seguro social, números de passaporte, números de prontuários médicos, etc.)
+- **Classificadores customizados** — Crie classificadores baseados em expressões regulares, listas de dicionário ou padrões de colunas específicos
+- **Regras de classificação** — Defina quais classificadores executam contra quais fontes de dados
 
 ![Purview Scan Flow](/images/purview-scan-flow.svg)
 
-### Sensitivity Labels — Protecting Sensitive Data
+### Rótulos de Sensibilidade — Protegendo Dados Sensíveis
 
-Sensitivity labels from Microsoft Purview Information Protection extend from Microsoft 365 to Azure data assets:
+Os rótulos de sensibilidade do Microsoft Purview Information Protection se estendem do Microsoft 365 para ativos de dados Azure:
 
-- **Label data at the source** — Apply sensitivity labels to SQL columns, files in Data Lake Storage, and other data assets
-- **Consistent labeling** — The same labels used in Microsoft 365 (Confidential, Highly Confidential, etc.) apply to Azure data
-- **Downstream protection** — Labels travel with data as it moves through pipelines, ensuring protection persists
+- **Rotule dados na fonte** — Aplique rótulos de sensibilidade a colunas SQL, arquivos no Data Lake Storage e outros ativos de dados
+- **Rotulagem consistente** — Os mesmos rótulos usados no Microsoft 365 (Confidencial, Altamente Confidencial, etc.) se aplicam a dados Azure
+- **Proteção downstream** — Rótulos acompanham os dados conforme se movem através de pipelines, garantindo que a proteção persista
 
-| Label | Description | Typical Controls |
+| Rótulo | Descrição | Controles Típicos |
 |---|---|---|
-| Public | Non-sensitive data | No restrictions |
-| General | Normal business data | Internal sharing allowed |
-| Confidential | Sensitive business data | Encryption, restricted sharing |
-| Highly Confidential | Regulated or critical data | Encryption, DLP, access logging |
+| Public | Dados não sensíveis | Sem restrições |
+| General | Dados normais de negócios | Compartilhamento interno permitido |
+| Confidential | Dados sensíveis de negócios | Criptografia, compartilhamento restrito |
+| Highly Confidential | Dados regulados ou críticos | Criptografia, DLP, logging de acesso |
 
-### Data Lineage — Tracking Data Flow
+### Linhagem de Dados — Rastreando o Fluxo de Dados
 
-Data lineage shows how data flows from source to destination, including all transformations along the way.
+A linhagem de dados mostra como os dados fluem da origem ao destino, incluindo todas as transformações ao longo do caminho.
 
-**Why lineage matters for governance:**
+**Por que a linhagem importa para governança:**
 
-- **Impact analysis** — Understand which downstream reports and applications are affected when a source changes
-- **Compliance auditing** — Prove to regulators that sensitive data is handled correctly throughout its lifecycle
-- **Root cause analysis** — Trace data quality issues back to their source
+- **Análise de impacto** — Entenda quais relatórios e aplicações downstream são afetados quando uma fonte muda
+- **Auditoria de conformidade** — Prove aos reguladores que dados sensíveis são tratados corretamente durante todo seu ciclo de vida
+- **Análise de causa raiz** — Rastreie problemas de qualidade de dados até sua origem
 
-**Lineage sources:**
+**Fontes de linhagem:**
 
-Purview captures lineage automatically from:
+O Purview captura linhagem automaticamente de:
 
-- Azure Data Factory and Synapse pipelines
-- Azure Databricks notebooks
+- Pipelines do Azure Data Factory e Synapse
+- Notebooks do Azure Databricks
 - SQL Server Integration Services (SSIS)
-- Power BI dataflows and reports
+- Dataflows e relatórios do Power BI
 
-### Integration with Azure Governance Tools
+### Integração com Ferramentas de Governança Azure
 
-Purview integrates with other Azure governance services to create a comprehensive governance posture:
+O Purview se integra com outros serviços de governança Azure para criar uma postura de governança abrangente:
 
-| Integration | How It Works |
+| Integração | Como Funciona |
 |---|---|
-| **Azure Policy** | Enforce that storage accounts have Purview scanning enabled; require diagnostic settings |
-| **Microsoft Defender for Cloud** | Surface Purview classification findings in Defender dashboards; prioritize protection for highly classified data |
-| **Microsoft Entra ID** | Use Entra ID for Purview access control; integrate with Conditional Access |
-| **Azure Monitor** | Route Purview diagnostic logs to Log Analytics; create alerts on scan failures |
-| **Azure Key Vault** | Store credentials for Purview scans securely; use managed identities where possible |
+| **Azure Policy** | Garantir que contas de armazenamento tenham varredura do Purview habilitada; exigir diagnostic settings |
+| **Microsoft Defender for Cloud** | Expor descobertas de classificação do Purview em dashboards do Defender; priorizar proteção para dados altamente classificados |
+| **Microsoft Entra ID** | Usar Entra ID para controle de acesso ao Purview; integrar com Conditional Access |
+| **Azure Monitor** | Rotear logs de diagnóstico do Purview para o Log Analytics; criar alertas para falhas de varredura |
+| **Azure Key Vault** | Armazenar credenciais para varreduras do Purview de forma segura; usar managed identities quando possível |
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Start with data discovery before applying controls** — You cannot govern what you do not know about. Run Purview scans across all data sources to build a comprehensive inventory before defining policies.
+1. **Comece com descoberta de dados antes de aplicar controles** — Você não pode governar o que não conhece. Execute varreduras do Purview em todas as fontes de dados para construir um inventário abrangente antes de definir políticas.
 
-2. **Define a business glossary early** — A common vocabulary for data terms (e.g., "Customer," "Revenue," "PII") ensures consistency across teams and makes the data catalog useful.
+2. **Defina um glossário de negócios cedo** — Um vocabulário comum para termos de dados (ex.: "Cliente", "Receita", "PII") garante consistência entre equipes e torna o catálogo de dados útil.
 
-3. **Use managed identities for scanning** — Avoid storing credentials. Configure Purview to use managed identities to access Azure data sources.
+3. **Use managed identities para varredura** — Evite armazenar credenciais. Configure o Purview para usar managed identities ao acessar fontes de dados Azure.
 
-4. **Align sensitivity labels with your organization's classification scheme** — Work with your security and compliance teams to define labels that map to existing data classification policies.
+4. **Alinhe rótulos de sensibilidade com o esquema de classificação da sua organização** — Trabalhe com suas equipes de segurança e conformidade para definir rótulos que mapeiem para políticas de classificação de dados existentes.
 
-5. **Automate scanning schedules** — Configure recurring scans (weekly or daily) to keep the catalog current as data sources evolve.
+5. **Automatize agendamentos de varredura** — Configure varreduras recorrentes (semanais ou diárias) para manter o catálogo atualizado conforme as fontes de dados evoluem.
 
-6. **Assign data stewards** — Every critical data asset should have an owner and a steward responsible for data quality and governance.
+6. **Atribua administradores de dados** — Cada ativo de dados crítico deve ter um proprietário e um administrador responsável pela qualidade e governança dos dados.
 
-7. **Enable lineage capture in pipelines** — Ensure that Azure Data Factory and Synapse pipelines have Purview lineage integration enabled.
+7. **Habilite captura de linhagem em pipelines** — Garanta que os pipelines do Azure Data Factory e Synapse tenham a integração de linhagem com o Purview habilitada.
 
-8. **Use Purview alongside Azure Policy** — Purview governs data content and classification; Azure Policy governs infrastructure configuration. Together, they provide comprehensive governance.
+8. **Use Purview junto com Azure Policy** — O Purview governa conteúdo e classificação de dados; Azure Policy governa configuração de infraestrutura. Juntos, eles fornecem governança abrangente.
 
 ---
 
-## Common Pitfalls
+## Armadilhas Comuns
 
-| Pitfall | Impact | Mitigation |
+| Armadilha | Impacto | Mitigação |
 |---|---|---|
-| Scanning everything at once | High scan costs and long scan times | Prioritize critical data sources; expand incrementally |
-| Ignoring the business glossary | The catalog becomes a dump of technical metadata | Invest time in defining business terms and mapping them |
-| Not reviewing auto-classifications | False positives in classification results | Regularly review and curate classification results |
-| Treating Purview as an IT-only tool | Low adoption by data consumers | Involve business users as data stewards and glossary contributors |
-| Forgetting about non-Azure data sources | Incomplete data governance | Scan on-premises and multi-cloud data sources using Purview's connectors |
+| Escanear tudo de uma vez | Altos custos de varredura e tempos de varredura longos | Priorize fontes de dados críticas; expanda incrementalmente |
+| Ignorar o glossário de negócios | O catálogo se torna um depósito de metadados técnicos | Invista tempo na definição de termos de negócios e seu mapeamento |
+| Não revisar auto-classificações | Falsos positivos nos resultados de classificação | Revise e cuide regularmente dos resultados de classificação |
+| Tratar o Purview como ferramenta apenas de TI | Baixa adoção por consumidores de dados | Envolva usuários de negócios como administradores de dados e contribuidores do glossário |
+| Esquecer das fontes de dados não-Azure | Governança de dados incompleta | Escaneie fontes de dados on-premises e multi-cloud usando os conectores do Purview |
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Deploy a Purview Account with Bicep
+### Implantar uma Conta Purview com Bicep
 
 ```bicep
 resource purviewAccount 'Microsoft.Purview/accounts@2021-12-01' = {
@@ -157,7 +157,7 @@ output purviewAccountName string = purviewAccount.name
 output purviewIdentityPrincipalId string = purviewAccount.identity.principalId
 ```
 
-### Azure Policy — Require Purview Diagnostic Settings
+### Azure Policy — Exigir Diagnostic Settings para Purview
 
 ```json
 {
@@ -181,7 +181,7 @@ output purviewIdentityPrincipalId string = purviewAccount.identity.principalId
 }
 ```
 
-### Resource Graph — Find Purview Accounts and Their Status
+### Resource Graph — Encontrar Contas Purview e Seu Status
 
 ```kusto
 resources
@@ -194,7 +194,7 @@ resources
 
 ---
 
-## References
+## Referências
 
 - [Microsoft Purview Documentation](https://learn.microsoft.com/purview/)
 - [Microsoft Purview Data Catalog](https://learn.microsoft.com/purview/catalog)
@@ -207,6 +207,6 @@ resources
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Sovereign Landing Zones](ch25-sovereign-landing-zones.md) | [AI Governance](ch27-ai-governance.md) |
+| [Sovereign Landing Zones](ch25-sovereign-landing-zones.md) | [Governança de IA](ch27-ai-governance.md) |

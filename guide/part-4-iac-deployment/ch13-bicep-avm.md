@@ -1,40 +1,40 @@
-# Chapter 13 — Bicep & Azure Verified Modules
+# Capítulo 13 — Bicep & Azure Verified Modules
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-Bicep is Azure's domain-specific language (DSL) for deploying Azure resources declaratively. It compiles down to ARM JSON templates but offers a dramatically cleaner authoring experience — concise syntax, type safety, first-class module support, and built-in linting.
+Bicep é a linguagem de domínio específico (DSL) do Azure para implantar recursos de forma declarativa. Ele compila para templates ARM JSON, mas oferece uma experiência de autoria dramaticamente mais limpa — sintaxe concisa, segurança de tipos, suporte nativo a módulos e linting integrado.
 
-Bicep reached **General Availability (GA) in June 2021** and is now the **recommended Infrastructure as Code (IaC) language** for Azure deployments. ARM JSON templates remain supported but are considered legacy for new projects.
+O Bicep alcançou **Disponibilidade Geral (GA) em junho de 2021** e agora é a **linguagem de Infrastructure as Code (IaC) recomendada** para implantações no Azure. Templates ARM JSON continuam sendo suportados, mas são considerados legados para novos projetos.
 
-Why Bicep replaced ARM JSON as the primary recommendation:
+Por que o Bicep substituiu o ARM JSON como recomendação principal:
 
-| Concern | ARM JSON | Bicep |
+| Aspecto | ARM JSON | Bicep |
 |---------|----------|-------|
-| **Readability** | Verbose, deeply nested JSON | Clean, concise DSL |
-| **Modularity** | Linked/nested templates with complex URI management | Native `module` keyword with local, registry, and Template Spec references |
-| **Tooling** | Limited IntelliSense | Rich VS Code extension with IntelliSense, validation, and refactoring |
-| **Type safety** | Runtime errors common | Compile-time type checking |
-| **Learning curve** | Steep for non-developers | Approachable for infrastructure engineers |
-| **Linting** | External tools required | Built-in linter with configurable rules |
-| **Decompilation** | N/A | `az bicep decompile` converts existing ARM JSON to Bicep |
+| **Legibilidade** | JSON verboso e profundamente aninhado | DSL limpa e concisa |
+| **Modularidade** | Templates vinculados/aninhados com gerenciamento complexo de URIs | Palavra-chave `module` nativa com referências locais, de registro e de Template Specs |
+| **Ferramentas** | IntelliSense limitado | Extensão rica para VS Code com IntelliSense, validação e refatoração |
+| **Segurança de tipos** | Erros em tempo de execução comuns | Verificação de tipos em tempo de compilação |
+| **Curva de aprendizado** | Íngreme para não-desenvolvedores | Acessível para engenheiros de infraestrutura |
+| **Linting** | Ferramentas externas necessárias | Linter integrado com regras configuráveis |
+| **Descompilação** | N/A | `az bicep decompile` converte ARM JSON existente para Bicep |
 
-> **Key point:** Every Bicep file compiles to an equivalent ARM JSON template. There is no runtime difference — Azure Resource Manager only sees ARM JSON. Bicep is purely an authoring improvement.
+> **Ponto-chave:** Todo arquivo Bicep compila para um template ARM JSON equivalente. Não há diferença em tempo de execução — o Azure Resource Manager só enxerga ARM JSON. Bicep é puramente uma melhoria de autoria.
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Bicep Syntax Fundamentals
+### Fundamentos da Sintaxe Bicep
 
-A Bicep file (`.bicep`) declares the desired state of Azure resources. The Bicep CLI or Azure CLI compiles it to ARM JSON before deployment.
+Um arquivo Bicep (`.bicep`) declara o estado desejado dos recursos do Azure. O Bicep CLI ou Azure CLI o compila para ARM JSON antes da implantação.
 
-#### Parameters
+#### Parâmetros
 
-Parameters allow callers to provide values at deployment time:
+Parâmetros permitem que os chamadores forneçam valores no momento da implantação:
 
 ```bicep
 @description('The Azure region for all resources.')
@@ -51,9 +51,9 @@ param location string = 'eastus'
 param environmentName string
 ```
 
-#### Variables
+#### Variáveis
 
-Variables hold computed or reusable values:
+Variáveis armazenam valores computados ou reutilizáveis:
 
 ```bicep
 var resourcePrefix = 'gov-${environmentName}'
@@ -64,9 +64,9 @@ var commonTags = {
 }
 ```
 
-#### Resources
+#### Recursos
 
-Resources declare the Azure infrastructure to deploy:
+Recursos declaram a infraestrutura Azure a ser implantada:
 
 ```bicep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
@@ -87,16 +87,16 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
 
 #### Outputs
 
-Outputs return values from the deployment for use by other templates or scripts:
+Outputs retornam valores da implantação para uso por outros templates ou scripts:
 
 ```bicep
 output storageAccountId string = storageAccount.id
 output storageAccountName string = storageAccount.name
 ```
 
-#### Modules
+#### Módulos
 
-Modules enable composition by referencing other Bicep files, Bicep registries, or Template Specs:
+Módulos permitem composição referenciando outros arquivos Bicep, registros Bicep ou Template Specs:
 
 ```bicep
 // Local module
@@ -127,20 +127,20 @@ module policyModule 'ts:00000000-0000-0000-0000-000000000000/governance-rg/polic
 
 ### Azure Verified Modules (AVM)
 
-**Azure Verified Modules (AVM)** are Microsoft's official, community-maintained library of pre-built Bicep and Terraform modules. They implement Azure best practices out of the box — including proper naming, diagnostics, RBAC integration, and Private Endpoint support.
+**Azure Verified Modules (AVM)** são a biblioteca oficial da Microsoft, mantida pela comunidade, de módulos pré-construídos para Bicep e Terraform. Eles implementam as melhores práticas do Azure prontas para uso — incluindo nomenclatura adequada, diagnósticos, integração RBAC e suporte a Private Endpoint.
 
-AVM modules are published to the **Bicep Public Module Registry** (`mcr.microsoft.com/bicep`) and follow a strict quality bar:
+Os módulos AVM são publicados no **Bicep Public Module Registry** (`mcr.microsoft.com/bicep`) e seguem um rigoroso padrão de qualidade:
 
-- **Consistent interface:** All modules follow a common specification for parameters, outputs, and naming
-- **Well-tested:** Every module has automated tests covering deployment and idempotency
-- **Versioned:** Semantic versioning ensures safe upgrades
-- **Two tiers:**
-  - **Resource modules** — wrap a single Azure resource type (e.g., `avm/res/storage/storage-account`)
-  - **Pattern modules** — compose multiple resources into common architectures (e.g., a hub-spoke network)
+- **Interface consistente:** todos os módulos seguem uma especificação comum para parâmetros, outputs e nomenclatura
+- **Bem testados:** todo módulo possui testes automatizados cobrindo implantação e idempotência
+- **Versionados:** versionamento semântico garante atualizações seguras
+- **Duas categorias:**
+  - **Resource modules** — encapsulam um único tipo de recurso Azure (ex.: `avm/res/storage/storage-account`)
+  - **Pattern modules** — compõem múltiplos recursos em arquiteturas comuns (ex.: uma rede hub-spoke)
 
-To discover available AVM modules, visit the [AVM Module Index](https://aka.ms/avm/moduleindex).
+Para descobrir os módulos AVM disponíveis, visite o [AVM Module Index](https://aka.ms/avm/moduleindex).
 
-#### Using an AVM Module
+#### Usando um Módulo AVM
 
 ```bicep
 // Deploy a Key Vault using the AVM resource module
@@ -163,20 +163,20 @@ module keyVault 'br/public:avm/res/key-vault/vault:0.11.0' = {
 
 ### Bicep Linter
 
-Bicep includes a **built-in linter** that runs automatically during compilation, catching common mistakes and enforcing best practices. Rules include:
+O Bicep inclui um **linter integrado** que executa automaticamente durante a compilação, detectando erros comuns e aplicando melhores práticas. As regras incluem:
 
-| Rule | What it catches |
-|------|----------------|
-| `no-unused-params` | Parameters declared but never referenced |
-| `no-unused-vars` | Variables declared but never referenced |
-| `no-hardcoded-env` | Hardcoded Azure environment URLs (e.g., `management.azure.com`) |
-| `prefer-interpolation` | Using `concat()` instead of string interpolation |
-| `secure-parameter-default` | Default values on `@secure()` parameters |
-| `use-resource-id-functions` | Manually constructing resource IDs instead of using `.id` |
-| `explicit-values-for-loc-params` | Not passing `location` explicitly to modules |
-| `max-outputs` / `max-params` | Exceeding recommended limits |
+| Regra | O que detecta |
+|-------|---------------|
+| `no-unused-params` | Parâmetros declarados mas nunca referenciados |
+| `no-unused-vars` | Variáveis declaradas mas nunca referenciadas |
+| `no-hardcoded-env` | URLs de ambiente Azure hardcoded (ex.: `management.azure.com`) |
+| `prefer-interpolation` | Uso de `concat()` ao invés de interpolação de string |
+| `secure-parameter-default` | Valores padrão em parâmetros `@secure()` |
+| `use-resource-id-functions` | Construção manual de IDs de recurso ao invés de usar `.id` |
+| `explicit-values-for-loc-params` | Não passar `location` explicitamente para módulos |
+| `max-outputs` / `max-params` | Exceder limites recomendados |
 
-Configure the linter in `bicepconfig.json`:
+Configure o linter em `bicepconfig.json`:
 
 ```json
 {
@@ -198,9 +198,9 @@ Configure the linter in `bicepconfig.json`:
 }
 ```
 
-### What-If Deployments
+### Implantações What-If
 
-**What-If** lets you preview the changes a deployment would make *before* executing it — similar to `terraform plan`. This is critical for governance because it allows review and approval before any modifications occur.
+**What-If** permite visualizar as alterações que uma implantação faria *antes* de executá-la — semelhante ao `terraform plan`. Isso é crítico para governança pois permite revisão e aprovação antes de qualquer modificação ocorrer.
 
 ```bash
 # Preview changes at subscription scope
@@ -210,66 +210,66 @@ az deployment sub what-if \
   --parameters environmentName='production'
 ```
 
-Output shows changes categorized as:
-- **Create** — new resources to be created
-- **Delete** — existing resources to be removed
-- **Modify** — properties that will change (with before/after values)
-- **NoChange** — resources that remain unchanged
-- **Ignore** — resources outside the template's scope
+A saída mostra alterações categorizadas como:
+- **Create** — novos recursos a serem criados
+- **Delete** — recursos existentes a serem removidos
+- **Modify** — propriedades que serão alteradas (com valores antes/depois)
+- **NoChange** — recursos que permanecem inalterados
+- **Ignore** — recursos fora do escopo do template
 
-### Terraform as an Alternative
+### Terraform como Alternativa
 
-While Bicep is Microsoft's recommended IaC language for Azure, **Terraform** (by HashiCorp) remains a popular alternative, especially for organizations that manage multi-cloud environments.
+Embora o Bicep seja a linguagem IaC recomendada pela Microsoft para o Azure, o **Terraform** (da HashiCorp) permanece como uma alternativa popular, especialmente para organizações que gerenciam ambientes multi-cloud.
 
-| Consideration | Bicep | Terraform |
-|---------------|-------|-----------|
-| **Azure support** | Day-zero support for new Azure features | Slight lag behind Azure API updates |
-| **Multi-cloud** | Azure only | AWS, GCP, Azure, and 3,000+ providers |
-| **State management** | Managed by Azure (no state file) | Requires state file management |
-| **Learning curve** | Lower for Azure-focused teams | HCL syntax to learn, but broad community |
-| **Module ecosystem** | AVM + Bicep Registry | Terraform Registry |
+| Consideração | Bicep | Terraform |
+|--------------|-------|-----------|
+| **Suporte ao Azure** | Suporte day-zero para novos recursos Azure | Pequeno atraso em relação às atualizações da API do Azure |
+| **Multi-cloud** | Somente Azure | AWS, GCP, Azure e mais de 3.000 provedores |
+| **Gerenciamento de estado** | Gerenciado pelo Azure (sem arquivo de estado) | Requer gerenciamento de arquivo de estado |
+| **Curva de aprendizado** | Menor para equipes focadas em Azure | Sintaxe HCL para aprender, mas ampla comunidade |
+| **Ecossistema de módulos** | AVM + Bicep Registry | Terraform Registry |
 
-For Azure-only governance implementations, Bicep is the natural choice. For multi-cloud organizations, Terraform provides a unified workflow.
+Para implementações de governança exclusivamente Azure, o Bicep é a escolha natural. Para organizações multi-cloud, o Terraform fornece um fluxo de trabalho unificado.
 
-See: [Terraform on Azure documentation](https://learn.microsoft.com/en-us/azure/developer/terraform/)
-
----
-
-## Best Practices
-
-1. **Use modules for reusability** — break templates into composable modules; prefer AVM modules for common resource types
-2. **Use a Bicep registry** — publish shared modules to an Azure Container Registry for cross-team consumption
-3. **Enable the linter** — treat linter warnings as errors in CI pipelines
-4. **Always run What-If before production deployments** — integrate What-If into CI/CD approval gates
-5. **Use parameter files** — separate configuration from code; use `.bicepparam` files (Bicep-native parameter format)
-6. **Tag all resources** — enforce tags via parameters and module interfaces
-7. **Pin module versions** — always reference specific versions of registry modules, not `latest`
-8. **Secure secrets** — use `@secure()` decorator for parameters; reference Key Vault secrets with `getSecret()`
-9. **Use `targetScope`** — explicitly declare the deployment scope (`resourceGroup`, `subscription`, `managementGroup`, `tenant`)
-10. **Version your templates** — store Bicep files in source control; use branching and pull requests for changes
+Veja: [Documentação do Terraform no Azure](https://learn.microsoft.com/en-us/azure/developer/terraform/)
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Hardcoding resource names | Naming collisions, inability to deploy to multiple environments | Use parameters and naming conventions |
-| Ignoring linter warnings | Subtle bugs and non-idiomatic code reach production | Configure linter rules as errors |
-| Not using What-If | Unexpected resource deletions or modifications | Mandate What-If in deployment pipelines |
-| Storing secrets in parameter files | Credentials committed to source control | Use Key Vault references and `@secure()` |
-| Using `dependsOn` excessively | Slower deployments, unnecessary serialization | Let Bicep infer dependencies via resource references |
-| Deploying ARM JSON alongside Bicep | Confusion over which is the source of truth | Standardize on Bicep; decompile legacy ARM JSON |
-| Not pinning AVM module versions | Breaking changes from module updates | Always specify a version number |
-| Ignoring `targetScope` | Deployment fails at wrong scope | Always declare `targetScope` explicitly |
+1. **Use módulos para reutilização** — divida templates em módulos composíveis; prefira módulos AVM para tipos de recursos comuns
+2. **Use um registro Bicep** — publique módulos compartilhados em um Azure Container Registry para consumo entre equipes
+3. **Habilite o linter** — trate avisos do linter como erros em pipelines de CI
+4. **Sempre execute What-If antes de implantações em produção** — integre o What-If nos gates de aprovação do CI/CD
+5. **Use arquivos de parâmetros** — separe configuração do código; use arquivos `.bicepparam` (formato nativo de parâmetros do Bicep)
+6. **Aplique tags em todos os recursos** — imponha tags via parâmetros e interfaces de módulos
+7. **Fixe versões de módulos** — sempre referencie versões específicas de módulos do registro, não `latest`
+8. **Proteja segredos** — use o decorator `@secure()` para parâmetros; referencie segredos do Key Vault com `getSecret()`
+9. **Use `targetScope`** — declare explicitamente o escopo da implantação (`resourceGroup`, `subscription`, `managementGroup`, `tenant`)
+10. **Versione seus templates** — armazene arquivos Bicep em controle de versão; use branching e pull requests para alterações
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Complete Bicep Template: Resource Group with RBAC and Tags
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Hardcoding de nomes de recursos | Colisões de nomes, incapacidade de implantar em múltiplos ambientes | Use parâmetros e convenções de nomenclatura |
+| Ignorar avisos do linter | Bugs sutis e código não idiomático chegam à produção | Configure regras do linter como erros |
+| Não usar What-If | Exclusões ou modificações inesperadas de recursos | Torne o What-If obrigatório nos pipelines de implantação |
+| Armazenar segredos em arquivos de parâmetros | Credenciais commitadas no controle de versão | Use referências ao Key Vault e `@secure()` |
+| Uso excessivo de `dependsOn` | Implantações mais lentas, serialização desnecessária | Deixe o Bicep inferir dependências via referências de recursos |
+| Implantar ARM JSON junto com Bicep | Confusão sobre qual é a fonte da verdade | Padronize em Bicep; descompile ARM JSON legado |
+| Não fixar versões de módulos AVM | Quebras por atualizações de módulos | Sempre especifique um número de versão |
+| Ignorar `targetScope` | Implantação falha no escopo errado | Sempre declare `targetScope` explicitamente |
 
-This template deploys at the **subscription scope**, creating a resource group with mandatory tags and assigning the Reader role to a security group.
+---
+
+## Exemplos de Código
+
+### Template Bicep Completo: Resource Group com RBAC e Tags
+
+Este template implanta no **escopo de subscription**, criando um resource group com tags obrigatórias e atribuindo a role Reader a um grupo de segurança.
 
 ```bicep
 // main.bicep
@@ -350,7 +350,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-Deploy with:
+Implante com:
 
 ```bash
 az deployment sub create \
@@ -361,9 +361,9 @@ az deployment sub create \
                costCenter='IT-GOV-001'
 ```
 
-### Using an Azure Verified Module
+### Usando um Azure Verified Module
 
-This example deploys an Azure Key Vault using the AVM resource module, with RBAC authorization, network restrictions, and diagnostics enabled:
+Este exemplo implanta um Azure Key Vault usando o módulo de recurso AVM, com autorização RBAC, restrições de rede e diagnósticos habilitados:
 
 ```bicep
 // keyvault-main.bicep
@@ -417,21 +417,21 @@ output keyVaultUri string = keyVault.outputs.uri
 
 ---
 
-## References
+## Referências
 
-- [Bicep documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview)
-- [Bicep language reference](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/file)
+- [Documentação do Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview)
+- [Referência da linguagem Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/file)
 - [Azure Verified Modules (AVM)](https://aka.ms/avm)
 - [AVM Module Index](https://aka.ms/avm/moduleindex)
-- [Bicep linter rules](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/linter)
-- [What-If deployment operation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if)
-- [Bicep modules](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
-- [Bicep parameter files (.bicepparam)](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameter-files)
-- [Terraform on Azure](https://learn.microsoft.com/en-us/azure/developer/terraform/)
-- [Migrate from ARM JSON to Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/migrate)
+- [Regras do Bicep linter](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/linter)
+- [Operação de implantação What-If](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if)
+- [Módulos Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
+- [Arquivos de parâmetros Bicep (.bicepparam)](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameter-files)
+- [Terraform no Azure](https://learn.microsoft.com/en-us/azure/developer/terraform/)
+- [Migrar de ARM JSON para Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/migrate)
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
-| [Governance Suggested Policies](../part-3-policy-compliance/ch09-azure-policy.md) | [Deployment Stacks](ch14-deployment-stacks.md) |
+| Anterior | Próximo |
+|:---------|:--------|
+| [Políticas Sugeridas de Governança](../part-3-policy-compliance/ch09-azure-policy.md) | [Deployment Stacks](ch14-deployment-stacks.md) |

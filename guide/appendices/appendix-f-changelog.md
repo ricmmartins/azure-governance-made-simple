@@ -1,95 +1,95 @@
-# Appendix F — Changelog
+# Apêndice F — Changelog
 
 > Last verified: 2026-04-06
 
 ---
 
-All notable changes to *Azure Governance Made Simple* are documented here.
+Todas as alterações notáveis em *Azure Governance Made Simple* estão documentadas aqui.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/) for book editions.
+O formato é baseado em [Keep a Changelog](https://keepachangelog.com/), e este projeto segue [Semantic Versioning](https://semver.org/) para edições do livro.
 
 ---
 
 ## [2.0.0] — 2026-04-06
 
-### Full Book Restructure and Content Revamp
+### Reestruturação Completa do Livro e Revisão de Conteúdo
 
-Reorganized the entire book into 8 parts and 30 chapters. Updated all content for April 2026 accuracy.
+Reorganizado todo o livro em 8 partes e 30 capítulos. Todo o conteúdo atualizado para precisão de abril de 2026.
 
-#### Added
+#### Adicionado
 
-- **Part 7 — At Scale**
-  - Chapter 23: Azure Landing Zones (major rewrite from subscription.md landing zone subsection)
-  - Chapter 24: Azure Arc — hybrid and multi-cloud governance
-  - Chapter 25: Sovereign Landing Zones — data residency and regulatory compliance
-  - Chapter 26: Data Governance with Microsoft Purview — data catalog, classification, lineage
-  - Chapter 27: AI Governance — Azure OpenAI controls, content safety, shadow AI detection
+- **Parte 7 — Em Escala**
+  - Capítulo 23: Azure Landing Zones (grande reescrita da subseção de landing zone em subscription.md)
+  - Capítulo 24: Azure Arc — governança híbrida e multi-cloud
+  - Capítulo 25: Sovereign Landing Zones — residência de dados e conformidade regulatória
+  - Capítulo 26: Governança de Dados com Microsoft Purview — catálogo de dados, classificação, linhagem
+  - Capítulo 27: Governança de IA — controles de Azure OpenAI, segurança de conteúdo, detecção de shadow AI
 
-- **Part 8 — Synthesis**
-  - Chapter 28: Governance Roadmap — phased implementation plan (replaces conclusion.md)
-  - Chapter 29: Case Studies — three fictional scenarios at Crawl/Walk/Run maturity
-  - Chapter 30: FAQ — 20 frequently asked questions about Azure governance
+- **Parte 8 — Síntese**
+  - Capítulo 28: Roadmap de Governança — plano de implementação por fases (substitui conclusion.md)
+  - Capítulo 29: Estudos de Caso — três cenários fictícios nas maturidades Crawl/Walk/Run
+  - Capítulo 30: FAQ — 20 perguntas frequentes sobre governança Azure
 
-- **Appendices**
-  - Appendix A: Glossary — 40+ Azure governance terms
-  - Appendix B: Decision Trees — governance tool selection, management group design, policy effect selection
-  - Appendix C: Policy Starter Kit — 30 recommended built-in policies with IDs
-  - Appendix D: Resource Graph Queries — top 20 governance KQL queries
-  - Appendix E: Learning Resources — certifications, Learn paths, community tools
-  - Appendix F: Changelog (this file)
+- **Apêndices**
+  - Apêndice A: Glossário — 40+ termos de governança Azure
+  - Apêndice B: Árvores de Decisão — seleção de ferramenta de governança, design de management groups, seleção de efeito de política
+  - Apêndice C: Kit Inicial de Políticas — 30 políticas built-in recomendadas com IDs
+  - Apêndice D: Queries do Resource Graph — top 20 queries KQL de governança
+  - Apêndice E: Recursos de Aprendizado — certificações, trilhas Learn, ferramentas da comunidade
+  - Apêndice F: Changelog (este arquivo)
 
-#### Changed
+#### Alterado
 
-- All references to the former identity service name updated to "Microsoft Entra ID"
-- All legacy identity abbreviations updated to "Microsoft Entra ID"
-- All legacy documentation domain links updated to `learn.microsoft.com`
-- Azure Blueprints references replaced with Deployment Stacks guidance
-- "Enterprise-Scale" terminology updated to "Azure Landing Zone Accelerator"
-- All content reviewed and updated for April 2026 accuracy
+- Todas as referências ao antigo nome do serviço de identidade atualizadas para "Microsoft Entra ID"
+- Todas as abreviações legadas de identidade atualizadas para "Microsoft Entra ID"
+- Todos os links de domínio de documentação legados atualizados para `learn.microsoft.com`
+- Referências a Azure Blueprints substituídas por orientações de Deployment Stacks
+- Terminologia "Enterprise-Scale" atualizada para "Azure Landing Zone Accelerator"
+- Todo o conteúdo revisado e atualizado para precisão de abril de 2026
 
-#### Deprecated
+#### Descontinuado
 
-- Azure Blueprints content removed (service deprecated by Microsoft)
-- References to classic identity terminology replaced
+- Conteúdo de Azure Blueprints removido (serviço descontinuado pela Microsoft)
+- Referências à terminologia clássica de identidade substituídas
 
-#### Removed
+#### Removido
 
-- Direct dependency on conclusion.md (replaced by Chapter 28)
+- Dependência direta de conclusion.md (substituído pelo Capítulo 28)
 
 ---
 
-## [1.0.0] — Original Release
+## [1.0.0] — Release Original
 
-### Initial Publication
+### Publicação Inicial
 
-- Original Azure governance guide covering:
-  - Governance overview and architecture
-  - Microsoft Entra ID (identity and access management)
-  - RBAC and permissions
-  - Subscriptions and landing zones introduction
-  - Resource groups, naming, and tagging
-  - Azure Policy and best practices
+- Guia original de governança Azure cobrindo:
+  - Visão geral e arquitetura de governança
+  - Microsoft Entra ID (gerenciamento de identidade e acesso)
+  - RBAC e permissões
+  - Subscriptions e introdução a landing zones
+  - Resource groups, nomenclatura e tags
+  - Azure Policy e melhores práticas
   - Resource locks
-  - ARM templates
-  - Azure Blueprints (now deprecated)
+  - Templates ARM
+  - Azure Blueprints (agora descontinuado)
   - Resource Graph
-  - Cost Management
-  - Conclusion with tool recommendations
+  - Gestão de Custos
+  - Conclusão com recomendações de ferramentas
 
 ---
 
-## How to Contribute
+## Como Contribuir
 
-If you find inaccuracies, outdated information, or have suggestions for improvement:
+Se você encontrar imprecisões, informações desatualizadas ou tiver sugestões de melhoria:
 
-1. Open an issue on the [GitHub repository](https://github.com/ricmmartins/azure-governance-made-simple)
-2. Submit a pull request with your proposed changes
-3. Reference the specific chapter and section in your contribution
+1. Abra uma issue no [repositório GitHub](https://github.com/ricmmartins/azure-governance-made-simple)
+2. Envie um pull request com suas alterações propostas
+3. Referencie o capítulo e seção específicos na sua contribuição
 
-All contributions are welcome and appreciated.
+Todas as contribuições são bem-vindas e apreciadas.
 
 ---
 
-| Previous |
+| Anterior |
 |:---|
-| [Appendix E — Learning Resources](appendix-e-learning-resources.md) |
+| [Apêndice E — Recursos de Aprendizado](appendix-e-learning-resources.md) |

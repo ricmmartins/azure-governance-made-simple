@@ -1,301 +1,302 @@
-# Chapter 29 — Case Studies
+# Capítulo 29 — Estudos de Caso
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-This chapter presents three fictional but realistic case studies illustrating Azure governance implementations at different organizational scales. Each case study follows the **Crawl-Walk-Run** maturity model and demonstrates how governance decisions evolve as organizations grow.
+Este capítulo apresenta três estudos de caso fictícios, porém realistas, ilustrando implementações de governança Azure em diferentes escalas organizacionais. Cada estudo de caso segue o modelo de maturidade **Crawl-Walk-Run** e demonstra como as decisões de governança evoluem à medida que as organizações crescem.
 
 ---
 
-## Case Study 1 — CloudBrew (Startup): Crawl Maturity
+## Estudo de Caso 1 — CloudBrew (Startup): Maturidade Crawl
 
-### The Scenario
+### O Cenário
 
-**CloudBrew** is a 50-person SaaS startup building a cloud-native project management tool. They have been using Azure for 18 months with a single subscription, one development team, and about 40 Azure resources. Their CTO recently realized that their Azure environment has grown organically with no governance structure.
+**CloudBrew** é uma startup SaaS de 50 pessoas que está construindo uma ferramenta de gerenciamento de projetos cloud-native. Eles utilizam Azure há 18 meses com uma única subscription, uma equipe de desenvolvimento e cerca de 40 recursos Azure. O CTO recentemente percebeu que o ambiente Azure cresceu organicamente sem nenhuma estrutura de governança.
 
-**Current state:**
-- 1 Azure subscription
-- 1 Microsoft Entra ID tenant (using default settings)
-- ~40 resources across 3 resource groups (named `rg1`, `dev-stuff`, `production`)
-- 5 developers with Owner access to the subscription
-- No naming convention
-- No tagging
-- No budgets or cost alerts
-- Monthly Azure spend: ~$3,500 (growing 15% month over month)
+**Estado atual:**
+- 1 subscription Azure
+- 1 tenant Microsoft Entra ID (usando configurações padrão)
+- ~40 recursos em 3 resource groups (nomeados `rg1`, `dev-stuff`, `production`)
+- 5 desenvolvedores com acesso Owner na subscription
+- Sem convenção de nomenclatura
+- Sem tags
+- Sem budgets ou alertas de custo
+- Gasto mensal no Azure: ~$3.500 (crescendo 15% mês a mês)
 
-### The Challenges
+### Os Desafios
 
-1. **No naming convention** — Resources have inconsistent names, making it difficult to identify what belongs to whom
-2. **Over-permissioned users** — All developers have Owner access to the entire subscription
-3. **No cost visibility** — The CTO receives a monthly bill but has no breakdown by team or project
-4. **No security baseline** — Microsoft Defender for Cloud has never been reviewed; MFA is optional
-5. **Resource sprawl** — Orphaned resources (unused VMs, old storage accounts) are accumulating
+1. **Sem convenção de nomenclatura** — Recursos têm nomes inconsistentes, tornando difícil identificar o que pertence a quem
+2. **Usuários com permissões excessivas** — Todos os desenvolvedores têm acesso Owner a toda a subscription
+3. **Sem visibilidade de custos** — O CTO recebe uma fatura mensal mas não tem detalhamento por equipe ou projeto
+4. **Sem baseline de segurança** — Microsoft Defender for Cloud nunca foi revisado; MFA é opcional
+5. **Proliferação de recursos** — Recursos órfãos (VMs não utilizadas, storage accounts antigas) estão se acumulando
 
-### Governance Decisions
+### Decisões de Governança
 
-CloudBrew's CTO spent one week implementing foundational governance:
+O CTO da CloudBrew gastou uma semana implementando governança fundamental:
 
-**Identity:**
-- Enforced MFA for all users via Microsoft Entra ID Conditional Access
-- Created two custom RBAC roles:
-  - `CloudBrew Developer` — Contributor on the resource group, Reader on the subscription
-  - `CloudBrew Admin` — Contributor on the subscription
-- Removed Owner access from all developers; only two admins retained elevated access
-- Created one emergency access (break-glass) account
+**Identidade:**
+- MFA aplicado para todos os usuários via Microsoft Entra ID Conditional Access
+- Dois roles RBAC customizados criados:
+  - `CloudBrew Developer` — Contributor no resource group, Reader na subscription
+  - `CloudBrew Admin` — Contributor na subscription
+- Acesso Owner removido de todos os desenvolvedores; apenas dois administradores mantiveram acesso elevado
+- Uma conta de acesso de emergência (break-glass) criada
 
-**Organization:**
-- Defined a naming convention: `{resource-type}-{app}-{environment}-{region}-{instance}`
-- Renamed resource groups to: `rg-cloudbrew-prod-eastus`, `rg-cloudbrew-dev-eastus`, `rg-cloudbrew-shared-eastus`
-- Defined three mandatory tags: `Environment`, `Owner`, `CostCenter`
+**Organização:**
+- Convenção de nomenclatura definida: `{tipo-recurso}-{app}-{ambiente}-{região}-{instância}`
+- Resource groups renomeados para: `rg-cloudbrew-prod-eastus`, `rg-cloudbrew-dev-eastus`, `rg-cloudbrew-shared-eastus`
+- Três tags obrigatórias definidas: `Environment`, `Owner`, `CostCenter`
 
-**Policy:**
-- Assigned three built-in policies (Audit mode):
-  - Require `Environment` tag on resource groups
-  - Allowed regions: East US, East US 2
-  - Audit VMs that do not use managed disks
+**Política:**
+- Três políticas built-in atribuídas (modo Audit):
+  - Exigir tag `Environment` em resource groups
+  - Regiões permitidas: East US, East US 2
+  - Auditar VMs que não usam managed disks
 
-**Cost:**
-- Set a $4,500/month budget on the subscription with alerts at 75% and 100%
-- Reviewed Azure Advisor cost recommendations — found $420/month in savings from right-sizing VMs
+**Custo:**
+- Budget de $4.500/mês definido na subscription com alertas em 75% e 100%
+- Recomendações de custo do Azure Advisor revisadas — encontrados $420/mês em economias com right-sizing de VMs
 
-**Security:**
-- Enabled Microsoft Defender for Cloud (free tier)
-- Reviewed Secure Score (initial: 32/100) and addressed the top 5 recommendations
+**Segurança:**
+- Microsoft Defender for Cloud habilitado (tier gratuito)
+- Secure Score revisado (inicial: 32/100) e as 5 principais recomendações endereçadas
 
-### Outcomes
+### Resultados
 
-| Metric | Before | After (3 months) |
+| Métrica | Antes | Depois (3 meses) |
 |---|---|---|
-| Users with Owner access | 5 | 2 |
-| Resources with required tags | 0% | 78% |
-| Monthly cost | $3,500 | $3,080 (reduced + budget controlled) |
+| Usuários com acesso Owner | 5 | 2 |
+| Recursos com tags obrigatórias | 0% | 78% |
+| Custo mensal | $3.500 | $3.080 (reduzido + budget controlado) |
 | Secure Score | 32 | 61 |
-| Orphaned resources | Unknown | 7 identified and deleted |
+| Recursos órfãos | Desconhecido | 7 identificados e excluídos |
 
-**Time invested:** ~40 hours total (1 week of focused work + ongoing tagging)
+**Tempo investido:** ~40 horas no total (1 semana de trabalho focado + tagueamento contínuo)
 
-**Key takeaway:** Even a minimal governance implementation — MFA, naming convention, basic RBAC, and budgets — dramatically improves a startup's cloud posture. You do not need a complex setup to start governing effectively.
+**Principal aprendizado:** Mesmo uma implementação mínima de governança — MFA, convenção de nomenclatura, RBAC básico e budgets — melhora dramaticamente a postura cloud de uma startup. Você não precisa de uma configuração complexa para começar a governar de forma eficaz.
 
 ---
 
-## Case Study 2 — Meridian Financial (Mid-Market): Walk Maturity
+## Estudo de Caso 2 — Meridian Financial (Mid-Market): Maturidade Walk
 
-### The Scenario
+### O Cenário
 
-**Meridian Financial** is a 500-person financial services company with 10 Azure subscriptions, multiple development teams, and a growing cloud footprint. They adopted Azure two years ago and have been expanding rapidly. The cloud platform team (3 people) is struggling to keep up with governance demands.
+**Meridian Financial** é uma empresa de serviços financeiros com 500 pessoas, 10 subscriptions Azure, múltiplas equipes de desenvolvimento e um footprint cloud crescente. Eles adotaram Azure há dois anos e estão expandindo rapidamente. A equipe de plataforma cloud (3 pessoas) está lutando para acompanhar as demandas de governança.
 
-**Current state:**
-- 10 Azure subscriptions (no management group structure — all under Tenant Root Group)
-- 1 Microsoft Entra ID tenant with Entra ID P1 licensing
-- ~600 Azure resources across multiple subscriptions
-- 8 development teams with varying levels of Azure expertise
-- Basic naming convention (partially followed)
-- Some tagging (inconsistent across teams)
-- Budgets on 3 of 10 subscriptions
-- Monthly Azure spend: ~$85,000
-- Regulatory requirements: SOC 2, PCI-DSS for payment processing
+**Estado atual:**
+- 10 subscriptions Azure (sem estrutura de management groups — todas sob o Tenant Root Group)
+- 1 tenant Microsoft Entra ID com licenciamento Entra ID P1
+- ~600 recursos Azure em múltiplas subscriptions
+- 8 equipes de desenvolvimento com níveis variados de expertise em Azure
+- Convenção de nomenclatura básica (parcialmente seguida)
+- Algumas tags (inconsistentes entre equipes)
+- Budgets em 3 de 10 subscriptions
+- Gasto mensal no Azure: ~$85.000
+- Requisitos regulatórios: SOC 2, PCI-DSS para processamento de pagamentos
 
-### The Challenges
+### Os Desafios
 
-1. **No management group hierarchy** — All subscriptions sit directly under the Tenant Root Group, making it impossible to apply policies consistently
-2. **Inconsistent RBAC** — Some teams use custom roles, others use built-in roles, and several service principals have Contributor access at the subscription level
-3. **Policy gaps** — Policies exist on some subscriptions but not others; no central management
-4. **Compliance pressure** — SOC 2 and PCI-DSS auditors are asking for evidence of consistent security controls
-5. **Cost attribution** — Finance cannot attribute costs to specific teams or projects
-6. **No IaC** — Most resources deployed via the portal or ad-hoc scripts
+1. **Sem hierarquia de management groups** — Todas as subscriptions estão diretamente sob o Tenant Root Group, tornando impossível aplicar políticas de forma consistente
+2. **RBAC inconsistente** — Algumas equipes usam roles customizados, outras usam roles built-in, e vários service principals têm acesso Contributor no nível de subscription
+3. **Lacunas de política** — Políticas existem em algumas subscriptions mas não em outras; sem gerenciamento centralizado
+4. **Pressão de conformidade** — Auditores de SOC 2 e PCI-DSS estão pedindo evidências de controles de segurança consistentes
+5. **Atribuição de custos** — Finanças não consegue atribuir custos a equipes ou projetos específicos
+6. **Sem IaC** — A maioria dos recursos implantados via portal ou scripts ad-hoc
 
-### Governance Decisions
+### Decisões de Governança
 
-The cloud platform team spent three months implementing a formal governance framework:
+A equipe de plataforma cloud gastou três meses implementando um framework formal de governança:
 
-**Identity:**
-- Upgraded to Microsoft Entra ID P2 for PIM and Access Reviews
-- Enabled PIM for all privileged roles (Global Admin, Subscription Owner, Subscription Contributor)
-- Scheduled quarterly Access Reviews for all privileged role assignments
-- Migrated CI/CD pipelines from service principal secrets to workload identity federation
-- Implemented Conditional Access: require compliant devices for Azure portal access
+**Identidade:**
+- Upgrade para Microsoft Entra ID P2 para PIM e Access Reviews
+- PIM habilitado para todos os roles privilegiados (Global Admin, Subscription Owner, Subscription Contributor)
+- Access Reviews trimestrais agendadas para todas as atribuições de roles privilegiados
+- Pipelines CI/CD migrados de secrets de service principal para workload identity federation
+- Conditional Access implementado: exigir dispositivos compatíveis para acesso ao portal Azure
 
-**Organization:**
-- Designed management group hierarchy:
+**Organização:**
+- Hierarquia de management groups projetada:
 
-  ![Meridian Financial MG Hierarchy](/images/meridian-mg-hierarchy.svg)
+  ![Hierarquia MG Meridian Financial](/images/meridian-mg-hierarchy.svg)
 
-- Moved all 10 subscriptions into the appropriate management groups
-- Created 2 new subscriptions: Management and Connectivity
+- Todas as 10 subscriptions movidas para os management groups apropriados
+- 2 novas subscriptions criadas: Management e Connectivity
 
-**Policy:**
-- Implemented Enterprise Policy as Code (EPAC) with a GitHub Actions pipeline
-- Assigned policies at the management group level:
-  - Top-level: Required tags, allowed regions, audit MCSB
-  - Corp: Enforce private endpoints, deny public IP addresses
-  - Online: Enforce WAF on Application Gateway, require HTTPS
-  - Sandbox: Enforce auto-shutdown on VMs, maximum VM size restrictions
-- Created a PCI-DSS-specific initiative for the Corp management group
+**Política:**
+- Enterprise Policy as Code (EPAC) implementado com pipeline GitHub Actions
+- Políticas atribuídas no nível de management group:
+  - Nível superior: Tags obrigatórias, regiões permitidas, auditoria MCSB
+  - Corp: Aplicar private endpoints, negar endereços IP públicos
+  - Online: Aplicar WAF no Application Gateway, exigir HTTPS
+  - Sandbox: Aplicar auto-shutdown em VMs, restrições de tamanho máximo de VM
 
-**Cost:**
-- Defined mandatory tags: `CostCenter`, `Team`, `Project`, `Environment`
-- Set budgets on every subscription with alerts routed to team leads
-- Implemented monthly cost review meetings with team leads
-- Identified $12,000/month in savings from orphaned resources and right-sizing
+- Initiative específica para PCI-DSS criada para o management group Corp
 
-**Security:**
-- Enabled Microsoft Defender for Cloud (Defender CSPM + server protection) on all subscriptions
-- Applied MCSB as the compliance standard
-- Deployed Azure Key Vault for each team with RBAC-based access
-- Configured Defender for Cloud regulatory compliance for SOC 2 and PCI-DSS
-- Initial Secure Score: 45 → Target: 75 within 6 months
+**Custo:**
+- Tags obrigatórias definidas: `CostCenter`, `Team`, `Project`, `Environment`
+- Budgets definidos em cada subscription com alertas direcionados aos líderes de equipe
+- Reuniões mensais de revisão de custos implementadas com líderes de equipe
+- $12.000/mês em economias identificados de recursos órfãos e right-sizing
 
-**Operations:**
-- Deployed AzGovViz running weekly via GitHub Actions
-- Created Azure Monitor workbooks for governance dashboards
-- Implemented Resource Graph queries for compliance reporting
+**Segurança:**
+- Microsoft Defender for Cloud habilitado (Defender CSPM + proteção de servidores) em todas as subscriptions
+- MCSB aplicado como padrão de conformidade
+- Azure Key Vault implantado para cada equipe com acesso baseado em RBAC
+- Conformidade regulatória do Defender for Cloud configurada para SOC 2 e PCI-DSS
+- Secure Score inicial: 45 → Meta: 75 dentro de 6 meses
 
-### Outcomes
+**Operações:**
+- AzGovViz implantado executando semanalmente via GitHub Actions
+- Workbooks do Azure Monitor criados para dashboards de governança
+- Queries do Resource Graph implementadas para relatórios de conformidade
 
-| Metric | Before | After (6 months) |
+### Resultados
+
+| Métrica | Antes | Depois (6 meses) |
 |---|---|---|
-| Policy compliance rate | 42% (estimated) | 89% (measured) |
-| Subscriptions with budgets | 3 of 10 | 12 of 12 (2 new platform subs) |
-| Monthly cost | $85,000 | $73,000 (14% reduction) |
+| Taxa de conformidade com políticas | 42% (estimado) | 89% (medido) |
+| Subscriptions com budgets | 3 de 10 | 12 de 12 (2 novas subs de plataforma) |
+| Custo mensal | $85.000 | $73.000 (redução de 14%) |
 | Secure Score | 45 | 72 |
-| PIM-protected roles | 0 | 100% of privileged roles |
-| SOC 2 audit findings (governance) | 12 | 2 |
-| Governance report frequency | Ad-hoc | Weekly (automated) |
+| Roles protegidos por PIM | 0 | 100% dos roles privilegiados |
+| Achados de auditoria SOC 2 (governança) | 12 | 2 |
+| Frequência de relatórios de governança | Ad-hoc | Semanal (automatizado) |
 
-**Time invested:** ~3 person-months across the platform team
+**Tempo investido:** ~3 pessoa-meses na equipe de plataforma
 
-**Key takeaway:** A management group hierarchy combined with Policy as Code transforms governance from reactive firefighting to proactive, automated enforcement. The investment pays for itself through cost savings and audit efficiency.
+**Principal aprendizado:** Uma hierarquia de management groups combinada com Policy as Code transforma a governança de combate a incêndios reativo para aplicação proativa e automatizada. O investimento se paga através de economias de custo e eficiência em auditorias.
 
 ---
 
-## Case Study 3 — GlobalTech Industries (Enterprise): Run Maturity
+## Estudo de Caso 3 — GlobalTech Industries (Enterprise): Maturidade Run
 
-### The Scenario
+### O Cenário
 
-**GlobalTech Industries** is a 5,000-person multinational manufacturing company with operations in North America, Europe, and Asia. They have been on Azure for four years and operate a mature cloud environment with strict regulatory requirements.
+**GlobalTech Industries** é uma empresa multinacional de manufatura com 5.000 pessoas, com operações na América do Norte, Europa e Ásia. Eles estão no Azure há quatro anos e operam um ambiente cloud maduro com requisitos regulatórios rigorosos.
 
-**Current state:**
-- 120+ Azure subscriptions across multiple business units
-- Microsoft Entra ID P2 with Microsoft Entra ID Governance
-- ~15,000 Azure resources
-- 40+ application teams across 3 continents
-- Azure Landing Zone deployed 2 years ago (Hub-and-Spoke topology)
-- On-premises datacenters in 5 locations (connected via ExpressRoute)
-- 200+ on-premises servers managed via Azure Arc
-- Monthly Azure spend: ~$1.2 million
-- Regulatory requirements: SOC 2, ISO 27001, GDPR, HIPAA (for health benefits platform)
+**Estado atual:**
+- 120+ subscriptions Azure em múltiplas unidades de negócio
+- Microsoft Entra ID P2 com Microsoft Entra ID Governance
+- ~15.000 recursos Azure
+- 40+ equipes de aplicações em 3 continentes
+- Azure Landing Zone implantada há 2 anos (topologia Hub-and-Spoke)
+- Datacenters on-premises em 5 localidades (conectados via ExpressRoute)
+- 200+ servidores on-premises gerenciados via Azure Arc
+- Gasto mensal no Azure: ~$1,2 milhão
+- Requisitos regulatórios: SOC 2, ISO 27001, GDPR, HIPAA (para plataforma de benefícios de saúde)
 
-### The Challenges
+### Os Desafios
 
-1. **Scale** — With 120+ subscriptions, manual governance is impossible
-2. **Multi-region compliance** — GDPR requires EU data to stay in EU; HIPAA requires specific controls for health data
-3. **Hybrid governance** — 200+ on-premises servers need the same governance as Azure resources
-4. **Shadow IT** — Teams deploying resources outside of the governed Landing Zone
-5. **Cost management** — $1.2M/month spend requires sophisticated FinOps practices
-6. **AI adoption** — Multiple teams experimenting with Azure OpenAI Service without centralized controls
+1. **Escala** — Com 120+ subscriptions, governança manual é impossível
+2. **Conformidade multi-região** — GDPR exige que dados da UE permaneçam na UE; HIPAA exige controles específicos para dados de saúde
+3. **Governança híbrida** — 200+ servidores on-premises precisam da mesma governança que recursos Azure
+4. **Shadow IT** — Equipes implantando recursos fora da Landing Zone governada
+5. **Gestão de custos** — Gasto de $1,2M/mês requer práticas sofisticadas de FinOps
+6. **Adoção de IA** — Múltiplas equipes experimentando com Azure OpenAI Service sem controles centralizados
 
-### Governance Decisions
+### Decisões de Governança
 
-GlobalTech operates a mature governance framework with continuous improvement:
+A GlobalTech opera um framework maduro de governança com melhoria contínua:
 
-**Identity:**
-- Microsoft Entra ID Governance fully deployed:
-  - Entitlement Management for access packages
-  - Access Reviews for all privileged roles (monthly) and application access (quarterly)
-  - PIM for all administrative roles with time-limited activation (8 hours max)
-- Conditional Access: location-based, device compliance, risk-based policies
-- Workload identity federation for all CI/CD pipelines (zero standing credentials)
-- Microsoft Entra Verified ID for partner access
+**Identidade:**
+- Microsoft Entra ID Governance totalmente implantado:
+  - Entitlement Management para pacotes de acesso
+  - Access Reviews para todos os roles privilegiados (mensal) e acesso a aplicações (trimestral)
+  - PIM para todos os roles administrativos com ativação limitada no tempo (máximo 8 horas)
+- Conditional Access: políticas baseadas em localização, conformidade de dispositivo e risco
+- Workload identity federation para todos os pipelines CI/CD (zero credenciais permanentes)
+- Microsoft Entra Verified ID para acesso de parceiros
 
-**Organization:**
-- Full ALZ management group hierarchy with per-region landing zones:
+**Organização:**
+- Hierarquia completa de management groups ALZ com landing zones por região:
 
-  ![GlobalTech MG Hierarchy](/images/globaltech-mg-hierarchy.svg)
+  ![Hierarquia MG GlobalTech](/images/globaltech-mg-hierarchy.svg)
 
-- Subscription vending fully automated via Terraform module + ServiceNow integration
-- Average time from subscription request to ready-to-use: 45 minutes
+- Subscription vending totalmente automatizado via módulo Terraform + integração ServiceNow
+- Tempo médio de solicitação de subscription até pronto para uso: 45 minutos
 
-**Policy:**
-- EPAC manages 200+ policy assignments across the management group hierarchy
-- Custom policy initiatives for each regulatory framework (GDPR, HIPAA, PCI-DSS, ISO 27001)
-- Policy exemption process with automated expiration and quarterly review
-- Azure Machine Configuration policies for OS-level compliance on Arc-enabled servers
-- New policies automatically deployed to Sandbox (Audit mode) for 2 weeks before enforcement
+**Política:**
+- EPAC gerencia 200+ atribuições de políticas na hierarquia de management groups
+- Initiatives customizadas para cada framework regulatório (GDPR, HIPAA, PCI-DSS, ISO 27001)
+- Processo de exemption de políticas com expiração automática e revisão trimestral
+- Políticas de Azure Machine Configuration para conformidade no nível de SO em servidores Arc-enabled
+- Novas políticas automaticamente implantadas no Sandbox (modo Audit) por 2 semanas antes da aplicação
 
-**Cost:**
-- Dedicated FinOps team (2 people) with showback and chargeback to business units
-- Azure Reservations for predictable workloads ($180K/year savings)
-- Savings Plans for compute ($95K/year savings)
-- Automated orphaned resource detection and cleanup pipeline
-- Monthly FinOps review with business unit leaders
-- Azure Cost Management exports to Power BI for executive dashboards
+**Custo:**
+- Equipe dedicada de FinOps (2 pessoas) com showback e chargeback para unidades de negócio
+- Azure Reservations para workloads previsíveis ($180K/ano em economias)
+- Savings Plans para compute ($95K/ano em economias)
+- Pipeline automatizado de detecção e limpeza de recursos órfãos
+- Revisão mensal de FinOps com líderes de unidades de negócio
+- Exportações do Azure Cost Management para Power BI para dashboards executivos
 
-**Security:**
-- Microsoft Defender for Cloud with all Defender plans enabled
-- MCSB enforced across all subscriptions; Secure Score: 82
-- Microsoft Defender for Cloud regulatory compliance tracking for SOC 2, ISO 27001, GDPR, HIPAA
-- Microsoft Sentinel for SIEM/SOAR
-- Weekly security posture reviews with the CISO office
-- Defender for Containers on all AKS and Arc-enabled Kubernetes clusters
+**Segurança:**
+- Microsoft Defender for Cloud com todos os planos Defender habilitados
+- MCSB aplicado em todas as subscriptions; Secure Score: 82
+- Monitoramento de conformidade regulatória do Microsoft Defender for Cloud para SOC 2, ISO 27001, GDPR, HIPAA
+- Microsoft Sentinel para SIEM/SOAR
+- Revisões semanais de postura de segurança com o escritório do CISO
+- Defender for Containers em todos os clusters AKS e Kubernetes Arc-enabled
 
-**Hybrid (Azure Arc):**
-- 200+ on-premises servers onboarded to Azure Arc
-- Same Azure Policy, RBAC, and monitoring applied to Arc-enabled servers
-- Azure Update Manager for unified patch management
-- Azure Machine Configuration for OS compliance (CIS benchmarks)
-- Governance parity: on-premises servers have the same compliance posture as Azure VMs
+**Híbrido (Azure Arc):**
+- 200+ servidores on-premises integrados ao Azure Arc
+- Mesmas Azure Policy, RBAC e monitoramento aplicados a servidores Arc-enabled
+- Azure Update Manager para gerenciamento unificado de patches
+- Azure Machine Configuration para conformidade de SO (benchmarks CIS)
+- Paridade de governança: servidores on-premises têm a mesma postura de conformidade que VMs Azure
 
-**AI Governance:**
-- Centralized Azure OpenAI Service in the Platform subscription
-- Azure API Management as an AI gateway for all teams
-- Content safety filters enforced on all deployments
-- Token quota allocated per team with budget alerts
-- AI governance board (CTO, CISO, Legal, Privacy) reviews new AI use cases
-- Defender for Cloud Apps monitoring for shadow AI detection
+**Governança de IA:**
+- Azure OpenAI Service centralizado na subscription Platform
+- Azure API Management como gateway de IA para todas as equipes
+- Filtros de segurança de conteúdo aplicados em todas as implantações
+- Cota de tokens alocada por equipe com alertas de budget
+- Comitê de governança de IA (CTO, CISO, Jurídico, Privacidade) revisa novos casos de uso de IA
+- Defender for Cloud Apps monitorando para detecção de shadow AI
 
-**Operations:**
-- AzGovViz running daily via Azure DevOps pipeline, reports published to SharePoint
-- Custom Azure Monitor workbooks for governance, cost, and security dashboards
-- Resource Graph queries automated and results published weekly
-- Governance review board meets monthly
-- Annual governance framework review aligned with regulatory audit cycle
+**Operações:**
+- AzGovViz executando diariamente via pipeline Azure DevOps, relatórios publicados no SharePoint
+- Workbooks customizados do Azure Monitor para dashboards de governança, custo e segurança
+- Queries do Resource Graph automatizadas e resultados publicados semanalmente
+- Comitê de revisão de governança se reúne mensalmente
+- Revisão anual do framework de governança alinhada com o ciclo de auditoria regulatória
 
-### Outcomes
+### Resultados
 
-| Metric | Value |
+| Métrica | Valor |
 |---|---|
-| Policy compliance rate | 96.4% |
+| Taxa de conformidade com políticas | 96,4% |
 | Secure Score | 82 |
-| Subscription provisioning time | 45 minutes (fully automated) |
-| Monthly cost | $1.2M (controlled; 15% lower than unmanaged projection) |
-| Annual cost savings from FinOps | $275K |
-| Regulatory audit findings (governance) | 0 critical, 3 minor |
-| Hybrid governance coverage | 100% of on-premises servers |
-| Shadow AI incidents detected | 14 (addressed within 48 hours) |
-| Governance report delivery | Daily (automated) |
+| Tempo de provisionamento de subscription | 45 minutos (totalmente automatizado) |
+| Custo mensal | $1,2M (controlado; 15% menor que projeção sem gerenciamento) |
+| Economias anuais de custos com FinOps | $275K |
+| Achados de auditoria regulatória (governança) | 0 críticos, 3 menores |
+| Cobertura de governança híbrida | 100% dos servidores on-premises |
+| Incidentes de shadow AI detectados | 14 (endereçados em até 48 horas) |
+| Entrega de relatórios de governança | Diária (automatizada) |
 
-**Key takeaway:** At enterprise scale, governance must be fully automated, continuously monitored, and deeply integrated with organizational processes. The combination of ALZ, Policy as Code, subscription vending, Arc, and FinOps creates a self-service platform with guardrails that enables teams to move fast without compromising compliance.
+**Principal aprendizado:** Em escala enterprise, a governança deve ser totalmente automatizada, continuamente monitorada e profundamente integrada aos processos organizacionais. A combinação de ALZ, Policy as Code, subscription vending, Arc e FinOps cria uma plataforma de autoatendimento com guardrails que permite às equipes se moverem rapidamente sem comprometer a conformidade.
 
 ---
 
-## Summary — Maturity at a Glance
+## Resumo — Maturidade em um Olhar
 
-| Capability | Crawl (CloudBrew) | Walk (Meridian) | Run (GlobalTech) |
+| Capacidade | Crawl (CloudBrew) | Walk (Meridian) | Run (GlobalTech) |
 |---|---|---|---|
-| Identity | MFA + basic RBAC | PIM + Access Reviews | Identity Governance + Conditional Access |
-| Organization | 1 subscription, naming convention | Management groups + hierarchy | Full ALZ + subscription vending |
-| Policy | 3 audit-mode policies | EPAC + Deny/DINE | 200+ policies, custom initiatives per regulation |
-| Cost | Budget + alerts | Team-level budgets + monthly reviews | FinOps team + chargeback + Reservations |
-| Security | Defender (free) | Defender CSPM + MCSB | Full Defender + Sentinel + regulatory compliance |
-| Operations | Manual checks | AzGovViz + workbooks | Daily automation + governance board |
-| Hybrid | N/A | N/A | Azure Arc for 200+ servers |
-| AI | N/A | N/A | Centralized AOAI + AI governance board |
+| Identidade | MFA + RBAC básico | PIM + Access Reviews | Identity Governance + Conditional Access |
+| Organização | 1 subscription, convenção de nomenclatura | Management groups + hierarquia | ALZ completo + subscription vending |
+| Política | 3 políticas em modo audit | EPAC + Deny/DINE | 200+ políticas, initiatives customizadas por regulamentação |
+| Custo | Budget + alertas | Budgets por equipe + revisões mensais | Equipe de FinOps + chargeback + Reservations |
+| Segurança | Defender (gratuito) | Defender CSPM + MCSB | Defender completo + Sentinel + conformidade regulatória |
+| Operações | Verificações manuais | AzGovViz + workbooks | Automação diária + comitê de governança |
+| Híbrido | N/A | N/A | Azure Arc para 200+ servidores |
+| IA | N/A | N/A | AOAI centralizado + comitê de governança de IA |
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Governance Roadmap](ch28-governance-roadmap.md) | [FAQ](ch30-faq.md) |
+| [Roadmap de Governança](ch28-governance-roadmap.md) | [FAQ](ch30-faq.md) |

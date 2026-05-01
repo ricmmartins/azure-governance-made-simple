@@ -1,121 +1,121 @@
-# Chapter 1 — Why Cloud Governance Matters
+# Capítulo 1 — Por Que a Governança em Nuvem É Importante
 
 > **Last verified: 2026-04-06**
 
 ---
 
-## Overview
+## Visão Geral
 
-Every organization migrating to the cloud faces a fundamental tension: **speed versus control**. Engineering teams want the agility to provision resources in minutes, while leadership needs assurance that spending, security, and compliance remain within acceptable boundaries. Cloud governance is the discipline that resolves this tension — not by slowing teams down, but by embedding guardrails directly into the platform.
+Toda organização que migra para a nuvem enfrenta uma tensão fundamental: **velocidade versus controle**. As equipes de engenharia querem a agilidade para provisionar recursos em minutos, enquanto a liderança precisa da garantia de que gastos, segurança e conformidade permaneçam dentro de limites aceitáveis. A governança em nuvem é a disciplina que resolve essa tensão — não desacelerando as equipes, mas incorporando proteções diretamente na plataforma.
 
-### What Is Cloud Governance?
+### O Que É Governança em Nuvem?
 
-Cloud governance is the set of **policies, processes, and tools** that an organization uses to ensure its cloud environment operates in alignment with business objectives, regulatory requirements, and technical standards.
+Governança em nuvem é o conjunto de **políticas, processos e ferramentas** que uma organização utiliza para garantir que seu ambiente de nuvem opere em conformidade com os objetivos de negócio, requisitos regulatórios e padrões técnicos.
 
-The Microsoft Cloud Adoption Framework (CAF) defines governance as:
+O Microsoft Cloud Adoption Framework (CAF) define governança como:
 
-> *"The process of establishing policies and continuously monitoring their proper enforcement. It is a set of controls and processes that ensure that Azure resources are deployed and managed in a compliant and cost-effective manner."*
+> *"O processo de estabelecer políticas e monitorar continuamente sua aplicação adequada. É um conjunto de controles e processos que garantem que os recursos do Azure sejam implantados e gerenciados de forma compatível e econômica."*
 
-Governance is not about restricting innovation — it is about creating the conditions under which innovation can happen safely and sustainably.
+Governança não se trata de restringir a inovação — trata-se de criar as condições sob as quais a inovação pode acontecer de forma segura e sustentável.
 
 ---
 
-## The Speed-vs-Control Narrative
+## A Narrativa Velocidade vs. Controle
 
-Companies adopt the cloud to be more agile and to reduce infrastructure costs. There is pressure to transform and innovate digitally, to shift focus away from managing servers and toward delighting customers with high-quality services. This drives a natural shift to DevOps in cloud environments, where engineers provision the resources they need to support solutions — often in minutes rather than weeks.
+As empresas adotam a nuvem para serem mais ágeis e reduzir custos de infraestrutura. Há pressão para transformar e inovar digitalmente, mudando o foco do gerenciamento de servidores para encantar os clientes com serviços de alta qualidade. Isso impulsiona uma mudança natural para DevOps em ambientes de nuvem, onde os engenheiros provisionam os recursos necessários para suportar soluções — frequentemente em minutos em vez de semanas.
 
-However, this agility comes at a price. Without governance, many organizations experience **Cloud Sprawl** — the uncontrolled proliferation of resources, subscriptions, and configurations that leads to runaway costs, security vulnerabilities, and compliance failures. This pattern is not new. In the early 2000s, server virtualization led to "VM sprawl." The industry response at the time was heavy-handed: insert an approval process, make teams fill out forms, wait two weeks for the infrastructure team to set up an environment.
+No entanto, essa agilidade tem um preço. Sem governança, muitas organizações experimentam o **Cloud Sprawl** — a proliferação descontrolada de recursos, assinaturas e configurações que leva a custos descontrolados, vulnerabilidades de segurança e falhas de conformidade. Esse padrão não é novo. No início dos anos 2000, a virtualização de servidores levou ao "VM sprawl." A resposta da indústria na época foi severa: inserir um processo de aprovação, fazer as equipes preencherem formulários, esperar duas semanas para a equipe de infraestrutura configurar um ambiente.
 
-![Traditional approach](../../images/traditional-approach.png)
-<div align="center"><em>Traditional approach — sacrificing speed for control</em></div>
+![Abordagem tradicional](../../images/traditional-approach.png)
+<div align="center"><em>Abordagem tradicional — sacrificando velocidade por controle</em></div>
 <br>
 
-That approach does not work in the cloud era. It sacrifices the very agility that motivated the migration in the first place.
+Essa abordagem não funciona na era da nuvem. Ela sacrifica exatamente a agilidade que motivou a migração em primeiro lugar.
 
-### The Cloud-Native Governance Model
+### O Modelo de Governança Cloud-Native
 
-In a cloud-native governance model, you achieve **speed and control simultaneously**. Instead of placing an approval bottleneck in front of every DevOps team, the cloud platform itself enforces controls on your behalf. Teams operate through a self-service model — they have full access to provision resources, but only within boundaries that the platform enforces automatically.
+Em um modelo de governança cloud-native, você alcança **velocidade e controle simultaneamente**. Em vez de colocar um gargalo de aprovação na frente de cada equipe de DevOps, a própria plataforma de nuvem aplica os controles em seu nome. As equipes operam por meio de um modelo de autoatendimento — têm acesso total para provisionar recursos, mas apenas dentro dos limites que a plataforma aplica automaticamente.
 
-- Resources that violate policy are denied at deployment time.
-- Costs remain predictable and aligned with budgets.
-- Security controls are inherited, not optional.
-- Compliance is continuous, not periodic.
+- Recursos que violam políticas são negados no momento da implantação.
+- Os custos permanecem previsíveis e alinhados com os orçamentos.
+- Os controles de segurança são herdados, não opcionais.
+- A conformidade é contínua, não periódica.
 
-![Cloud governance approach](../../images/cloud-governance-approach.png)
-<div align="center"><em>Cloud-native governance model — speed and control together</em></div>
+![Abordagem de governança em nuvem](../../images/cloud-governance-approach.png)
+<div align="center"><em>Modelo de governança cloud-native — velocidade e controle juntos</em></div>
 <br>
 
 ---
 
-## The CAF Five Disciplines of Cloud Governance
+## As Cinco Disciplinas de Governança em Nuvem do CAF
 
-The Cloud Adoption Framework organizes governance into **five disciplines**. Each discipline addresses a specific area of risk that emerges when organizations operate in the cloud:
+O Cloud Adoption Framework organiza a governança em **cinco disciplinas**. Cada disciplina aborda uma área específica de risco que surge quando as organizações operam na nuvem:
 
-| Discipline | What It Addresses | Key Question |
+| Disciplina | O Que Aborda | Pergunta-Chave |
 |---|---|---|
-| **Cost Management** | Budget overruns, uncontrolled spending, orphaned resources | *Are we spending what we planned to spend?* |
-| **Security Baseline** | Data protection, threat detection, encryption, network security | *Are our workloads protected from threats?* |
-| **Identity Baseline** | Authentication, authorization, identity lifecycle, privileged access | *Do only the right people have access to the right resources?* |
-| **Resource Consistency** | Resource organization, naming, tagging, lifecycle management | *Can we find, manage, and operate our resources reliably?* |
-| **Deployment Acceleration** | Infrastructure as Code, CI/CD pipelines, configuration drift, policy enforcement | *Can we deploy and update environments quickly, safely, and repeatably?* |
+| **Cost Management** | Estouros de orçamento, gastos descontrolados, recursos órfãos | *Estamos gastando o que planejamos gastar?* |
+| **Security Baseline** | Proteção de dados, detecção de ameaças, criptografia, segurança de rede | *Nossas cargas de trabalho estão protegidas contra ameaças?* |
+| **Identity Baseline** | Autenticação, autorização, ciclo de vida de identidade, acesso privilegiado | *Apenas as pessoas certas têm acesso aos recursos certos?* |
+| **Resource Consistency** | Organização de recursos, nomenclatura, etiquetagem, gerenciamento de ciclo de vida | *Podemos encontrar, gerenciar e operar nossos recursos de forma confiável?* |
+| **Deployment Acceleration** | Infrastructure as Code, pipelines de CI/CD, desvio de configuração, aplicação de políticas | *Podemos implantar e atualizar ambientes de forma rápida, segura e repetível?* |
 
-These five disciplines are not independent silos — they interconnect. For example, enforcing a **Security Baseline** requires a solid **Identity Baseline**, and achieving **Deployment Acceleration** depends on **Resource Consistency** through naming conventions and tagging strategies.
+Essas cinco disciplinas não são silos independentes — elas se interconectam. Por exemplo, aplicar uma **Security Baseline** requer uma **Identity Baseline** sólida, e alcançar **Deployment Acceleration** depende de **Resource Consistency** por meio de convenções de nomenclatura e estratégias de etiquetagem.
 
-> **Key insight:** You do not need to mature all five disciplines at once. Start with the areas of greatest risk to your organization and expand over time.
+> **Insight principal:** Você não precisa amadurecer todas as cinco disciplinas de uma vez. Comece pelas áreas de maior risco para sua organização e expanda ao longo do tempo.
 
-> *Note: These five disciplines originate from the foundational CAF governance model and remain widely referenced. The current CAF Govern methodology organizes governance as a continuous process: build a governance team, assess risks, document policies, enforce policies, and monitor compliance.*
-
----
-
-## Architecture
-
-Cloud governance does not exist in isolation — it is woven into every layer of the Azure resource hierarchy. The diagram below shows how governance policies flow from the top of the hierarchy downward:
-
-![Azure Governance Hierarchy & Inheritance Model](/images/governance-hierarchy.svg)
-
-Governance controls — policies, RBAC role assignments, budgets — are applied at the management group or subscription level and **inherited** by all child scopes. This inheritance model is what makes cloud-native governance scalable.
+> *Nota: Essas cinco disciplinas se originam do modelo de governança fundamental do CAF e continuam amplamente referenciadas. A metodologia atual do CAF Govern organiza a governança como um processo contínuo: construir uma equipe de governança, avaliar riscos, documentar políticas, aplicar políticas e monitorar conformidade.*
 
 ---
 
-## How It Works
+## Arquitetura
 
-1. **Define policies** that encode your organization's rules (e.g., "All storage accounts must use private endpoints").
-2. **Assign policies** at management group or subscription scope so they apply broadly.
-3. **Azure Resource Manager evaluates** every deployment request against assigned policies.
-4. **Non-compliant requests are denied** at deployment time (or flagged for remediation, depending on the policy effect).
-5. **Continuous compliance** is assessed — Azure Policy periodically scans existing resources and reports drift.
+A governança em nuvem não existe isoladamente — ela está entrelaçada em cada camada da hierarquia de recursos do Azure. O diagrama abaixo mostra como as políticas de governança fluem do topo da hierarquia para baixo:
 
-This "shift-left" approach means governance violations are caught **before** resources are deployed, not after an auditor discovers them months later.
+![Hierarquia de Governança do Azure e Modelo de Herança](/images/governance-hierarchy.svg)
+
+Controles de governança — políticas, atribuições de função RBAC, orçamentos — são aplicados no nível do management group ou da assinatura e **herdados** por todos os escopos filhos. Esse modelo de herança é o que torna a governança cloud-native escalável.
 
 ---
 
-## Best Practices
+## Como Funciona
 
-1. **Start with guardrails, not gates.** Use Azure Policy to prevent non-compliant deployments rather than manual approval workflows.
-2. **Apply governance at the highest practical scope.** Assign policies at the management group level to ensure consistent enforcement across all subscriptions.
-3. **Adopt the CAF five disciplines as your framework.** Even if you start small, structure your governance program around these disciplines so it scales.
-4. **Treat governance as code.** Define policies, role assignments, and resource configurations in Bicep or Terraform. Store them in version control.
-5. **Establish clear team responsibilities.** Define who owns governance decisions (e.g., a Cloud Center of Excellence) and who is responsible for implementation.
+1. **Defina políticas** que codifiquem as regras da sua organização (ex.: "Todas as contas de armazenamento devem usar endpoints privados").
+2. **Atribua políticas** no escopo de management group ou assinatura para que se apliquem amplamente.
+3. **O Azure Resource Manager avalia** cada solicitação de implantação contra as políticas atribuídas.
+4. **Solicitações não conformes são negadas** no momento da implantação (ou sinalizadas para remediação, dependendo do efeito da política).
+5. **Conformidade contínua** é avaliada — o Azure Policy verifica periodicamente os recursos existentes e reporta desvios.
+
+Essa abordagem "shift-left" significa que violações de governança são detectadas **antes** que os recursos sejam implantados, não depois que um auditor as descobre meses depois.
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Why It Hurts | What to Do Instead |
+1. **Comece com proteções, não com portões.** Use o Azure Policy para prevenir implantações não conformes em vez de fluxos de aprovação manuais.
+2. **Aplique governança no escopo mais alto praticável.** Atribua políticas no nível do management group para garantir aplicação consistente em todas as assinaturas.
+3. **Adote as cinco disciplinas do CAF como seu framework.** Mesmo que comece pequeno, estruture seu programa de governança em torno dessas disciplinas para que ele escale.
+4. **Trate governança como código.** Defina políticas, atribuições de função e configurações de recursos em Bicep ou Terraform. Armazene-os em controle de versão.
+5. **Estabeleça responsabilidades claras da equipe.** Defina quem é proprietário das decisões de governança (ex.: um Cloud Center of Excellence) e quem é responsável pela implementação.
+
+---
+
+## Armadilhas Comuns
+
+| Armadilha | Por Que Prejudica | O Que Fazer em Vez Disso |
 |---|---|---|
-| No governance until after migration | Retroactive enforcement is painful and disruptive | Establish foundational governance before the first workload |
-| Over-governance from day one | Teams rebel against excessive restrictions and find workarounds | Start with the minimum viable governance and iterate |
-| Governance as a one-time project | Cloud environments evolve; static rules become stale | Treat governance as a continuous process with regular reviews |
-| Siloed governance ownership | Security, finance, and platform teams set conflicting rules | Establish a cross-functional governance team or Cloud CoE |
-| Ignoring the developer experience | If governance makes deployment harder, adoption suffers | Design guardrails that are invisible to teams doing the right thing |
+| Nenhuma governança até após a migração | A aplicação retroativa é dolorosa e disruptiva | Estabeleça governança fundamental antes da primeira carga de trabalho |
+| Governança excessiva desde o primeiro dia | As equipes se rebelam contra restrições excessivas e encontram soluções alternativas | Comece com a governança mínima viável e itere |
+| Governança como projeto único | Ambientes de nuvem evoluem; regras estáticas se tornam obsoletas | Trate a governança como um processo contínuo com revisões regulares |
+| Propriedade de governança em silos | Equipes de segurança, finanças e plataforma definem regras conflitantes | Estabeleça uma equipe de governança multifuncional ou Cloud CoE |
+| Ignorar a experiência do desenvolvedor | Se a governança dificulta a implantação, a adoção sofre | Projete proteções que sejam invisíveis para equipes que fazem a coisa certa |
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Azure Policy — Deny Resources in Unapproved Regions
+### Azure Policy — Negar Recursos em Regiões Não Aprovadas
 
-This policy ensures resources can only be deployed to approved Azure regions:
+Esta política garante que os recursos só possam ser implantados em regiões aprovadas do Azure:
 
 ```json
 {
@@ -149,7 +149,7 @@ This policy ensures resources can only be deployed to approved Azure regions:
 }
 ```
 
-### Azure CLI — Assign the Built-In "Allowed Locations" Policy
+### Azure CLI — Atribuir a Política Interna "Allowed Locations"
 
 ```bash
 az policy assignment create \
@@ -162,40 +162,40 @@ az policy assignment create \
 
 ---
 
-## Hands-On Exercise
+## Exercício Prático
 
-**Scenario:** Your organization is about to begin its cloud journey. You have been asked to prepare a governance foundation.
+**Cenário:** Sua organização está prestes a iniciar sua jornada na nuvem. Você foi solicitado a preparar uma base de governança.
 
-1. **Identify your top three governance risks.** Consider: uncontrolled spending, unauthorized access, deployment to unapproved regions, or lack of resource visibility.
-2. **Map each risk to a CAF discipline.** For example, "uncontrolled spending" maps to Cost Management.
-3. **Draft one Azure Policy rule** (in JSON or pseudocode) that would mitigate your number-one risk.
-4. **Determine the scope** where you would assign this policy (management group, subscription, or resource group) and justify your choice.
+1. **Identifique seus três principais riscos de governança.** Considere: gastos descontrolados, acesso não autorizado, implantação em regiões não aprovadas ou falta de visibilidade de recursos.
+2. **Mapeie cada risco para uma disciplina do CAF.** Por exemplo, "gastos descontrolados" mapeia para Cost Management.
+3. **Elabore uma regra de Azure Policy** (em JSON ou pseudocódigo) que mitigaria seu risco número um.
+4. **Determine o escopo** onde você atribuiria esta política (management group, assinatura ou resource group) e justifique sua escolha.
 
-> **Bonus:** Review the [CAF Govern methodology](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) and identify which governance discipline your organization should prioritize first.
-
----
-
-## Team Structure and Responsibilities
-
-Aligned with governance, it is important to have a well-defined structure around responsibilities across different teams — especially if you are migrating from a traditional on-premises approach to a cloud-native model. The following resources will help you mature team structures and align responsibilities:
-
-- [Mature team structures](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/organization-structures)
-- [Align responsibilities across teams](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/raci-alignment)
-- [Building technical skills](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/suggested-skills)
+> **Bônus:** Revise a [metodologia CAF Govern](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) e identifique qual disciplina de governança sua organização deve priorizar primeiro.
 
 ---
 
-## References
+## Estrutura da Equipe e Responsabilidades
 
-| Resource | Link |
+Alinhado com a governança, é importante ter uma estrutura bem definida em torno das responsabilidades entre diferentes equipes — especialmente se você está migrando de uma abordagem tradicional on-premises para um modelo cloud-native. Os seguintes recursos ajudarão você a amadurecer as estruturas de equipe e alinhar responsabilidades:
+
+- [Amadurecer estruturas de equipe](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/organization-structures)
+- [Alinhar responsabilidades entre equipes](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/raci-alignment)
+- [Desenvolver habilidades técnicas](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/suggested-skills)
+
+---
+
+## Referências
+
+| Recurso | Link |
 |---|---|
-| CAF Govern methodology | [learn.microsoft.com/azure/cloud-adoption-framework/govern/](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) |
-| Mature team structures | [learn.microsoft.com/azure/cloud-adoption-framework/organize/organization-structures](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/organization-structures) |
-| Align responsibilities across teams | [learn.microsoft.com/azure/cloud-adoption-framework/organize/raci-alignment](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/raci-alignment) |
-| Azure Policy overview | [learn.microsoft.com/azure/governance/policy/overview](https://learn.microsoft.com/azure/governance/policy/overview) |
+| Metodologia CAF Govern | [learn.microsoft.com/azure/cloud-adoption-framework/govern/](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) |
+| Amadurecer estruturas de equipe | [learn.microsoft.com/azure/cloud-adoption-framework/organize/organization-structures](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/organization-structures) |
+| Alinhar responsabilidades entre equipes | [learn.microsoft.com/azure/cloud-adoption-framework/organize/raci-alignment](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/raci-alignment) |
+| Visão geral do Azure Policy | [learn.microsoft.com/azure/governance/policy/overview](https://learn.microsoft.com/azure/governance/policy/overview) |
 
 ---
 
-| | Next |
+| | Próximo |
 |:---|:---|
-| | [Chapter 2 — Governance at a Glance](ch02-governance-at-a-glance.md) |
+| | [Capítulo 2 — Governança em Uma Visão Geral](ch02-governance-at-a-glance.md) |

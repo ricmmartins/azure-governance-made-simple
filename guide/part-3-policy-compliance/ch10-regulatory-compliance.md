@@ -1,89 +1,89 @@
-# Chapter 10 — Regulatory Compliance & Microsoft Cloud Security Benchmark
+# Capítulo 10 — Conformidade Regulatória & Microsoft Cloud Security Benchmark
 
 > Last verified: 2026-04-06
 
-Meeting regulatory compliance requirements is a fundamental driver of cloud governance. Azure provides built-in tools to map your cloud environment against industry standards and regulatory frameworks, track compliance posture over time, and report on gaps. This chapter covers how regulatory compliance works in Azure, the Microsoft Cloud Security Benchmark, and how to operationalize compliance using Azure Policy and Microsoft Defender for Cloud.
+Atender a requisitos de conformidade regulatória é um fator fundamental da governança em nuvem. O Azure fornece ferramentas integradas para mapear seu ambiente de nuvem contra padrões da indústria e frameworks regulatórios, rastrear a postura de conformidade ao longo do tempo e reportar lacunas. Este capítulo cobre como a conformidade regulatória funciona no Azure, o Microsoft Cloud Security Benchmark e como operacionalizar a conformidade usando Azure Policy e Microsoft Defender for Cloud.
 
 ---
 
-## Overview
+## Visão Geral
 
-Regulatory compliance in Azure refers to the process of ensuring that your cloud resources and configurations meet the requirements of industry standards, government regulations, and organizational policies. Azure does not make you compliant — **you** are responsible for compliance — but Azure provides the tooling and controls to help you get there.
+Conformidade regulatória no Azure refere-se ao processo de garantir que seus recursos e configurações de nuvem atendam aos requisitos de padrões da indústria, regulamentações governamentais e políticas organizacionais. O Azure não torna você conforme — **você** é responsável pela conformidade — mas o Azure fornece as ferramentas e controles para ajudá-lo a chegar lá.
 
-Key Azure services involved in regulatory compliance:
+Principais serviços Azure envolvidos na conformidade regulatória:
 
-| Service | Role |
-|---------|------|
-| **Azure Policy** | Defines and enforces configuration standards. Compliance initiatives map to regulatory frameworks. |
-| **Microsoft Defender for Cloud** | Provides a compliance dashboard, secure score, and security recommendations aligned to regulatory standards. |
-| **Microsoft Purview** | Data governance, classification, and compliance for data workloads. |
-| **Azure Audit Logs** | Activity and diagnostic logs for audit trails. |
-| **Microsoft Entra ID** | Identity governance, access reviews, and conditional access for identity-related compliance controls. |
+| Serviço | Função |
+|---------|--------|
+| **Azure Policy** | Define e aplica padrões de configuração. Iniciativas de conformidade mapeiam para frameworks regulatórios. |
+| **Microsoft Defender for Cloud** | Fornece um painel de conformidade, secure score e recomendações de segurança alinhadas a padrões regulatórios. |
+| **Microsoft Purview** | Governança de dados, classificação e conformidade para cargas de trabalho de dados. |
+| **Azure Audit Logs** | Logs de atividade e diagnóstico para trilhas de auditoria. |
+| **Microsoft Entra ID** | Governança de identidade, revisões de acesso e acesso condicional para controles de conformidade relacionados a identidade. |
 
-### Shared Responsibility Model
+### Modelo de Responsabilidade Compartilhada
 
-Compliance in the cloud follows the shared responsibility model:
+A conformidade na nuvem segue o modelo de responsabilidade compartilhada:
 
-- **Microsoft** is responsible for the compliance of the cloud infrastructure (physical security, host OS, hypervisor).
-- **You** are responsible for compliance of what you deploy in the cloud (data, applications, identity, network configuration, OS patching for IaaS).
+- **Microsoft** é responsável pela conformidade da infraestrutura de nuvem (segurança física, SO do host, hypervisor).
+- **Você** é responsável pela conformidade do que você implanta na nuvem (dados, aplicações, identidade, configuração de rede, patching de SO para IaaS).
 
-The degree of responsibility shifts depending on the service model:
+O grau de responsabilidade muda dependendo do modelo de serviço:
 
-| Control | IaaS | PaaS | SaaS |
-|---------|------|------|------|
-| Data classification | Customer | Customer | Customer |
-| Identity & access | Customer | Customer | Shared |
-| Application | Customer | Shared | Microsoft |
-| Network controls | Customer | Shared | Microsoft |
-| OS patching | Customer | Microsoft | Microsoft |
-| Physical security | Microsoft | Microsoft | Microsoft |
+| Controle | IaaS | PaaS | SaaS |
+|----------|------|------|------|
+| Classificação de dados | Cliente | Cliente | Cliente |
+| Identidade e acesso | Cliente | Cliente | Compartilhado |
+| Aplicação | Cliente | Compartilhado | Microsoft |
+| Controles de rede | Cliente | Compartilhado | Microsoft |
+| Patching de SO | Cliente | Microsoft | Microsoft |
+| Segurança física | Microsoft | Microsoft | Microsoft |
 
 ---
 
-## How It Works
+## Como Funciona
 
 ### Microsoft Cloud Security Benchmark (MCSB)
 
-The **Microsoft Cloud Security Benchmark (MCSB)** is a set of security and compliance best practices authored by Microsoft. It provides a unified framework of security controls that maps to multiple industry standards. MCSB is the default security initiative assigned to every Azure subscription through Microsoft Defender for Cloud.
+O **Microsoft Cloud Security Benchmark (MCSB)** é um conjunto de melhores práticas de segurança e conformidade criado pela Microsoft. Ele fornece um framework unificado de controles de segurança que mapeia para múltiplos padrões da indústria. O MCSB é a iniciativa de segurança padrão atribuída a cada assinatura Azure através do Microsoft Defender for Cloud.
 
-MCSB is organized into **control domains**:
+O MCSB é organizado em **domínios de controle**:
 
-| Control Domain | Description |
-|---------------|-------------|
-| Network Security (NS) | Securing virtual networks, private endpoints, firewalls, DNS |
-| Identity Management (IM) | Authentication, authorization, managed identities, conditional access |
-| Privileged Access (PA) | Protecting administrative accounts and JIT access |
-| Data Protection (DP) | Encryption at rest, in transit, key management |
-| Asset Management (AM) | Inventory, discovery, resource governance |
-| Logging and Threat Detection (LT) | Diagnostic settings, audit logs, threat detection |
-| Incident Response (IR) | Preparation, detection, containment, post-incident |
-| Posture and Vulnerability Management (PV) | Vulnerability scanning, secure configurations |
-| Endpoint Security (ES) | EDR, anti-malware, host security |
-| Backup and Recovery (BR) | Backup policies, recovery testing |
-| DevOps Security (DS) | Secure pipelines, code scanning, supply chain |
-| Governance and Strategy (GS) | Organizational alignment, policy, and risk management |
+| Domínio de Controle | Descrição |
+|--------------------|-----------|
+| Network Security (NS) | Proteger redes virtuais, endpoints privados, firewalls, DNS |
+| Identity Management (IM) | Autenticação, autorização, identidades gerenciadas, acesso condicional |
+| Privileged Access (PA) | Proteção de contas administrativas e acesso JIT |
+| Data Protection (DP) | Criptografia em repouso, em trânsito, gerenciamento de chaves |
+| Asset Management (AM) | Inventário, descoberta, governança de recursos |
+| Logging and Threat Detection (LT) | Configurações de diagnóstico, logs de auditoria, detecção de ameaças |
+| Incident Response (IR) | Preparação, detecção, contenção, pós-incidente |
+| Posture and Vulnerability Management (PV) | Varredura de vulnerabilidades, configurações seguras |
+| Endpoint Security (ES) | EDR, anti-malware, segurança de host |
+| Backup and Recovery (BR) | Políticas de backup, teste de recuperação |
+| DevOps Security (DS) | Pipelines seguros, varredura de código, cadeia de suprimentos |
+| Governance and Strategy (GS) | Alinhamento organizacional, políticas e gerenciamento de riscos |
 
-### How MCSB Maps to Industry Standards
+### Como o MCSB Mapeia para Padrões da Indústria
 
-MCSB provides direct mappings to the following regulatory frameworks:
+O MCSB fornece mapeamentos diretos para os seguintes frameworks regulatórios:
 
-| Framework | Description | Mapping |
-|-----------|-------------|---------|
-| **CIS Benchmarks** | Center for Internet Security configuration baselines for Azure | MCSB controls map to specific CIS recommendations |
-| **NIST SP 800-53 Rev. 5** | U.S. federal security and privacy controls | Each MCSB control references applicable NIST control families |
-| **PCI-DSS v4.0** | Payment Card Industry Data Security Standard | MCSB maps relevant controls for payment processing environments |
-| **ISO 27001:2022** | International information security management standard | MCSB controls align with ISO 27001 Annex A controls |
+| Framework | Descrição | Mapeamento |
+|-----------|-----------|------------|
+| **CIS Benchmarks** | Baselines de configuração do Center for Internet Security para Azure | Controles MCSB mapeiam para recomendações CIS específicas |
+| **NIST SP 800-53 Rev. 5** | Controles federais de segurança e privacidade dos EUA | Cada controle MCSB referencia famílias de controle NIST aplicáveis |
+| **PCI-DSS v4.0** | Payment Card Industry Data Security Standard | MCSB mapeia controles relevantes para ambientes de processamento de pagamentos |
+| **ISO 27001:2022** | Padrão internacional de gerenciamento de segurança da informação | Controles MCSB se alinham com controles do Anexo A da ISO 27001 |
 
-This means that by implementing MCSB controls, you are simultaneously addressing requirements from multiple frameworks. The Defender for Cloud compliance dashboard shows this mapping visually.
+Isso significa que ao implementar controles MCSB, você está simultaneamente atendendo requisitos de múltiplos frameworks. O painel de conformidade do Defender for Cloud mostra esse mapeamento visualmente.
 
-### Built-in Regulatory Compliance Initiatives in Azure Policy
+### Iniciativas Integradas de Conformidade Regulatória no Azure Policy
 
-Azure Policy provides **built-in compliance initiatives** that map directly to regulatory standards. These initiatives are collections of policy definitions grouped by control area. When assigned, they evaluate your resources and report compliance status per control.
+O Azure Policy fornece **iniciativas de conformidade integradas** que mapeiam diretamente para padrões regulatórios. Essas iniciativas são coleções de definições de policy agrupadas por área de controle. Quando atribuídas, elas avaliam seus recursos e reportam o status de conformidade por controle.
 
-Major built-in initiatives include:
+Principais iniciativas integradas incluem:
 
-| Initiative | Policy Definition Set ID |
-|-----------|------------------------|
+| Iniciativa | ID do Conjunto de Definições de Policy |
+|-----------|---------------------------------------|
 | Microsoft Cloud Security Benchmark | `1f3afdf9-d0c9-4c3d-847f-89da613e70a8` |
 | NIST SP 800-53 Rev. 5 | `179d1daa-458f-4e47-8086-2a68d0d6c38f` |
 | CIS Microsoft Azure Foundations Benchmark v2.0.0 | `06f19060-9e68-4070-92ca-f15cc126059e` |
@@ -94,10 +94,10 @@ Major built-in initiatives include:
 | SOC 2 Type 2 | `4054785f-702b-4a98-9215-009571ba8f21` |
 | Canada Federal PBMM | `4c4a5f27-de81-430b-b4e5-9cbd50595a87` |
 
-To assign a compliance initiative:
+Para atribuir uma iniciativa de conformidade:
 
 ```bash
-# Assign the NIST SP 800-53 Rev. 5 initiative to a subscription
+# Atribuir a iniciativa NIST SP 800-53 Rev. 5 a uma assinatura
 az policy assignment create \
   --name "nist-800-53-assignment" \
   --display-name "NIST SP 800-53 Rev. 5 Compliance" \
@@ -106,43 +106,43 @@ az policy assignment create \
   --enforcement-mode "Default"
 ```
 
-### Compliance Dashboard in Microsoft Defender for Cloud
+### Painel de Conformidade no Microsoft Defender for Cloud
 
-Microsoft Defender for Cloud provides a **Regulatory Compliance** dashboard that gives a real-time view of your compliance posture against assigned initiatives.
+O Microsoft Defender for Cloud fornece um painel de **Regulatory Compliance** que oferece uma visão em tempo real da sua postura de conformidade contra as iniciativas atribuídas.
 
-The dashboard shows:
+O painel mostra:
 
-1. **Overall compliance percentage** per assigned standard.
-2. **Control-level breakdown** — which controls are passing, failing, or not assessed.
-3. **Recommendation-level detail** — specific resources that are non-compliant and remediation guidance.
-4. **Downloadable compliance reports** — PDF and CSV exports for auditors and stakeholders.
+1. **Porcentagem geral de conformidade** por padrão atribuído.
+2. **Detalhamento por controle** — quais controles estão passando, falhando ou não avaliados.
+3. **Detalhe por recomendação** — recursos específicos que estão não conformes e orientação de remediação.
+4. **Relatórios de conformidade para download** — Exportações PDF e CSV para auditores e stakeholders.
 
-To access the dashboard:
+Para acessar o painel:
 
-1. Navigate to **Microsoft Defender for Cloud** in the Azure portal.
-2. Select **Regulatory compliance** from the left menu.
-3. Select the standard you want to review (e.g., NIST SP 800-53 Rev. 5).
-4. Drill into individual controls and recommendations.
+1. Navegue até **Microsoft Defender for Cloud** no portal do Azure.
+2. Selecione **Regulatory compliance** no menu lateral.
+3. Selecione o padrão que deseja revisar (ex.: NIST SP 800-53 Rev. 5).
+4. Aprofunde-se em controles e recomendações individuais.
 
-> **Note:** The compliance dashboard requires at least one regulatory compliance initiative to be assigned to your subscription. The MCSB initiative is assigned by default.
+> **Nota:** O painel de conformidade requer que pelo menos uma iniciativa de conformidade regulatória esteja atribuída à sua assinatura. A iniciativa MCSB é atribuída por padrão.
 
-### Custom Compliance Standards
+### Padrões de Conformidade Personalizados
 
-While built-in initiatives cover major frameworks, organizations often have additional internal requirements. You can create **custom compliance initiatives** that:
+Embora as iniciativas integradas cubram os principais frameworks, organizações frequentemente possuem requisitos internos adicionais. Você pode criar **iniciativas de conformidade personalizadas** que:
 
-- Include a mix of built-in and custom policy definitions.
-- Map to your organization's control framework.
-- Appear in the Defender for Cloud compliance dashboard alongside built-in standards.
+- Incluem uma combinação de definições de policy integradas e personalizadas.
+- Mapeiam para o framework de controles da sua organização.
+- Aparecem no painel de conformidade do Defender for Cloud junto com padrões integrados.
 
-Steps to create a custom compliance standard:
+Passos para criar um padrão de conformidade personalizado:
 
-1. **Define your control framework** — Document your organization's security controls.
-2. **Map controls to policies** — For each control, identify Azure Policy definitions (built-in or custom) that evaluate compliance.
-3. **Create a policy initiative** — Group the mapped policies into an initiative.
-4. **Assign the initiative** — Assign it at the management group or subscription level.
-5. **Register as a compliance standard** — Use the Defender for Cloud API to register your custom initiative as a regulatory standard so it appears in the compliance dashboard.
+1. **Definir seu framework de controles** — Documentar os controles de segurança da sua organização.
+2. **Mapear controles para policies** — Para cada controle, identificar definições de Azure Policy (integradas ou personalizadas) que avaliam conformidade.
+3. **Criar uma iniciativa de policy** — Agrupar as policies mapeadas em uma iniciativa.
+4. **Atribuir a iniciativa** — Atribuí-la no nível de grupo de gerenciamento ou assinatura.
+5. **Registrar como padrão de conformidade** — Usar a API do Defender for Cloud para registrar sua iniciativa personalizada como padrão regulatório para que apareça no painel de conformidade.
 
-Example custom initiative structure:
+Exemplo de estrutura de iniciativa personalizada:
 
 ```json
 {
@@ -194,49 +194,49 @@ Example custom initiative structure:
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Use built-in initiatives as your baseline** — Start with MCSB and layer additional framework-specific initiatives as needed. Do not duplicate controls that MCSB already covers.
+1. **Use iniciativas integradas como sua baseline** — Comece com MCSB e adicione iniciativas específicas de framework adicionais conforme necessário. Não duplique controles que o MCSB já cobre.
 
-2. **Create custom initiatives for organization-specific requirements** — Map your internal security policies to Azure Policy definitions and register them as compliance standards in Defender for Cloud.
+2. **Crie iniciativas personalizadas para requisitos específicos da organização** — Mapeie suas políticas de segurança internas para definições de Azure Policy e registre-as como padrões de conformidade no Defender for Cloud.
 
-3. **Assign compliance initiatives at the management group level** — This ensures consistent coverage across all subscriptions and avoids per-subscription management overhead.
+3. **Atribua iniciativas de conformidade no nível de grupo de gerenciamento** — Isso garante cobertura consistente em todas as assinaturas e evita overhead de gerenciamento por assinatura.
 
-4. **Separate enforcement from compliance reporting** — Use compliance initiatives in Audit mode for visibility and reporting. Use separate Deny/Modify policy assignments for enforcement. This keeps compliance reporting clean and avoids double-counting.
+4. **Separe aplicação de relatórios de conformidade** — Use iniciativas de conformidade em modo Audit para visibilidade e relatórios. Use atribuições separadas de policy Deny/Modify para aplicação. Isso mantém os relatórios de conformidade limpos e evita contagem dupla.
 
-5. **Automate compliance reporting** — Export compliance data using the Azure Policy Compliance REST API or Azure Resource Graph queries. Integrate with your GRC (Governance, Risk, and Compliance) tooling.
+5. **Automatize relatórios de conformidade** — Exporte dados de conformidade usando a API REST de Conformidade do Azure Policy ou consultas do Azure Resource Graph. Integre com suas ferramentas de GRC (Governança, Risco e Conformidade).
 
-6. **Review compliance posture regularly** — Schedule weekly or monthly compliance reviews using the Defender for Cloud dashboard. Track trends over time.
+6. **Revise a postura de conformidade regularmente** — Agende revisões semanais ou mensais de conformidade usando o painel do Defender for Cloud. Rastreie tendências ao longo do tempo.
 
-7. **Use exemptions for accepted risk** — When a resource legitimately cannot comply with a control, create a policy exemption with documented justification rather than ignoring the non-compliance.
+7. **Use isenções para risco aceito** — Quando um recurso legitimamente não pode cumprir um controle, crie uma isenção de policy com justificativa documentada em vez de ignorar a não conformidade.
 
-8. **Map to multiple frameworks simultaneously** — MCSB's cross-framework mappings let you demonstrate compliance to multiple standards with a single set of controls. Use this to reduce audit burden.
+8. **Mapeie para múltiplos frameworks simultaneamente** — Os mapeamentos cross-framework do MCSB permitem demonstrar conformidade com múltiplos padrões com um único conjunto de controles. Use isso para reduzir a carga de auditoria.
 
-9. **Prepare for audits proactively** — Keep compliance reports current, document all exemptions, and maintain evidence of remediation actions. Auditors will ask for point-in-time compliance snapshots.
+9. **Prepare-se para auditorias proativamente** — Mantenha relatórios de conformidade atualizados, documente todas as isenções e mantenha evidências de ações de remediação. Auditores pedirão snapshots de conformidade point-in-time.
 
-10. **Integrate compliance into CI/CD** — Use Azure Policy's compliance check APIs in your deployment pipelines to catch non-compliant deployments before they reach production.
-
----
-
-## Common Pitfalls
-
-1. **Confusing Azure compliance with organizational compliance** — Azure provides tools and controls, but compliance is ultimately your responsibility. Assigning a NIST initiative does not make you NIST-compliant — you must also address controls outside Azure's scope (people, processes, physical security).
-
-2. **Assigning too many overlapping initiatives** — Multiple compliance initiatives often include the same underlying policies. This creates duplicate findings in the compliance dashboard and inflates the remediation workload. Rationalize your initiative assignments.
-
-3. **Ignoring "Not Applicable" controls** — Some controls in a framework may not apply to your environment. Document why they are not applicable rather than leaving them unaddressed.
-
-4. **Not tracking compliance over time** — A point-in-time compliance snapshot has limited value. Track compliance trends to identify regression and measure improvement.
-
-5. **Treating compliance as a one-time project** — Regulatory compliance is an ongoing process. Resources are constantly being deployed and modified. Without continuous monitoring, compliance drift is inevitable.
-
-6. **Not involving compliance teams early** — Technical teams may implement controls that do not satisfy the specific evidence requirements that auditors need. Involve compliance and legal teams when defining control implementations.
+10. **Integre conformidade no CI/CD** — Use as APIs de verificação de conformidade do Azure Policy em seus pipelines de implantação para detectar implantações não conformes antes que cheguem à produção.
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Azure Resource Graph: Query Compliance State
+1. **Confundir conformidade do Azure com conformidade organizacional** — O Azure fornece ferramentas e controles, mas a conformidade é, em última instância, sua responsabilidade. Atribuir uma iniciativa NIST não torna você conforme ao NIST — você também deve abordar controles fora do escopo do Azure (pessoas, processos, segurança física).
+
+2. **Atribuir muitas iniciativas sobrepostas** — Múltiplas iniciativas de conformidade frequentemente incluem as mesmas policies subjacentes. Isso cria achados duplicados no painel de conformidade e infla a carga de trabalho de remediação. Racionalize suas atribuições de iniciativa.
+
+3. **Ignorar controles "Não Aplicável"** — Alguns controles em um framework podem não se aplicar ao seu ambiente. Documente por que não são aplicáveis em vez de deixá-los sem tratamento.
+
+4. **Não rastrear conformidade ao longo do tempo** — Um snapshot point-in-time de conformidade tem valor limitado. Rastreie tendências de conformidade para identificar regressão e medir melhoria.
+
+5. **Tratar conformidade como um projeto único** — Conformidade regulatória é um processo contínuo. Recursos estão constantemente sendo implantados e modificados. Sem monitoramento contínuo, a deriva de conformidade é inevitável.
+
+6. **Não envolver equipes de conformidade cedo** — Equipes técnicas podem implementar controles que não satisfazem os requisitos específicos de evidência que auditores precisam. Envolva equipes de conformidade e jurídicas ao definir implementações de controle.
+
+---
+
+## Exemplos de Código
+
+### Azure Resource Graph: Consultar Estado de Conformidade
 
 ```kusto
 PolicyResources
@@ -253,16 +253,16 @@ PolicyResources
 | order by CompliancePercentage asc
 ```
 
-### Azure CLI: List Compliance States for an Initiative Assignment
+### Azure CLI: Listar Estados de Conformidade para uma Atribuição de Iniciativa
 
 ```bash
-# Get compliance summary for a specific policy assignment
+# Obter resumo de conformidade para uma atribuição de policy específica
 az policy state summarize \
   --policy-assignment "nist-800-53-assignment" \
   --top 10
 ```
 
-### Bicep: Assign a Regulatory Compliance Initiative
+### Bicep: Atribuir uma Iniciativa de Conformidade Regulatória
 
 ```bicep
 targetScope = 'subscription'
@@ -287,21 +287,21 @@ resource complianceAssignment 'Microsoft.Authorization/policyAssignments@2024-04
 
 ---
 
-## References
+## Referências
 
-- [Microsoft Cloud Security Benchmark overview](https://learn.microsoft.com/en-us/security/benchmark/azure/overview)
-- [MCSB control domains](https://learn.microsoft.com/en-us/security/benchmark/azure/mcsb-overview)
-- [Regulatory compliance in Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/regulatory-compliance-dashboard)
-- [Azure Policy regulatory compliance built-in initiatives](https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-initiatives#regulatory-compliance)
-- [Azure compliance documentation](https://learn.microsoft.com/en-us/azure/compliance/)
+- [Visão geral do Microsoft Cloud Security Benchmark](https://learn.microsoft.com/en-us/security/benchmark/azure/overview)
+- [Domínios de controle do MCSB](https://learn.microsoft.com/en-us/security/benchmark/azure/mcsb-overview)
+- [Conformidade regulatória no Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/regulatory-compliance-dashboard)
+- [Iniciativas integradas de conformidade regulatória do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-initiatives#regulatory-compliance)
+- [Documentação de conformidade do Azure](https://learn.microsoft.com/en-us/azure/compliance/)
 - [Microsoft Trust Center](https://www.microsoft.com/en-us/trust-center)
-- [Custom compliance standards in Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/custom-security-policies)
-- [Shared responsibility in the cloud](https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility)
-- [Azure Policy compliance states](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data)
-- [NIST SP 800-53 Rev. 5 initiative](https://learn.microsoft.com/en-us/azure/governance/policy/samples/nist-sp-800-53-r5)
+- [Padrões de conformidade personalizados no Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/custom-security-policies)
+- [Responsabilidade compartilhada na nuvem](https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility)
+- [Estados de conformidade do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data)
+- [Iniciativa NIST SP 800-53 Rev. 5](https://learn.microsoft.com/en-us/azure/governance/policy/samples/nist-sp-800-53-r5)
 
 ---
 
-Previous | Next
+Anterior | Próximo
 :--- | :---
-[Chapter 9 — Azure Policy](/guide/part-3-policy-compliance/ch09-azure-policy.md) | [Chapter 11 — Microsoft Defender for Cloud](/guide/part-3-policy-compliance/ch11-defender-for-cloud.md)
+[Capítulo 9 — Azure Policy](/guide/part-3-policy-compliance/ch09-azure-policy.md) | [Capítulo 11 — Microsoft Defender for Cloud](/guide/part-3-policy-compliance/ch11-defender-for-cloud.md)

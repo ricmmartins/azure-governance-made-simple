@@ -1,82 +1,82 @@
-# Chapter 8 — Managed Identities & Workload Identity
+# Capítulo 8 — Managed Identities & Workload Identity
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-Credentials are a liability. Every secret stored in code, configuration, or a key vault is a secret that can leak. **Managed identities** eliminate this risk for Azure workloads by providing an automatically managed identity in Microsoft Entra ID — no passwords, no certificates, no rotation headaches.
+Credenciais são um passivo. Todo segredo armazenado em código, configuração ou key vault é um segredo que pode vazar. **Managed identities** eliminam esse risco para cargas de trabalho Azure fornecendo uma identidade gerenciada automaticamente no Microsoft Entra ID — sem senhas, sem certificados, sem dores de cabeça com rotação.
 
-**Workload Identity Federation** extends this model beyond Azure, letting external workloads (GitHub Actions, Kubernetes clusters, other cloud providers) authenticate to Microsoft Entra ID without storing secrets, using federated credentials based on industry-standard OIDC tokens.
+**Workload Identity Federation** estende esse modelo para além do Azure, permitindo que cargas de trabalho externas (GitHub Actions, clusters Kubernetes, outros provedores de nuvem) se autentiquem no Microsoft Entra ID sem armazenar segredos, usando credenciais federadas baseadas em tokens OIDC padrão da indústria.
 
-Together, these capabilities form the foundation of a **secretless** authentication strategy — and that's a governance win.
+Juntas, essas capacidades formam a base de uma estratégia de autenticação **sem segredos (secretless)** — e isso é uma vitória de governança.
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Managed Identities — The Basics
+### Managed Identities — O Básico
 
-A managed identity is a service principal in Microsoft Entra ID whose lifecycle is tied to an Azure resource. Azure handles credential creation, rotation, and deletion automatically.
+Uma managed identity é um service principal no Microsoft Entra ID cujo ciclo de vida está vinculado a um recurso Azure. O Azure gerencia a criação, rotação e exclusão de credenciais automaticamente.
 
 ![Managed Identity Flow](/images/managed-identity-flow.svg)
 
-There is no password or certificate for you to manage — Azure rotates the underlying credentials automatically.
+Não há senha ou certificado para você gerenciar — o Azure rotaciona as credenciais subjacentes automaticamente.
 
 ### System-Assigned vs. User-Assigned
 
-| Dimension | System-Assigned | User-Assigned |
-|-----------|----------------|---------------|
-| **Lifecycle** | Tied to the Azure resource. Created when enabled, deleted when the resource is deleted. | Independent. You create it as a standalone resource and attach it to one or more Azure resources. |
-| **Sharing** | One identity per resource. Cannot be shared. | Can be assigned to multiple resources. |
-| **Use case** | Simple, single-resource scenarios. The identity doesn't outlive the resource. | Shared identity across multiple resources (e.g., several VMs accessing the same storage account), or when you need the identity to persist across resource re-creation. |
-| **Governance** | Easy to audit — identity maps 1:1 to a resource. | Requires deliberate lifecycle management to avoid orphaned identities. |
+| Dimensão | System-Assigned | User-Assigned |
+|----------|----------------|---------------|
+| **Ciclo de vida** | Vinculada ao recurso Azure. Criada quando habilitada, excluída quando o recurso é excluído. | Independente. Você a cria como um recurso standalone e a anexa a um ou mais recursos Azure. |
+| **Compartilhamento** | Uma identidade por recurso. Não pode ser compartilhada. | Pode ser atribuída a múltiplos recursos. |
+| **Caso de uso** | Cenários simples de recurso único. A identidade não sobrevive ao recurso. | Identidade compartilhada entre múltiplos recursos (ex.: diversas VMs acessando a mesma storage account), ou quando você precisa que a identidade persista entre recriações de recurso. |
+| **Governança** | Fácil de auditar — identidade mapeia 1:1 para um recurso. | Requer gerenciamento deliberado de ciclo de vida para evitar identidades órfãs. |
 
-### When to Use Each
+### Quando Usar Cada Uma
 
-- **System-assigned** — Use when the identity is exclusively for that one resource and should be automatically cleaned up with it. Example: a single Function App accessing a specific Key Vault.
+- **System-assigned** — Use quando a identidade é exclusivamente para aquele único recurso e deve ser automaticamente limpa junto com ele. Exemplo: um Function App individual acessando um Key Vault específico.
 
-- **User-assigned** — Use when multiple resources need the same identity, or when you need to pre-create the identity before the resource exists (common in infrastructure-as-code pipelines). Example: a pool of VMs behind a load balancer that all need access to a shared storage account.
+- **User-assigned** — Use quando múltiplos recursos precisam da mesma identidade, ou quando você precisa pré-criar a identidade antes do recurso existir (comum em pipelines de infraestrutura como código). Exemplo: um pool de VMs atrás de um load balancer que todas precisam acessar uma storage account compartilhada.
 
-> **Governance recommendation:** Default to **user-assigned** for production workloads. The slight additional management overhead is offset by better control over identity lifecycle, cleaner RBAC assignments, and easier migration when resources are recreated.
+> **Recomendação de governança:** Use **user-assigned** como padrão para cargas de trabalho de produção. O leve overhead adicional de gerenciamento é compensado por melhor controle sobre o ciclo de vida da identidade, atribuições RBAC mais limpas e migração mais fácil quando recursos são recriados.
 
 ---
 
 ## Workload Identity Federation
 
-### What It Is
+### O que É
 
-Workload Identity Federation lets external identity providers (IdPs) issue tokens that Microsoft Entra ID trusts — without exchanging secrets. You configure a **federated credential** on an app registration or user-assigned managed identity that says, *"I trust tokens from this issuer, for this subject."*
+Workload Identity Federation permite que provedores de identidade (IdPs) externos emitam tokens nos quais o Microsoft Entra ID confia — sem trocar segredos. Você configura uma **credencial federada** em um app registration ou user-assigned managed identity que diz: *"Eu confio em tokens deste emissor, para este sujeito."*
 
-### How It Works
+### Como Funciona
 
 ![Workload Identity Federation Flow](/images/workload-identity-flow.svg)
 
-No client secret. No certificate. The trust is based on the token's issuer (`iss`) and subject (`sub`) claims matching the federated credential configuration.
+Sem client secret. Sem certificado. A confiança é baseada nas claims de emissor (`iss`) e sujeito (`sub`) do token correspondendo à configuração da credencial federada.
 
-### Common Scenarios
+### Cenários Comuns
 
-| Scenario | Issuer | Subject Example |
-|----------|--------|-----------------|
+| Cenário | Emissor | Exemplo de Subject |
+|---------|---------|-------------------|
 | **GitHub Actions** | `https://token.actions.githubusercontent.com` | `repo:contoso/app:ref:refs/heads/main` |
-| **Kubernetes (AKS, EKS, GKE)** | The cluster's OIDC issuer URL | `system:serviceaccount:my-namespace:my-sa` |
-| **Other clouds (AWS, GCP)** | The cloud provider's STS/OIDC endpoint | Provider-specific subject claims |
-| **Terraform Cloud/Enterprise** | `https://app.terraform.io` | Organization and workspace identifier |
+| **Kubernetes (AKS, EKS, GKE)** | URL do emissor OIDC do cluster | `system:serviceaccount:my-namespace:my-sa` |
+| **Outras nuvens (AWS, GCP)** | Endpoint STS/OIDC do provedor de nuvem | Claims de subject específicas do provedor |
+| **Terraform Cloud/Enterprise** | `https://app.terraform.io` | Identificador de organização e workspace |
 
-### Best Practices for Federation
+### Melhores Práticas para Federação
 
-1. **Scope the subject claim narrowly** — for GitHub Actions, restrict to a specific repo *and* branch (e.g., `repo:contoso/app:ref:refs/heads/main`). A wildcard subject claim is as dangerous as a leaked secret.
+1. **Restrinja a claim de subject ao máximo** — para GitHub Actions, restrinja a um repositório *e* branch específicos (ex.: `repo:contoso/app:ref:refs/heads/main`). Uma claim de subject com wildcard é tão perigosa quanto um segredo vazado.
 
-2. **Prefer managed identities over app registrations** — when using federation with Azure workloads, federate on a user-assigned managed identity rather than an app registration. Managed identities don't have client secrets that could be accidentally created later.
+2. **Prefira managed identities a app registrations** — ao usar federação com cargas de trabalho Azure, federe em uma user-assigned managed identity em vez de um app registration. Managed identities não têm client secrets que possam ser acidentalmente criados depois.
 
-3. **Rotate federated credentials if the external IdP changes** — if you change your Kubernetes cluster's OIDC configuration or move repositories, update the federated credentials.
+3. **Rotacione credenciais federadas se o IdP externo mudar** — se você alterar a configuração OIDC do cluster Kubernetes ou mover repositórios, atualize as credenciais federadas.
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Bicep — Create a user-assigned managed identity and assign a role
+### Bicep — Criar uma user-assigned managed identity e atribuir uma função
 
 ```bicep
 @description('The Azure region for the managed identity.')
@@ -117,7 +117,7 @@ output identityClientId string = managedIdentity.properties.clientId
 output identityPrincipalId string = managedIdentity.properties.principalId
 ```
 
-### Bicep — Assign a system-assigned managed identity to a Web App
+### Bicep — Atribuir uma system-assigned managed identity a um Web App
 
 ```bicep
 resource webApp 'Microsoft.Web/sites@2023-12-01' = {
@@ -134,9 +134,9 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
 output webAppPrincipalId string = webApp.identity.principalId
 ```
 
-### Using DefaultAzureCredential in Application Code
+### Usando DefaultAzureCredential no Código da Aplicação
 
-The `DefaultAzureCredential` class from the Azure Identity SDK provides a seamless authentication experience that works across local development and production. It tries multiple credential sources in order — managed identity, environment variables, Azure CLI, and more — so the same code works everywhere.
+A classe `DefaultAzureCredential` do Azure Identity SDK fornece uma experiência de autenticação transparente que funciona tanto no desenvolvimento local quanto em produção. Ela tenta múltiplas fontes de credencial em ordem — managed identity, variáveis de ambiente, Azure CLI e mais — então o mesmo código funciona em qualquer lugar.
 
 **Python:**
 
@@ -189,7 +189,7 @@ for await (const container of blobServiceClient.listContainers()) {
 }
 ```
 
-> **Tip:** In production, if you're using a user-assigned managed identity, pass the client ID to `DefaultAzureCredential` to avoid ambiguity when multiple identities are assigned to the same resource:
+> **Dica:** Em produção, se estiver usando uma user-assigned managed identity, passe o client ID para `DefaultAzureCredential` para evitar ambiguidade quando múltiplas identidades estão atribuídas ao mesmo recurso:
 >
 > ```python
 > credential = DefaultAzureCredential(managed_identity_client_id="<client-id>")
@@ -197,13 +197,13 @@ for await (const container of blobServiceClient.listContainers()) {
 
 ---
 
-## Governance of Identity Proliferation
+## Governança da Proliferação de Identidades
 
-Managed identities are easy to create — perhaps too easy. Without governance, you end up with hundreds of identities, many of them orphaned (the resource they were attached to is long gone, but the identity lingers in Entra ID).
+Managed identities são fáceis de criar — talvez fáceis demais. Sem governança, você acaba com centenas de identidades, muitas delas órfãs (o recurso ao qual estavam anexadas há muito tempo se foi, mas a identidade persiste no Entra ID).
 
-### How to Track and Audit Managed Identities
+### Como Rastrear e Auditar Managed Identities
 
-1. **Use Azure Resource Graph** to inventory all managed identities across subscriptions:
+1. **Use Azure Resource Graph** para inventariar todas as managed identities entre subscriptions:
 
     ```kusto
     resources
@@ -212,7 +212,7 @@ Managed identities are easy to create — perhaps too easy. Without governance, 
     | order by subscriptionId, resourceGroup
     ```
 
-2. **Detect orphaned user-assigned identities** — when a resource is deleted, its system-assigned identity's service principal may linger briefly (Azure cleans it up, but there can be a delay). For user-assigned identities, orphans are your responsibility. The following query cross-references identity assignments across all resources to find identities that no resource references:
+2. **Detecte user-assigned identities órfãs** — quando um recurso é excluído, o service principal da system-assigned identity pode persistir brevemente (o Azure faz a limpeza, mas pode haver um atraso). Para user-assigned identities, identidades órfãs são sua responsabilidade. A consulta a seguir cruza atribuições de identidade em todos os recursos para encontrar identidades que nenhum recurso referencia:
 
     ```kusto
     resources
@@ -228,64 +228,64 @@ Managed identities are easy to create — perhaps too easy. Without governance, 
     ) on $left.identityId == $right.uaiId
     ```
 
-3. **Review RBAC assignments for managed identities** — combine identity inventory with role assignment data to find identities with excessive permissions:
+3. **Revise atribuições RBAC para managed identities** — combine o inventário de identidades com dados de atribuição de função para encontrar identidades com permissões excessivas:
 
     ```bash
     az role assignment list --all --query "[?principalType=='ServicePrincipal']" --output table
     ```
 
-4. **Tag user-assigned managed identities** — apply tags like `owner`, `project`, and `environment` to every user-assigned managed identity. This makes it possible to identify ownership and clean up stale identities.
+4. **Aplique tags em user-assigned managed identities** — aplique tags como `owner`, `project` e `environment` em toda user-assigned managed identity. Isso torna possível identificar proprietários e limpar identidades obsoletas.
 
-5. **Enforce naming conventions** — use a consistent prefix (e.g., `mi-<app>-<env>`) so managed identities are easily identifiable in Entra ID and Azure Resource Graph.
+5. **Aplique convenções de nomenclatura** — use um prefixo consistente (ex.: `mi-<app>-<env>`) para que managed identities sejam facilmente identificáveis no Entra ID e Azure Resource Graph.
 
-6. **Use Azure Policy** to enforce governance:
-    - Require tags on `Microsoft.ManagedIdentity/userAssignedIdentities` resources.
-    - Audit resources that use system-assigned identities when a user-assigned identity is preferred.
-
----
-
-## Best Practices
-
-1. **Prefer managed identities over service principals with secrets** — if your workload runs on Azure, there is almost never a reason to use client secrets or certificates.
-
-2. **Default to user-assigned for production** — they survive resource re-creation, can be shared, and have clearer lifecycle management.
-
-3. **Use Workload Identity Federation for external workloads** — GitHub Actions, Terraform Cloud, Kubernetes — all support OIDC federation. Stop storing secrets in CI/CD.
-
-4. **Apply least privilege RBAC to managed identities** — a managed identity is still a security principal. Assign the narrowest role possible (see [Chapter 6 — RBAC](ch06-rbac.md)).
-
-5. **Include managed identities in access reviews** — use Microsoft Entra access reviews to periodically verify that managed identities still need their role assignments (see [Chapter 7 — Entra ID Governance](ch07-entra-id-governance.md)).
-
-6. **Clean up orphaned identities** — schedule periodic sweeps using Azure Resource Graph queries. An orphaned identity with standing permissions is a risk.
-
-7. **Use DefaultAzureCredential in application code** — it provides a consistent, credential-free developer experience that automatically uses the right credential for the environment.
+6. **Use Azure Policy** para aplicar governança:
+    - Exija tags em recursos `Microsoft.ManagedIdentity/userAssignedIdentities`.
+    - Audite recursos que usam system-assigned identities quando uma user-assigned identity é preferida.
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Why It Hurts | Fix |
-|---------|-------------|-----|
-| Using client secrets "because it's simpler" | Secrets leak. They end up in logs, config files, and source control. | Use managed identities or workload identity federation. |
-| Creating a system-assigned identity on every resource | Fine for simple cases, but leads to a proliferation of role assignments that are hard to audit. | Use user-assigned identities when multiple resources need the same access. |
-| Orphaned user-assigned identities | They linger in Entra ID with active RBAC assignments, creating a risk surface. | Tag identities, query with Resource Graph, and schedule clean-up. |
-| Using `DefaultAzureCredential` without specifying client ID in multi-identity scenarios | The SDK may pick the wrong identity, causing intermittent auth failures. | Pass the explicit `managed_identity_client_id`. |
-| Wildcard subject claims in federated credentials | Any workflow in the repo (or org) can authenticate as the identity. | Scope to specific repo, branch, and environment. |
+1. **Prefira managed identities a service principals com segredos** — se sua carga de trabalho roda no Azure, quase nunca há razão para usar client secrets ou certificados.
+
+2. **Use user-assigned como padrão para produção** — elas sobrevivem à recriação de recursos, podem ser compartilhadas e têm gerenciamento de ciclo de vida mais claro.
+
+3. **Use Workload Identity Federation para cargas de trabalho externas** — GitHub Actions, Terraform Cloud, Kubernetes — todos suportam federação OIDC. Pare de armazenar segredos em CI/CD.
+
+4. **Aplique RBAC de menor privilégio em managed identities** — uma managed identity ainda é um security principal. Atribua a função mais restrita possível (veja o [Capítulo 6 — RBAC](ch06-rbac.md)).
+
+5. **Inclua managed identities nas access reviews** — use access reviews do Microsoft Entra para verificar periodicamente se managed identities ainda precisam de suas atribuições de função (veja o [Capítulo 7 — Entra ID Governance](ch07-entra-id-governance.md)).
+
+6. **Limpe identidades órfãs** — agende varreduras periódicas usando consultas do Azure Resource Graph. Uma identidade órfã com permissões permanentes é um risco.
+
+7. **Use DefaultAzureCredential no código da aplicação** — fornece uma experiência de desenvolvimento consistente e sem credenciais que automaticamente usa a credencial certa para o ambiente.
 
 ---
 
-## References
+## Armadilhas Comuns
 
-- [Managed identities for Azure resources](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+| Armadilha | Por Que Prejudica | Correção |
+|-----------|-------------------|----------|
+| Usar client secrets "porque é mais simples" | Segredos vazam. Acabam em logs, arquivos de configuração e controle de versão. | Use managed identities ou workload identity federation. |
+| Criar uma system-assigned identity em cada recurso | Bom para casos simples, mas leva a uma proliferação de atribuições de função difíceis de auditar. | Use user-assigned identities quando múltiplos recursos precisam do mesmo acesso. |
+| User-assigned identities órfãs | Persistem no Entra ID com atribuições RBAC ativas, criando uma superfície de risco. | Aplique tags nas identidades, consulte com Resource Graph e agende limpeza. |
+| Usar `DefaultAzureCredential` sem especificar client ID em cenários multi-identidade | O SDK pode escolher a identidade errada, causando falhas intermitentes de autenticação. | Passe o `managed_identity_client_id` explicitamente. |
+| Claims de subject com wildcard em credenciais federadas | Qualquer workflow no repositório (ou organização) pode se autenticar como a identidade. | Restrinja a repositório, branch e ambiente específicos. |
+
+---
+
+## Referências
+
+- [Managed identities para recursos Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [User-assigned vs. system-assigned managed identities](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/managed-identity-best-practice-recommendations)
 - [Workload Identity Federation](https://learn.microsoft.com/entra/workload-id/workload-identity-federation)
 - [DefaultAzureCredential (Azure Identity SDK)](https://learn.microsoft.com/python/api/azure-identity/azure.identity.defaultazurecredential)
-- [Azure Resource Graph queries for managed identities](https://learn.microsoft.com/azure/governance/resource-graph/samples/starter)
-- [RBAC — Chapter 6](ch06-rbac.md)
-- [Microsoft Entra ID Governance — Chapter 7](ch07-entra-id-governance.md)
+- [Consultas Azure Resource Graph para managed identities](https://learn.microsoft.com/azure/governance/resource-graph/samples/starter)
+- [RBAC — Capítulo 6](ch06-rbac.md)
+- [Microsoft Entra ID Governance — Capítulo 7](ch07-entra-id-governance.md)
 
 ---
 
-Previous | Next
+Anterior | Próximo
 :--- | :---
-[Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md) | [Part 3 — Policy & Compliance](../part-3-policy-compliance/ch09-azure-policy.md)
+[Capítulo 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md) | [Parte 3 — Política & Conformidade](../part-3-policy-compliance/ch09-azure-policy.md)

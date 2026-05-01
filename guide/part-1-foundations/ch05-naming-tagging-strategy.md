@@ -1,56 +1,56 @@
-# Chapter 5 — Naming and Tagging Strategy
+# Capítulo 5 — Estratégia de Nomenclatura e Etiquetagem
 
 > **Last verified: 2026-04-06**
 
 ---
 
-## Overview
+## Visão Geral
 
-Naming conventions and tagging strategies are two of the most impactful governance controls you can implement — and two of the most frequently neglected. Without them, your Azure environment becomes an unmanageable collection of cryptically named resources with no way to determine who owns them, what they cost, or which application they support.
+Convenções de nomenclatura e estratégias de etiquetagem são dois dos controles de governança mais impactantes que você pode implementar — e dois dos mais frequentemente negligenciados. Sem eles, seu ambiente Azure se torna uma coleção ingerenciável de recursos com nomes crípticos sem nenhuma forma de determinar quem os possui, quanto custam ou qual aplicação suportam.
 
-This chapter covers both topics together because they are complementary:
+Este capítulo cobre ambos os tópicos juntos porque são complementares:
 
-- **Naming conventions** make resources identifiable at a glance.
-- **Tags** add structured metadata for cost allocation, automation, compliance, and operations.
+- **Convenções de nomenclatura** tornam os recursos identificáveis à primeira vista.
+- **Tags** adicionam metadados estruturados para alocação de custos, automação, conformidade e operações.
 
-Together, they form the **organizational backbone** of your governance strategy.
-
----
-
-## Architecture: How Naming and Tagging Fit into Governance
-
-![Naming and Tagging Architecture](/images/naming-tagging-architecture.svg)
+Juntos, eles formam a **espinha dorsal organizacional** da sua estratégia de governança.
 
 ---
 
-## Part 1 — Naming Conventions
+## Arquitetura: Como Nomenclatura e Etiquetagem se Encaixam na Governança
 
-### Why Naming Matters
+![Arquitetura de Nomenclatura e Etiquetagem](/images/naming-tagging-architecture.svg)
 
-In a well-governed environment, you should be able to look at a resource name and immediately understand:
+---
 
-- **What type of resource** it is (VM, storage account, key vault)
-- **What workload** it belongs to (payments, CRM, data-platform)
-- **What environment** it is in (production, staging, development)
-- **What region** it is deployed to (westeurope, eastus2)
+## Parte 1 — Convenções de Nomenclatura
 
-Without a naming convention, you end up with resources named `myvm1`, `test-storage`, or `prod2-backup-old-DONOT-DELETE` — names that convey no useful information and make governance impossible at scale.
+### Por Que a Nomenclatura É Importante
 
-### Recommended Naming Convention Pattern
+Em um ambiente bem governado, você deve ser capaz de olhar para o nome de um recurso e imediatamente entender:
 
-The Cloud Adoption Framework recommends the following pattern:
+- **Que tipo de recurso** é (VM, storage account, key vault)
+- **A qual carga de trabalho** pertence (payments, CRM, data-platform)
+- **Em qual ambiente** está (produção, staging, desenvolvimento)
+- **Em qual região** está implantado (westeurope, eastus2)
+
+Sem uma convenção de nomenclatura, você acaba com recursos nomeados `myvm1`, `test-storage` ou `prod2-backup-old-DONOT-DELETE` — nomes que não transmitem informação útil e tornam a governança impossível em escala.
+
+### Padrão de Convenção de Nomenclatura Recomendado
+
+O Cloud Adoption Framework recomenda o seguinte padrão:
 
 ```
 {resource-type}-{workload}-{environment}-{region}-{instance}
 ```
 
-**Examples:**
+**Exemplos:**
 
-| Resource | Name |
+| Recurso | Nome |
 |---|---|
 | Resource group | `rg-payments-prod-westeu` |
-| Virtual machine | `vm-payments-prod-westeu-001` |
-| Storage account | `stpaymentsprodwesteu001` (no hyphens — storage account constraint) |
+| Máquina virtual | `vm-payments-prod-westeu-001` |
+| Storage account | `stpaymentsprodwesteu001` (sem hífens — restrição de storage account) |
 | Key vault | `kv-payments-prod-westeu` |
 | Virtual network | `vnet-payments-prod-westeu` |
 | Network security group | `nsg-payments-prod-westeu` |
@@ -58,20 +58,20 @@ The Cloud Adoption Framework recommends the following pattern:
 | SQL Database | `sql-payments-prod-westeu` |
 | Log Analytics workspace | `log-payments-prod-westeu` |
 
-### Common Azure Resource Abbreviations
+### Abreviações Comuns de Recursos do Azure
 
-Use these standardized abbreviations as the `{resource-type}` prefix. This is a subset of the [full CAF abbreviation list](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations):
+Use estas abreviações padronizadas como o prefixo `{resource-type}`. Este é um subconjunto da [lista completa de abreviações do CAF](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations):
 
-| Resource Type | Abbreviation | Example |
+| Tipo de Recurso | Abreviação | Exemplo |
 |---|---|---|
 | Resource group | `rg` | `rg-payments-prod-westeu` |
-| Virtual machine | `vm` | `vm-web-prod-eastus2-001` |
+| Máquina virtual | `vm` | `vm-web-prod-eastus2-001` |
 | Storage account | `st` | `stwebprodeastus2001` |
 | Key vault | `kv` | `kv-web-prod-eastus2` |
 | Virtual network | `vnet` | `vnet-hub-prod-westeu` |
 | Subnet | `snet` | `snet-app-prod-westeu` |
 | Network security group | `nsg` | `nsg-app-prod-westeu` |
-| Public IP address | `pip` | `pip-fw-prod-westeu` |
+| Endereço IP público | `pip` | `pip-fw-prod-westeu` |
 | Load balancer | `lb` | `lb-web-prod-westeu` |
 | Application Gateway | `agw` | `agw-web-prod-westeu` |
 | Azure Firewall | `afw` | `afw-hub-prod-westeu` |
@@ -84,40 +84,40 @@ Use these standardized abbreviations as the `{resource-type}` prefix. This is a 
 | Log Analytics workspace | `log` | `log-central-prod-westeu` |
 | Application Insights | `appi` | `appi-web-prod-westeu` |
 | Managed identity | `id` | `id-app-prod-westeu` |
-| Azure Policy definition | `policy` | `policy-require-tags` |
+| Definição de Azure Policy | `policy` | `policy-require-tags` |
 | Management group | `mg` | `mg-landingzones` |
-| Subscription | `sub` | `sub-payments-prod` |
+| Assinatura | `sub` | `sub-payments-prod` |
 
-### Naming Constraints
+### Restrições de Nomenclatura
 
-Azure resources have different naming constraints. Be aware of:
+Os recursos do Azure têm diferentes restrições de nomenclatura. Esteja ciente de:
 
-| Resource | Max Length | Allowed Characters | Global Uniqueness |
+| Recurso | Comprimento Máximo | Caracteres Permitidos | Unicidade Global |
 |---|---|---|---|
-| Resource group | 90 | Alphanumeric, hyphen, underscore, period, parenthesis | Unique within subscription |
-| Storage account | 24 | Lowercase alphanumeric only (no hyphens) | Globally unique |
-| Key vault | 24 | Alphanumeric and hyphens | Globally unique |
-| Virtual machine | 64 (Linux), 15 (Windows) | Alphanumeric, hyphen, underscore | Unique within resource group |
-| App Service | 60 | Alphanumeric and hyphens | Globally unique |
+| Resource group | 90 | Alfanumérico, hífen, sublinhado, ponto, parêntesis | Único dentro da assinatura |
+| Storage account | 24 | Apenas alfanumérico minúsculo (sem hífens) | Globalmente único |
+| Key vault | 24 | Alfanumérico e hífens | Globalmente único |
+| Máquina virtual | 64 (Linux), 15 (Windows) | Alfanumérico, hífen, sublinhado | Único dentro do resource group |
+| App Service | 60 | Alfanumérico e hífens | Globalmente único |
 
-> **Tip:** For resources that require global uniqueness (storage accounts, key vaults, App Services), append a numeric instance suffix or hash to ensure uniqueness.
+> **Dica:** Para recursos que requerem unicidade global (storage accounts, key vaults, App Services), adicione um sufixo numérico de instância ou hash para garantir unicidade.
 
-### Environment Abbreviations
+### Abreviações de Ambiente
 
-| Environment | Abbreviation |
+| Ambiente | Abreviação |
 |---|---|
-| Production | `prod` |
+| Produção | `prod` |
 | Staging | `stag` |
-| Development | `dev` |
-| Test | `test` |
+| Desenvolvimento | `dev` |
+| Teste | `test` |
 | Sandbox | `sbx` |
-| Shared services | `shared` |
+| Serviços compartilhados | `shared` |
 
-### Region Abbreviations
+### Abreviações de Região
 
-Use short, recognizable abbreviations for Azure regions:
+Use abreviações curtas e reconhecíveis para regiões do Azure:
 
-| Region | Abbreviation |
+| Região | Abreviação |
 |---|---|
 | West Europe | `westeu` |
 | North Europe | `northeu` |
@@ -129,91 +129,91 @@ Use short, recognizable abbreviations for Azure regions:
 
 ---
 
-## Part 2 — Tagging Strategy
+## Parte 2 — Estratégia de Etiquetagem
 
-### Why Tags Matter
+### Por Que as Tags São Importantes
 
-Tags are key-value metadata pairs applied to Azure resources and resource groups. They enable:
+Tags são pares de metadados chave-valor aplicados a recursos e resource groups do Azure. Elas permitem:
 
-- **Cost allocation:** Which department or project is responsible for this spend?
-- **Automation:** Which resources should be shut down at night? Which should be backed up?
-- **Operations:** Who owns this resource? What SLA does it require?
-- **Compliance:** Is this resource subject to GDPR? PCI-DSS?
-- **Lifecycle management:** When was this resource created? When should it be reviewed?
+- **Alocação de custos:** Qual departamento ou projeto é responsável por este gasto?
+- **Automação:** Quais recursos devem ser desligados à noite? Quais devem ter backup?
+- **Operações:** Quem é o proprietário deste recurso? Qual SLA ele requer?
+- **Conformidade:** Este recurso está sujeito ao GDPR? PCI-DSS?
+- **Gerenciamento de ciclo de vida:** Quando este recurso foi criado? Quando deve ser revisado?
 
-Tags are applied to **resources and resource groups**, but tags on a resource group are **not** automatically inherited by the resources within it. Use Azure Policy to propagate tags from resource groups to resources (see code sample below).
+Tags são aplicadas a **recursos e resource groups**, mas tags em um resource group **não** são automaticamente herdadas pelos recursos dentro dele. Use Azure Policy para propagar tags de resource groups para recursos (veja o exemplo de código abaixo).
 
-### Recommended Minimum Tag Taxonomy
+### Taxonomia Mínima de Tags Recomendada
 
-Every organization should define a **minimum set of required tags**. Start with these and expand as needs mature:
+Toda organização deve definir um **conjunto mínimo de tags obrigatórias**. Comece com estas e expanda conforme as necessidades amadurecem:
 
-| Tag Name | Purpose | Example Value | Required? |
+| Nome da Tag | Propósito | Exemplo de Valor | Obrigatória? |
 |---|---|---|---|
-| `Environment` | Identifies the deployment environment | `prod`, `dev`, `test`, `stag` | ✅ Yes |
-| `Owner` | Contact for the resource (email or team name) | `payments-team@contoso.com` | ✅ Yes |
-| `CostCenter` | Maps spending to a financial cost center | `CC-4521` | ✅ Yes |
-| `Application` | Identifies the workload or application name | `payments-api` | ✅ Yes |
-| `CreatedBy` | How the resource was created | `bicep-pipeline`, `manual`, `terraform` | ✅ Yes |
-| `CreatedDate` | Date the resource was created (ISO 8601) | `2026-04-06` | 🟡 Recommended |
-| `Criticality` | Business criticality level | `high`, `medium`, `low` | 🟡 Recommended |
-| `DataClassification` | Sensitivity of data stored | `public`, `internal`, `confidential` | 🟡 Recommended |
-| `ExpirationDate` | When the resource should be reviewed or decommissioned | `2026-12-31` | 🟡 Recommended |
-| `AutoShutdown` | Whether the resource should be stopped after hours | `true`, `false` | 🟡 Recommended |
+| `Environment` | Identifica o ambiente de implantação | `prod`, `dev`, `test`, `stag` | ✅ Sim |
+| `Owner` | Contato do recurso (email ou nome da equipe) | `payments-team@contoso.com` | ✅ Sim |
+| `CostCenter` | Mapeia gastos para um centro de custo financeiro | `CC-4521` | ✅ Sim |
+| `Application` | Identifica o nome da carga de trabalho ou aplicação | `payments-api` | ✅ Sim |
+| `CreatedBy` | Como o recurso foi criado | `bicep-pipeline`, `manual`, `terraform` | ✅ Sim |
+| `CreatedDate` | Data de criação do recurso (ISO 8601) | `2026-04-06` | 🟡 Recomendada |
+| `Criticality` | Nível de criticidade para o negócio | `high`, `medium`, `low` | 🟡 Recomendada |
+| `DataClassification` | Sensibilidade dos dados armazenados | `public`, `internal`, `confidential` | 🟡 Recomendada |
+| `ExpirationDate` | Quando o recurso deve ser revisado ou descomissionado | `2026-12-31` | 🟡 Recomendada |
+| `AutoShutdown` | Se o recurso deve ser parado fora do horário comercial | `true`, `false` | 🟡 Recomendada |
 
-### Tag Limits
+### Limites de Tags
 
-- Maximum **50 tags** per resource or resource group.
-- Tag name: maximum **512 characters** (128 for storage accounts).
-- Tag value: maximum **256 characters**.
-- Tag names are **case-insensitive** for operations but **case-preserving** in storage.
+- Máximo de **50 tags** por recurso ou resource group.
+- Nome da tag: máximo de **512 caracteres** (128 para storage accounts).
+- Valor da tag: máximo de **256 caracteres**.
+- Nomes de tags são **insensíveis a maiúsculas/minúsculas** para operações, mas **preservam maiúsculas/minúsculas** no armazenamento.
 
 ---
 
-## How It Works: Enforcement via Azure Policy
+## Como Funciona: Aplicação via Azure Policy
 
-Naming conventions and tags are only useful if they are **enforced**. Azure Policy is the primary enforcement mechanism.
+Convenções de nomenclatura e tags só são úteis se forem **aplicadas**. O Azure Policy é o mecanismo principal de aplicação.
 
-### Policy Enforcement Modes
+### Modos de Aplicação de Política
 
-| Effect | Behavior |
+| Efeito | Comportamento |
 |---|---|
-| `deny` | Prevents resource creation if the condition is met (e.g., missing required tag) |
-| `audit` | Allows creation but flags non-compliance in the compliance dashboard |
-| `modify` | Automatically adds or corrects tag values during deployment |
-| `append` | Adds a tag if it does not exist (legacy — prefer `modify`) |
+| `deny` | Previne criação de recurso se a condição for atendida (ex.: tag obrigatória ausente) |
+| `audit` | Permite a criação mas sinaliza não-conformidade no dashboard de conformidade |
+| `modify` | Adiciona ou corrige automaticamente valores de tags durante a implantação |
+| `append` | Adiciona uma tag se ela não existir (legado — prefira `modify`) |
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Define naming and tagging standards before your first deployment.** Retroactive enforcement is painful — it is much easier to start right than to fix later.
-2. **Use Azure Policy `deny` for critical tags.** Environment, Owner, and CostCenter should be required on every resource group.
-3. **Use Azure Policy `modify` to inherit tags.** Automatically copy tags from resource groups to resources to reduce tagging burden on developers.
-4. **Document your conventions in a central, accessible location.** A governance wiki or README in your IaC repository is ideal.
-5. **Validate naming conventions in CI/CD.** Catch naming violations in pull request checks before deployment.
-6. **Review and update your tag taxonomy annually.** As your organization matures, your tagging needs will evolve.
-7. **Use tags for automation.** Shut down non-production VMs at night, identify resources for backup policies, or flag resources for decommissioning.
+1. **Defina padrões de nomenclatura e etiquetagem antes da sua primeira implantação.** A aplicação retroativa é dolorosa — é muito mais fácil começar certo do que corrigir depois.
+2. **Use `deny` do Azure Policy para tags críticas.** Environment, Owner e CostCenter devem ser obrigatórias em todo resource group.
+3. **Use `modify` do Azure Policy para herdar tags.** Copie automaticamente tags de resource groups para recursos para reduzir a carga de etiquetagem nos desenvolvedores.
+4. **Documente suas convenções em um local central e acessível.** Uma wiki de governança ou README no seu repositório de IaC é ideal.
+5. **Valide convenções de nomenclatura no CI/CD.** Capture violações de nomenclatura em verificações de pull request antes da implantação.
+6. **Revise e atualize sua taxonomia de tags anualmente.** Conforme sua organização amadurece, suas necessidades de etiquetagem evoluirão.
+7. **Use tags para automação.** Desligue VMs de não-produção à noite, identifique recursos para políticas de backup ou sinalize recursos para descomissionamento.
 
 ---
 
-## Common Pitfalls
+## Armadilhas Comuns
 
-| Pitfall | Why It Hurts | What to Do Instead |
+| Armadilha | Por Que Prejudica | O Que Fazer em Vez Disso |
 |---|---|---|
-| No naming convention | Resources are unidentifiable; automation and querying fail | Define and enforce a convention before deployment |
-| Too many required tags | Developers resist governance and find workarounds | Start with 4–5 required tags; expand gradually |
-| Assuming resource group tags are inherited | Resources end up untagged; cost allocation breaks | Use Azure Policy to propagate tags |
-| Inconsistent tag casing | `Environment` vs `environment` vs `ENVIRONMENT` creates chaos | Standardize on a single casing convention (PascalCase is common) |
-| Tags with no governance owner | Tag values drift; "owner" tags point to people who left the company | Assign a governance team to review tag compliance quarterly |
-| Naming convention is too long | Hits character limits on storage accounts, VMs | Use standard abbreviations; keep names concise |
+| Sem convenção de nomenclatura | Recursos são não identificáveis; automação e consultas falham | Defina e aplique uma convenção antes da implantação |
+| Muitas tags obrigatórias | Desenvolvedores resistem à governança e encontram soluções alternativas | Comece com 4–5 tags obrigatórias; expanda gradualmente |
+| Assumir que tags do resource group são herdadas | Recursos acabam sem tags; alocação de custos quebra | Use Azure Policy para propagar tags |
+| Capitalização inconsistente de tags | `Environment` vs `environment` vs `ENVIRONMENT` cria caos | Padronize em uma única convenção de capitalização (PascalCase é comum) |
+| Tags sem proprietário de governança | Valores de tags divergem; tags "owner" apontam para pessoas que saíram da empresa | Atribua uma equipe de governança para revisar conformidade de tags trimestralmente |
+| Convenção de nomenclatura muito longa | Atinge limites de caracteres em storage accounts, VMs | Use abreviações padrão; mantenha nomes concisos |
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Azure Policy — Require a Tag on Resource Groups
+### Azure Policy — Exigir uma Tag em Resource Groups
 
-This policy **denies** the creation of a resource group if the specified tag is missing:
+Esta política **nega** a criação de um resource group se a tag especificada estiver ausente:
 
 ```json
 {
@@ -252,7 +252,7 @@ This policy **denies** the creation of a resource group if the specified tag is 
 }
 ```
 
-**Deploy with Azure CLI:**
+**Implantar com Azure CLI:**
 
 ```bash
 # Create the policy definition
@@ -272,9 +272,9 @@ az policy assignment create \
   --scope "/subscriptions/<subscription-id>"
 ```
 
-### Azure Policy — Inherit a Tag from Resource Group
+### Azure Policy — Herdar uma Tag do Resource Group
 
-This policy uses the `modify` effect to automatically copy a tag from the resource group to resources that are missing it:
+Esta política usa o efeito `modify` para copiar automaticamente uma tag do resource group para recursos que não a possuem:
 
 ```json
 {
@@ -325,9 +325,9 @@ This policy uses the `modify` effect to automatically copy a tag from the resour
 }
 ```
 
-### Azure Policy — Enforce Naming Convention (Pattern Match)
+### Azure Policy — Aplicar Convenção de Nomenclatura (Correspondência de Padrão)
 
-This policy denies resources whose names do not match a specified pattern. Uses the `like` condition with `*` as a multi-character wildcard to enforce the pattern `vm-{workload}-{environment}-{region}-{instance}`:
+Esta política nega recursos cujos nomes não correspondem a um padrão especificado. Usa a condição `like` com `*` como curinga de múltiplos caracteres para aplicar o padrão `vm-{workload}-{environment}-{region}-{instance}`:
 
 ```json
 {
@@ -360,9 +360,9 @@ This policy denies resources whose names do not match a specified pattern. Uses 
 }
 ```
 
-> **Note:** The `match` condition uses `?` for a single letter, `#` for a single digit, and `.` for any single character. For variable-length patterns, use `like` with `*` wildcards (as shown above) or validate naming in CI/CD pipelines before deployment.
+> **Nota:** A condição `match` usa `?` para uma única letra, `#` para um único dígito e `.` para qualquer caractere único. Para padrões de comprimento variável, use `like` com curingas `*` (como mostrado acima) ou valide nomenclatura em pipelines de CI/CD antes da implantação.
 
-### Bicep — Deploy a Resource Group with Full Tagging
+### Bicep — Implantar um Resource Group com Etiquetagem Completa
 
 ```bicep
 targetScope = 'subscription'
@@ -387,7 +387,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
 }
 ```
 
-### Azure Resource Graph — Find Resources Missing Required Tags
+### Azure Resource Graph — Encontrar Recursos Sem Tags Obrigatórias
 
 ```kusto
 resources
@@ -401,35 +401,35 @@ resources
 
 ---
 
-## Hands-On Exercise
+## Exercício Prático
 
-**Scenario:** You are defining the naming and tagging standards for a greenfield Azure deployment.
+**Cenário:** Você está definindo os padrões de nomenclatura e etiquetagem para uma implantação greenfield do Azure.
 
-1. **Define a naming convention** for your organization using the `{resource-type}-{workload}-{environment}-{region}-{instance}` pattern. Write out 5 example resource names.
-2. **Define your minimum required tag taxonomy.** Choose 4–6 tags from the recommended table above (or define your own).
-3. **Create an Azure Policy** (JSON or Bicep) that denies the creation of resource groups without your most critical tag (e.g., `CostCenter`).
-4. **Create an Azure Policy** that inherits the `Environment` tag from resource groups to child resources using the `modify` effect.
-5. **Deploy both policies** to a test subscription and verify they work:
-   - Try creating a resource group without the required tag (should be denied).
-   - Create a resource group with the `Environment` tag, then create a resource inside it — verify the tag is inherited.
-6. **Run the Resource Graph query** above to find resources in your environment that are missing required tags.
+1. **Defina uma convenção de nomenclatura** para sua organização usando o padrão `{resource-type}-{workload}-{environment}-{region}-{instance}`. Escreva 5 exemplos de nomes de recursos.
+2. **Defina sua taxonomia mínima de tags obrigatórias.** Escolha 4–6 tags da tabela recomendada acima (ou defina as suas próprias).
+3. **Crie uma Azure Policy** (JSON ou Bicep) que nega a criação de resource groups sem sua tag mais crítica (ex.: `CostCenter`).
+4. **Crie uma Azure Policy** que herda a tag `Environment` de resource groups para recursos filhos usando o efeito `modify`.
+5. **Implante ambas as políticas** em uma assinatura de teste e verifique que funcionam:
+   - Tente criar um resource group sem a tag obrigatória (deve ser negado).
+   - Crie um resource group com a tag `Environment`, depois crie um recurso dentro dele — verifique que a tag é herdada.
+6. **Execute a consulta do Resource Graph** acima para encontrar recursos no seu ambiente que estão sem tags obrigatórias.
 
 ---
 
-## References
+## Referências
 
-| Resource | Link |
+| Recurso | Link |
 |---|---|
-| CAF naming conventions | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) |
-| CAF resource abbreviations | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations) |
-| CAF tagging strategy | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging) |
-| CAF tagging best practices | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging) |
-| Azure Policy built-in definitions for tags | [learn.microsoft.com/azure/governance/policy/samples/built-in-policies#tags](https://learn.microsoft.com/azure/governance/policy/samples/built-in-policies#tags) |
-| Azure naming rules and restrictions | [learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules) |
-| Policy rule definition structure | [learn.microsoft.com/azure/governance/policy/concepts/definition-structure-policy-rule](https://learn.microsoft.com/azure/governance/policy/concepts/definition-structure-policy-rule) |
+| Convenções de nomenclatura do CAF | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) |
+| Abreviações de recursos do CAF | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations) |
+| Estratégia de etiquetagem do CAF | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging) |
+| Melhores práticas de etiquetagem do CAF | [learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging) |
+| Definições internas de Azure Policy para tags | [learn.microsoft.com/azure/governance/policy/samples/built-in-policies#tags](https://learn.microsoft.com/azure/governance/policy/samples/built-in-policies#tags) |
+| Regras e restrições de nomenclatura do Azure | [learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules) |
+| Estrutura de definição de regra de política | [learn.microsoft.com/azure/governance/policy/concepts/definition-structure-policy-rule](https://learn.microsoft.com/azure/governance/policy/concepts/definition-structure-policy-rule) |
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Chapter 4 — Resource Hierarchy](ch04-resource-hierarchy.md) | [Part 2 — Identity and Access](../part-2-identity-access/ch06-rbac.md) |
+| [Capítulo 4 — Hierarquia de Recursos](ch04-resource-hierarchy.md) | [Parte 2 — Identidade e Acesso](../part-2-identity-access/ch06-rbac.md) |

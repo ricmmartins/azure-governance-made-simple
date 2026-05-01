@@ -1,45 +1,45 @@
-# Chapter 25 — Sovereign Landing Zones
+# Capítulo 25 — Sovereign Landing Zones
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Sovereign Landing Zones (SLZ)** are specialized Azure Landing Zone architectures designed for organizations that must meet strict data residency, data sovereignty, and regulatory compliance requirements. They build on the standard Azure Landing Zone architecture and add controls that ensure data stays within specific geographic or political boundaries and that operations comply with national regulations.
+**Sovereign Landing Zones (SLZ)** são arquiteturas especializadas de Azure Landing Zone projetadas para organizações que devem atender a requisitos rigorosos de residência de dados, soberania de dados e conformidade regulatória. Elas se baseiam na arquitetura padrão de Azure Landing Zone e adicionam controles que garantem que os dados permaneçam dentro de limites geográficos ou políticos específicos e que as operações estejam em conformidade com regulamentações nacionais.
 
-Sovereign Landing Zones are relevant for:
+Sovereign Landing Zones são relevantes para:
 
-- **Government agencies** subject to national data handling laws
-- **Financial services** organizations with data localization requirements
-- **Healthcare organizations** bound by regional patient data protection rules
-- **Any organization** operating in jurisdictions with strict data sovereignty laws (GDPR, LGPD, PIPL, etc.)
+- **Agências governamentais** sujeitas a leis nacionais de tratamento de dados
+- **Organizações de serviços financeiros** com requisitos de localização de dados
+- **Organizações de saúde** vinculadas a regras regionais de proteção de dados de pacientes
+- **Qualquer organização** operando em jurisdições com leis rigorosas de soberania de dados (GDPR, LGPD, PIPL, etc.)
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Sovereign Clouds vs. Public Cloud with Sovereignty Controls
+### Nuvens Soberanas vs. Nuvem Pública com Controles de Soberania
 
-Azure offers dedicated sovereign cloud environments as well as sovereignty controls within the public cloud:
+O Azure oferece ambientes de nuvem soberana dedicados, bem como controles de soberania dentro da nuvem pública:
 
-| Environment | Description | Use Case |
+| Ambiente | Descrição | Caso de Uso |
 |---|---|---|
-| **Azure Public** (with sovereignty features) | Standard Azure regions with data residency guarantees, confidential computing, and customer-managed keys | Most regulated industries; GDPR compliance |
-| **Azure Government** (US) | Physically isolated datacenters for US federal, state, and local government | US government workloads; FedRAMP High, DoD IL4/IL5 |
-| **Azure China** (operated by 21Vianet) | Physically and logically isolated Azure operated by a Chinese entity | Workloads that must remain within China |
+| **Azure Public** (com recursos de soberania) | Regiões Azure padrão com garantias de residência de dados, computação confidencial e chaves gerenciadas pelo cliente | Maioria das indústrias reguladas; conformidade com GDPR |
+| **Azure Government** (EUA) | Datacenters fisicamente isolados para governo federal, estadual e local dos EUA | Cargas de trabalho do governo dos EUA; FedRAMP High, DoD IL4/IL5 |
+| **Azure China** (operado pela 21Vianet) | Azure fisicamente e logicamente isolado operado por uma entidade chinesa | Cargas de trabalho que devem permanecer dentro da China |
 
-> **Note:** Azure Germany (operated by T-Systems) was retired. German data residency requirements are now met by Azure public regions in Germany (Germany West Central, Germany North).
+> **Nota:** O Azure Germany (operado pela T-Systems) foi descontinuado. Os requisitos de residência de dados na Alemanha agora são atendidos pelas regiões públicas do Azure na Alemanha (Germany West Central, Germany North).
 
-### Data Residency Requirements
+### Requisitos de Residência de Dados
 
-Data residency controls ensure that data is stored, processed, and — in some cases — never leaves a specific geographic region.
+Os controles de residência de dados garantem que os dados sejam armazenados, processados e — em alguns casos — nunca saiam de uma região geográfica específica.
 
-Azure provides several mechanisms for data residency:
+O Azure fornece vários mecanismos para residência de dados:
 
-1. **Azure region selection** — Most Azure services store data at rest within the selected region. Azure guarantees data residency for the majority of services.
+1. **Seleção de região Azure** — A maioria dos serviços Azure armazena dados em repouso dentro da região selecionada. O Azure garante residência de dados para a maioria dos serviços.
 
-2. **Allowed Locations policy** — Use Azure Policy to restrict which Azure regions resources can be deployed to:
+2. **Política Allowed Locations** — Use Azure Policy para restringir em quais regiões Azure os recursos podem ser implantados:
 
    ```json
    {
@@ -71,61 +71,61 @@ Azure provides several mechanisms for data residency:
    }
    ```
 
-3. **Customer-managed keys (CMK)** — Control encryption keys using Azure Key Vault or Azure Key Vault Managed HSM to ensure that only authorized parties can decrypt data.
+3. **Chaves gerenciadas pelo cliente (CMK)** — Controle chaves de criptografia usando Azure Key Vault ou Azure Key Vault Managed HSM para garantir que apenas partes autorizadas possam descriptografar dados.
 
-4. **Azure Confidential Computing** — Use hardware-based Trusted Execution Environments (TEEs) to protect data in use, not just at rest and in transit.
+4. **Azure Confidential Computing** — Use Trusted Execution Environments (TEEs) baseados em hardware para proteger dados em uso, não apenas em repouso e em trânsito.
 
-5. **Azure Data Boundary** — The EU Data Boundary for the Microsoft Cloud ensures that customer data for EU-based customers is stored and processed within the EU.
+5. **Azure Data Boundary** — O EU Data Boundary para a Microsoft Cloud garante que dados de clientes baseados na UE sejam armazenados e processados dentro da UE.
 
-### Sovereign Landing Zone Architecture Patterns
+### Padrões de Arquitetura de Sovereign Landing Zone
 
-The Sovereign Landing Zone architecture extends the standard ALZ with additional controls:
+A arquitetura de Sovereign Landing Zone estende a ALZ padrão com controles adicionais:
 
 ![Sovereign Landing Zone Additions](/images/sovereign-lz-additions.svg)
 
-**Key architectural additions:**
+**Principais adições arquiteturais:**
 
-| Control | Purpose |
+| Controle | Finalidade |
 |---|---|
-| **Allowed Locations** | Restrict resource deployment to sovereign-approved regions |
-| **Customer Lockbox** | Require approval before Microsoft support accesses data |
-| **Customer-managed keys** | Retain control over encryption keys |
-| **Confidential Computing** | Protect data in use with hardware-based TEEs |
-| **Private endpoints** | Prevent data from traversing the public internet |
-| **Network peering restrictions** | Prevent cross-border network connectivity |
-| **Diagnostic settings** | Route all logs to a sovereign-controlled Log Analytics workspace |
-| **Azure Key Vault Managed HSM** | FIPS 140-2 Level 3 validated hardware security modules |
+| **Allowed Locations** | Restringir implantação de recursos a regiões aprovadas para soberania |
+| **Customer Lockbox** | Exigir aprovação antes que o suporte Microsoft acesse dados |
+| **Chaves gerenciadas pelo cliente** | Manter controle sobre chaves de criptografia |
+| **Confidential Computing** | Proteger dados em uso com TEEs baseados em hardware |
+| **Private endpoints** | Impedir que dados trafeguem pela internet pública |
+| **Restrições de peering de rede** | Impedir conectividade de rede transfronteiriça |
+| **Diagnostic settings** | Rotear todos os logs para um workspace do Log Analytics controlado soberanamente |
+| **Azure Key Vault Managed HSM** | Módulos de segurança de hardware validados FIPS 140-2 Nível 3 |
 
-### Compliance Boundaries for Regulated Industries
+### Limites de Conformidade para Indústrias Reguladas
 
-Different industries have specific compliance requirements that the Sovereign Landing Zone addresses:
+Diferentes indústrias têm requisitos de conformidade específicos que a Sovereign Landing Zone aborda:
 
-**Healthcare:**
-- HIPAA (US), GDPR (EU), LGPD (Brazil)
-- Patient data must be encrypted at rest and in transit
-- Access to patient data must be audited
-- Data residency requirements vary by jurisdiction
+**Saúde:**
+- HIPAA (EUA), GDPR (UE), LGPD (Brasil)
+- Dados de pacientes devem ser criptografados em repouso e em trânsito
+- Acesso a dados de pacientes deve ser auditado
+- Requisitos de residência de dados variam por jurisdição
 
-**Financial Services:**
-- PCI-DSS for payment card data
-- SOX for financial reporting systems
-- National banking regulations (often require data residency)
-- Strong encryption and key management requirements
+**Serviços Financeiros:**
+- PCI-DSS para dados de cartão de pagamento
+- SOX para sistemas de relatórios financeiros
+- Regulamentações bancárias nacionais (frequentemente exigem residência de dados)
+- Requisitos fortes de criptografia e gerenciamento de chaves
 
-**Government:**
-- FedRAMP (US federal), IRAP (Australia), G-Cloud (UK)
-- Data sovereignty is typically mandatory
-- Clearance requirements for operations personnel
-- Strict network isolation requirements
+**Governo:**
+- FedRAMP (federal dos EUA), IRAP (Austrália), G-Cloud (Reino Unido)
+- Soberania de dados é tipicamente obrigatória
+- Requisitos de habilitação de segurança para pessoal de operações
+- Requisitos rigorosos de isolamento de rede
 
-### Privacy and Data Protection Governance Controls
+### Controles de Governança de Privacidade e Proteção de Dados
 
-Sovereign Landing Zones implement privacy controls at multiple levels:
+Sovereign Landing Zones implementam controles de privacidade em múltiplos níveis:
 
-1. **Infrastructure level** — Encryption, network isolation, region restrictions
-2. **Platform level** — Microsoft Purview for data classification, sensitivity labels
-3. **Application level** — Microsoft Entra ID Conditional Access, data loss prevention
-4. **Operational level** — Customer Lockbox, access reviews, audit logging
+1. **Nível de infraestrutura** — Criptografia, isolamento de rede, restrições de região
+2. **Nível de plataforma** — Microsoft Purview para classificação de dados, rótulos de sensibilidade
+3. **Nível de aplicação** — Conditional Access do Microsoft Entra ID, prevenção contra perda de dados
+4. **Nível operacional** — Customer Lockbox, revisões de acesso, logging de auditoria
 
 ```bicep
 // Example: Policy assignment to restrict resources to EU regions
@@ -159,39 +159,39 @@ resource euOnlyPolicy 'Microsoft.Authorization/policyAssignments@2024-04-01' = {
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Understand your regulatory requirements first** — Sovereignty requirements vary dramatically by jurisdiction and industry. Engage legal and compliance teams before designing the architecture.
+1. **Entenda seus requisitos regulatórios primeiro** — Requisitos de soberania variam dramaticamente por jurisdição e indústria. Envolva equipes jurídicas e de conformidade antes de projetar a arquitetura.
 
-2. **Use the Sovereign Landing Zone reference implementation** — The [Azure Sovereign Landing Zone](https://github.com/Azure/sovereign-landing-zone) provides a starting point for sovereign deployments.
+2. **Use a implementação de referência de Sovereign Landing Zone** — A [Azure Sovereign Landing Zone](https://github.com/Azure/sovereign-landing-zone) fornece um ponto de partida para implantações soberanas.
 
-3. **Enforce region restrictions early** — Apply Allowed Locations policies at the highest management group level. It is much harder to relocate resources after deployment.
+3. **Aplique restrições de região cedo** — Aplique políticas Allowed Locations no nível mais alto de management group. É muito mais difícil realocar recursos após a implantação.
 
-4. **Enable Customer Lockbox** — For truly sovereign workloads, Customer Lockbox ensures that Microsoft support cannot access your data without explicit approval.
+4. **Habilite Customer Lockbox** — Para cargas de trabalho verdadeiramente soberanas, o Customer Lockbox garante que o suporte Microsoft não pode acessar seus dados sem aprovação explícita.
 
-5. **Use customer-managed keys for all data stores** — Even when service-managed keys are available, regulated workloads should use customer-managed keys for full control.
+5. **Use chaves gerenciadas pelo cliente para todos os armazenamentos de dados** — Mesmo quando chaves gerenciadas pelo serviço estão disponíveis, cargas de trabalho reguladas devem usar chaves gerenciadas pelo cliente para controle total.
 
-6. **Plan for key management** — Customer-managed keys require Key Vault or Managed HSM. Plan the key rotation, backup, and disaster recovery strategy.
+6. **Planeje o gerenciamento de chaves** — Chaves gerenciadas pelo cliente requerem Key Vault ou Managed HSM. Planeje a estratégia de rotação de chaves, backup e recuperação de desastres.
 
-7. **Consider confidential computing for highly sensitive workloads** — Azure Confidential VMs and confidential containers protect data even from the cloud operator.
+7. **Considere computação confidencial para cargas de trabalho altamente sensíveis** — Azure Confidential VMs e contêineres confidenciais protegem dados mesmo do operador da nuvem.
 
-8. **Document your compliance posture** — Use Microsoft Defender for Cloud regulatory compliance dashboards to continuously demonstrate compliance with applicable frameworks.
+8. **Documente sua postura de conformidade** — Use os dashboards de conformidade regulatória do Microsoft Defender for Cloud para demonstrar continuamente a conformidade com os frameworks aplicáveis.
 
 ---
 
-## Common Pitfalls
+## Armadilhas Comuns
 
-| Pitfall | Impact | Mitigation |
+| Armadilha | Impacto | Mitigação |
 |---|---|---|
-| Assuming Azure region selection alone ensures sovereignty | Some services replicate metadata globally | Review each service's data residency documentation |
-| Not restricting paired regions | Geo-redundant storage may replicate to a region outside your boundary | Use zone-redundant storage (ZRS) instead of geo-redundant (GRS) |
-| Forgetting about support data | Support tickets may contain customer data | Enable Customer Lockbox; review support data handling |
-| Over-restricting regions | Reduced service availability and higher latency | Balance sovereignty requirements with operational needs |
-| Ignoring operational access | Cloud operators may access infrastructure during incidents | Use Customer Lockbox and sovereign operations controls |
+| Assumir que a seleção de região Azure sozinha garante soberania | Alguns serviços replicam metadados globalmente | Revise a documentação de residência de dados de cada serviço |
+| Não restringir regiões pareadas | Armazenamento geo-redundante pode replicar para uma região fora do seu limite | Use armazenamento com redundância de zona (ZRS) em vez de geo-redundante (GRS) |
+| Esquecer dos dados de suporte | Tickets de suporte podem conter dados de clientes | Habilite Customer Lockbox; revise o tratamento de dados de suporte |
+| Restringir regiões excessivamente | Disponibilidade de serviço reduzida e latência mais alta | Equilibre requisitos de soberania com necessidades operacionais |
+| Ignorar acesso operacional | Operadores de nuvem podem acessar infraestrutura durante incidentes | Use Customer Lockbox e controles de operações soberanas |
 
 ---
 
-## References
+## Referências
 
 - [Azure Sovereign Landing Zone (GitHub)](https://github.com/Azure/sovereign-landing-zone)
 - [Data Residency in Azure](https://azure.microsoft.com/explore/global-infrastructure/data-residency/)
@@ -205,6 +205,6 @@ resource euOnlyPolicy 'Microsoft.Authorization/policyAssignments@2024-04-01' = {
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Azure Arc](ch24-azure-arc.md) | [Data Governance with Purview](ch26-data-governance-purview.md) |
+| [Azure Arc](ch24-azure-arc.md) | [Governança de Dados com Purview](ch26-data-governance-purview.md) |

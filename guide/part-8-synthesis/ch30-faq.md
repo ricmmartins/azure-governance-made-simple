@@ -1,284 +1,284 @@
-# Chapter 30 — Frequently Asked Questions
+# Capítulo 30 — Perguntas Frequentes
 
 > Last verified: 2026-04-06
 
 ---
 
-## 1. Do I need all of this for a small Azure deployment?
+## 1. Preciso de tudo isso para um ambiente Azure pequeno?
 
-**No.** Governance should be proportional to your environment's size, risk, and regulatory requirements. A startup with one subscription and a small team needs foundational governance — MFA, a naming convention, a few core policies, and budgets. That is enough to start.
+**Não.** A governança deve ser proporcional ao tamanho, risco e requisitos regulatórios do seu ambiente. Uma startup com uma subscription e uma equipe pequena precisa de governança fundamental — MFA, uma convenção de nomenclatura, algumas políticas essenciais e budgets. Isso é suficiente para começar.
 
-The Crawl-Walk-Run maturity model (see Chapter 28 and Case Study 1) shows that you can implement meaningful governance in a single week. You do not need management groups, Policy as Code, or Azure Landing Zones on day one. Start with the basics and add complexity only when your environment demands it.
+O modelo de maturidade Crawl-Walk-Run (veja o Capítulo 28 e o Estudo de Caso 1) mostra que você pode implementar governança significativa em uma única semana. Você não precisa de management groups, Policy as Code ou Azure Landing Zones no primeiro dia. Comece com o básico e adicione complexidade apenas quando seu ambiente exigir.
 
-**Minimum viable governance:**
-- Enforce MFA for all users
-- Define a naming convention
-- Assign 3–5 core policies (Audit mode)
-- Set a budget with alerts
-- Enable Microsoft Defender for Cloud (free tier)
+**Governança mínima viável:**
+- Aplicar MFA para todos os usuários
+- Definir uma convenção de nomenclatura
+- Atribuir 3–5 políticas essenciais (modo Audit)
+- Definir um budget com alertas
+- Habilitar Microsoft Defender for Cloud (tier gratuito)
 
 ---
 
-## 2. What's the difference between governance, management, and compliance?
+## 2. Qual a diferença entre governança, gestão e conformidade?
 
-These terms are related but distinct:
+Esses termos são relacionados mas distintos:
 
-| Term | Definition | Example |
+| Termo | Definição | Exemplo |
 |---|---|---|
-| **Governance** | The rules, policies, and processes that define *how* cloud resources should be used | "All resources must have an `Owner` tag" |
-| **Management** | The day-to-day operations of monitoring, maintaining, and optimizing resources | "Review Azure Monitor alerts daily" |
-| **Compliance** | Demonstrating that your environment meets specific regulatory or organizational standards | "All storage accounts encrypt data at rest (SOC 2 requirement)" |
+| **Governança** | As regras, políticas e processos que definem *como* recursos cloud devem ser utilizados | "Todos os recursos devem ter uma tag `Owner`" |
+| **Gestão** | As operações do dia a dia de monitorar, manter e otimizar recursos | "Revisar alertas do Azure Monitor diariamente" |
+| **Conformidade** | Demonstrar que seu ambiente atende a padrões regulatórios ou organizacionais específicos | "Todas as storage accounts criptografam dados em repouso (requisito SOC 2)" |
 
-Governance sets the rules. Management enforces and operates within those rules. Compliance proves the rules are being followed.
+Governança define as regras. Gestão aplica e opera dentro dessas regras. Conformidade prova que as regras estão sendo seguidas.
 
 ---
 
-## 3. Should I use Azure Policy or RBAC to restrict actions?
+## 3. Devo usar Azure Policy ou RBAC para restringir ações?
 
-**Use both — they serve different purposes.**
+**Use ambos — eles servem propósitos diferentes.**
 
-| Mechanism | What It Controls | Example |
+| Mecanismo | O que Controla | Exemplo |
 |---|---|---|
-| **Azure Policy** | What *resources* can look like (properties, configurations) | "Storage accounts must use TLS 1.2" |
-| **RBAC** | What *users* can do (actions, operations) | "Developers can deploy to dev, but not production" |
+| **Azure Policy** | Como os *recursos* devem ser (propriedades, configurações) | "Storage accounts devem usar TLS 1.2" |
+| **RBAC** | O que os *usuários* podem fazer (ações, operações) | "Desenvolvedores podem implantar em dev, mas não em produção" |
 
-**Rule of thumb:**
-- Use **Azure Policy** when the restriction is about *resource configuration* — regardless of who deploys it
-- Use **RBAC** when the restriction is about *who can perform an action*
+**Regra geral:**
+- Use **Azure Policy** quando a restrição é sobre *configuração de recurso* — independentemente de quem implanta
+- Use **RBAC** quando a restrição é sobre *quem pode executar uma ação*
 
-For example, "no public IP addresses" is a Policy concern. "Only platform admins can modify networking resources" is an RBAC concern.
-
----
-
-## 4. How do I start with governance if I already have resources deployed?
-
-This is the most common scenario. Most organizations adopt governance *after* resources are already in Azure.
-
-**Recommended approach:**
-
-1. **Assess** — Use Azure Resource Graph to inventory all resources, tags, and configurations. Run Microsoft Defender for Cloud to get a Secure Score.
-2. **Assign policies in Audit mode** — Do not start with Deny. Audit mode shows you what *would* be non-compliant without blocking anything.
-3. **Remediate** — Address the most impactful non-compliant resources first (untagged resources, public endpoints, missing encryption).
-4. **Enforce** — Once compliance is above 80%, switch critical policies to Deny or DeployIfNotExists.
-5. **Iterate** — Governance is continuous. Add new policies as your needs evolve.
-
-> **Important:** Never switch a policy from Audit to Deny without first notifying all affected teams and remediating existing violations.
+Por exemplo, "sem endereços IP públicos" é uma preocupação de Policy. "Apenas administradores de plataforma podem modificar recursos de rede" é uma preocupação de RBAC.
 
 ---
 
-## 5. What happened to Azure Blueprints?
+## 4. Como começo com governança se já tenho recursos implantados?
 
-**Azure Blueprints has been deprecated.** Microsoft announced the deprecation in 2024 and recommends migrating to **Deployment Stacks** for most Blueprint use cases.
+Este é o cenário mais comum. A maioria das organizações adota governança *após* os recursos já estarem no Azure.
 
-| Blueprints Capability | Replacement |
+**Abordagem recomendada:**
+
+1. **Avalie** — Use Azure Resource Graph para inventariar todos os recursos, tags e configurações. Execute Microsoft Defender for Cloud para obter um Secure Score.
+2. **Atribua políticas em modo Audit** — Não comece com Deny. O modo Audit mostra o que *seria* não conforme sem bloquear nada.
+3. **Remedie** — Endereça os recursos não conformes de maior impacto primeiro (recursos sem tags, endpoints públicos, criptografia ausente).
+4. **Aplique** — Quando a conformidade estiver acima de 80%, mude políticas críticas para Deny ou DeployIfNotExists.
+5. **Itere** — Governança é contínua. Adicione novas políticas conforme suas necessidades evoluem.
+
+> **Importante:** Nunca mude uma política de Audit para Deny sem antes notificar todas as equipes afetadas e remediar violações existentes.
+
+---
+
+## 5. O que aconteceu com o Azure Blueprints?
+
+**Azure Blueprints foi descontinuado.** A Microsoft anunciou a descontinuação em 2024 e recomenda migrar para **Deployment Stacks** para a maioria dos casos de uso de Blueprints.
+
+| Capacidade do Blueprints | Substituto |
 |---|---|
-| Package ARM templates + policies + RBAC | **Deployment Stacks** — deploy Bicep/ARM templates with deny settings and cleanup on delete |
-| Versioned environment definitions | **Template Specs** or **Bicep modules** in a registry |
-| Policy assignment in a package | **Policy as Code** (EPAC or CI/CD pipelines) |
-| RBAC assignment in a package | **Bicep/Terraform** RBAC modules |
+| Empacotar templates ARM + políticas + RBAC | **Deployment Stacks** — implantar templates Bicep/ARM com deny settings e limpeza ao excluir |
+| Definições de ambiente versionadas | **Template Specs** ou **módulos Bicep** em um registry |
+| Atribuição de políticas em um pacote | **Policy as Code** (EPAC ou pipelines CI/CD) |
+| Atribuição de RBAC em um pacote | Módulos RBAC em **Bicep/Terraform** |
 
-If you currently use Blueprints, plan your migration to Deployment Stacks. See Chapter 14 (Deployment Stacks) for details.
+Se você atualmente usa Blueprints, planeje sua migração para Deployment Stacks. Veja o Capítulo 14 (Deployment Stacks) para detalhes.
 
 ---
 
-## 6. Should I use Bicep or Terraform?
+## 6. Devo usar Bicep ou Terraform?
 
-**Both are excellent choices.** The decision depends on your team's skills, multi-cloud requirements, and ecosystem preferences.
+**Ambos são excelentes escolhas.** A decisão depende das habilidades da sua equipe, requisitos multi-cloud e preferências de ecossistema.
 
-| Factor | Bicep | Terraform |
+| Fator | Bicep | Terraform |
 |---|---|---|
-| Azure-native | ✅ First-party, tightly integrated | Third-party (AzureRM provider) |
-| Multi-cloud | Azure only | AWS, GCP, Azure, and more |
-| State management | No state file (uses ARM deployment history) | Requires state file (local, Azure Storage, Terraform Cloud) |
-| Learning curve | Lower for Azure-focused teams | Moderate; HCL syntax is different from ARM/Bicep |
-| Community modules | Azure Verified Modules (AVM) | Terraform Registry (massive ecosystem) |
-| Policy as Code | EPAC (PowerShell-based) | Native Terraform + Sentinel |
+| Azure-native | ✅ First-party, fortemente integrado | Third-party (provider AzureRM) |
+| Multi-cloud | Apenas Azure | AWS, GCP, Azure e mais |
+| Gerenciamento de estado | Sem arquivo de estado (usa histórico de deployment ARM) | Requer arquivo de estado (local, Azure Storage, Terraform Cloud) |
+| Curva de aprendizado | Menor para equipes focadas em Azure | Moderada; sintaxe HCL é diferente de ARM/Bicep |
+| Módulos da comunidade | Azure Verified Modules (AVM) | Terraform Registry (ecossistema massivo) |
+| Policy as Code | EPAC (baseado em PowerShell) | Terraform nativo + Sentinel |
 
-**Recommendation:** If your organization is Azure-only, Bicep is the simpler choice. If you operate in a multi-cloud environment or your team already knows Terraform, Terraform is the pragmatic choice. Avoid using both in the same organization unless you have a clear reason to.
-
----
-
-## 7. How many management group levels should I have?
-
-**No more than six levels** (Azure enforces this limit). Most organizations need only **three to four levels**:
-
-![Management Group Hierarchy](/images/faq-mg-hierarchy.svg)
-
-**Common mistake:** Creating management groups that mirror the org chart (one per department, one per team). This leads to excessive depth and policy complexity. Management groups should represent *governance boundaries*, not organizational hierarchy.
+**Recomendação:** Se sua organização é exclusivamente Azure, Bicep é a escolha mais simples. Se você opera em um ambiente multi-cloud ou sua equipe já conhece Terraform, Terraform é a escolha pragmática. Evite usar ambos na mesma organização a menos que haja uma razão clara para isso.
 
 ---
 
-## 8. What's the minimum set of policies I should deploy?
+## 7. Quantos níveis de management groups devo ter?
 
-Start with these high-impact, low-risk policies in **Audit mode**:
+**No máximo seis níveis** (o Azure impõe este limite). A maioria das organizações precisa apenas de **três a quatro níveis**:
 
-1. **Require a tag on resource groups** — `Environment` tag at minimum
-2. **Allowed locations** — Restrict to your approved Azure regions
-3. **Audit VMs without managed disks** — Security and manageability baseline
-4. **Audit storage accounts allowing public access** — Data protection
-5. **Audit resources without resource locks** — Protection for critical resources
+![Hierarquia de Management Groups](/images/faq-mg-hierarchy.svg)
 
-Once you are comfortable, add enforcement policies:
-
-6. **Deny public IP addresses** (on the Corp management group)
-7. **DeployIfNotExists: Enable Azure Monitor Agent** — Ensure monitoring
-8. **Deny storage accounts without HTTPS** — Encryption in transit
-9. **Require specific tag values** (e.g., `Environment` must be `prod`, `dev`, `staging`)
-10. **Deny unencrypted SQL databases** — Data at rest encryption
-
-See Appendix C for a full starter kit of 30 recommended policies.
+**Erro comum:** Criar management groups que espelham o organograma (um por departamento, um por equipe). Isso leva a profundidade excessiva e complexidade de políticas. Management groups devem representar *limites de governança*, não hierarquia organizacional.
 
 ---
 
-## 9. How do I govern AI workloads?
+## 8. Qual é o conjunto mínimo de políticas que devo implantar?
 
-AI governance requires controls at multiple levels:
+Comece com estas políticas de alto impacto e baixo risco em **modo Audit**:
 
-1. **Access control** — Use Microsoft Entra ID authentication (not API keys) for Azure OpenAI Service. Assign the `Cognitive Services OpenAI User` role via RBAC.
-2. **Content safety** — Keep default content filters enabled. Create custom filter configurations only with governance board approval.
-3. **Rate limiting** — Set Tokens Per Minute (TPM) quotas per deployment to prevent runaway costs.
-4. **Network isolation** — Require private endpoints for Azure OpenAI resources.
-5. **Audit logging** — Enable diagnostic settings to log all API calls.
-6. **Shadow AI detection** — Use Microsoft Defender for Cloud Apps to detect unauthorized AI service usage.
+1. **Exigir uma tag em resource groups** — Tag `Environment` no mínimo
+2. **Localizações permitidas** — Restringir às suas regiões Azure aprovadas
+3. **Auditar VMs sem managed disks** — Baseline de segurança e gerenciabilidade
+4. **Auditar storage accounts permitindo acesso público** — Proteção de dados
+5. **Auditar recursos sem resource locks** — Proteção para recursos críticos
 
-See Chapter 27 (AI Governance) for a comprehensive guide.
+Quando estiver confortável, adicione políticas de aplicação:
+
+6. **Negar endereços IP públicos** (no management group Corp)
+7. **DeployIfNotExists: Habilitar Azure Monitor Agent** — Garantir monitoramento
+8. **Negar storage accounts sem HTTPS** — Criptografia em trânsito
+9. **Exigir valores específicos de tag** (ex.: `Environment` deve ser `prod`, `dev`, `staging`)
+10. **Negar bancos de dados SQL sem criptografia** — Criptografia de dados em repouso
+
+Veja o Apêndice C para um kit inicial completo de 30 políticas recomendadas.
 
 ---
 
-## 10. What's the difference between Resource Locks and Deployment Stack deny settings?
+## 9. Como governar workloads de IA?
 
-Both prevent unwanted changes, but they work differently:
+Governança de IA requer controles em múltiplos níveis:
 
-| Feature | Resource Locks | Deployment Stack Deny Settings |
+1. **Controle de acesso** — Use autenticação Microsoft Entra ID (não chaves de API) para Azure OpenAI Service. Atribua o role `Cognitive Services OpenAI User` via RBAC.
+2. **Segurança de conteúdo** — Mantenha os filtros de conteúdo padrão habilitados. Crie configurações de filtro customizadas apenas com aprovação do comitê de governança.
+3. **Rate limiting** — Defina cotas de Tokens Per Minute (TPM) por deployment para evitar custos descontrolados.
+4. **Isolamento de rede** — Exija private endpoints para recursos Azure OpenAI.
+5. **Log de auditoria** — Habilite diagnostic settings para registrar todas as chamadas de API.
+6. **Detecção de shadow AI** — Use Microsoft Defender for Cloud Apps para detectar uso não autorizado de serviços de IA.
+
+Veja o Capítulo 27 (Governança de IA) para um guia abrangente.
+
+---
+
+## 10. Qual a diferença entre Resource Locks e deny settings de Deployment Stacks?
+
+Ambos previnem alterações indesejadas, mas funcionam de maneiras diferentes:
+
+| Recurso | Resource Locks | Deny Settings de Deployment Stack |
 |---|---|---|
-| Scope | Individual resource or resource group | All resources managed by the stack |
-| Lock types | CanNotDelete, ReadOnly | DenyDelete, DenyWriteAndDelete |
-| Override | Users with `Microsoft.Authorization/locks/write` permission | Users in the excludePrincipals list |
-| Lifecycle | Independent of deployment | Tied to the Deployment Stack lifecycle |
-| Orphan protection | No | Yes — deleting the stack can clean up resources |
-| Best for | Protecting individual critical resources | Protecting entire deployments from drift |
+| Escopo | Recurso individual ou resource group | Todos os recursos gerenciados pelo stack |
+| Tipos de lock | CanNotDelete, ReadOnly | DenyDelete, DenyWriteAndDelete |
+| Override | Usuários com permissão `Microsoft.Authorization/locks/write` | Usuários na lista excludePrincipals |
+| Ciclo de vida | Independente do deployment | Vinculado ao ciclo de vida do Deployment Stack |
+| Proteção contra órfãos | Não | Sim — excluir o stack pode limpar recursos |
+| Melhor para | Proteger recursos críticos individuais | Proteger deployments inteiros contra drift |
 
-**Use Resource Locks** for one-off protection of critical resources (e.g., a production database). **Use Deployment Stack deny settings** when you manage infrastructure as code and want to prevent out-of-band changes to the entire deployment.
+**Use Resource Locks** para proteção pontual de recursos críticos (ex.: um banco de dados de produção). **Use deny settings de Deployment Stack** quando você gerencia infraestrutura como código e quer prevenir alterações fora de banda em todo o deployment.
 
 ---
 
-## 11. How often should I run access reviews?
+## 11. Com que frequência devo executar access reviews?
 
-| Role Type | Recommended Frequency |
+| Tipo de Role | Frequência Recomendada |
 |---|---|
-| Global Administrator, Subscription Owner | Monthly |
-| Privileged roles (Contributor, Security Admin) | Quarterly |
-| Application access (reader roles, service principals) | Semi-annually |
-| Guest user access | Quarterly |
+| Global Administrator, Subscription Owner | Mensal |
+| Roles privilegiados (Contributor, Security Admin) | Trimestral |
+| Acesso a aplicações (roles de reader, service principals) | Semestral |
+| Acesso de usuários convidados | Trimestral |
 
-Access Reviews in Microsoft Entra ID can be automated with auto-apply, so reviewers only need to confirm or deny continued access. Set up reminders and escalation for non-responsive reviewers.
+Access Reviews no Microsoft Entra ID podem ser automatizadas com auto-apply, então os revisores só precisam confirmar ou negar acesso continuado. Configure lembretes e escalonamento para revisores que não respondem.
 
 ---
 
-## 12. Should I use system-assigned or user-assigned managed identities?
+## 12. Devo usar managed identities system-assigned ou user-assigned?
 
-| Criteria | System-Assigned | User-Assigned |
+| Critério | System-Assigned | User-Assigned |
 |---|---|---|
-| Lifecycle | Tied to the resource — deleted when the resource is deleted | Independent — exists until you delete it |
-| Sharing | One identity per resource | One identity can be assigned to multiple resources |
-| Management | Simpler to manage for single-resource scenarios | More flexible for shared access patterns |
-| Best for | Single VM or App Service accessing Key Vault | Multiple VMs or apps sharing the same database access |
+| Ciclo de vida | Vinculada ao recurso — excluída quando o recurso é excluído | Independente — existe até você excluí-la |
+| Compartilhamento | Uma identidade por recurso | Uma identidade pode ser atribuída a múltiplos recursos |
+| Gerenciamento | Mais simples para cenários de recurso único | Mais flexível para padrões de acesso compartilhado |
+| Melhor para | VM ou App Service única acessando Key Vault | Múltiplas VMs ou apps compartilhando o mesmo acesso a banco de dados |
 
-**Recommendation:** Use **system-assigned** for simple, single-resource scenarios. Use **user-assigned** when multiple resources need the same permissions, or when you need the identity to persist independently of any single resource.
-
----
-
-## 13. How do I enforce tagging across my organization?
-
-A multi-layered approach works best:
-
-1. **Azure Policy — Require tags on resource groups:**
-   - Effect: `Deny` — Resource groups cannot be created without the required tags
-
-2. **Azure Policy — Inherit tags from resource group:**
-   - Effect: `Modify` — Resources automatically inherit tags from their resource group
-
-3. **Azure Policy — Require tags on resources:**
-   - Effect: `Audit` or `Deny` — Flag or block resources missing required tags
-
-4. **CI/CD pipeline validation:**
-   - Check for required tags in Bicep/Terraform templates before deployment
-
-5. **Regular remediation:**
-   - Run remediation tasks to apply `Modify` policies to existing resources
-
-**Recommended mandatory tags:** `Environment`, `Owner`, `CostCenter`, `Application`
+**Recomendação:** Use **system-assigned** para cenários simples de recurso único. Use **user-assigned** quando múltiplos recursos precisam das mesmas permissões, ou quando você precisa que a identidade persista independentemente de qualquer recurso individual.
 
 ---
 
-## 14. What compliance frameworks does Azure support out of the box?
+## 13. Como aplicar tags em toda a organização?
 
-Microsoft Defender for Cloud provides built-in regulatory compliance assessments for many frameworks:
+Uma abordagem em múltiplas camadas funciona melhor:
 
-| Framework | Region/Industry |
+1. **Azure Policy — Exigir tags em resource groups:**
+   - Efeito: `Deny` — Resource groups não podem ser criados sem as tags obrigatórias
+
+2. **Azure Policy — Herdar tags do resource group:**
+   - Efeito: `Modify` — Recursos herdam automaticamente tags do seu resource group
+
+3. **Azure Policy — Exigir tags em recursos:**
+   - Efeito: `Audit` ou `Deny` — Sinalizar ou bloquear recursos sem tags obrigatórias
+
+4. **Validação em pipeline CI/CD:**
+   - Verificar tags obrigatórias em templates Bicep/Terraform antes do deployment
+
+5. **Remediação regular:**
+   - Executar tarefas de remediação para aplicar políticas `Modify` em recursos existentes
+
+**Tags obrigatórias recomendadas:** `Environment`, `Owner`, `CostCenter`, `Application`
+
+---
+
+## 14. Quais frameworks de conformidade o Azure suporta nativamente?
+
+Microsoft Defender for Cloud fornece avaliações de conformidade regulatória built-in para muitos frameworks:
+
+| Framework | Região/Indústria |
 |---|---|
 | Microsoft Cloud Security Benchmark (MCSB) | Global |
 | SOC 2 Type 2 | Global |
 | ISO 27001:2022 | Global |
-| PCI-DSS v4.0 | Payment card industry |
-| HIPAA / HITRUST | US healthcare |
-| FedRAMP High | US federal government |
-| NIST SP 800-53 Rev. 5 | US government |
+| PCI-DSS v4.0 | Indústria de cartões de pagamento |
+| HIPAA / HITRUST | Saúde nos EUA |
+| FedRAMP High | Governo federal dos EUA |
+| NIST SP 800-53 Rev. 5 | Governo dos EUA |
 | CIS Azure Benchmark | Global |
-| GDPR | European Union |
-| Australia IRAP | Australia |
-| Canada PBMM | Canada |
-| UK OFFICIAL / NHS | United Kingdom |
-| NIS2 | European Union |
+| GDPR | União Europeia |
+| Australia IRAP | Austrália |
+| Canada PBMM | Canadá |
+| UK OFFICIAL / NHS | Reino Unido |
+| NIS2 | União Europeia |
 
-You can also add custom compliance standards by creating custom policy initiatives that map controls to your organization's specific requirements.
-
----
-
-## 15. How do I track governance progress over time?
-
-Use a combination of tools and metrics:
-
-1. **Secure Score trend** — Track Microsoft Defender for Cloud Secure Score weekly. It should trend upward.
-
-2. **Policy compliance percentage** — Monitor the overall compliance rate in the Azure Policy dashboard. Target: >90%.
-
-3. **AzGovViz reports** — Run AzGovViz weekly or daily to generate comprehensive governance reports showing policy assignments, RBAC, and management group structure.
-
-4. **Azure Resource Graph queries** — Write queries to track specific metrics (untagged resources, public endpoints, missing locks). See Appendix D for starter queries.
-
-5. **Cost trends** — Track month-over-month cost changes. Governance should stabilize or reduce costs over time.
-
-6. **Audit findings** — Track the number of governance-related audit findings. This should decrease over time.
-
-7. **Governance dashboard** — Build an Azure Monitor workbook or Power BI dashboard that aggregates all governance metrics in one place.
+Você também pode adicionar padrões de conformidade customizados criando initiatives de política customizadas que mapeiam controles para os requisitos específicos da sua organização.
 
 ---
 
-## 16. Can I use Azure Policy to enforce configurations inside virtual machines?
+## 15. Como acompanhar o progresso da governança ao longo do tempo?
 
-**Yes** — via **Azure Machine Configuration** (formerly Guest Configuration). Machine Configuration uses Azure Policy to audit and enforce settings inside the guest operating system:
+Use uma combinação de ferramentas e métricas:
 
-- Password complexity requirements
-- Installed software inventory
-- Windows Registry settings
-- Linux file permissions
-- Service status (running/stopped)
-- CIS benchmark compliance
+1. **Tendência do Secure Score** — Monitore o Secure Score do Microsoft Defender for Cloud semanalmente. Deve ter tendência de alta.
 
-Machine Configuration works on Azure VMs and Azure Arc-enabled servers, providing consistent OS-level governance across hybrid environments.
+2. **Porcentagem de conformidade com políticas** — Monitore a taxa geral de conformidade no dashboard do Azure Policy. Meta: >90%.
+
+3. **Relatórios do AzGovViz** — Execute AzGovViz semanal ou diariamente para gerar relatórios abrangentes de governança mostrando atribuições de políticas, RBAC e estrutura de management groups.
+
+4. **Queries do Azure Resource Graph** — Escreva queries para monitorar métricas específicas (recursos sem tags, endpoints públicos, locks ausentes). Veja o Apêndice D para queries iniciais.
+
+5. **Tendências de custo** — Monitore variações de custo mês a mês. A governança deve estabilizar ou reduzir custos ao longo do tempo.
+
+6. **Achados de auditoria** — Monitore o número de achados de auditoria relacionados à governança. Deve diminuir ao longo do tempo.
+
+7. **Dashboard de governança** — Construa um workbook do Azure Monitor ou dashboard do Power BI que agregue todas as métricas de governança em um único lugar.
 
 ---
 
-## 17. How do I handle exceptions to governance policies?
+## 16. Posso usar Azure Policy para aplicar configurações dentro de máquinas virtuais?
 
-Use **Azure Policy exemptions** with these guidelines:
+**Sim** — via **Azure Machine Configuration** (anteriormente Guest Configuration). Machine Configuration usa Azure Policy para auditar e aplicar configurações dentro do sistema operacional guest:
 
-1. **Always set an expiration date** — Exemptions should be temporary. Set a maximum exemption period (e.g., 90 days).
-2. **Document the justification** — Every exemption must have a clear reason and an approval record.
-3. **Use the `Waiver` category** — For intentional deviations. Use `Mitigated` only when an alternative control exists.
-4. **Review regularly** — Include exemption reviews in your monthly governance cadence.
-5. **Track in a central register** — Use Azure Resource Graph to query all active exemptions:
+- Requisitos de complexidade de senha
+- Inventário de software instalado
+- Configurações do Windows Registry
+- Permissões de arquivo Linux
+- Status de serviço (em execução/parado)
+- Conformidade com benchmark CIS
+
+Machine Configuration funciona em VMs Azure e servidores Azure Arc-enabled, fornecendo governança consistente no nível de SO em ambientes híbridos.
+
+---
+
+## 17. Como lidar com exceções às políticas de governança?
+
+Use **Azure Policy exemptions** com estas diretrizes:
+
+1. **Sempre defina uma data de expiração** — Exemptions devem ser temporárias. Defina um período máximo de exemption (ex.: 90 dias).
+2. **Documente a justificativa** — Toda exemption deve ter uma razão clara e um registro de aprovação.
+3. **Use a categoria `Waiver`** — Para desvios intencionais. Use `Mitigated` apenas quando um controle alternativo existe.
+4. **Revise regularmente** — Inclua revisões de exemptions na sua cadência mensal de governança.
+5. **Monitore em um registro central** — Use Azure Resource Graph para consultar todas as exemptions ativas:
 
 ```kusto
 policyresources
@@ -292,48 +292,48 @@ policyresources
 
 ---
 
-## 18. What's the difference between a Policy Initiative and a single Policy?
+## 18. Qual a diferença entre uma Policy Initiative e uma Policy individual?
 
-A **Policy Definition** is a single rule (e.g., "Storage accounts must use HTTPS"). A **Policy Initiative** (also called a Policy Set) is a group of related policy definitions assigned together.
+Uma **Policy Definition** é uma regra individual (ex.: "Storage accounts devem usar HTTPS"). Uma **Policy Initiative** (também chamada de Policy Set) é um grupo de definições de política relacionadas atribuídas juntas.
 
-**When to use initiatives:**
-- When you want to track compliance against a framework (e.g., MCSB, PCI-DSS)
-- When multiple policies are always assigned together
-- When you want a single compliance score for a group of controls
+**Quando usar initiatives:**
+- Quando você quer monitorar conformidade contra um framework (ex.: MCSB, PCI-DSS)
+- Quando múltiplas políticas são sempre atribuídas juntas
+- Quando você quer um score de conformidade único para um grupo de controles
 
-**Example:** The "Microsoft Cloud Security Benchmark" is an initiative containing 200+ individual policy definitions across multiple security domains.
+**Exemplo:** O "Microsoft Cloud Security Benchmark" é uma initiative contendo 200+ definições de políticas individuais em múltiplos domínios de segurança.
 
 ---
 
-## 19. Should I assign policies at the management group or subscription level?
+## 19. Devo atribuir políticas no nível de management group ou subscription?
 
-**Prefer management group level.** Assigning policies at the management group level ensures consistent enforcement across all child subscriptions — including any subscriptions created in the future.
+**Prefira o nível de management group.** Atribuir políticas no nível de management group garante aplicação consistente em todas as subscriptions filhas — incluindo quaisquer subscriptions criadas no futuro.
 
-| Assignment Level | Use When |
+| Nível de Atribuição | Quando Usar |
 |---|---|
-| Management group | Default for all broad governance policies |
-| Subscription | Exception-based or subscription-specific policies |
-| Resource group | Rarely; only for highly specific controls |
+| Management group | Padrão para todas as políticas amplas de governança |
+| Subscription | Políticas baseadas em exceção ou específicas da subscription |
+| Resource group | Raramente; apenas para controles muito específicos |
 
-Assign broad policies (tags, allowed regions, security baselines) at the highest applicable management group. Assign workload-specific policies at the landing zone management group level. Avoid assigning at the resource group level — it does not scale.
-
----
-
-## 20. How do I get started with governance today?
-
-1. **Read Chapters 1–3** — Understand what governance is and why it matters
-2. **Run Microsoft Defender for Cloud** — Get your Secure Score as a baseline
-3. **Run Azure Resource Graph queries** — Inventory your resources (see Appendix D)
-4. **Implement the Phase 1 roadmap** — Follow Chapter 28's Month 1–3 plan
-5. **Pick three policies** — Start with Audit mode (see FAQ #8 for recommendations)
-6. **Set a budget** — Even one budget with one alert is better than none
-7. **Enable MFA** — The single highest-impact security control
-8. **Schedule 30 minutes weekly** — Review governance metrics and address issues
-
-You do not need to do everything at once. Start today, iterate weekly, and your governance posture will steadily improve.
+Atribua políticas amplas (tags, regiões permitidas, baselines de segurança) no management group aplicável mais alto. Atribua políticas específicas de workload no nível de management group da landing zone. Evite atribuir no nível de resource group — não escala.
 
 ---
 
-| Previous | Next |
+## 20. Como começo com governança hoje?
+
+1. **Leia os Capítulos 1–3** — Entenda o que é governança e por que importa
+2. **Execute Microsoft Defender for Cloud** — Obtenha seu Secure Score como baseline
+3. **Execute queries do Azure Resource Graph** — Inventarie seus recursos (veja Apêndice D)
+4. **Implemente o roadmap da Fase 1** — Siga o plano do Mês 1–3 do Capítulo 28
+5. **Escolha três políticas** — Comece com modo Audit (veja FAQ #8 para recomendações)
+6. **Defina um budget** — Mesmo um budget com um alerta é melhor que nenhum
+7. **Habilite MFA** — O controle de segurança de maior impacto
+8. **Agende 30 minutos semanais** — Revise métricas de governança e endereça problemas
+
+Você não precisa fazer tudo de uma vez. Comece hoje, itere semanalmente, e sua postura de governança melhorará continuamente.
+
+---
+
+| Anterior | Próximo |
 |:---|:---|
-| [Case Studies](ch29-case-studies.md) | [Appendix A — Glossary](../appendices/appendix-a-glossary.md) |
+| [Estudos de Caso](ch29-case-studies.md) | [Apêndice A — Glossário](../appendices/appendix-a-glossary.md) |

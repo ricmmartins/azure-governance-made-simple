@@ -1,61 +1,61 @@
-# Chapter 19 — Cost Automation
+# Capítulo 19 — Automação de Custos
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-Manual cost management doesn't scale. As organizations grow their Azure footprint, automated cost controls become essential to prevent budget overruns, enforce spending policies, and optimize resource utilization without human intervention.
+A gestão manual de custos não escala. Conforme as organizações expandem sua presença no Azure, controles automatizados de custos se tornam essenciais para prevenir estouros de orçamento, aplicar políticas de gastos e otimizar a utilização de recursos sem intervenção humana.
 
-Cost automation covers:
+A automação de custos abrange:
 
-- **Automated budget actions** — trigger workflows when spending thresholds are breached
-- **Resource lifecycle automation** — auto-shutdown, auto-start, and auto-delete for dev/test environments
-- **Programmatic budget management** — create and manage budgets via REST API, Bicep, or CLI
-- **Advisor-driven optimization** — act on Azure Advisor recommendations automatically
-- **Custom alert workflows** — route cost alerts to Slack, Teams, ticketing systems, or custom logic
+- **Ações automatizadas de orçamento** — acionar workflows quando limites de gastos são ultrapassados
+- **Automação do ciclo de vida de recursos** — auto-shutdown, auto-start e auto-delete para ambientes de dev/test
+- **Gestão programática de orçamentos** — criar e gerenciar orçamentos via REST API, Bicep ou CLI
+- **Otimização orientada pelo Advisor** — atuar nas recomendações do Azure Advisor automaticamente
+- **Workflows personalizados de alerta** — direcionar alertas de custo para Slack, Teams, sistemas de tickets ou lógica customizada
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Automated Budget Actions with Action Groups
+### Ações Automatizadas de Orçamento com Action Groups
 
-Azure budgets can trigger **action groups** when thresholds are crossed. Action groups support multiple notification and automation channels:
+Os orçamentos do Azure podem acionar **action groups** quando limites são ultrapassados. Action groups suportam múltiplos canais de notificação e automação:
 
-| Action Type | Description |
-|-------------|-------------|
-| **Email** | Send notifications to individuals or distribution lists |
-| **SMS** | Text message alerts for urgent thresholds |
-| **Azure Function** | Execute serverless code (e.g., shut down VMs, send API calls) |
-| **Logic App** | Trigger a workflow (e.g., create a ServiceNow ticket, post to Teams) |
-| **Webhook** | Call any HTTP endpoint |
-| **Automation Runbook** | Execute an Azure Automation runbook |
-| **Event Hub** | Stream to Event Hub for custom processing |
-| **ITSM** | Integrate with IT Service Management tools |
+| Tipo de Ação | Descrição |
+|--------------|-----------|
+| **Email** | Enviar notificações para indivíduos ou listas de distribuição |
+| **SMS** | Alertas por mensagem de texto para limites urgentes |
+| **Azure Function** | Executar código serverless (ex.: desligar VMs, enviar chamadas de API) |
+| **Logic App** | Acionar um workflow (ex.: criar um ticket no ServiceNow, postar no Teams) |
+| **Webhook** | Chamar qualquer endpoint HTTP |
+| **Automation Runbook** | Executar um runbook do Azure Automation |
+| **Event Hub** | Transmitir para Event Hub para processamento customizado |
+| **ITSM** | Integrar com ferramentas de IT Service Management |
 
-### Logic Apps for Cost Alert Workflows
+### Logic Apps para Workflows de Alerta de Custo
 
-**Azure Logic Apps** enable low-code workflows triggered by budget alerts. Common patterns:
+**Azure Logic Apps** habilitam workflows low-code acionados por alertas de orçamento. Padrões comuns:
 
-- **Escalation workflow** — when budget exceeds 80%, email the team lead; at 100%, email the VP and create a blocking ticket
-- **Slack/Teams notification** — post cost alerts to a shared channel with a link to cost analysis
-- **Resource action** — when a dev/test budget is exceeded, automatically deallocate all VMs in the resource group
+- **Workflow de escalonamento** — quando o orçamento excede 80%, enviar e-mail ao líder da equipe; em 100%, enviar e-mail ao VP e criar um ticket bloqueador
+- **Notificação no Slack/Teams** — postar alertas de custo em um canal compartilhado com link para a análise de custos
+- **Ação em recursos** — quando um orçamento de dev/test é excedido, desalocar automaticamente todas as VMs no grupo de recursos
 
-### Auto-Shutdown for Dev/Test Environments
+### Auto-Shutdown para Ambientes de Dev/Test
 
-Dev/test environments are prime candidates for cost automation. Common approaches:
+Ambientes de dev/test são candidatos ideais para automação de custos. Abordagens comuns:
 
-| Approach | Tool | Scope |
-|----------|------|-------|
-| **VM auto-shutdown** | Built-in Azure feature | Individual VMs |
-| **Start/Stop VMs v2** | Azure Function-based solution | Multiple VMs by tag, resource group, or subscription |
-| **Budget-triggered shutdown** | Budget + Action Group + Azure Function | Resource group or subscription |
-| **Azure DevTest Labs** | Managed lab environments | Lab VMs with auto-shutdown policies |
-| **Scheduled pipeline** | GitHub Actions / Azure DevOps on cron | Any resource via CLI commands |
+| Abordagem | Ferramenta | Escopo |
+|-----------|------------|--------|
+| **Auto-shutdown de VM** | Recurso nativo do Azure | VMs individuais |
+| **Start/Stop VMs v2** | Solução baseada em Azure Function | Múltiplas VMs por tag, grupo de recursos ou assinatura |
+| **Shutdown acionado por orçamento** | Budget + Action Group + Azure Function | Grupo de recursos ou assinatura |
+| **Azure DevTest Labs** | Ambientes de laboratório gerenciados | VMs de laboratório com políticas de auto-shutdown |
+| **Pipeline agendado** | GitHub Actions / Azure DevOps via cron | Qualquer recurso via comandos CLI |
 
-### Programmatic Budget Management
+### Gestão Programática de Orçamentos
 
 #### REST API
 
@@ -85,9 +85,9 @@ az rest --method put \
   }'
 ```
 
-### Azure Advisor API for Optimization Recommendations
+### API do Azure Advisor para Recomendações de Otimização
 
-The **Azure Advisor REST API** provides programmatic access to cost optimization recommendations:
+A **REST API do Azure Advisor** fornece acesso programático às recomendações de otimização de custos:
 
 ```bash
 # Get cost recommendations for a subscription
@@ -102,45 +102,45 @@ az advisor recommendation list \
   --output json
 ```
 
-Common automation patterns with Advisor:
+Padrões comuns de automação com o Advisor:
 
-- **Weekly report** — query Advisor API and send a summary email with estimated savings
-- **Auto-remediation** — for low-risk recommendations (e.g., delete unattached disks), apply automatically
-- **Ticket creation** — for high-impact recommendations (e.g., resize VMs), create work items in your tracking system
-
----
-
-## Best Practices
-
-1. **Layer budget alerts** — set alerts at 50% (informational), 80% (warning), and 100% (action required)
-2. **Use forecast alerts** — forecast alerts give you time to act before the actual threshold is hit
-3. **Automate dev/test shutdowns** — schedule VMs to shut down at end of business day; start on demand
-4. **Tag resources for automation scope** — use tags like `AutoShutdown: true` to target automation
-5. **Test actions in non-production first** — validate budget actions and Logic Apps in a dev subscription
-6. **Monitor automation health** — alert on action group failures to ensure automations are actually running
-7. **Combine budgets with policy** — use budgets for alerting and Azure Policy for prevention (e.g., restrict expensive SKUs)
-8. **Review Advisor recommendations weekly** — automate the retrieval; manually approve high-impact changes
-9. **Use managed identities** — authenticate Azure Functions and Logic Apps with managed identities, not stored credentials
-10. **Document automation behavior** — teams should know what happens when a budget is exceeded
+- **Relatório semanal** — consultar a API do Advisor e enviar um e-mail resumo com economias estimadas
+- **Auto-remediação** — para recomendações de baixo risco (ex.: excluir discos não anexados), aplicar automaticamente
+- **Criação de tickets** — para recomendações de alto impacto (ex.: redimensionar VMs), criar itens de trabalho no sistema de rastreamento
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Budget actions that shut down production | Production outage | Never configure auto-shutdown actions on production scopes |
-| No monitoring of action group health | Silent failures; alerts never sent | Monitor action group execution via Activity Log |
-| Over-reliance on email alerts | Alert fatigue; emails ignored | Use actionable alerts (tickets, auto-remediation) in addition to email |
-| Not testing budget actions | Actions fail when needed | Test action groups with a low threshold in a dev subscription |
-| Auto-deleting resources without approval | Data loss | Only auto-delete clearly orphaned resources; require approval for others |
-| Using client secrets in automation | Security risk | Use managed identities for Azure Functions and Logic Apps |
+1. **Escalone alertas de orçamento** — defina alertas em 50% (informativo), 80% (aviso) e 100% (ação necessária)
+2. **Use alertas de previsão** — alertas de previsão dão tempo para agir antes que o limite real seja atingido
+3. **Automatize desligamentos de dev/test** — agende VMs para desligar no fim do expediente; inicie sob demanda
+4. **Marque recursos para escopo de automação** — use tags como `AutoShutdown: true` para direcionar a automação
+5. **Teste ações em não-produção primeiro** — valide ações de orçamento e Logic Apps em uma assinatura de dev
+6. **Monitore a saúde da automação** — alerte sobre falhas de action groups para garantir que as automações estão realmente executando
+7. **Combine orçamentos com políticas** — use orçamentos para alertas e Azure Policy para prevenção (ex.: restringir SKUs caras)
+8. **Revise recomendações do Advisor semanalmente** — automatize a recuperação; aprove manualmente mudanças de alto impacto
+9. **Use managed identities** — autentique Azure Functions e Logic Apps com managed identities, não credenciais armazenadas
+10. **Documente o comportamento da automação** — as equipes devem saber o que acontece quando um orçamento é excedido
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Budget with Action Group via Bicep
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Ações de orçamento que desligam produção | Interrupção de produção | Nunca configure ações de auto-shutdown em escopos de produção |
+| Sem monitoramento da saúde do action group | Falhas silenciosas; alertas nunca enviados | Monitore a execução do action group via Activity Log |
+| Dependência excessiva de alertas por e-mail | Fadiga de alertas; e-mails ignorados | Use alertas acionáveis (tickets, auto-remediação) além de e-mail |
+| Não testar ações de orçamento | Ações falham quando necessárias | Teste action groups com limite baixo em uma assinatura de dev |
+| Auto-exclusão de recursos sem aprovação | Perda de dados | Apenas auto-exclua recursos claramente órfãos; exija aprovação para outros |
+| Usar client secrets na automação | Risco de segurança | Use managed identities para Azure Functions e Logic Apps |
+
+---
+
+## Exemplos de Código
+
+### Orçamento com Action Group via Bicep
 
 ```bicep
 // cost-automation.bicep
@@ -236,7 +236,7 @@ output budgetName string = budget.name
 output actionGroupId string = costActionGroup.id
 ```
 
-### Auto-Shutdown Schedule via Bicep
+### Agendamento de Auto-Shutdown via Bicep
 
 ```bicep
 // vm-auto-shutdown.bicep
@@ -277,7 +277,7 @@ resource shutdownSchedule 'Microsoft.DevTestLab/schedules@2018-09-15' = {
 }
 ```
 
-### GitHub Actions: Weekly Advisor Cost Report
+### GitHub Actions: Relatório Semanal de Custos do Advisor
 
 ```yaml
 # .github/workflows/advisor-cost-report.yml
@@ -329,7 +329,7 @@ jobs:
 
 ---
 
-## References
+## Referências
 
 - [Budget action groups](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets#configure-budget-action-groups)
 - [Azure Advisor REST API](https://learn.microsoft.com/en-us/rest/api/advisor/)
@@ -343,6 +343,6 @@ jobs:
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [FinOps](ch18-finops.md) | [Azure Monitor](../part-6-observability/ch20-azure-monitor.md) |

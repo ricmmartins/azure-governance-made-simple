@@ -1,23 +1,23 @@
-# Chapter 9 — Azure Policy
+# Capítulo 9 — Azure Policy
 
 > Last verified: 2026-04-06
 
-Azure Policy is the backbone of governance in Azure. It lets you define organizational standards, evaluate resources for compliance, and enforce or remediate non-compliant configurations at scale. Whether you need to restrict which regions teams can deploy to, ensure every resource is tagged, or automatically configure diagnostic settings, Azure Policy is the mechanism that makes it happen.
+Azure Policy é a espinha dorsal da governança no Azure. Ele permite definir padrões organizacionais, avaliar recursos quanto à conformidade e aplicar ou remediar configurações não conformes em escala. Seja para restringir em quais regiões as equipes podem implantar, garantir que todo recurso esteja tagueado ou configurar automaticamente configurações de diagnóstico, Azure Policy é o mecanismo que torna isso possível.
 
-This chapter covers the full lifecycle of Azure Policy — from core concepts through advanced patterns like Policy as Code and remediation at scale.
+Este capítulo cobre o ciclo de vida completo do Azure Policy — desde conceitos fundamentais até padrões avançados como Policy as Code e remediação em escala.
 
 ---
 
-## 9.1 Core Concepts
+## 9.1 Conceitos Fundamentais
 
-### Policy Definitions
+### Definições de Policy
 
-A **policy definition** is a JSON object that describes a business rule. It contains:
+Uma **definição de policy** é um objeto JSON que descreve uma regra de negócio. Ela contém:
 
-- **Conditions** (`if`) — which resources the rule applies to.
-- **Effect** (`then`) — what happens when the conditions are met (e.g., deny, audit, modify).
+- **Condições** (`if`) — quais recursos a regra se aplica.
+- **Efeito** (`then`) — o que acontece quando as condições são atendidas (ex.: deny, audit, modify).
 
-Each definition targets a specific concern — for example, "storage accounts must use HTTPS" or "virtual machines must use managed disks."
+Cada definição trata de uma preocupação específica — por exemplo, "contas de armazenamento devem usar HTTPS" ou "máquinas virtuais devem usar discos gerenciados."
 
 ```json
 {
@@ -47,9 +47,9 @@ Each definition targets a specific concern — for example, "storage accounts mu
 }
 ```
 
-### Initiatives (Policy Sets)
+### Iniciativas (Conjuntos de Policies)
 
-An **initiative** (also called a **policy set**) groups multiple policy definitions into a single assignable unit. This simplifies management when you have dozens or hundreds of policies. For example, the built-in **Microsoft Cloud Security Benchmark** initiative bundles hundreds of security-related policies.
+Uma **iniciativa** (também chamada de **policy set**) agrupa múltiplas definições de policy em uma única unidade atribuível. Isso simplifica o gerenciamento quando você tem dezenas ou centenas de policies. Por exemplo, a iniciativa integrada **Microsoft Cloud Security Benchmark** agrupa centenas de policies relacionadas à segurança.
 
 ```json
 {
@@ -75,144 +75,144 @@ An **initiative** (also called a **policy set**) groups multiple policy definiti
 }
 ```
 
-### Assignments
+### Atribuições
 
-A **policy assignment** is the act of attaching a policy definition or initiative to a scope. An assignment specifies:
+Uma **atribuição de policy** é o ato de vincular uma definição de policy ou iniciativa a um escopo. Uma atribuição especifica:
 
-- **Scope** — Where the policy applies (management group, subscription, or resource group).
-- **Parameters** — Values that customize the behavior of the policy.
-- **Enforcement mode** — Whether the policy is actively enforced (`Default`) or only evaluated for compliance (`DoNotEnforce`).
-- **Non-compliance message** — A custom message shown when a deployment is denied.
+- **Escopo** — Onde a policy se aplica (grupo de gerenciamento, assinatura ou grupo de recursos).
+- **Parâmetros** — Valores que personalizam o comportamento da policy.
+- **Modo de aplicação** — Se a policy é ativamente aplicada (`Default`) ou apenas avaliada para conformidade (`DoNotEnforce`).
+- **Mensagem de não conformidade** — Uma mensagem personalizada exibida quando uma implantação é negada.
 
-### Scopes
+### Escopos
 
-Policy assignments follow the Azure resource hierarchy:
+As atribuições de policy seguem a hierarquia de recursos do Azure:
 
 ![Policy Scope Hierarchy](/images/policy-scope-hierarchy.svg)
 
-Policies assigned at a higher scope are **inherited** by all child scopes. A policy assigned to a management group applies to every subscription and resource group beneath it.
+Policies atribuídas em um escopo superior são **herdadas** por todos os escopos filhos. Uma policy atribuída a um grupo de gerenciamento se aplica a toda assinatura e grupo de recursos abaixo dele.
 
-### Exemptions
+### Isenções
 
-A **policy exemption** temporarily or permanently excludes a specific resource or scope from a policy assignment. Exemptions are useful for:
+Uma **isenção de policy** exclui temporária ou permanentemente um recurso ou escopo específico de uma atribuição de policy. Isenções são úteis para:
 
-- **Waiver** — The resource intentionally does not comply, and the organization has accepted the risk.
-- **Mitigated** — The intent of the policy is satisfied through another mechanism.
+- **Waiver** — O recurso intencionalmente não está em conformidade, e a organização aceitou o risco.
+- **Mitigated** — A intenção da policy é satisfeita por outro mecanismo.
 
-Exemptions have an optional expiration date, and they are tracked as Azure resources so they appear in compliance reports.
+Isenções possuem uma data de expiração opcional e são rastreadas como recursos do Azure, então aparecem nos relatórios de conformidade.
 
 ### Policy vs. RBAC
 
-A common source of confusion:
+Uma fonte comum de confusão:
 
-| Aspect | Azure Policy | Azure RBAC |
-|--------|-------------|------------|
-| **Purpose** | What properties resources can have | What actions users can perform |
-| **Default** | Allow (unless explicitly denied) | Deny (unless explicitly allowed) |
-| **Scope** | Resource properties and configurations | User/group/service principal permissions |
-| **Evaluation** | At resource creation and on a schedule | At every API call |
-| **Example** | "All VMs must use managed disks" | "User X can create VMs" |
+| Aspecto | Azure Policy | Azure RBAC |
+|---------|-------------|------------|
+| **Propósito** | Quais propriedades os recursos podem ter | Quais ações os usuários podem executar |
+| **Padrão** | Permitir (a menos que explicitamente negado) | Negar (a menos que explicitamente permitido) |
+| **Escopo** | Propriedades e configurações de recursos | Permissões de usuário/grupo/service principal |
+| **Avaliação** | Na criação do recurso e em um agendamento | Em cada chamada de API |
+| **Exemplo** | "Todas as VMs devem usar discos gerenciados" | "Usuário X pode criar VMs" |
 
-Both are needed — RBAC controls **who** can act, and Policy controls **what** can be created or how resources must be configured.
+Ambos são necessários — RBAC controla **quem** pode agir, e Policy controla **o que** pode ser criado ou como os recursos devem ser configurados.
 
 ---
 
-## 9.2 Policy Effects & Evaluation Order
+## 9.2 Efeitos de Policy e Ordem de Avaliação
 
-### Effects
+### Efeitos
 
-Azure Policy supports the following effects:
+Azure Policy suporta os seguintes efeitos:
 
-| Effect | Description |
-|--------|-------------|
-| **Disabled** | The policy rule is not evaluated. Useful for testing or temporarily turning off a policy. |
-| **Append** | Adds fields to the resource request. Commonly used to add tags or IP rules. |
-| **Deny** | Blocks the resource request before it reaches the resource provider. |
-| **Audit** | Creates a warning event in the activity log but does not block the request. |
-| **AuditIfNotExists** | Audits when a related resource does not exist (e.g., diagnostic settings are missing). |
-| **DeployIfNotExists** | Deploys a related resource when one does not exist (e.g., automatically deploy a diagnostic setting). Requires a managed identity. |
-| **Modify** | Adds, updates, or removes properties or tags on a resource during creation or update. Requires a managed identity. |
-| **Manual** | The compliance state is managed by the user, not evaluated automatically. Used for policies where automated evaluation is not possible. |
-| **Mutate** | Corrects resource configurations using mutation during the ARM request pipeline, allowing Policy to fix non-compliant requests before deployment rather than denying them. |
-| **DenyAction** | Blocks specific actions on resources (e.g., prevent deletion). |
+| Efeito | Descrição |
+|--------|-----------|
+| **Disabled** | A regra de policy não é avaliada. Útil para testes ou desativar temporariamente uma policy. |
+| **Append** | Adiciona campos à solicitação do recurso. Comumente usado para adicionar tags ou regras de IP. |
+| **Deny** | Bloqueia a solicitação do recurso antes que ela chegue ao provedor de recursos. |
+| **Audit** | Cria um evento de alerta no log de atividades, mas não bloqueia a solicitação. |
+| **AuditIfNotExists** | Audita quando um recurso relacionado não existe (ex.: configurações de diagnóstico estão ausentes). |
+| **DeployIfNotExists** | Implanta um recurso relacionado quando um não existe (ex.: implantar automaticamente uma configuração de diagnóstico). Requer uma identidade gerenciada. |
+| **Modify** | Adiciona, atualiza ou remove propriedades ou tags em um recurso durante a criação ou atualização. Requer uma identidade gerenciada. |
+| **Manual** | O estado de conformidade é gerenciado pelo usuário, não avaliado automaticamente. Usado para policies onde a avaliação automatizada não é possível. |
+| **Mutate** | Corrige configurações de recursos usando mutação durante o pipeline de requisição do ARM, permitindo que o Policy corrija requisições não conformes antes da implantação em vez de negá-las. |
+| **DenyAction** | Bloqueia ações específicas em recursos (ex.: impedir exclusão). |
 
-### Evaluation Order
+### Ordem de Avaliação
 
-Requests to create or update a resource through Azure Resource Manager are evaluated by Policy before reaching the resource provider. Policy creates a list of all assignments that apply to the resource and evaluates the resource against each definition. Processing effects before handing the request to the resource provider prevents unnecessary processing for resources that do not meet governance controls.
+Solicitações para criar ou atualizar um recurso através do Azure Resource Manager são avaliadas pelo Policy antes de chegar ao provedor de recursos. O Policy cria uma lista de todas as atribuições que se aplicam ao recurso e avalia o recurso em relação a cada definição. O processamento dos efeitos antes de entregar a solicitação ao provedor de recursos evita processamento desnecessário para recursos que não atendem aos controles de governança.
 
-The evaluation order is:
+A ordem de avaliação é:
 
-1. **Disabled** — checked first to determine whether the policy rule should be evaluated at all.
+1. **Disabled** — verificado primeiro para determinar se a regra de policy deve ser avaliada.
 
-2. **Append / Modify / Mutate** — evaluated next because they can change the request. A change made by Append may prevent an Audit or Deny effect from triggering. Modify and Mutate similarly alter the resource payload before further evaluation.
+2. **Append / Modify / Mutate** — avaliados em seguida porque podem alterar a solicitação. Uma alteração feita pelo Append pode impedir que um efeito Audit ou Deny seja disparado. Modify e Mutate também alteram o payload do recurso antes de uma avaliação adicional.
 
-3. **Deny / DenyAction** — evaluated next. By evaluating Deny before Audit, double-logging of an unwanted resource request is avoided. DenyAction blocks specific operations (like delete) on existing resources.
+3. **Deny / DenyAction** — avaliados em seguida. Ao avaliar Deny antes de Audit, evita-se o registro duplo de uma solicitação de recurso indesejada. DenyAction bloqueia operações específicas (como exclusão) em recursos existentes.
 
-4. **Audit** — evaluated before the request goes to the resource provider. Audit creates a warning event in the activity log when evaluating a non-compliant resource but does not block the request.
+4. **Audit** — avaliado antes que a solicitação vá para o provedor de recursos. Audit cria um evento de alerta no log de atividades ao avaliar um recurso não conforme, mas não bloqueia a solicitação.
 
-5. **AuditIfNotExists / DeployIfNotExists** — evaluated after the resource provider returns a success code, to determine whether additional compliance logging or remediation action is required.
+5. **AuditIfNotExists / DeployIfNotExists** — avaliados após o provedor de recursos retornar um código de sucesso, para determinar se registro adicional de conformidade ou ação de remediação é necessário.
 
-   - **AuditIfNotExists** enables auditing on resources that match the `if` condition but do not have the components specified in the `details` of the `then` condition.
-   - **DeployIfNotExists** triggers a template deployment when the condition is met.
+   - **AuditIfNotExists** habilita auditoria em recursos que correspondem à condição `if`, mas não possuem os componentes especificados nos `details` da condição `then`.
+   - **DeployIfNotExists** dispara uma implantação de template quando a condição é atendida.
 
-6. **Manual** — compliance is determined by the user or an external process, not by the policy engine.
+6. **Manual** — a conformidade é determinada pelo usuário ou um processo externo, não pelo motor de policy.
 
-### Understanding Policy Modes
+### Entendendo os Modos de Policy
 
-- **All** — Evaluates all resource types. Used for policies that check resource group properties or subscription-level settings.
-- **Indexed** — Evaluates only resource types that support tags and locations. This is the most common mode.
-- **Microsoft.Kubernetes.Data** — Used for Kubernetes admission control policies.
-- **Microsoft.Network.Data** — Used for custom network data-plane policies.
+- **All** — Avalia todos os tipos de recursos. Usado para policies que verificam propriedades de grupos de recursos ou configurações em nível de assinatura.
+- **Indexed** — Avalia apenas tipos de recursos que suportam tags e localizações. Este é o modo mais comum.
+- **Microsoft.Kubernetes.Data** — Usado para policies de controle de admissão do Kubernetes.
+- **Microsoft.Network.Data** — Usado para policies personalizadas de plano de dados de rede.
 
 ---
 
 ## 9.3 Azure Machine Configuration
 
-### What It Is
+### O Que É
 
-**Azure Machine Configuration** extends Azure Policy into the operating system running inside virtual machines and Arc-enabled servers. While standard Azure Policy governs the properties of Azure resources on the management plane, Azure Machine Configuration can audit and enforce settings **inside** VMs — such as installed software, OS configurations, registry keys, file contents, and service states.
+**Azure Machine Configuration** estende o Azure Policy para dentro do sistema operacional executado em máquinas virtuais e servidores habilitados para Arc. Enquanto o Azure Policy padrão governa as propriedades dos recursos Azure no plano de gerenciamento, o Azure Machine Configuration pode auditar e aplicar configurações **dentro** das VMs — como software instalado, configurações do SO, chaves de registro, conteúdo de arquivos e estados de serviços.
 
-### How It Works
+### Como Funciona
 
-Azure Machine Configuration uses the following architecture:
+O Azure Machine Configuration utiliza a seguinte arquitetura:
 
-1. **Machine Configuration extension** — A VM extension installed on the target machine that runs the configuration agent.
-2. **Configuration packages** — Authored as PowerShell DSC (Desired State Configuration) documents. Each package contains the rules to evaluate.
-3. **Azure Policy integration** — Machine Configuration packages are assigned to VMs through Azure Policy, using `AuditIfNotExists` or `DeployIfNotExists` effects. Compliance results flow back to the Azure Policy compliance dashboard.
+1. **Extensão Machine Configuration** — Uma extensão de VM instalada na máquina de destino que executa o agente de configuração.
+2. **Pacotes de configuração** — Criados como documentos PowerShell DSC (Desired State Configuration). Cada pacote contém as regras a serem avaliadas.
+3. **Integração com Azure Policy** — Pacotes do Machine Configuration são atribuídos a VMs através do Azure Policy, usando efeitos `AuditIfNotExists` ou `DeployIfNotExists`. Os resultados de conformidade retornam ao painel de conformidade do Azure Policy.
 
-The evaluation flow:
+O fluxo de avaliação:
 
 ![Machine Configuration Flow](/images/machine-config-flow.svg)
 
-### Built-in Machine Configuration Policies
+### Policies Integradas do Machine Configuration
 
-Azure provides many built-in Machine Configuration policies, including:
+O Azure fornece muitas policies integradas do Machine Configuration, incluindo:
 
-- Audit Windows machines that do not have the specified Windows features installed.
-- Audit Linux machines that have accounts without passwords.
-- Audit Windows machines that do not restrict the minimum password length.
-- Audit Windows machines that do not store passwords using reversible encryption.
-- Audit Windows machines on which the Log Analytics agent is not connected. *(Note: The Log Analytics agent was retired in August 2024. This policy is maintained for legacy environments. For new deployments, use Azure Monitor Agent-based policies.)*
+- Auditar máquinas Windows que não possuem os recursos Windows especificados instalados.
+- Auditar máquinas Linux que possuem contas sem senhas.
+- Auditar máquinas Windows que não restringem o comprimento mínimo da senha.
+- Auditar máquinas Windows que não armazenam senhas usando criptografia reversível.
+- Auditar máquinas Windows nas quais o agente Log Analytics não está conectado. *(Nota: O agente Log Analytics foi descontinuado em agosto de 2024. Esta policy é mantida para ambientes legados. Para novas implantações, use policies baseadas no Azure Monitor Agent.)*
 
-### Custom Configurations
+### Configurações Personalizadas
 
-You can author custom Machine Configuration packages for organization-specific requirements:
+Você pode criar pacotes personalizados do Machine Configuration para requisitos específicos da organização:
 
-1. **Author** a DSC configuration in PowerShell.
-2. **Compile** and **package** it using the `GuestConfiguration` PowerShell module.
-3. **Publish** the package to an Azure Storage blob (or other accessible URI).
-4. **Create a policy definition** that references the package.
-5. **Assign** the policy to the target scope.
+1. **Criar** uma configuração DSC em PowerShell.
+2. **Compilar** e **empacotar** usando o módulo PowerShell `GuestConfiguration`.
+3. **Publicar** o pacote em um blob do Azure Storage (ou outro URI acessível).
+4. **Criar uma definição de policy** que referencia o pacote.
+5. **Atribuir** a policy ao escopo de destino.
 
 ```powershell
-# Example: Create a custom Machine Configuration package
+# Exemplo: Criar um pacote personalizado de Machine Configuration
 Install-Module -Name GuestConfiguration -Force
 
-# Compile the DSC configuration
+# Compilar a configuração DSC
 . ./MyConfig.ps1
 MyConfig -OutputPath ./compiled
 
-# Create the package
+# Criar o pacote
 New-GuestConfigurationPackage `
   -Name 'AuditSecureBaseline' `
   -Configuration './compiled/localhost.mof' `
@@ -220,61 +220,61 @@ New-GuestConfigurationPackage `
   -Force
 ```
 
-### Key Considerations
+### Considerações Importantes
 
-- Machine Configuration requires the **Azure Machine Configuration extension** to be installed on target VMs.
-- For Arc-enabled servers, the extension is automatically managed.
-- Machine Configuration supports both **Audit** (report-only) and **AuditAndSet** (enforce) modes.
-- Custom packages must be stored in a location accessible to the VM (Azure Blob Storage with SAS token or managed identity access).
+- O Machine Configuration requer que a **extensão Azure Machine Configuration** esteja instalada nas VMs de destino.
+- Para servidores habilitados para Arc, a extensão é gerenciada automaticamente.
+- O Machine Configuration suporta os modos **Audit** (somente relatório) e **AuditAndSet** (aplicar).
+- Pacotes personalizados devem ser armazenados em um local acessível à VM (Azure Blob Storage com token SAS ou acesso por identidade gerenciada).
 
 ---
 
 ## 9.4 Policy as Code (EPAC & CI/CD)
 
-### What Policy as Code Means
+### O Que Significa Policy as Code
 
-**Policy as Code** is the practice of managing Azure Policy definitions, initiatives, assignments, and exemptions as version-controlled source code — just as you would manage application code or infrastructure as code. This approach provides:
+**Policy as Code** é a prática de gerenciar definições, iniciativas, atribuições e isenções do Azure Policy como código-fonte versionado — assim como você gerenciaria código de aplicação ou infraestrutura como código. Esta abordagem fornece:
 
-- **Version history** — Track who changed what and when.
-- **Peer review** — Policy changes go through pull requests.
-- **Automated testing** — Validate policies before deploying to production.
-- **Repeatability** — Apply the same policies consistently across environments.
-- **Rollback** — Revert to a previous policy state if issues are discovered.
+- **Histórico de versões** — Rastrear quem alterou o quê e quando.
+- **Revisão por pares** — Alterações de policy passam por pull requests.
+- **Testes automatizados** — Validar policies antes de implantar em produção.
+- **Repetibilidade** — Aplicar as mesmas policies consistentemente entre ambientes.
+- **Rollback** — Reverter para um estado anterior de policy se problemas forem descobertos.
 
 ### Enterprise Policy as Code (EPAC)
 
-The **Enterprise Policy as Code (EPAC)** framework is a Microsoft-supported open-source project that provides a structured approach to managing Azure Policy at enterprise scale. EPAC uses a declarative, JSON/CSV-based format to define the desired state of all policies across your Azure environment.
+O framework **Enterprise Policy as Code (EPAC)** é um projeto open-source apoiado pela Microsoft que fornece uma abordagem estruturada para gerenciar Azure Policy em escala empresarial. O EPAC usa um formato declarativo baseado em JSON/CSV para definir o estado desejado de todas as policies em seu ambiente Azure.
 
-Key features of EPAC:
+Principais funcionalidades do EPAC:
 
-- **Desired-state model** — You declare what policies, initiatives, assignments, and exemptions should exist, and EPAC calculates the delta.
-- **Multi-environment support** — Manage dev, test, and production policy estates from a single repository.
-- **Plan and deploy stages** — Separate planning (what-if) from deployment for safe rollouts.
-- **Exemption management** — Track and manage exemptions alongside policy definitions.
-- **Role assignment management** — Automatically create the managed identity role assignments required by DeployIfNotExists and Modify policies.
+- **Modelo de estado desejado** — Você declara quais policies, iniciativas, atribuições e isenções devem existir, e o EPAC calcula o delta.
+- **Suporte multi-ambiente** — Gerenciar estates de policy de dev, test e produção a partir de um único repositório.
+- **Estágios de plan e deploy** — Separar planejamento (what-if) de implantação para rollouts seguros.
+- **Gerenciamento de isenções** — Rastrear e gerenciar isenções junto com definições de policy.
+- **Gerenciamento de atribuição de roles** — Criar automaticamente as atribuições de role de identidade gerenciada requeridas pelas policies DeployIfNotExists e Modify.
 
-An EPAC policy definition structure looks like:
+Uma estrutura de definição de policy EPAC se parece com:
 
 ![EPAC Folder Structure](/images/epac-folder-structure.svg)
 
-> **Reference:** [Enterprise Policy as Code (EPAC)](https://aka.ms/epac)
+> **Referência:** [Enterprise Policy as Code (EPAC)](https://aka.ms/epac)
 
-### CI/CD Pipeline for Policy Lifecycle
+### Pipeline CI/CD para o Ciclo de Vida de Policy
 
-A robust Policy as Code pipeline follows this workflow:
+Um pipeline robusto de Policy as Code segue este fluxo de trabalho:
 
 ![Policy Lifecycle](/images/policy-lifecycle.svg)
 
-#### Stage 1: Author
+#### Estágio 1: Criar
 
-Policy authors create or modify policy definitions, initiatives, and assignments in the Git repository.
+Autores de policy criam ou modificam definições de policy, iniciativas e atribuições no repositório Git.
 
-#### Stage 2: Validate
+#### Estágio 2: Validar
 
-Automated validation checks:
+Verificações de validação automatizadas:
 
 ```yaml
-# Example: Azure DevOps pipeline step for EPAC validation
+# Exemplo: Etapa de pipeline do Azure DevOps para validação EPAC
 - task: PowerShell@2
   displayName: 'Build EPAC Deployment Plan'
   inputs:
@@ -285,52 +285,52 @@ Automated validation checks:
         -OutputFolder "$(Build.ArtifactStagingDirectory)/plans"
 ```
 
-#### Stage 3: Plan
+#### Estágio 3: Planejar
 
-Generate a deployment plan showing what will change:
+Gerar um plano de implantação mostrando o que mudará:
 
-- New policy definitions to create.
-- Assignments to update.
-- Resources that will become non-compliant.
+- Novas definições de policy a criar.
+- Atribuições a atualizar.
+- Recursos que se tornarão não conformes.
 
-#### Stage 4: Review
+#### Estágio 4: Revisar
 
-The plan is attached to the pull request for peer review. Reviewers verify:
+O plano é anexado ao pull request para revisão por pares. Os revisores verificam:
 
-- The policy logic is correct.
-- The scope is appropriate (not too broad, not too narrow).
-- Exemptions have documented justifications.
+- A lógica da policy está correta.
+- O escopo é apropriado (não muito amplo, não muito restrito).
+- Isenções possuem justificativas documentadas.
 
-#### Stage 5: Deploy
+#### Estágio 5: Implantar
 
-After approval, the pipeline deploys the policies:
+Após a aprovação, o pipeline implanta as policies:
 
 ```powershell
-# EPAC deployment
+# Implantação EPAC
 Deploy-PolicyPlan `
   -InputFolder "./plans" `
   -DefaultContext $context
 ```
 
-#### Stage 6: Monitor
+#### Estágio 6: Monitorar
 
-Post-deployment monitoring:
+Monitoramento pós-implantação:
 
-- Check the compliance dashboard for unexpected non-compliance.
-- Review Azure Activity Log for policy evaluation events.
-- Set up alerts for compliance state changes.
+- Verificar o painel de conformidade para não conformidades inesperadas.
+- Revisar o Azure Activity Log para eventos de avaliação de policy.
+- Configurar alertas para mudanças de estado de conformidade.
 
-### Policy Testing Strategies
+### Estratégias de Teste de Policy
 
-**Audit-first, then Deny:**
+**Auditar primeiro, depois Deny:**
 
-The safest approach to policy rollout is:
+A abordagem mais segura para rollout de policy é:
 
-1. Deploy with `Audit` effect or `DoNotEnforce` enforcement mode.
-2. Wait for a compliance evaluation cycle (typically 24 hours for a full scan).
-3. Review which resources would be affected.
-4. Communicate with affected teams.
-5. Switch to `Deny` effect after teams have remediated or acknowledged.
+1. Implantar com efeito `Audit` ou modo de aplicação `DoNotEnforce`.
+2. Aguardar um ciclo de avaliação de conformidade (tipicamente 24 horas para uma varredura completa).
+3. Revisar quais recursos seriam afetados.
+4. Comunicar às equipes afetadas.
+5. Mudar para efeito `Deny` após as equipes terem remediado ou reconhecido.
 
 ```json
 {
@@ -358,9 +358,9 @@ The safest approach to policy rollout is:
 }
 ```
 
-### Policy Exemption Management in Code
+### Gerenciamento de Isenções de Policy em Código
 
-Exemptions should be tracked in source control alongside policies:
+Isenções devem ser rastreadas no controle de versão junto com as policies:
 
 ```json
 {
@@ -381,42 +381,42 @@ Exemptions should be tracked in source control alongside policies:
 }
 ```
 
-### Git-Based Policy Management Workflow
+### Fluxo de Trabalho de Gerenciamento de Policy Baseado em Git
 
 ![Git-Based Policy Management](/images/policy-git-branching.svg)
 
-Each pull request triggers:
-1. Schema validation of policy JSON.
-2. EPAC plan generation (what-if).
-3. Plan posted as PR comment for review.
-4. On merge, deployment pipeline runs automatically.
+Cada pull request dispara:
+1. Validação de schema do JSON de policy.
+2. Geração de plano EPAC (what-if).
+3. Plano publicado como comentário no PR para revisão.
+4. No merge, pipeline de implantação executa automaticamente.
 
 ---
 
-## 9.5 Policy Remediation at Scale
+## 9.5 Remediação de Policy em Escala
 
-### Remediation Tasks
+### Tarefas de Remediação
 
-When policies use `DeployIfNotExists` or `Modify` effects, existing non-compliant resources are not automatically fixed. You must create **remediation tasks** to bring existing resources into compliance.
+Quando policies usam efeitos `DeployIfNotExists` ou `Modify`, recursos não conformes existentes não são automaticamente corrigidos. Você deve criar **tarefas de remediação** para trazer recursos existentes à conformidade.
 
-A remediation task:
-1. Identifies all non-compliant resources for a given policy assignment.
-2. Deploys the remediation template (for DeployIfNotExists) or applies modifications (for Modify) to each resource.
-3. Reports progress and results.
+Uma tarefa de remediação:
+1. Identifica todos os recursos não conformes para uma determinada atribuição de policy.
+2. Implanta o template de remediação (para DeployIfNotExists) ou aplica modificações (para Modify) em cada recurso.
+3. Reporta progresso e resultados.
 
 ```bash
-# Create a remediation task via Azure CLI
+# Criar uma tarefa de remediação via Azure CLI
 az policy remediation create \
   --name "remediate-diagnostics-settings" \
   --policy-assignment "/subscriptions/{sub-id}/providers/Microsoft.Authorization/policyAssignments/deploy-diag-settings" \
   --resource-group "my-resource-group"
 ```
 
-### DeployIfNotExists Remediation
+### Remediação DeployIfNotExists
 
-The `DeployIfNotExists` effect is one of the most powerful tools for governance at scale. It allows Policy to automatically deploy companion resources — such as diagnostic settings, private endpoints, or Microsoft Defender for Cloud configurations.
+O efeito `DeployIfNotExists` é uma das ferramentas mais poderosas para governança em escala. Ele permite que o Policy implante automaticamente recursos complementares — como configurações de diagnóstico, endpoints privados ou configurações do Microsoft Defender for Cloud.
 
-Example: Automatically deploy diagnostic settings for Key Vaults:
+Exemplo: Implantar automaticamente configurações de diagnóstico para Key Vaults:
 
 ```json
 {
@@ -493,15 +493,15 @@ Example: Automatically deploy diagnostic settings for Key Vaults:
 }
 ```
 
-### Large-Scale Compliance Remediation Strategies
+### Estratégias de Remediação de Conformidade em Larga Escala
 
-When remediating thousands of resources:
+Ao remediar milhares de recursos:
 
-1. **Prioritize by risk** — Remediate the most critical non-compliant resources first (e.g., public-facing storage accounts before internal dev resources).
+1. **Priorizar por risco** — Remediar os recursos não conformes mais críticos primeiro (ex.: contas de armazenamento com acesso público antes de recursos internos de desenvolvimento).
 
-2. **Batch remediation tasks** — Azure Policy processes up to 500 resources per remediation task. For larger estates, create multiple tasks or use EPAC to manage remediation systematically.
+2. **Agrupar tarefas de remediação em lotes** — O Azure Policy processa até 500 recursos por tarefa de remediação. Para estates maiores, crie múltiplas tarefas ou use o EPAC para gerenciar remediação sistematicamente.
 
-3. **Monitor remediation progress** — Use Azure Resource Graph to query remediation status:
+3. **Monitorar progresso da remediação** — Use o Azure Resource Graph para consultar o status de remediação:
 
 ```kusto
 PolicyResources
@@ -511,127 +511,127 @@ PolicyResources
 | order by count_ desc
 ```
 
-4. **Parallel remediation** — Run remediation tasks for different policy assignments in parallel. Avoid running multiple remediations on the same resources simultaneously.
+4. **Remediação paralela** — Execute tarefas de remediação para diferentes atribuições de policy em paralelo. Evite executar múltiplas remediações nos mesmos recursos simultaneamente.
 
-5. **Handle failures gracefully** — Some remediations will fail due to resource locks, insufficient permissions, or resource-specific constraints. Review failed remediation operations and address blockers individually.
+5. **Tratar falhas com elegância** — Algumas remediações falharão devido a bloqueios de recurso, permissões insuficientes ou restrições específicas do recurso. Revise operações de remediação falhas e resolva bloqueios individualmente.
 
-### Safe Deployment Practices for Policy Rollout
+### Práticas Seguras de Implantação para Rollout de Policy
 
-Rolling out policy changes at scale requires care:
+Implantar mudanças de policy em escala requer cuidado:
 
-1. **Use DoNotEnforce mode** — Test new assignments with enforcement disabled to see compliance impact without blocking deployments.
+1. **Usar modo DoNotEnforce** — Testar novas atribuições com aplicação desabilitada para ver o impacto na conformidade sem bloquear implantações.
 
-2. **Ring-based deployment** — Apply policies progressively:
-   - Ring 0: Sandbox/Dev subscriptions.
-   - Ring 1: Test/Staging subscriptions.
-   - Ring 2: Production subscriptions (non-critical).
-   - Ring 3: Production subscriptions (critical).
+2. **Implantação em anéis** — Aplicar policies progressivamente:
+   - Anel 0: Assinaturas Sandbox/Dev.
+   - Anel 1: Assinaturas Test/Staging.
+   - Anel 2: Assinaturas de Produção (não críticas).
+   - Anel 3: Assinaturas de Produção (críticas).
 
-3. **Monitor compliance delta** — After each ring deployment, wait for a compliance scan and review the change in compliance percentage.
+3. **Monitorar delta de conformidade** — Após cada implantação de anel, aguardar uma varredura de conformidade e revisar a mudança na porcentagem de conformidade.
 
-4. **Have a rollback plan** — Keep the previous policy state in source control so you can quickly revert if a policy causes issues.
+4. **Ter um plano de rollback** — Manter o estado anterior de policy no controle de versão para poder reverter rapidamente se uma policy causar problemas.
 
-5. **Communicate broadly** — Notify development and operations teams before enforcing new Deny policies, and provide remediation guidance.
-
----
-
-## 9.6 Governance Starter Policies
-
-Below is a curated set of 36 built-in Azure Policy definitions organized by category. These serve as a strong starting point for any organization establishing Azure governance.
-
-> **Tip:** If you enable the Microsoft Defender for Cloud built-in initiative, check for overlapping policies. See the [Azure Policy built-in definitions for Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference) for the full list.
+5. **Comunicar amplamente** — Notificar equipes de desenvolvimento e operações antes de aplicar novas policies Deny, e fornecer orientação de remediação.
 
 ---
 
-### ☑️ Compute
+## 9.6 Policies Iniciais de Governança
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 1 | **Allowed virtual machine size SKUs** — Restricts which VM sizes can be deployed, controlling cost and standardizing environments. | Deny | `cccc23c7-8427-4f53-ad12-b6a63eb452b3` |
-| 2 | **Virtual machines should use managed disks** — Audits VMs that do not use managed disks for improved reliability and security. | Audit | `06a78e20-9358-41c9-923c-fb736d382a4d` |
-| 3 | **Require automatic OS image patching on Virtual Machine Scale Sets** — Ensures VMSS instances receive automatic OS patches. | Deny | `465f0161-0087-490a-9ad9-ad6217f4f43a` |
-| 4 | **Azure Machine Configuration extension should be installed on machines** — Ensures the Machine Configuration extension is installed for in-guest policy evaluation. Maps to CIS and NIST baselines. | AuditIfNotExists | `ae89ebca-1c92-4898-ac2c-9f63decb045c` |
+Abaixo está um conjunto curado de 36 definições integradas de Azure Policy organizadas por categoria. Estas servem como um forte ponto de partida para qualquer organização estabelecendo governança no Azure.
 
-### ☑️ General
+> **Dica:** Se você habilitar a iniciativa integrada do Microsoft Defender for Cloud, verifique policies sobrepostas. Consulte as [definições integradas de Azure Policy para o Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference) para a lista completa.
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 5 | **Allowed locations** — Restricts the locations where resources can be deployed. Enforces geo-compliance requirements. | Deny | `e56962a6-4747-49cd-b67b-bf8b01975c4c` |
-| 6 | **Allowed locations for resource groups** — Restricts where resource groups can be created. | Deny | `e765b5de-1225-4ba3-bd56-1ac6695af988` |
-| 7 | **Allowed resource types** — Specifies which resource types can be deployed. Only affects types supporting tags and locations. | Deny | `a08ec900-254a-4555-9bf5-e42af04b5c5c` |
-| 8 | **Not allowed resource types** — Blocks specific resource types from being deployed. Reduces complexity and attack surface. | Deny | `6c112d4e-5bc7-47ae-a041-ea2d9dccd749` |
-| 9 | **Audit resource location matches resource group location** — Audits that the resource location matches its parent resource group location. | Audit | `0a914e76-4921-4c19-b460-a2d36003525a` |
+---
 
-### ☑️ Security
+### ☑️ Computação
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 10 | **A maximum of 3 owners should be designated for your subscription** — Limits subscription owners to reduce breach blast radius. Maps to NIST AC-6. | AuditIfNotExists | `4f11b553-d42e-4e3a-89be-32ca364cad4c` |
-| 11 | **MFA should be enabled on accounts with owner permissions on your subscription** — Ensures MFA is enabled for owner accounts to prevent credential-based attacks. Maps to NIST IA-2, PCI-DSS 8.3. | AuditIfNotExists | `aa633080-8b72-40c4-a2d7-d00c03e80bed` |
-| 12 | **Subscriptions should have a contact email address for security issues** — Ensures security contacts receive notifications from Microsoft Defender for Cloud. | AuditIfNotExists | `4f4f78b8-e367-4b10-a341-d9a4ad5cf1c7` |
-| 13 | **There should be more than one owner assigned to your subscription** — Ensures administrator access redundancy for subscription management. | AuditIfNotExists | `09024ccc-0c5f-475e-9457-b7c0d9ed487b` |
-| 14 | **Audit usage of custom RBAC rules** — Audits custom RBAC roles instead of built-in roles. Custom roles are error-prone and require rigorous threat modeling. | Audit | `a451c1ef-c6ca-483d-87ed-f49761e3ffb5` |
-| 15 | **Custom subscription owner roles should not exist** — Ensures no custom roles replicate the Owner role at subscription scope. | Audit | `10ee2ea2-fb4d-45b8-a7e9-a2e770044cd9` |
-| 16 | **Microsoft Defender for Cloud should be enabled on your subscription** — Ensures Defender for Cloud is enabled for continuous security assessment. | AuditIfNotExists | `ac076320-ddcf-4066-b451-6154267e8ad2` |
-| 17 | **Azure DDoS Protection should be enabled** — Ensures DDoS Protection is enabled on virtual networks with public-facing resources. Maps to NIST SC-5. | AuditIfNotExists | `a7aca53f-2ed4-4466-a25e-0b45ade68efd` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 1 | **Allowed virtual machine size SKUs** — Restringe quais tamanhos de VM podem ser implantados, controlando custos e padronizando ambientes. | Deny | `cccc23c7-8427-4f53-ad12-b6a63eb452b3` |
+| 2 | **Virtual machines should use managed disks** — Audita VMs que não usam discos gerenciados para maior confiabilidade e segurança. | Audit | `06a78e20-9358-41c9-923c-fb736d382a4d` |
+| 3 | **Require automatic OS image patching on Virtual Machine Scale Sets** — Garante que instâncias de VMSS recebam patches automáticos de SO. | Deny | `465f0161-0087-490a-9ad9-ad6217f4f43a` |
+| 4 | **Azure Machine Configuration extension should be installed on machines** — Garante que a extensão Machine Configuration esteja instalada para avaliação de policy in-guest. Mapeia para baselines CIS e NIST. | AuditIfNotExists | `ae89ebca-1c92-4898-ac2c-9f63decb045c` |
+
+### ☑️ Geral
+
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 5 | **Allowed locations** — Restringe as localizações onde recursos podem ser implantados. Aplica requisitos de conformidade geográfica. | Deny | `e56962a6-4747-49cd-b67b-bf8b01975c4c` |
+| 6 | **Allowed locations for resource groups** — Restringe onde grupos de recursos podem ser criados. | Deny | `e765b5de-1225-4ba3-bd56-1ac6695af988` |
+| 7 | **Allowed resource types** — Especifica quais tipos de recursos podem ser implantados. Afeta apenas tipos que suportam tags e localizações. | Deny | `a08ec900-254a-4555-9bf5-e42af04b5c5c` |
+| 8 | **Not allowed resource types** — Bloqueia tipos de recursos específicos de serem implantados. Reduz complexidade e superfície de ataque. | Deny | `6c112d4e-5bc7-47ae-a041-ea2d9dccd749` |
+| 9 | **Audit resource location matches resource group location** — Audita se a localização do recurso corresponde à localização do grupo de recursos pai. | Audit | `0a914e76-4921-4c19-b460-a2d36003525a` |
+
+### ☑️ Segurança
+
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 10 | **A maximum of 3 owners should be designated for your subscription** — Limita proprietários de assinatura para reduzir o raio de explosão de violações. Mapeia para NIST AC-6. | AuditIfNotExists | `4f11b553-d42e-4e3a-89be-32ca364cad4c` |
+| 11 | **MFA should be enabled on accounts with owner permissions on your subscription** — Garante que MFA esteja habilitado para contas de proprietário para prevenir ataques baseados em credenciais. Mapeia para NIST IA-2, PCI-DSS 8.3. | AuditIfNotExists | `aa633080-8b72-40c4-a2d7-d00c03e80bed` |
+| 12 | **Subscriptions should have a contact email address for security issues** — Garante que contatos de segurança recebam notificações do Microsoft Defender for Cloud. | AuditIfNotExists | `4f4f78b8-e367-4b10-a341-d9a4ad5cf1c7` |
+| 13 | **There should be more than one owner assigned to your subscription** — Garante redundância de acesso administrativo para gerenciamento de assinatura. | AuditIfNotExists | `09024ccc-0c5f-475e-9457-b7c0d9ed487b` |
+| 14 | **Audit usage of custom RBAC rules** — Audita roles RBAC personalizados em vez de roles integrados. Roles personalizados são propensos a erros e requerem modelagem de ameaças rigorosa. | Audit | `a451c1ef-c6ca-483d-87ed-f49761e3ffb5` |
+| 15 | **Custom subscription owner roles should not exist** — Garante que nenhum role personalizado replique o role Owner no escopo da assinatura. | Audit | `10ee2ea2-fb4d-45b8-a7e9-a2e770044cd9` |
+| 16 | **Microsoft Defender for Cloud should be enabled on your subscription** — Garante que o Defender for Cloud esteja habilitado para avaliação contínua de segurança. | AuditIfNotExists | `ac076320-ddcf-4066-b451-6154267e8ad2` |
+| 17 | **Azure DDoS Protection should be enabled** — Garante que a DDoS Protection esteja habilitada em redes virtuais com recursos de acesso público. Mapeia para NIST SC-5. | AuditIfNotExists | `a7aca53f-2ed4-4466-a25e-0b45ade68efd` |
 
 ### ☑️ Tags
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 18 | **Require a tag on resource groups** — Enforces that resource groups must have a specified tag. | Deny | `96670d01-0a4d-4649-9c89-2d3abc0a5025` |
-| 19 | **Inherit a tag from the resource group if missing** — Adds a specified tag with its value from the parent resource group when a resource is created or updated without it. | Modify | `ea3f2387-9b95-492a-a190-fcdc54f7b070` |
-| 20 | **Require a tag and its value on resources** — Enforces that resources must have a specific tag with a specific value. | Deny | `1e30110a-5ceb-460c-a204-c1c3969c6d62` |
-| 21 | **Add a tag to resource groups** — Adds the specified tag and value when any resource group is created or updated missing this tag. Existing resource groups can be remediated. | Modify | `49c88fc8-6fd1-46fd-a676-f12d1d3a4c71` |
-| 22 | **Require a tag on resources** — Enforces existence of a tag on all resources. | Deny | `871b6d14-10aa-478d-b590-94f262ecfa99` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 18 | **Require a tag on resource groups** — Exige que grupos de recursos tenham uma tag especificada. | Deny | `96670d01-0a4d-4649-9c89-2d3abc0a5025` |
+| 19 | **Inherit a tag from the resource group if missing** — Adiciona uma tag especificada com seu valor do grupo de recursos pai quando um recurso é criado ou atualizado sem ela. | Modify | `ea3f2387-9b95-492a-a190-fcdc54f7b070` |
+| 20 | **Require a tag and its value on resources** — Exige que recursos tenham uma tag específica com um valor específico. | Deny | `1e30110a-5ceb-460c-a204-c1c3969c6d62` |
+| 21 | **Add a tag to resource groups** — Adiciona a tag e valor especificados quando qualquer grupo de recursos é criado ou atualizado sem esta tag. Grupos de recursos existentes podem ser remediados. | Modify | `49c88fc8-6fd1-46fd-a676-f12d1d3a4c71` |
+| 22 | **Require a tag on resources** — Exige a existência de uma tag em todos os recursos. | Deny | `871b6d14-10aa-478d-b590-94f262ecfa99` |
 
-### ☑️ Networking
+### ☑️ Rede
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 23 | **Network interfaces should not have public IPs** — Prevents network interfaces from being configured with public IP addresses. Reduces attack surface. | Deny | `83a86a26-fd1f-447c-b59d-e51f44264114` |
-| 24 | **Subnets should be associated with a Network Security Group** — Audits subnets that are not associated with an NSG to protect traffic with network-level access controls. Maps to CIS, NIST SC-7. | AuditIfNotExists | `e71308d3-144b-4262-b144-efdc3cc90517` |
-| 25 | **Web Application Firewall (WAF) should be enabled for Application Gateway** — Ensures WAF is deployed in front of public-facing web applications. Maps to PCI-DSS 6.6. | Audit | `564feb30-bf6a-4854-b4bb-0d2d2d1e6c66` |
-| 26 | **Network Watcher should be enabled** — Audits that Network Watcher is enabled in regions where virtual networks exist. | AuditIfNotExists | `b6e2945c-0b7b-40f5-9233-7a5323b5cdc6` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 23 | **Network interfaces should not have public IPs** — Impede que interfaces de rede sejam configuradas com endereços IP públicos. Reduz superfície de ataque. | Deny | `83a86a26-fd1f-447c-b59d-e51f44264114` |
+| 24 | **Subnets should be associated with a Network Security Group** — Audita subnets que não estão associadas a um NSG para proteger tráfego com controles de acesso em nível de rede. Mapeia para CIS, NIST SC-7. | AuditIfNotExists | `e71308d3-144b-4262-b144-efdc3cc90517` |
+| 25 | **Web Application Firewall (WAF) should be enabled for Application Gateway** — Garante que WAF esteja implantado em frente a aplicações web de acesso público. Mapeia para PCI-DSS 6.6. | Audit | `564feb30-bf6a-4854-b4bb-0d2d2d1e6c66` |
+| 26 | **Network Watcher should be enabled** — Audita que o Network Watcher está habilitado nas regiões onde redes virtuais existem. | AuditIfNotExists | `b6e2945c-0b7b-40f5-9233-7a5323b5cdc6` |
 
-### ☑️ Storage
+### ☑️ Armazenamento
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 27 | **Storage accounts should restrict network access** — Audits storage accounts that allow access from all networks. Use virtual network rules or IP-based firewall rules. Maps to CIS, NIST SC-7. | Audit | `34c877ad-507e-4c82-993e-3452a6e0ad3c` |
-| 28 | **Secure transfer to storage accounts should be enabled** — Ensures storage accounts only accept requests over HTTPS. Maps to CIS, NIST SC-8. | Audit/Deny | `404c3081-a854-4457-ae30-26a93ef643f9` |
-| 29 | **Storage accounts should use customer-managed key for encryption** — Audits storage accounts that do not use CMK for data-at-rest encryption. Maps to NIST SC-28. | Audit | `6fac406b-40ca-413b-bf8e-0bf964659c25` |
-| 30 | **Storage accounts should prevent shared key access** — Requires Microsoft Entra ID authorization instead of shared key for storage account access. | Audit | `8c6a50c6-9ffd-4ae7-986f-5fa6111f9a54` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 27 | **Storage accounts should restrict network access** — Audita contas de armazenamento que permitem acesso de todas as redes. Use regras de rede virtual ou regras de firewall baseadas em IP. Mapeia para CIS, NIST SC-7. | Audit | `34c877ad-507e-4c82-993e-3452a6e0ad3c` |
+| 28 | **Secure transfer to storage accounts should be enabled** — Garante que contas de armazenamento aceitem apenas solicitações via HTTPS. Mapeia para CIS, NIST SC-8. | Audit/Deny | `404c3081-a854-4457-ae30-26a93ef643f9` |
+| 29 | **Storage accounts should use customer-managed key for encryption** — Audita contas de armazenamento que não usam CMK para criptografia de dados em repouso. Mapeia para NIST SC-28. | Audit | `6fac406b-40ca-413b-bf8e-0bf964659c25` |
+| 30 | **Storage accounts should prevent shared key access** — Requer autorização do Microsoft Entra ID em vez de chave compartilhada para acesso à conta de armazenamento. | Audit | `8c6a50c6-9ffd-4ae7-986f-5fa6111f9a54` |
 
-### ☑️ Identity
+### ☑️ Identidade
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 31 | **External accounts with owner permissions should be removed from your subscription** — Removes external accounts with owner role to prevent unmonitored access. Maps to NIST AC-6. | AuditIfNotExists | `f8456c1c-aa66-4dfb-861a-25d127b775c9` |
-| 32 | **Managed identity should be used in function apps** — Ensures function apps use managed identity for authentication instead of connection strings. | AuditIfNotExists | `0da106f2-4ca3-48e8-bc85-c638fe6aea8f` |
-| 33 | **Service Fabric clusters should only use Microsoft Entra ID for client authentication** — Ensures Service Fabric clusters authenticate via Microsoft Entra ID rather than certificates alone. | Audit | `b54ed75b-3e1a-44ac-a333-05ba39b99ff0` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 31 | **External accounts with owner permissions should be removed from your subscription** — Remove contas externas com role de proprietário para prevenir acesso não monitorado. Mapeia para NIST AC-6. | AuditIfNotExists | `f8456c1c-aa66-4dfb-861a-25d127b775c9` |
+| 32 | **Managed identity should be used in function apps** — Garante que function apps usem identidade gerenciada para autenticação em vez de connection strings. | AuditIfNotExists | `0da106f2-4ca3-48e8-bc85-c638fe6aea8f` |
+| 33 | **Service Fabric clusters should only use Microsoft Entra ID for client authentication** — Garante que clusters Service Fabric autentiquem via Microsoft Entra ID em vez de apenas certificados. | Audit | `b54ed75b-3e1a-44ac-a333-05ba39b99ff0` |
 
-### ☑️ Monitoring
+### ☑️ Monitoramento
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 34 | **Activity log should be retained for at least 365 days** — Ensures adequate retention of activity logs for security investigations. Maps to CIS, NIST AU-11. | AuditIfNotExists | `b02aacc0-b073-424e-8298-42b22829ee0a` |
-| 35 | **Azure Monitor log profile should collect logs for categories 'write', 'delete', and 'action'** — Ensures the log profile collects administrative operation logs. | AuditIfNotExists | `1a4e592a-6a6e-44a5-9814-e36264ca96e7` |
-| 36 | **An activity log alert should exist for specific Administrative operations** — Audits that alerts are configured for critical operations like policy assignments or network security group changes. | AuditIfNotExists | `b954148f-4c11-4c38-8221-be76711e194a` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 34 | **Activity log should be retained for at least 365 days** — Garante retenção adequada de logs de atividade para investigações de segurança. Mapeia para CIS, NIST AU-11. | AuditIfNotExists | `b02aacc0-b073-424e-8298-42b22829ee0a` |
+| 35 | **Azure Monitor log profile should collect logs for categories 'write', 'delete', and 'action'** — Garante que o perfil de log colete logs de operações administrativas. | AuditIfNotExists | `1a4e592a-6a6e-44a5-9814-e36264ca96e7` |
+| 36 | **An activity log alert should exist for specific Administrative operations** — Audita que alertas estão configurados para operações críticas como atribuições de policy ou mudanças em network security groups. | AuditIfNotExists | `b954148f-4c11-4c38-8221-be76711e194a` |
 
 ### ☑️ Kubernetes
 
-| # | Policy Name | Effect | Built-in Definition ID |
-|---|-------------|--------|----------------------|
-| 37 | **Azure Kubernetes Service clusters should have Defender profile enabled** — Ensures Defender for Containers is enabled on AKS clusters for runtime threat protection. | Audit, Disabled | `a1840de2-8088-4ea8-b153-b4c723e9cb01` |
-| 38 | **Kubernetes cluster should not allow privileged containers** — Prevents containers from running in privileged mode, which grants near-root access to the host. Maps to CIS Kubernetes Benchmark. | Deny/Audit | `95edb821-ddaf-4404-9732-666045e056b4` |
-| 39 | **Kubernetes cluster containers should only use allowed images** — Restricts container images to a defined registry and repository pattern. Prevents deployment of untrusted images. | Deny/Audit | `febd0533-8e55-448f-b837-bd0e06f16469` |
+| # | Nome da Policy | Efeito | ID da Definição Integrada |
+|---|----------------|--------|--------------------------|
+| 37 | **Azure Kubernetes Service clusters should have Defender profile enabled** — Garante que o Defender for Containers esteja habilitado em clusters AKS para proteção contra ameaças em runtime. | Audit, Disabled | `a1840de2-8088-4ea8-b153-b4c723e9cb01` |
+| 38 | **Kubernetes cluster should not allow privileged containers** — Impede que containers executem em modo privilegiado, que concede acesso quase root ao host. Mapeia para CIS Kubernetes Benchmark. | Deny/Audit | `95edb821-ddaf-4404-9732-666045e056b4` |
+| 39 | **Kubernetes cluster containers should only use allowed images** — Restringe imagens de container a um padrão definido de registry e repositório. Impede implantação de imagens não confiáveis. | Deny/Audit | `febd0533-8e55-448f-b837-bd0e06f16469` |
 
 ---
 
-### Bicep Example: Assigning a Policy Initiative
+### Exemplo Bicep: Atribuindo uma Iniciativa de Policy
 
-The following Bicep template assigns the "Allowed locations" policy at a resource group scope:
+O seguinte template Bicep atribui a policy "Allowed locations" no escopo de um grupo de recursos:
 
 ```bicep
 @description('The list of allowed Azure regions.')
@@ -669,7 +669,7 @@ resource policyAssignment 'Microsoft.Authorization/policyAssignments@2024-04-01'
 output assignmentId string = policyAssignment.id
 ```
 
-### Bicep Example: Custom Policy Definition and Assignment
+### Exemplo Bicep: Definição e Atribuição de Policy Personalizada
 
 ```bicep
 targetScope = 'subscription'
@@ -745,56 +745,56 @@ resource policyAssignment 'Microsoft.Authorization/policyAssignments@2024-04-01'
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Start with built-in policies** — Azure provides hundreds of built-in policies. Use them before writing custom definitions.
+1. **Comece com policies integradas** — O Azure fornece centenas de policies integradas. Use-as antes de escrever definições personalizadas.
 
-2. **Use initiatives, not individual assignments** — Group related policies into initiatives for easier management and compliance reporting.
+2. **Use iniciativas, não atribuições individuais** — Agrupe policies relacionadas em iniciativas para facilitar o gerenciamento e relatórios de conformidade.
 
-3. **Parameterize effects** — Make the effect a parameter so you can switch between Audit and Deny without rewriting the policy.
+3. **Parametrize efeitos** — Torne o efeito um parâmetro para poder alternar entre Audit e Deny sem reescrever a policy.
 
-4. **Assign at the management group level** — Apply policies at the highest appropriate scope to ensure consistent coverage.
+4. **Atribua no nível de grupo de gerenciamento** — Aplique policies no escopo mais alto apropriado para garantir cobertura consistente.
 
-5. **Use exemptions sparingly** — Every exemption should have a documented justification, an owner, and an expiration date.
+5. **Use isenções com parcimônia** — Toda isenção deve ter uma justificativa documentada, um proprietário e uma data de expiração.
 
-6. **Adopt Policy as Code** — Manage all policies through source control with CI/CD pipelines for repeatable, auditable governance.
+6. **Adote Policy as Code** — Gerencie todas as policies através do controle de versão com pipelines CI/CD para governança repetível e auditável.
 
-7. **Test in Audit mode first** — Never deploy a Deny policy directly to production. Always start with Audit to understand impact.
+7. **Teste em modo Audit primeiro** — Nunca implante uma policy Deny diretamente em produção. Sempre comece com Audit para entender o impacto.
 
-8. **Monitor compliance continuously** — Use the Azure Policy compliance dashboard and Azure Resource Graph to track compliance trends over time.
+8. **Monitore conformidade continuamente** — Use o painel de conformidade do Azure Policy e o Azure Resource Graph para rastrear tendências de conformidade ao longo do tempo.
 
-9. **Limit custom policies** — Custom policies require ongoing maintenance. Check if a built-in policy or a combination of built-in policies can meet your needs.
+9. **Limite policies personalizadas** — Policies personalizadas requerem manutenção contínua. Verifique se uma policy integrada ou combinação de policies integradas pode atender suas necessidades.
 
-10. **Document non-compliance messages** — Use the `nonComplianceMessages` property in policy assignments to give developers clear, actionable feedback when their deployments are denied.
-
----
-
-## Common Pitfalls
-
-1. **Deploying Deny policies without testing** — Deploying a Deny policy without first running it in Audit mode can break CI/CD pipelines and block legitimate deployments across the organization.
-
-2. **Overly broad scope** — Assigning a restrictive policy at the tenant root management group without exemptions for shared services or platform subscriptions.
-
-3. **Forgetting managed identity for remediation** — `DeployIfNotExists` and `Modify` policies require a managed identity with appropriate RBAC roles. Without it, remediation tasks silently fail.
-
-4. **Ignoring policy evaluation delays** — Policy compliance is not real-time. A full evaluation cycle can take up to 24 hours. New resources are evaluated on creation, but existing resources are evaluated on a schedule.
-
-5. **Not tracking exemptions** — Exemptions without expiration dates or documentation become permanent gaps in your compliance posture.
-
-6. **Conflicting policies** — Two policies with conflicting effects (e.g., one requires a tag and another appends a different value for the same tag) can cause unpredictable behavior.
-
-7. **Azure Machine Configuration without the extension** — Assigning Machine Configuration policies to VMs that do not have the Machine Configuration extension installed results in "Not started" compliance state rather than actual evaluation.
-
-8. **Exceeding policy limits** — Azure has limits on the number of policy definitions and assignments per scope. At enterprise scale, be mindful of these limits and use initiatives to stay within bounds.
+10. **Documente mensagens de não conformidade** — Use a propriedade `nonComplianceMessages` nas atribuições de policy para dar aos desenvolvedores feedback claro e acionável quando suas implantações são negadas.
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Azure CLI: Create and Assign a Policy
+1. **Implantar policies Deny sem testar** — Implantar uma policy Deny sem antes executá-la em modo Audit pode quebrar pipelines CI/CD e bloquear implantações legítimas em toda a organização.
+
+2. **Escopo excessivamente amplo** — Atribuir uma policy restritiva no grupo de gerenciamento raiz do tenant sem isenções para serviços compartilhados ou assinaturas de plataforma.
+
+3. **Esquecer a identidade gerenciada para remediação** — Policies `DeployIfNotExists` e `Modify` requerem uma identidade gerenciada com roles RBAC apropriados. Sem ela, tarefas de remediação falham silenciosamente.
+
+4. **Ignorar atrasos na avaliação de policy** — A conformidade de policy não é em tempo real. Um ciclo completo de avaliação pode levar até 24 horas. Novos recursos são avaliados na criação, mas recursos existentes são avaliados em um agendamento.
+
+5. **Não rastrear isenções** — Isenções sem datas de expiração ou documentação se tornam lacunas permanentes na sua postura de conformidade.
+
+6. **Policies conflitantes** — Duas policies com efeitos conflitantes (ex.: uma exige uma tag e outra adiciona um valor diferente para a mesma tag) podem causar comportamento imprevisível.
+
+7. **Azure Machine Configuration sem a extensão** — Atribuir policies de Machine Configuration a VMs que não possuem a extensão Machine Configuration instalada resulta em estado de conformidade "Not started" em vez de avaliação real.
+
+8. **Exceder limites de policy** — O Azure possui limites no número de definições e atribuições de policy por escopo. Em escala empresarial, esteja atento a esses limites e use iniciativas para permanecer dentro dos limites.
+
+---
+
+## Exemplos de Código
+
+### Azure CLI: Criar e Atribuir uma Policy
 
 ```bash
-# Create a custom policy definition
+# Criar uma definição de policy personalizada
 az policy definition create \
   --name "require-tag-environment" \
   --display-name "Require Environment tag on resources" \
@@ -810,7 +810,7 @@ az policy definition create \
   }' \
   --mode "Indexed"
 
-# Assign the policy to a resource group
+# Atribuir a policy a um grupo de recursos
 az policy assignment create \
   --name "require-tag-environment-rg" \
   --display-name "Require Environment tag" \
@@ -819,7 +819,7 @@ az policy assignment create \
   --enforcement-mode "Default"
 ```
 
-### Azure CLI: Trigger a Remediation Task
+### Azure CLI: Disparar uma Tarefa de Remediação
 
 ```bash
 az policy remediation create \
@@ -829,7 +829,7 @@ az policy remediation create \
   --resource-discovery-mode "ReEvaluateCompliance"
 ```
 
-### Azure Resource Graph: Query Non-Compliant Resources
+### Azure Resource Graph: Consultar Recursos Não Conformes
 
 ```kusto
 PolicyResources
@@ -847,22 +847,22 @@ PolicyResources
 
 ---
 
-## References
+## Referências
 
-- [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
-- [Azure Policy definition structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)
-- [Azure Policy effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects)
-- [Azure Policy initiative structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure)
-- [Azure Policy exemption structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/exemption-structure)
-- [Azure Policy remediation](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources)
-- [Azure Machine Configuration overview](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview)
+- [Visão geral do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+- [Estrutura de definição do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)
+- [Efeitos do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects)
+- [Estrutura de iniciativa do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure)
+- [Estrutura de isenção do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/exemption-structure)
+- [Remediação do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources)
+- [Visão geral do Azure Machine Configuration](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview)
 - [Enterprise Policy as Code (EPAC)](https://aka.ms/epac)
-- [Azure Policy built-in definitions](https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies)
-- [Azure Policy limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-policy-limits)
-- [Microsoft Defender for Cloud policy reference](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference)
+- [Definições integradas do Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies)
+- [Limites do Azure Policy](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-policy-limits)
+- [Referência de policy do Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference)
 
 ---
 
-Previous | Next
+Anterior | Próximo
 :--- | :---
-[Chapter 6 — RBAC](/guide/part-2-identity-access/ch06-rbac.md) | [Chapter 10 — Regulatory Compliance](/guide/part-3-policy-compliance/ch10-regulatory-compliance.md)
+[Capítulo 6 — RBAC](/guide/part-2-identity-access/ch06-rbac.md) | [Capítulo 10 — Conformidade Regulatória](/guide/part-3-policy-compliance/ch10-regulatory-compliance.md)

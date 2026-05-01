@@ -1,72 +1,72 @@
-# Contributing to Azure Governance Made Simple
+# Contribuindo para o Azure Governance Made Simple
 
-Thank you for your interest in contributing to this project! This guide will help you get started.
+Obrigado pelo seu interesse em contribuir com este projeto! Este guia ajudará você a começar.
 
-## Content Rules
+## Regras de Conteúdo
 
-### Terminology Standards
+### Padrões de Terminologia
 
-| ❌ Do Not Use | ✅ Use Instead |
+| ❌ Não Use | ✅ Use em Vez Disso |
 |--------------|---------------|
 | Azure Active Directory / AAD | Microsoft Entra ID |
 | Azure AD Connect | Microsoft Entra Connect / Microsoft Entra Cloud Sync |
 | Azure Security Center | Microsoft Defender for Cloud |
-| Azure Blueprints (without deprecation note) | Deployment Stacks |
-| ARM Templates (as recommended approach) | Bicep (primary); ARM JSON (legacy reference only) |
+| Azure Blueprints (sem nota de descontinuação) | Deployment Stacks |
+| ARM Templates (como abordagem recomendada) | Bicep (principal); ARM JSON (apenas referência legada) |
 | Guest Configuration / VM Guest Policy | Azure Machine Configuration |
 | docs.microsoft.com | learn.microsoft.com |
 
-### Authorship
+### Autoria
 
-- **NEVER add Copilot or any AI assistant as a co-author** in commit messages. All commits must attribute authorship exclusively to human contributors.
+- **NUNCA adicione o Copilot ou qualquer assistente de IA como coautor** nas mensagens de commit. Todos os commits devem atribuir autoria exclusivamente a contribuidores humanos.
 
-### Editorial Voice
+### Voz Editorial
 
-- **Tone:** Authoritative but approachable — like a senior cloud architect mentoring a team.
-- **Person:** Use "you" for instructions. Use "we recommend" for best practices.
-- **Links:** Use descriptive link text (never "click here"). Always use the `learn.microsoft.com` domain for Microsoft documentation.
+- **Tom:** Autoritativo mas acessível — como um arquiteto de nuvem sênior orientando uma equipe.
+- **Pessoa:** Use "você" para instruções. Use "recomendamos" para melhores práticas.
+- **Links:** Use texto descritivo nos links (nunca "clique aqui"). Sempre use o domínio `learn.microsoft.com` para documentação da Microsoft.
 
-### Chapter Structure
+### Estrutura dos Capítulos
 
-Every chapter should follow this structure:
+Todo capítulo deve seguir esta estrutura:
 
 ```
-## [Chapter Title]
+## [Título do Capítulo]
 
-*Last verified: YYYY-MM-DD*
+*Última verificação: AAAA-MM-DD*
 
-### Overview
-### How It Works
-### Best Practices
-### Common Pitfalls
-### Code Samples
-### Hands-On Exercise (where applicable)
-### References
+### Visão Geral
+### Como Funciona
+### Melhores Práticas
+### Armadilhas Comuns
+### Exemplos de Código
+### Exercício Prático (quando aplicável)
+### Referências
 ```
 
-### Code Samples
+### Exemplos de Código
 
-- Use fenced code blocks with language identifiers: `bicep`, `json`, `powershell`, `bash`, `kusto`
-- Provide working, copy-pasteable examples
-- Prefer Bicep over ARM JSON for new IaC content
+- Use blocos de código cercados com identificadores de linguagem: `bicep`, `json`, `powershell`, `bash`, `kusto`
+- Forneça exemplos funcionais e prontos para copiar e colar
+- Prefira Bicep em vez de ARM JSON para novo conteúdo de IaC
 
-## How to Contribute
+## Como Contribuir
 
-1. **Fork** the repository
-2. **Create a branch** for your changes (`git checkout -b improve/chapter-name`)
-3. **Make your changes** following the content rules above
-4. **Update the "Last verified" date** on any chapter you modify
-5. **Add a changelog entry** in `guide/appendices/appendix-f-changelog.md`
-6. **Submit a pull request** with a clear description of your changes
+1. **Faça um fork** do repositório
+2. **Crie uma branch** para suas alterações (`git checkout -b improve/chapter-name`)
+3. **Faça suas alterações** seguindo as regras de conteúdo acima
+4. **Atualize a data de "Última verificação"** em qualquer capítulo que você modificar
+5. **Adicione uma entrada no registro de alterações** em `guide/appendices/appendix-f-changelog.md`
+6. **Envie um pull request** com uma descrição clara das suas alterações
 
-## Reporting Issues
+## Reportando Problemas
 
-If you find outdated content, broken links, or inaccuracies, please [open an issue](https://github.com/ricmmartins/azure-governance-made-simple/issues/new) with:
+Se você encontrar conteúdo desatualizado, links quebrados ou imprecisões, por favor [abra uma issue](https://github.com/ricmmartins/azure-governance-made-simple/issues/new) com:
 
-- The chapter and section affected
-- What is incorrect
-- What the correct information should be (with a reference link if possible)
+- O capítulo e a seção afetados
+- O que está incorreto
+- Qual deveria ser a informação correta (com um link de referência, se possível)
 
-## License
+## Licença
 
-By contributing, you agree that your contributions will be licensed under the GPL-3.0 License.
+Ao contribuir, você concorda que suas contribuições serão licenciadas sob a Licença GPL-3.0.

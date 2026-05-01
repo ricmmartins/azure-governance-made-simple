@@ -1,171 +1,171 @@
-# Chapter 18 — FinOps
+# Capítulo 18 — FinOps
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**FinOps** (Financial Operations) is a cultural practice and operational framework that brings financial accountability to cloud spending. It unites engineering, finance, and business teams around data-driven decisions about where and how to invest in cloud resources.
+**FinOps** (Financial Operations) é uma prática cultural e um framework operacional que traz responsabilidade financeira para os gastos em nuvem. Ele une equipes de engenharia, finanças e negócios em torno de decisões baseadas em dados sobre onde e como investir em recursos de nuvem.
 
-FinOps is not a tool or a product — it's a **discipline** defined by the [FinOps Foundation](https://www.finops.org/) (part of The Linux Foundation). Azure provides the tooling, but FinOps is the practice that makes those tools effective.
+FinOps não é uma ferramenta ou um produto — é uma **disciplina** definida pela [FinOps Foundation](https://www.finops.org/) (parte da Linux Foundation). O Azure fornece as ferramentas, mas FinOps é a prática que torna essas ferramentas eficazes.
 
-Why governance teams should care about FinOps:
+Por que equipes de governança devem se preocupar com FinOps:
 
-- Governance defines *what can be deployed*; FinOps ensures *what is deployed is cost-efficient*
-- Tags, policies, and budgets are governance controls; FinOps is the operating model that makes them meaningful
-- Without FinOps, cost optimization is reactive (responding to overruns) instead of proactive (optimizing continuously)
+- Governança define *o que pode ser implantado*; FinOps garante que *o que está implantado seja eficiente em custos*
+- Tags, políticas e orçamentos são controles de governança; FinOps é o modelo operacional que os torna significativos
+- Sem FinOps, a otimização de custos é reativa (respondendo a estouros) em vez de proativa (otimizando continuamente)
 
 ---
 
-## How It Works
+## Como Funciona
 
-### The FinOps Framework
+### O Framework FinOps
 
-The FinOps Foundation defines three phases that organizations cycle through continuously:
+A FinOps Foundation define três fases pelas quais as organizações ciclam continuamente:
 
 ![FinOps Lifecycle](/images/finops-lifecycle.svg)
 
-#### Phase 1: Inform
+#### Fase 1: Informar
 
-**Goal:** Create visibility into cloud costs so teams can make informed decisions.
+**Objetivo:** Criar visibilidade sobre os custos de nuvem para que as equipes possam tomar decisões informadas.
 
-Activities:
-- **Showback/chargeback reporting** — attribute costs to teams, projects, and cost centers
-- **Tagging strategy** — enforce consistent tags for cost allocation
-- **Dashboards** — build real-time cost visibility for engineering and finance
-- **Anomaly detection** — surface unexpected spending patterns
-- **Forecasting** — project future costs based on trends and committed plans
+Atividades:
+- **Relatórios de showback/chargeback** — atribuir custos a equipes, projetos e centros de custo
+- **Estratégia de tags** — aplicar tags consistentes para alocação de custos
+- **Dashboards** — construir visibilidade de custos em tempo real para engenharia e finanças
+- **Detecção de anomalias** — identificar padrões de gastos inesperados
+- **Previsão** — projetar custos futuros com base em tendências e planos comprometidos
 
-Azure tools: Cost Management, Cost Allocation Rules, Azure Resource Tags, Power BI integration
+Ferramentas Azure: Cost Management, Cost Allocation Rules, Azure Resource Tags, integração com Power BI
 
-#### Phase 2: Optimize
+#### Fase 2: Otimizar
 
-**Goal:** Reduce cloud waste and improve pricing through commitment-based discounts.
+**Objetivo:** Reduzir desperdício de nuvem e melhorar preços através de descontos baseados em compromisso.
 
-Activities:
-- **Right-sizing** — match resource SKUs to actual workload requirements
-- **Savings Plans** — commit to hourly compute spend for up to 65% savings
-- **Reservations** — commit to specific SKUs for up to 72% savings
-- **Spot VMs** — use spare capacity at up to 90% discount for fault-tolerant workloads
-- **Storage tiering** — move data to cool/archive tiers based on access patterns
-- **Resource cleanup** — identify and delete orphaned resources (unattached disks, unused IPs, stopped VMs)
+Atividades:
+- **Right-sizing** — adequar SKUs de recursos aos requisitos reais de carga de trabalho
+- **Savings Plans** — comprometer-se com gastos de computação por hora para até 65% de economia
+- **Reservations** — comprometer-se com SKUs específicas para até 72% de economia
+- **Spot VMs** — usar capacidade ociosa com até 90% de desconto para cargas tolerantes a falhas
+- **Camadas de armazenamento** — mover dados para camadas cool/archive com base em padrões de acesso
+- **Limpeza de recursos** — identificar e excluir recursos órfãos (discos não anexados, IPs não utilizados, VMs paradas)
 
-Azure tools: Azure Advisor, Savings Plans, Reservations, Azure Spot VMs, Storage lifecycle management
+Ferramentas Azure: Azure Advisor, Savings Plans, Reservations, Azure Spot VMs, Storage lifecycle management
 
-#### Phase 3: Operate
+#### Fase 3: Operar
 
-**Goal:** Embed FinOps into organizational processes so cost optimization is continuous, not one-time.
+**Objetivo:** Incorporar FinOps nos processos organizacionais para que a otimização de custos seja contínua, não pontual.
 
-Activities:
-- **Governance policies** — enforce tagging, budget limits, and approved SKUs
-- **Automated actions** — auto-shutdown dev/test resources, auto-remediate policy violations
-- **Regular reviews** — monthly cost reviews with engineering leads and finance
-- **KPIs** — track metrics like cost per unit of business value (e.g., cost per transaction, cost per user)
-- **Culture** — celebrate cost optimization wins; make cost awareness part of engineering culture
+Atividades:
+- **Políticas de governança** — aplicar tags, limites de orçamento e SKUs aprovadas
+- **Ações automatizadas** — auto-shutdown de recursos de dev/test, auto-remediação de violações de política
+- **Revisões regulares** — revisões mensais de custos com líderes de engenharia e finanças
+- **KPIs** — acompanhar métricas como custo por unidade de valor de negócio (ex.: custo por transação, custo por usuário)
+- **Cultura** — celebrar vitórias de otimização de custos; tornar a consciência de custos parte da cultura de engenharia
 
-Azure tools: Azure Policy, Budgets with action groups, Azure Automation, Logic Apps
+Ferramentas Azure: Azure Policy, Budgets com action groups, Azure Automation, Logic Apps
 
-### FinOps Maturity Model
+### Modelo de Maturidade FinOps
 
-The FinOps Foundation defines three maturity levels:
+A FinOps Foundation define três níveis de maturidade:
 
-| Level | Name | Characteristics |
+| Nível | Nome | Características |
 |-------|------|-----------------|
-| **1** | **Crawl** | Basic visibility; reactive cost management; limited tagging; no commitment-based pricing |
-| **2** | **Walk** | Consistent tagging; active right-sizing; Savings Plans and Reservations in use; monthly cost reviews; some automation |
-| **3** | **Run** | Real-time cost awareness; automated optimization; FinOps culture embedded in engineering; advanced forecasting; continuous rate and usage optimization |
+| **1** | **Crawl** | Visibilidade básica; gestão de custos reativa; tags limitadas; sem preços baseados em compromisso |
+| **2** | **Walk** | Tags consistentes; right-sizing ativo; Savings Plans e Reservations em uso; revisões mensais de custos; alguma automação |
+| **3** | **Run** | Consciência de custos em tempo real; otimização automatizada; cultura FinOps incorporada na engenharia; previsão avançada; otimização contínua de tarifa e uso |
 
-Most organizations start at Crawl and should target Walk within 6–12 months. Run is an ongoing aspiration.
+A maioria das organizações começa no Crawl e deve visar o Walk dentro de 6 a 12 meses. Run é uma aspiração contínua.
 
 ### Showback vs. Chargeback
 
-| Model | Description | Governance Impact |
-|-------|-------------|-------------------|
-| **Showback** | Costs are *shown* to teams for awareness, but not billed to their budget | Lower friction; good for building cost awareness culture |
-| **Chargeback** | Costs are *charged back* to team budgets through internal billing | Higher accountability; requires mature tagging and allocation |
+| Modelo | Descrição | Impacto na Governança |
+|--------|-----------|----------------------|
+| **Showback** | Custos são *mostrados* às equipes para conscientização, mas não cobrados de seus orçamentos | Menor atrito; bom para construir cultura de consciência de custos |
+| **Chargeback** | Custos são *cobrados de volta* dos orçamentos das equipes através de faturamento interno | Maior responsabilidade; requer tags e alocação maduros |
 
-**Recommendation:** Start with showback to build visibility and trust, then move to chargeback as tagging and allocation mature.
+**Recomendação:** Comece com showback para construir visibilidade e confiança, depois migre para chargeback conforme as tags e a alocação amadureçam.
 
-**Azure implementation:**
-- Use **cost allocation rules** to distribute shared costs
-- Use **tags** (`CostCenter`, `Team`, `Project`) for direct attribution
-- Use **management group hierarchy** to align billing with organizational structure
-- Export cost data to **Power BI** or **Azure Data Explorer** for custom showback/chargeback dashboards
-
----
-
-## Azure Tools for FinOps
-
-| Tool | FinOps Phase | Purpose |
-|------|-------------|---------|
-| **Azure Cost Management** | Inform, Operate | Cost analysis, budgets, exports, anomaly detection |
-| **Azure Advisor** | Optimize | Right-sizing, shutdown, reservation, and Savings Plan recommendations |
-| **Azure Savings Plans** | Optimize | Commitment-based compute discounts (flexible across SKUs/regions) |
-| **Azure Reservations** | Optimize | Commitment-based discounts for specific SKUs |
-| **Azure Policy** | Operate | Enforce tagging, allowed SKUs, region restrictions |
-| **Resource Tags** | Inform | Cost allocation dimensions |
-| **Cost Allocation Rules** | Inform | Distribute shared costs |
-| **Power BI / Azure Data Explorer** | Inform | Custom dashboards and reporting |
-| **Azure Automation / Logic Apps** | Operate | Automated cost actions (shutdown, alerts) |
-| **Azure Resource Graph** | Inform | Query resource inventory for orphan detection |
+**Implementação no Azure:**
+- Use **regras de alocação de custos** para distribuir custos compartilhados
+- Use **tags** (`CostCenter`, `Team`, `Project`) para atribuição direta
+- Use **hierarquia de management groups** para alinhar faturamento com a estrutura organizacional
+- Exporte dados de custo para **Power BI** ou **Azure Data Explorer** para dashboards personalizados de showback/chargeback
 
 ---
 
-## Organizational Models for FinOps
+## Ferramentas Azure para FinOps
 
-### Central FinOps Team
-
-A dedicated team owns the FinOps practice and provides tooling, reporting, and guidance to all engineering teams.
-
-**Pros:** Consistent practices, centralized expertise, efficient tooling
-**Cons:** Can become a bottleneck; teams may not feel ownership of costs
-
-### Embedded FinOps
-
-Each engineering team has a designated FinOps champion who owns cost optimization for their area.
-
-**Pros:** Teams own their costs; faster action; deep context
-**Cons:** Inconsistent practices; duplicated effort; requires training
-
-### Hub-and-Spoke (Recommended)
-
-A central FinOps team provides the platform (tools, dashboards, policies), while embedded champions in each team drive day-to-day optimization.
-
-**Pros:** Best of both models; central standards with local execution
-**Cons:** Requires coordination and communication
+| Ferramenta | Fase FinOps | Propósito |
+|------------|-------------|-----------|
+| **Azure Cost Management** | Informar, Operar | Análise de custos, orçamentos, exportações, detecção de anomalias |
+| **Azure Advisor** | Otimizar | Recomendações de right-sizing, desligamento, reservas e Savings Plans |
+| **Azure Savings Plans** | Otimizar | Descontos de computação baseados em compromisso (flexível entre SKUs/regiões) |
+| **Azure Reservations** | Otimizar | Descontos baseados em compromisso para SKUs específicas |
+| **Azure Policy** | Operar | Aplicar tags, SKUs permitidas, restrições de região |
+| **Resource Tags** | Informar | Dimensões de alocação de custos |
+| **Cost Allocation Rules** | Informar | Distribuir custos compartilhados |
+| **Power BI / Azure Data Explorer** | Informar | Dashboards e relatórios personalizados |
+| **Azure Automation / Logic Apps** | Operar | Ações automatizadas de custos (desligamento, alertas) |
+| **Azure Resource Graph** | Informar | Consultar inventário de recursos para detecção de órfãos |
 
 ---
 
-## Best Practices
+## Modelos Organizacionais para FinOps
 
-1. **Start with Inform** — you can't optimize what you can't see; get visibility before optimizing
-2. **Enforce tags from day one** — retroactive tagging is painful; use Azure Policy to require tags at resource creation
-3. **Set team-level budgets** — give each team a budget and the tools to manage it
-4. **Combine Savings Plans and Reservations** — use Savings Plans for flexible coverage and Reservations for stable workloads
-5. **Review Advisor weekly** — assign an owner to triage and act on Advisor recommendations
-6. **Automate what you can** — auto-shutdown, auto-remediation, and automated reporting reduce manual effort
-7. **Make costs visible** — publish cost dashboards in team Slack/Teams channels
-8. **Celebrate wins** — recognize teams that reduce waste; create incentive alignment
-9. **Iterate maturity** — don't try to jump from Crawl to Run; progress through Walk first
-10. **Align FinOps with governance** — FinOps and governance are complementary; your tagging policy, budget policy, and SKU restrictions serve both disciplines
+### Equipe Central de FinOps
 
----
+Uma equipe dedicada é responsável pela prática de FinOps e fornece ferramentas, relatórios e orientação para todas as equipes de engenharia.
 
-## Common Pitfalls
+**Prós:** Práticas consistentes, expertise centralizada, ferramentas eficientes
+**Contras:** Pode se tornar um gargalo; equipes podem não sentir propriedade sobre os custos
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Starting with optimization before visibility | Optimizing the wrong things | Invest in tagging and cost analysis first |
-| No executive sponsor | FinOps practice lacks authority and budget | Secure VP/CTO sponsorship before starting |
-| Over-committing on Reservations | Paying for unused capacity | Start with Savings Plans; reserve only after analyzing 3+ months of usage |
-| Treating FinOps as a one-time project | Benefits erode as usage patterns change | Embed FinOps into monthly operating rhythms |
-| No tagging enforcement | Cannot allocate costs to teams | Use Azure Policy deny effects for required tags |
-| Ignoring shared costs | Teams under-report actual costs | Configure cost allocation rules for shared infrastructure |
+### FinOps Incorporado
+
+Cada equipe de engenharia tem um campeão de FinOps designado que é responsável pela otimização de custos em sua área.
+
+**Prós:** Equipes são donas dos seus custos; ação mais rápida; contexto profundo
+**Contras:** Práticas inconsistentes; esforço duplicado; requer treinamento
+
+### Hub-and-Spoke (Recomendado)
+
+Uma equipe central de FinOps fornece a plataforma (ferramentas, dashboards, políticas), enquanto campeões incorporados em cada equipe conduzem a otimização do dia a dia.
+
+**Prós:** O melhor dos dois modelos; padrões centrais com execução local
+**Contras:** Requer coordenação e comunicação
 
 ---
 
-## References
+## Melhores Práticas
+
+1. **Comece pela fase Informar** — você não pode otimizar o que não pode ver; obtenha visibilidade antes de otimizar
+2. **Aplique tags desde o primeiro dia** — retroativamente aplicar tags é doloroso; use Azure Policy para exigir tags na criação de recursos
+3. **Defina orçamentos por equipe** — dê a cada equipe um orçamento e as ferramentas para gerenciá-lo
+4. **Combine Savings Plans e Reservations** — use Savings Plans para cobertura flexível e Reservations para cargas de trabalho estáveis
+5. **Revise o Advisor semanalmente** — atribua um responsável para triar e atuar nas recomendações do Advisor
+6. **Automatize o que puder** — auto-shutdown, auto-remediação e relatórios automatizados reduzem o esforço manual
+7. **Torne os custos visíveis** — publique dashboards de custos nos canais de Slack/Teams das equipes
+8. **Celebre as vitórias** — reconheça equipes que reduzem desperdício; crie alinhamento de incentivos
+9. **Itere na maturidade** — não tente pular do Crawl para o Run; progrida pelo Walk primeiro
+10. **Alinhe FinOps com governança** — FinOps e governança são complementares; sua política de tags, política de orçamento e restrições de SKU servem ambas as disciplinas
+
+---
+
+## Armadilhas Comuns
+
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Começar pela otimização antes da visibilidade | Otimizar as coisas erradas | Invista em tags e análise de custos primeiro |
+| Sem patrocinador executivo | Prática de FinOps carece de autoridade e orçamento | Garanta o patrocínio de VP/CTO antes de começar |
+| Comprometimento excessivo com Reservations | Pagando por capacidade não utilizada | Comece com Savings Plans; reserve apenas após analisar 3+ meses de uso |
+| Tratar FinOps como um projeto pontual | Benefícios se deterioram conforme padrões de uso mudam | Incorpore FinOps nos ritmos operacionais mensais |
+| Sem aplicação de tags | Impossível alocar custos para equipes | Use efeitos deny do Azure Policy para tags obrigatórias |
+| Ignorar custos compartilhados | Equipes sub-reportam custos reais | Configure regras de alocação de custos para infraestrutura compartilhada |
+
+---
+
+## Referências
 
 - [FinOps Foundation](https://www.finops.org/)
 - [FinOps Framework](https://www.finops.org/framework/)
@@ -179,6 +179,6 @@ A central FinOps team provides the platform (tools, dashboards, policies), while
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [Cost Management](ch17-cost-management.md) | [Cost Automation](ch19-cost-automation.md) |

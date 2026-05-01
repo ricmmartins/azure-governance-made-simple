@@ -1,169 +1,169 @@
-# Chapter 3 — Cloud Governance Maturity Model
+# Capítulo 3 — Modelo de Maturidade de Governança em Nuvem
 
 > **Last verified: 2026-04-06**
 
 ---
 
-## Overview
+## Visão Geral
 
-Not every organization needs (or is ready for) a fully optimized governance framework on day one. Governance maturity is a journey. Trying to implement every control at once creates friction, slows adoption, and risks alienating the engineering teams whose cooperation you need most.
+Nem toda organização precisa (ou está pronta para) um framework de governança totalmente otimizado no primeiro dia. A maturidade da governança é uma jornada. Tentar implementar todos os controles de uma vez cria atrito, desacelera a adoção e arrisca alienar as equipes de engenharia cuja cooperação você mais precisa.
 
-This chapter introduces a **three-level maturity model** — Crawl, Walk, Run — that helps you assess where your organization stands today and provides a clear path forward. Each level is described across five governance dimensions: Identity, Policy, Cost, Security, and Operations.
+Este capítulo apresenta um **modelo de maturidade em três níveis** — Engatinhar, Andar, Correr — que ajuda você a avaliar onde sua organização está hoje e fornece um caminho claro para avançar. Cada nível é descrito em cinco dimensões de governança: Identidade, Política, Custo, Segurança e Operações.
 
-The model is aligned with the [CAF Govern methodology](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/), which recommends an incremental approach: establish a minimum viable product (MVP) governance foundation and then iterate as your cloud footprint grows.
-
----
-
-## Architecture: The Three Maturity Levels
-
-![Cloud Governance Maturity Model — Crawl, Walk, Run](/images/governance-maturity-model.svg)
+O modelo está alinhado com a [metodologia CAF Govern](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/), que recomenda uma abordagem incremental: estabelecer uma base de governança com produto mínimo viável (MVP) e depois iterar conforme sua presença na nuvem cresce.
 
 ---
 
-## How It Works: Maturity Levels in Detail
+## Arquitetura: Os Três Níveis de Maturidade
 
-### Level 1 — Crawl (Ad-Hoc)
+![Modelo de Maturidade de Governança em Nuvem — Engatinhar, Andar, Correr](/images/governance-maturity-model.svg)
 
-At the Crawl level, the organization has started using Azure, but governance is **reactive and inconsistent**. There is no formal governance strategy. Controls are applied manually, if at all.
+---
 
-| Dimension | What It Looks Like |
+## Como Funciona: Níveis de Maturidade em Detalhe
+
+### Nível 1 — Engatinhar (Ad-Hoc)
+
+No nível Engatinhar, a organização começou a usar o Azure, mas a governança é **reativa e inconsistente**. Não há estratégia formal de governança. Os controles são aplicados manualmente, se é que são aplicados.
+
+| Dimensão | Como Se Parece |
 |---|---|
-| **Identity** | Users have standing privileged access. Shared accounts may exist. No formal access review process. Microsoft Entra ID is configured, but Conditional Access policies are minimal or absent. |
-| **Policy** | Few or no Azure Policies are assigned. Policy decisions are made ad-hoc by individual teams. No management group hierarchy beyond the root. |
-| **Cost** | No budgets or cost alerts. Spending surprises are discovered at invoice time. No tag-based cost allocation. Orphaned resources accumulate. |
-| **Security** | Microsoft Defender for Cloud is in free tier or not reviewed. Network security groups are inconsistently configured. No encryption-at-rest policy. |
-| **Operations** | Resources are named inconsistently. No standard tagging. Deployments are manual (portal clicks). No infrastructure as code. Monitoring is per-resource, not centralized. |
+| **Identidade** | Usuários têm acesso privilegiado permanente. Contas compartilhadas podem existir. Sem processo formal de revisão de acesso. Microsoft Entra ID está configurado, mas as políticas de Conditional Access são mínimas ou ausentes. |
+| **Política** | Poucas ou nenhuma Azure Policy atribuída. Decisões de política são tomadas de forma ad-hoc por equipes individuais. Nenhuma hierarquia de management group além da raiz. |
+| **Custo** | Sem orçamentos ou alertas de custo. Surpresas de gastos são descobertas no momento da fatura. Sem alocação de custos baseada em tags. Recursos órfãos se acumulam. |
+| **Segurança** | Microsoft Defender for Cloud está no tier gratuito ou não é revisado. Network security groups são configurados de forma inconsistente. Sem política de criptografia em repouso. |
+| **Operações** | Recursos são nomeados de forma inconsistente. Sem etiquetagem padrão. Implantações são manuais (cliques no portal). Sem infrastructure as code. Monitoramento é por recurso, não centralizado. |
 
-**Typical characteristics:**
-- 1–5 subscriptions, usually created without a plan
-- No Cloud Center of Excellence (CCoE) or governance team
-- "It works" is the success criterion
+**Características típicas:**
+- 1–5 assinaturas, geralmente criadas sem um plano
+- Sem Cloud Center of Excellence (CCoE) ou equipe de governança
+- "Funciona" é o critério de sucesso
 
 ---
 
-### Level 2 — Walk (Defined)
+### Nível 2 — Andar (Definido)
 
-At the Walk level, the organization has established **standards and enforcement mechanisms**. Governance is documented, policies are assigned, and there is a team responsible for governance decisions.
+No nível Andar, a organização estabeleceu **padrões e mecanismos de aplicação**. A governança está documentada, políticas estão atribuídas e há uma equipe responsável pelas decisões de governança.
 
-| Dimension | What It Looks Like |
+| Dimensão | Como Se Parece |
 |---|---|
-| **Identity** | RBAC roles are assigned following least privilege. Privileged Identity Management (PIM) is enabled for critical roles. Access reviews are conducted quarterly. |
-| **Policy** | A management group hierarchy exists. Azure Policy assignments enforce foundational rules (allowed regions, required tags, approved SKUs). Policy compliance is reviewed monthly. |
-| **Cost** | Budgets and cost alerts are configured per subscription. Tags are used for cost allocation. Monthly cost reviews occur. Orphaned resource cleanup is periodic. |
-| **Security** | Microsoft Defender for Cloud is enabled with enhanced security. Security recommendations are triaged. Diagnostic settings route logs to a central Log Analytics workspace. |
-| **Operations** | A naming convention is defined and documented. Core infrastructure is deployed via Bicep or Terraform. Centralized monitoring with Azure Monitor. Deployment Stacks or CI/CD pipelines manage environment consistency. |
+| **Identidade** | Funções RBAC são atribuídas seguindo o menor privilégio. Privileged Identity Management (PIM) está habilitado para funções críticas. Revisões de acesso são conduzidas trimestralmente. |
+| **Política** | Uma hierarquia de management group existe. Atribuições de Azure Policy aplicam regras fundamentais (regiões permitidas, tags obrigatórias, SKUs aprovados). A conformidade de políticas é revisada mensalmente. |
+| **Custo** | Orçamentos e alertas de custo estão configurados por assinatura. Tags são usadas para alocação de custos. Revisões mensais de custos ocorrem. Limpeza de recursos órfãos é periódica. |
+| **Segurança** | Microsoft Defender for Cloud está habilitado com segurança aprimorada. Recomendações de segurança são triadas. Configurações de diagnóstico encaminham logs para um workspace central de Log Analytics. |
+| **Operações** | Uma convenção de nomenclatura está definida e documentada. A infraestrutura central é implantada via Bicep ou Terraform. Monitoramento centralizado com Azure Monitor. Deployment Stacks ou pipelines de CI/CD gerenciam a consistência do ambiente. |
 
-**Typical characteristics:**
-- Management group hierarchy in place
-- Cloud Center of Excellence (CCoE) established or emerging
-- Governance treated as a workstream, not an afterthought
+**Características típicas:**
+- Hierarquia de management group implementada
+- Cloud Center of Excellence (CCoE) estabelecido ou emergindo
+- Governança tratada como uma linha de trabalho, não como um adendo
 
 ---
 
-### Level 3 — Run (Optimized)
+### Nível 3 — Correr (Otimizado)
 
-At the Run level, governance is **automated, proactive, and continuously improving**. The organization uses data-driven insights to optimize policies and predict issues before they occur.
+No nível Correr, a governança é **automatizada, proativa e em melhoria contínua**. A organização usa insights baseados em dados para otimizar políticas e prever problemas antes que ocorram.
 
-| Dimension | What It Looks Like |
+| Dimensão | Como Se Parece |
 |---|---|
-| **Identity** | Zero-standing-access for all privileged roles. Entitlement management automates access packages. Continuous access evaluation is enabled. Workload identities use managed identities exclusively. |
-| **Policy** | Policy-as-code is fully integrated into CI/CD. Custom policies address organization-specific requirements. Policy exemptions are tracked and time-bound. Compliance dashboards are reviewed in real time. |
-| **Cost** | FinOps practices are mature. Reservation and savings plan utilization is optimized. Anomaly detection alerts on unexpected spending. Chargeback/showback models are fully implemented. Tag governance is enforced automatically. |
-| **Security** | Microsoft Defender for Cloud Secure Score is actively managed (target >80%). Automated remediation tasks fix common misconfigurations. Security posture is reported to leadership. Threat detection and response are integrated with SIEM/SOAR. |
-| **Operations** | All infrastructure is deployed via IaC through CI/CD pipelines. Drift detection identifies manual changes. Azure Resource Graph powers custom governance dashboards. Subscription vending automates new workload onboarding. Azure Governance Visualizer runs on a schedule. |
+| **Identidade** | Acesso privilegiado permanente zero para todas as funções privilegiadas. Gerenciamento de direitos automatiza pacotes de acesso. Avaliação de acesso contínua está habilitada. Identidades de carga de trabalho usam managed identities exclusivamente. |
+| **Política** | Policy-as-code está totalmente integrada ao CI/CD. Políticas personalizadas atendem a requisitos específicos da organização. Isenções de política são rastreadas e com prazo determinado. Dashboards de conformidade são revisados em tempo real. |
+| **Custo** | Práticas de FinOps estão maduras. A utilização de reservas e savings plans é otimizada. Detecção de anomalias alerta sobre gastos inesperados. Modelos de chargeback/showback estão totalmente implementados. Governança de tags é aplicada automaticamente. |
+| **Segurança** | O Secure Score do Microsoft Defender for Cloud é gerenciado ativamente (meta >80%). Tarefas de remediação automatizadas corrigem configurações incorretas comuns. A postura de segurança é reportada à liderança. Detecção e resposta a ameaças são integradas com SIEM/SOAR. |
+| **Operações** | Toda a infraestrutura é implantada via IaC através de pipelines de CI/CD. Detecção de desvio identifica alterações manuais. Azure Resource Graph alimenta dashboards de governança personalizados. Subscription vending automatiza a integração de novas cargas de trabalho. Azure Governance Visualizer executa em agendamento. |
 
-**Typical characteristics:**
-- Dozens to hundreds of subscriptions, all governed consistently
-- Mature CCoE with defined processes and SLAs
-- Governance metrics reported to leadership alongside other KPIs
+**Características típicas:**
+- Dezenas a centenas de assinaturas, todas governadas de forma consistente
+- CCoE maduro com processos e SLAs definidos
+- Métricas de governança reportadas à liderança junto com outros KPIs
 
 ---
 
-## Self-Assessment Checklist
+## Lista de Verificação de Autoavaliação
 
-Use the following table to assess your organization's current maturity level. For each item, mark your current state.
+Use a tabela a seguir para avaliar o nível de maturidade atual da sua organização. Para cada item, marque seu estado atual.
 
-| # | Governance Control | Crawl | Walk | Run |
+| # | Controle de Governança | Engatinhar | Andar | Correr |
 |---|---|---|---|---|
-| 1 | Management group hierarchy defined | ☐ No hierarchy | ☐ Basic hierarchy | ☐ CAF-aligned hierarchy with segmentation |
-| 2 | Azure Policy assigned at MG scope | ☐ No policies | ☐ Foundational policies (regions, tags) | ☐ Policy-as-code in CI/CD with custom policies |
-| 3 | RBAC follows least privilege | ☐ Broad Owner/Contributor | ☐ Role assignments reviewed quarterly | ☐ PIM + zero standing access |
-| 4 | Naming convention defined | ☐ Ad-hoc naming | ☐ Documented convention | ☐ Convention enforced via policy |
-| 5 | Tagging strategy implemented | ☐ No tags or inconsistent | ☐ Required tags enforced | ☐ Tag inheritance + compliance dashboards |
-| 6 | Cost budgets and alerts | ☐ None | ☐ Per-subscription budgets | ☐ FinOps with anomaly detection |
-| 7 | Microsoft Defender for Cloud | ☐ Free tier / not reviewed | ☐ Enhanced tier, recommendations triaged | ☐ Secure Score managed, auto-remediation |
-| 8 | Infrastructure as Code | ☐ Manual / portal | ☐ Bicep/Terraform for core infra | ☐ All deployments via IaC + CI/CD |
-| 9 | Centralized monitoring | ☐ Per-resource only | ☐ Central Log Analytics workspace | ☐ Unified dashboards, alerting, and AIOps |
-| 10 | Subscription vending | ☐ Manual subscription creation | ☐ Templated process | ☐ Fully automated vending machine |
-| 11 | Governance reporting | ☐ None | ☐ Monthly compliance reviews | ☐ Real-time dashboards + leadership reporting |
-| 12 | Access reviews | ☐ No reviews | ☐ Quarterly manual reviews | ☐ Automated recurring access reviews |
+| 1 | Hierarquia de management group definida | ☐ Sem hierarquia | ☐ Hierarquia básica | ☐ Hierarquia alinhada ao CAF com segmentação |
+| 2 | Azure Policy atribuída no escopo de MG | ☐ Sem políticas | ☐ Políticas fundamentais (regiões, tags) | ☐ Policy-as-code em CI/CD com políticas personalizadas |
+| 3 | RBAC segue menor privilégio | ☐ Owner/Contributor amplo | ☐ Atribuições de função revisadas trimestralmente | ☐ PIM + acesso privilegiado permanente zero |
+| 4 | Convenção de nomenclatura definida | ☐ Nomenclatura ad-hoc | ☐ Convenção documentada | ☐ Convenção aplicada via política |
+| 5 | Estratégia de etiquetagem implementada | ☐ Sem tags ou inconsistente | ☐ Tags obrigatórias aplicadas | ☐ Herança de tags + dashboards de conformidade |
+| 6 | Orçamentos e alertas de custo | ☐ Nenhum | ☐ Orçamentos por assinatura | ☐ FinOps com detecção de anomalias |
+| 7 | Microsoft Defender for Cloud | ☐ Tier gratuito / não revisado | ☐ Tier aprimorado, recomendações triadas | ☐ Secure Score gerenciado, auto-remediação |
+| 8 | Infrastructure as Code | ☐ Manual / portal | ☐ Bicep/Terraform para infra central | ☐ Todas as implantações via IaC + CI/CD |
+| 9 | Monitoramento centralizado | ☐ Apenas por recurso | ☐ Workspace central de Log Analytics | ☐ Dashboards unificados, alertas e AIOps |
+| 10 | Subscription vending | ☐ Criação manual de assinatura | ☐ Processo com template | ☐ Máquina de vending totalmente automatizada |
+| 11 | Relatórios de governança | ☐ Nenhum | ☐ Revisões mensais de conformidade | ☐ Dashboards em tempo real + relatórios para liderança |
+| 12 | Revisões de acesso | ☐ Sem revisões | ☐ Revisões manuais trimestrais | ☐ Revisões de acesso recorrentes automatizadas |
 
-**Scoring:**
-- **Mostly Crawl:** Focus on establishing your governance MVP — management group hierarchy, foundational policies, and a naming convention.
-- **Mostly Walk:** You have a solid foundation. Focus on automation, enforcement, and expanding policy coverage.
-- **Mostly Run:** You are operating at a mature level. Focus on continuous improvement, optimization, and innovation.
-
----
-
-## Best Practices
-
-1. **Do not skip levels.** Each maturity level builds on the previous one. Jumping from Crawl to Run without establishing Walk-level foundations creates fragile governance.
-2. **Start with an MVP governance foundation.** The CAF recommends starting with: one management group hierarchy, a small set of foundational policies, a naming convention, and RBAC assignments. This is your Crawl-to-Walk transition.
-3. **Iterate based on risk.** As your cloud footprint grows, add governance controls where risk is highest. Do not try to govern everything at once.
-4. **Measure and report.** Governance without measurement is governance without accountability. Track policy compliance rates, Secure Score, cost variance, and access review completion.
-5. **Invest in automation at Walk level.** The transition from Walk to Run is primarily about automation — policy-as-code, subscription vending, IaC pipelines, and automated remediation.
+**Pontuação:**
+- **Maioria Engatinhar:** Foque em estabelecer seu MVP de governança — hierarquia de management group, políticas fundamentais e uma convenção de nomenclatura.
+- **Maioria Andar:** Você tem uma base sólida. Foque em automação, aplicação e expansão da cobertura de políticas.
+- **Maioria Correr:** Você está operando em um nível maduro. Foque em melhoria contínua, otimização e inovação.
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Why It Hurts | What to Do Instead |
+1. **Não pule níveis.** Cada nível de maturidade se constrói sobre o anterior. Pular de Engatinhar para Correr sem estabelecer os fundamentos do nível Andar cria governança frágil.
+2. **Comece com uma base de governança MVP.** O CAF recomenda começar com: uma hierarquia de management group, um pequeno conjunto de políticas fundamentais, uma convenção de nomenclatura e atribuições RBAC. Esta é sua transição de Engatinhar para Andar.
+3. **Itere com base no risco.** Conforme sua presença na nuvem cresce, adicione controles de governança onde o risco é maior. Não tente governar tudo de uma vez.
+4. **Meça e reporte.** Governança sem medição é governança sem responsabilidade. Acompanhe taxas de conformidade de políticas, Secure Score, variação de custos e conclusão de revisões de acesso.
+5. **Invista em automação no nível Andar.** A transição de Andar para Correr é principalmente sobre automação — policy-as-code, subscription vending, pipelines de IaC e remediação automatizada.
+
+---
+
+## Armadilhas Comuns
+
+| Armadilha | Por Que Prejudica | O Que Fazer em Vez Disso |
 |---|---|---|
-| Attempting Run-level controls on a Crawl-level foundation | Complex policies fail without a management group hierarchy, naming, and RBAC | Build the foundation first; complexity comes later |
-| No governance team or CCoE | Governance becomes nobody's job, so it does not get done | Establish a cross-functional governance team by Walk level |
-| Treating maturity as a one-time assessment | Cloud environments change; maturity can regress | Reassess quarterly and adjust controls as the environment evolves |
-| Focusing only on security governance | Cost overruns and operational chaos are just as damaging as security breaches | Address all five dimensions: Identity, Policy, Cost, Security, Operations |
-| Ignoring developer experience | Governance that makes developers less productive will be circumvented | Design controls that are transparent when teams follow the rules |
+| Tentar controles do nível Correr em uma base do nível Engatinhar | Políticas complexas falham sem uma hierarquia de management group, nomenclatura e RBAC | Construa a base primeiro; a complexidade vem depois |
+| Sem equipe de governança ou CCoE | A governança se torna responsabilidade de ninguém, então não é feita | Estabeleça uma equipe de governança multifuncional até o nível Andar |
+| Tratar maturidade como avaliação única | Ambientes de nuvem mudam; a maturidade pode regredir | Reavalie trimestralmente e ajuste os controles conforme o ambiente evolui |
+| Focar apenas na governança de segurança | Estouros de custos e caos operacional são tão prejudiciais quanto violações de segurança | Aborde todas as cinco dimensões: Identidade, Política, Custo, Segurança, Operações |
+| Ignorar a experiência do desenvolvedor | Governança que torna os desenvolvedores menos produtivos será contornada | Projete controles que sejam transparentes quando as equipes seguem as regras |
 
 ---
 
-## Recommended Actions by Level Transition
+## Ações Recomendadas por Transição de Nível
 
-### Crawl → Walk
+### Engatinhar → Andar
 
-| Action | Priority |
+| Ação | Prioridade |
 |---|---|
-| Design and implement a management group hierarchy | 🔴 Critical |
-| Define and document a naming convention | 🔴 Critical |
-| Assign foundational Azure Policies (allowed regions, required tags) | 🔴 Critical |
-| Enable Microsoft Defender for Cloud enhanced security | 🟡 High |
-| Configure cost budgets and alerts per subscription | 🟡 High |
-| Implement RBAC with least privilege | 🟡 High |
-| Enable PIM for Global Admin and Subscription Owner roles | 🟡 High |
-| Adopt Bicep or Terraform for core infrastructure | 🟢 Medium |
-| Establish a Cloud Center of Excellence (CCoE) | 🟢 Medium |
+| Projetar e implementar uma hierarquia de management group | 🔴 Crítica |
+| Definir e documentar uma convenção de nomenclatura | 🔴 Crítica |
+| Atribuir Azure Policies fundamentais (regiões permitidas, tags obrigatórias) | 🔴 Crítica |
+| Habilitar segurança aprimorada do Microsoft Defender for Cloud | 🟡 Alta |
+| Configurar orçamentos e alertas de custo por assinatura | 🟡 Alta |
+| Implementar RBAC com menor privilégio | 🟡 Alta |
+| Habilitar PIM para funções de Global Admin e Subscription Owner | 🟡 Alta |
+| Adotar Bicep ou Terraform para infraestrutura central | 🟢 Média |
+| Estabelecer um Cloud Center of Excellence (CCoE) | 🟢 Média |
 
-### Walk → Run
+### Andar → Correr
 
-| Action | Priority |
+| Ação | Prioridade |
 |---|---|
-| Implement policy-as-code with CI/CD deployment | 🔴 Critical |
-| Automate subscription vending | 🟡 High |
-| Deploy Azure Governance Visualizer on a schedule | 🟡 High |
-| Implement FinOps practices with chargeback/showback | 🟡 High |
-| Enable automated remediation in Defender for Cloud | 🟡 High |
-| Deploy Deployment Stacks for managed environment lifecycle | 🟢 Medium |
-| Implement drift detection for IaC-managed resources | 🟢 Medium |
-| Build governance dashboards with Azure Resource Graph + workbooks | 🟢 Medium |
-| Achieve and maintain Defender for Cloud Secure Score > 80% | 🟢 Medium |
+| Implementar policy-as-code com implantação via CI/CD | 🔴 Crítica |
+| Automatizar subscription vending | 🟡 Alta |
+| Implantar Azure Governance Visualizer em agendamento | 🟡 Alta |
+| Implementar práticas de FinOps com chargeback/showback | 🟡 Alta |
+| Habilitar remediação automatizada no Defender for Cloud | 🟡 Alta |
+| Implantar Deployment Stacks para ciclo de vida de ambientes gerenciados | 🟢 Média |
+| Implementar detecção de desvio para recursos gerenciados por IaC | 🟢 Média |
+| Construir dashboards de governança com Azure Resource Graph + workbooks | 🟢 Média |
+| Alcançar e manter Secure Score do Defender for Cloud > 80% | 🟢 Média |
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Azure Resource Graph — Governance Maturity Dashboard Query
+### Azure Resource Graph — Consulta para Dashboard de Maturidade de Governança
 
-This query counts resources by compliance state, giving you a quick maturity signal:
+Esta consulta conta recursos por estado de conformidade, fornecendo um sinal rápido de maturidade:
 
 ```kusto
 policyresources
@@ -176,7 +176,7 @@ policyresources
 | extend complianceRate = round(100.0 * compliant / total, 2)
 ```
 
-### Azure CLI — Check Defender for Cloud Secure Score
+### Azure CLI — Verificar Secure Score do Defender for Cloud
 
 ```bash
 az security secure-score-controls list \
@@ -186,30 +186,30 @@ az security secure-score-controls list \
 
 ---
 
-## Hands-On Exercise
+## Exercício Prático
 
-**Scenario:** You have been asked to assess your organization's governance maturity and propose a roadmap.
+**Cenário:** Você foi solicitado a avaliar a maturidade de governança da sua organização e propor um roteiro.
 
-1. **Complete the self-assessment checklist** above for your organization.
-2. **Identify your current maturity level** (Crawl, Walk, or Run) for each of the five dimensions.
-3. **Pick the two dimensions with the lowest maturity** and identify three specific actions from the "Recommended Actions" tables that would move those dimensions up one level.
-4. **Write a one-page governance roadmap** with quarterly milestones for the next 12 months.
+1. **Complete a lista de verificação de autoavaliação** acima para sua organização.
+2. **Identifique seu nível de maturidade atual** (Engatinhar, Andar ou Correr) para cada uma das cinco dimensões.
+3. **Escolha as duas dimensões com a menor maturidade** e identifique três ações específicas das tabelas de "Ações Recomendadas" que moveriam essas dimensões um nível acima.
+4. **Escreva um roteiro de governança de uma página** com marcos trimestrais para os próximos 12 meses.
 
-> **Tip:** Use the [CAF Govern methodology](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) as your reference framework when building the roadmap.
+> **Dica:** Use a [metodologia CAF Govern](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) como seu framework de referência ao construir o roteiro.
 
 ---
 
-## References
+## Referências
 
-| Resource | Link |
+| Recurso | Link |
 |---|---|
-| CAF Govern methodology | [learn.microsoft.com/azure/cloud-adoption-framework/govern/](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) |
-| Standard enterprise governance guide | [learn.microsoft.com/azure/cloud-adoption-framework/govern/guides/standard/](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/guides/standard/) |
-| Cloud Center of Excellence (CCoE) functions | [learn.microsoft.com/azure/cloud-adoption-framework/organize/cloud-center-of-excellence](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/cloud-center-of-excellence) |
-| FinOps with Azure | [learn.microsoft.com/azure/cost-management-billing/finops/](https://learn.microsoft.com/azure/cost-management-billing/finops/) |
+| Metodologia CAF Govern | [learn.microsoft.com/azure/cloud-adoption-framework/govern/](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/) |
+| Guia de governança empresarial padrão | [learn.microsoft.com/azure/cloud-adoption-framework/govern/guides/standard/](https://learn.microsoft.com/azure/cloud-adoption-framework/govern/guides/standard/) |
+| Funções do Cloud Center of Excellence (CCoE) | [learn.microsoft.com/azure/cloud-adoption-framework/organize/cloud-center-of-excellence](https://learn.microsoft.com/azure/cloud-adoption-framework/organize/cloud-center-of-excellence) |
+| FinOps com Azure | [learn.microsoft.com/azure/cost-management-billing/finops/](https://learn.microsoft.com/azure/cost-management-billing/finops/) |
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Chapter 2 — Governance at a Glance](ch02-governance-at-a-glance.md) | [Chapter 4 — Resource Hierarchy](ch04-resource-hierarchy.md) |
+| [Capítulo 2 — Governança em Uma Visão Geral](ch02-governance-at-a-glance.md) | [Capítulo 4 — Hierarquia de Recursos](ch04-resource-hierarchy.md) |

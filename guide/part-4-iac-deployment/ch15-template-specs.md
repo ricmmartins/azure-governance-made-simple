@@ -1,36 +1,36 @@
-# Chapter 15 — Template Specs
+# Capítulo 15 — Template Specs
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Template Specs** are Azure resources that store versioned ARM JSON or Bicep templates in Azure itself. They provide a native, centralized way to share and distribute infrastructure templates across teams, subscriptions, and even Microsoft Entra ID tenants — without requiring access to a source code repository.
+**Template Specs** são recursos do Azure que armazenam templates ARM JSON ou Bicep versionados no próprio Azure. Eles fornecem uma forma nativa e centralizada de compartilhar e distribuir templates de infraestrutura entre equipes, subscriptions e até tenants do Microsoft Entra ID — sem exigir acesso a um repositório de código-fonte.
 
-Think of a Template Spec as a "published template" that anyone with the right Azure RBAC permissions can deploy, without needing to understand the underlying IaC code or have access to a Git repository.
+Pense em um Template Spec como um "template publicado" que qualquer pessoa com as permissões Azure RBAC corretas pode implantar, sem precisar entender o código IaC subjacente ou ter acesso a um repositório Git.
 
-Key benefits:
+Benefícios principais:
 
-- **Versioned** — each Template Spec supports multiple versions, enabling safe rollouts and rollbacks
-- **Stored in Azure** — no external storage or registry required; managed as a native Azure resource
-- **RBAC-controlled** — access is governed by standard Azure RBAC; you control who can read, deploy, or manage templates
-- **Referenceable as Bicep modules** — Bicep can consume Template Specs directly using the `ts:` module source
-- **Cross-scope deployment** — Template Specs can deploy resources at any scope (resource group, subscription, management group)
+- **Versionado** — cada Template Spec suporta múltiplas versões, permitindo rollouts e rollbacks seguros
+- **Armazenado no Azure** — nenhum armazenamento externo ou registro necessário; gerenciado como um recurso nativo do Azure
+- **Controlado por RBAC** — o acesso é governado pelo Azure RBAC padrão; você controla quem pode ler, implantar ou gerenciar templates
+- **Referenciável como módulos Bicep** — o Bicep pode consumir Template Specs diretamente usando a fonte de módulo `ts:`
+- **Implantação cross-scope** — Template Specs podem implantar recursos em qualquer escopo (resource group, subscription, management group)
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Template Spec Anatomy
+### Anatomia de um Template Spec
 
-A Template Spec is an Azure resource of type `Microsoft.Resources/templateSpecs` that lives in a resource group. Each version is a child resource (`Microsoft.Resources/templateSpecs/versions`) containing the actual template content.
+Um Template Spec é um recurso do Azure do tipo `Microsoft.Resources/templateSpecs` que reside em um resource group. Cada versão é um recurso filho (`Microsoft.Resources/templateSpecs/versions`) contendo o conteúdo real do template.
 
 ![Template Spec Versions](/images/template-spec-versions.svg)
 
-### Creating a Template Spec
+### Criando um Template Spec
 
-#### Using Azure CLI
+#### Usando Azure CLI
 
 ```bash
 # Create a Template Spec from a Bicep file
@@ -44,7 +44,7 @@ az ts create \
   --display-name 'Governance Baseline v2.0'
 ```
 
-#### Using Azure PowerShell
+#### Usando Azure PowerShell
 
 ```powershell
 New-AzTemplateSpec `
@@ -56,22 +56,22 @@ New-AzTemplateSpec `
   -Description 'Standard governance baseline for new subscriptions'
 ```
 
-### Versioning and Lifecycle
+### Versionamento e Ciclo de Vida
 
-Template Spec versions follow a naming convention (not enforced as semantic versioning, but recommended):
+Versões de Template Spec seguem uma convenção de nomenclatura (não imposta como versionamento semântico, mas recomendada):
 
-| Version | Description |
-|---------|-------------|
-| `1.0` | Initial release |
-| `1.1` | Minor update — added optional parameter |
-| `2.0` | Breaking change — renamed parameters |
+| Versão | Descrição |
+|--------|-----------|
+| `1.0` | Release inicial |
+| `1.1` | Atualização menor — adicionado parâmetro opcional |
+| `2.0` | Quebra de compatibilidade — parâmetros renomeados |
 
-**Lifecycle management tips:**
+**Dicas de gerenciamento de ciclo de vida:**
 
-- Use semantic versioning (`MAJOR.MINOR`) for clarity
-- Never overwrite a published version; create a new version instead
-- Delete outdated versions after confirming no active deployments reference them
-- Document changes in the `--description` field of each version
+- Use versionamento semântico (`MAJOR.MINOR`) para clareza
+- Nunca sobrescreva uma versão publicada; crie uma nova versão
+- Exclua versões desatualizadas após confirmar que nenhuma implantação ativa as referencia
+- Documente alterações no campo `--description` de cada versão
 
 ```bash
 # List all versions of a Template Spec
@@ -88,7 +88,7 @@ az ts delete \
   --yes
 ```
 
-### Deploying a Template Spec
+### Implantando um Template Spec
 
 ```bash
 # Get the Template Spec version resource ID
@@ -105,18 +105,18 @@ az deployment sub create \
   --parameters environmentName='production'
 ```
 
-### Sharing Templates Across Teams and Subscriptions
+### Compartilhando Templates Entre Equipes e Subscriptions
 
-Template Specs are standard Azure resources, so sharing is controlled through Azure RBAC:
+Template Specs são recursos Azure padrão, então o compartilhamento é controlado através do Azure RBAC:
 
-| Role | Capability |
+| Role | Capacidade |
 |------|-----------|
-| **Reader** | Can view the Template Spec and deploy it |
-| **Template Spec Reader** | Can read and deploy Template Specs (purpose-built role) |
-| **Contributor** | Can create, update, and deploy Template Specs |
-| **Owner** | Full control including RBAC management |
+| **Reader** | Pode visualizar o Template Spec e implantá-lo |
+| **Template Spec Reader** | Pode ler e implantar Template Specs (role construída para esse propósito) |
+| **Contributor** | Pode criar, atualizar e implantar Template Specs |
+| **Owner** | Controle total incluindo gerenciamento de RBAC |
 
-**Cross-subscription sharing** — assign the `Template Spec Reader` role to users or groups in other subscriptions:
+**Compartilhamento cross-subscription** — atribua a role `Template Spec Reader` para usuários ou grupos em outras subscriptions:
 
 ```bash
 # Grant a group in another subscription read access to a Template Spec
@@ -126,9 +126,9 @@ az role assignment create \
   --scope '/subscriptions/<sub-id>/resourceGroups/rg-templates/providers/Microsoft.Resources/templateSpecs/governance-baseline'
 ```
 
-### Referencing Template Specs as Bicep Modules
+### Referenciando Template Specs como Módulos Bicep
 
-One of the most powerful features is using Template Specs directly as Bicep modules with the `ts:` prefix:
+Uma das funcionalidades mais poderosas é usar Template Specs diretamente como módulos Bicep com o prefixo `ts:`:
 
 ```bicep
 // Reference a Template Spec as a module
@@ -141,7 +141,7 @@ module governanceBaseline 'ts:<subscriptionId>/rg-templates/governance-baseline:
 }
 ```
 
-You can also configure aliases in `bicepconfig.json` for cleaner references:
+Você também pode configurar aliases em `bicepconfig.json` para referências mais limpas:
 
 ```json
 {
@@ -156,7 +156,7 @@ You can also configure aliases in `bicepconfig.json` for cleaner references:
 }
 ```
 
-Then reference the module with the alias:
+Então referencie o módulo com o alias:
 
 ```bicep
 module governanceBaseline 'ts/GovernanceSpecs:governance-baseline:2.0' = {
@@ -171,51 +171,51 @@ module governanceBaseline 'ts/GovernanceSpecs:governance-baseline:2.0' = {
 
 ## Template Specs vs. Bicep Module Registry
 
-Both Template Specs and the Bicep Module Registry (backed by Azure Container Registry) allow you to share templates. Here's when to use each:
+Tanto Template Specs quanto o Bicep Module Registry (apoiado pelo Azure Container Registry) permitem compartilhar templates. Veja quando usar cada um:
 
-| Feature | Template Specs | Bicep Module Registry (ACR) |
+| Recurso | Template Specs | Bicep Module Registry (ACR) |
 |---------|---------------|----------------------------|
-| **Storage** | Azure Resource Manager | Azure Container Registry |
-| **Access control** | Azure RBAC on the Template Spec resource | ACR RBAC and tokens |
-| **Versioning** | Custom version strings | OCI tags (semantic versioning) |
-| **Discoverability** | Azure Portal, CLI, PowerShell | ACR repository listing, `br:` prefix in Bicep |
-| **Deployment** | Directly deployable via `az deployment` | Must be referenced as a Bicep module |
-| **Cross-tenant sharing** | Via Azure Lighthouse or guest access | Via ACR token or cross-registry replication |
-| **Best for** | Self-service deployment by non-IaC teams | Shared module libraries consumed by IaC developers |
+| **Armazenamento** | Azure Resource Manager | Azure Container Registry |
+| **Controle de acesso** | Azure RBAC no recurso Template Spec | ACR RBAC e tokens |
+| **Versionamento** | Strings de versão customizadas | Tags OCI (versionamento semântico) |
+| **Descoberta** | Azure Portal, CLI, PowerShell | Listagem do repositório ACR, prefixo `br:` no Bicep |
+| **Implantação** | Diretamente implantável via `az deployment` | Deve ser referenciado como módulo Bicep |
+| **Compartilhamento cross-tenant** | Via Azure Lighthouse ou acesso de convidado | Via token ACR ou replicação cross-registry |
+| **Ideal para** | Implantação self-service por equipes que não usam IaC | Bibliotecas de módulos compartilhados consumidos por desenvolvedores IaC |
 
-**Recommendation:** Use **Template Specs** when you want non-IaC teams to deploy standardized infrastructure through the Azure Portal or CLI. Use the **Bicep Module Registry** when you want IaC developers to consume shared modules in their own Bicep files.
-
----
-
-## Best Practices
-
-1. **Centralize Template Specs in a dedicated resource group** — create `rg-templates` in a governance or shared-services subscription
-2. **Use semantic versioning** — follow `MAJOR.MINOR` to communicate breaking vs. non-breaking changes
-3. **Automate publishing** — publish Template Specs from CI/CD pipelines, not manually
-4. **Document each version** — use the `--description` parameter to record what changed
-5. **Use RBAC for access control** — grant `Template Spec Reader` to consuming teams; limit `Contributor` to the platform team
-6. **Test before publishing** — validate templates with What-If and linting before publishing a new version
-7. **Configure Bicep aliases** — simplify module references with `bicepconfig.json` aliases
+**Recomendação:** Use **Template Specs** quando quiser que equipes que não usam IaC implantem infraestrutura padronizada através do Azure Portal ou CLI. Use o **Bicep Module Registry** quando quiser que desenvolvedores IaC consumam módulos compartilhados em seus próprios arquivos Bicep.
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Overwriting existing versions | Consumers get unexpected changes | Always publish as a new version |
-| No access control | Unauthorized deployments of sensitive templates | Apply RBAC to Template Spec resources |
-| Not testing before publishing | Broken templates shared to all consumers | Integrate What-If and linting in CI/CD |
-| Orphaned versions | Confusion over which version to use | Document and clean up old versions |
-| Using Template Specs when a module registry is more appropriate | Teams author Bicep but can't use `ts:` as easily as `br:` | Match the tool to the audience |
+1. **Centralize Template Specs em um resource group dedicado** — crie `rg-templates` em uma subscription de governança ou serviços compartilhados
+2. **Use versionamento semântico** — siga `MAJOR.MINOR` para comunicar alterações com ou sem quebra de compatibilidade
+3. **Automatize a publicação** — publique Template Specs a partir de pipelines CI/CD, não manualmente
+4. **Documente cada versão** — use o parâmetro `--description` para registrar o que mudou
+5. **Use RBAC para controle de acesso** — conceda `Template Spec Reader` para equipes consumidoras; limite `Contributor` à equipe de plataforma
+6. **Teste antes de publicar** — valide templates com What-If e linting antes de publicar uma nova versão
+7. **Configure aliases Bicep** — simplifique referências de módulos com aliases em `bicepconfig.json`
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Creating and Deploying a Template Spec (End-to-End)
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Sobrescrever versões existentes | Consumidores recebem alterações inesperadas | Sempre publique como uma nova versão |
+| Sem controle de acesso | Implantações não autorizadas de templates sensíveis | Aplique RBAC aos recursos Template Spec |
+| Não testar antes de publicar | Templates quebrados compartilhados com todos os consumidores | Integre What-If e linting no CI/CD |
+| Versões órfãs | Confusão sobre qual versão usar | Documente e limpe versões antigas |
+| Usar Template Specs quando um module registry é mais apropriado | Equipes escrevem Bicep mas não conseguem usar `ts:` tão facilmente quanto `br:` | Combine a ferramenta com a audiência |
 
-**Step 1: Author the Bicep template**
+---
+
+## Exemplos de Código
+
+### Criando e Implantando um Template Spec (Ponta a Ponta)
+
+**Passo 1: Escreva o template Bicep**
 
 ```bicep
 // storage-account.bicep
@@ -259,7 +259,7 @@ output storageAccountId string = storageAccount.id
 output primaryBlobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 ```
 
-**Step 2: Publish as a Template Spec**
+**Passo 2: Publique como um Template Spec**
 
 ```bash
 # Create the resource group for templates (one-time setup)
@@ -275,7 +275,7 @@ az ts create \
   --description 'Secure storage account with TLS 1.2, HTTPS-only, no public blob access'
 ```
 
-**Step 3: Deploy the Template Spec**
+**Passo 3: Implante o Template Spec**
 
 ```bash
 # Get the version ID
@@ -292,7 +292,7 @@ az deployment group create \
   --parameters storageAccountName='stappdata001' skuName='Standard_ZRS'
 ```
 
-**Step 4: Use as a Bicep module in another template**
+**Passo 4: Use como módulo Bicep em outro template**
 
 ```bicep
 // main.bicep
@@ -311,17 +311,17 @@ module secureStorage 'ts/GovernanceSpecs:secure-storage-account:1.0' = {
 
 ---
 
-## References
+## Referências
 
-- [Template Specs overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs)
-- [Create and deploy Template Specs](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs-create-linked)
-- [Use Template Specs as Bicep modules](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules#template-specs)
-- [Template Spec Reader role](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#template-spec-reader)
-- [Bicep module registries](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/private-module-registry)
-- [Bicep configuration (bicepconfig.json)](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-config-modules)
+- [Visão geral de Template Specs](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs)
+- [Criar e implantar Template Specs](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs-create-linked)
+- [Usar Template Specs como módulos Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules#template-specs)
+- [Role Template Spec Reader](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#template-spec-reader)
+- [Registros de módulos Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/private-module-registry)
+- [Configuração Bicep (bicepconfig.json)](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-config-modules)
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
-| [Deployment Stacks](ch14-deployment-stacks.md) | [Governance CI/CD](ch16-governance-cicd.md) |
+| Anterior | Próximo |
+|:---------|:--------|
+| [Deployment Stacks](ch14-deployment-stacks.md) | [Governança CI/CD](ch16-governance-cicd.md) |

@@ -1,148 +1,148 @@
-# Chapter 20 — Azure Monitor for Governance
+# Capítulo 20 — Azure Monitor para Governança
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Azure Monitor** is the unified observability platform for Azure. While most teams think of it as an application performance monitoring (APM) tool, it's equally powerful for **governance observability** — tracking who did what, when, and whether resources comply with organizational standards.
+**Azure Monitor** é a plataforma unificada de observabilidade do Azure. Embora a maioria das equipes pense nele como uma ferramenta de monitoramento de desempenho de aplicações (APM), ele é igualmente poderoso para **observabilidade de governança** — rastreando quem fez o quê, quando e se os recursos estão em conformidade com os padrões organizacionais.
 
-For governance teams, Azure Monitor provides:
+Para equipes de governança, o Azure Monitor fornece:
 
-- **Activity Logs** — every control-plane operation (resource creation, deletion, RBAC changes, policy operations)
-- **Diagnostic Settings** — configuring what telemetry data is collected and where it's sent
-- **Log Analytics** — centralized store for querying governance data with KQL
-- **Azure Workbooks** — interactive dashboards for governance reporting
-- **Alert Rules** — automated notifications for governance-relevant events
+- **Activity Logs** — toda operação no plano de controle (criação de recursos, exclusão, alterações de RBAC, operações de política)
+- **Diagnostic Settings** — configuração de quais dados de telemetria são coletados e para onde são enviados
+- **Log Analytics** — repositório centralizado para consultar dados de governança com KQL
+- **Azure Workbooks** — dashboards interativos para relatórios de governança
+- **Regras de Alerta** — notificações automatizadas para eventos relevantes de governança
 
 ---
 
-## How It Works
+## Como Funciona
 
 ### Activity Logs
 
-The **Activity Log** records all control-plane operations in Azure. Every API call that modifies a resource generates an Activity Log entry. For governance, the most relevant categories are:
+O **Activity Log** registra todas as operações no plano de controle do Azure. Toda chamada de API que modifica um recurso gera uma entrada no Activity Log. Para governança, as categorias mais relevantes são:
 
-| Category | What It Captures |
-|----------|------------------|
-| **Administrative** | Resource create/update/delete operations |
-| **Security** | Microsoft Defender for Cloud alerts |
-| **Policy** | Policy evaluation results and remediation actions |
-| **Recommendation** | Azure Advisor recommendations |
+| Categoria | O Que Captura |
+|-----------|---------------|
+| **Administrative** | Operações de criação/atualização/exclusão de recursos |
+| **Security** | Alertas do Microsoft Defender for Cloud |
+| **Policy** | Resultados de avaliação de políticas e ações de remediação |
+| **Recommendation** | Recomendações do Azure Advisor |
 
-Activity Log entries are retained for **90 days** by default. To retain data longer, configure Diagnostic Settings to send Activity Logs to a Log Analytics workspace, storage account, or Event Hub.
+As entradas do Activity Log são retidas por **90 dias** por padrão. Para reter dados por mais tempo, configure Diagnostic Settings para enviar Activity Logs para um workspace do Log Analytics, conta de armazenamento ou Event Hub.
 
-**Key governance events to monitor:**
+**Eventos-chave de governança para monitorar:**
 
-- RBAC role assignments created or deleted
-- Policy assignments created, modified, or deleted
-- Resource locks added or removed
-- Management group hierarchy changes
-- Subscription moved between management groups
-- Resource deletions in production subscriptions
+- Atribuições de função RBAC criadas ou excluídas
+- Atribuições de política criadas, modificadas ou excluídas
+- Resource locks adicionados ou removidos
+- Alterações na hierarquia de management groups
+- Assinatura movida entre management groups
+- Exclusão de recursos em assinaturas de produção
 
 ### Diagnostic Settings
 
-**Diagnostic Settings** configure where Azure platform logs and metrics are sent. For governance, you need to collect data from multiple sources into a central location:
+**Diagnostic Settings** configuram para onde os logs e métricas da plataforma Azure são enviados. Para governança, você precisa coletar dados de múltiplas fontes em um local central:
 
-| Source | Data | Configuration |
-|--------|------|---------------|
-| **Subscription Activity Log** | All control-plane operations | Subscription-level diagnostic setting |
-| **Microsoft Entra ID** | Sign-in logs, audit logs | Entra ID diagnostic setting |
-| **Azure resources** | Resource-specific logs and metrics | Per-resource diagnostic setting |
-| **Azure Policy** | Policy state changes | Included in Activity Log |
+| Fonte | Dados | Configuração |
+|-------|-------|--------------|
+| **Activity Log da Assinatura** | Todas as operações no plano de controle | Diagnostic setting no nível da assinatura |
+| **Microsoft Entra ID** | Logs de sign-in, logs de auditoria | Diagnostic setting do Entra ID |
+| **Recursos do Azure** | Logs e métricas específicos de cada recurso | Diagnostic setting por recurso |
+| **Azure Policy** | Alterações de estado de política | Incluído no Activity Log |
 
-**Recommended destinations:**
+**Destinos recomendados:**
 
-| Destination | Use Case |
-|-------------|----------|
-| **Log Analytics workspace** | Interactive KQL queries, Workbooks, alerts |
-| **Storage account** | Long-term retention, compliance archives |
-| **Event Hub** | Real-time streaming to SIEM tools (Sentinel, Splunk) |
+| Destino | Caso de Uso |
+|---------|-------------|
+| **Workspace do Log Analytics** | Consultas KQL interativas, Workbooks, alertas |
+| **Conta de armazenamento** | Retenção de longo prazo, arquivos de conformidade |
+| **Event Hub** | Streaming em tempo real para ferramentas SIEM (Sentinel, Splunk) |
 
-### Log Analytics Workspace
+### Workspace do Log Analytics
 
-A **Log Analytics workspace** is the central data store for Azure Monitor Logs. For governance, a dedicated workspace (or a dedicated table within a shared workspace) collects:
+Um **workspace do Log Analytics** é o repositório central de dados para Azure Monitor Logs. Para governança, um workspace dedicado (ou uma tabela dedicada dentro de um workspace compartilhado) coleta:
 
-- Activity Logs from all subscriptions
-- Microsoft Entra ID audit and sign-in logs
-- Azure Policy compliance data
-- Custom logs from governance automation
+- Activity Logs de todas as assinaturas
+- Logs de auditoria e sign-in do Microsoft Entra ID
+- Dados de conformidade do Azure Policy
+- Logs personalizados de automação de governança
 
-**Workspace design for governance:**
+**Design de workspace para governança:**
 
-| Approach | When to Use |
-|----------|-------------|
-| **Dedicated governance workspace** | Strict access control; governance team needs isolation |
-| **Shared workspace with RBAC** | Cost-efficient; use table-level RBAC to restrict access |
-| **Per-subscription workspace** | Regulatory requirement for data residency or isolation |
+| Abordagem | Quando Usar |
+|-----------|-------------|
+| **Workspace dedicado de governança** | Controle de acesso rigoroso; equipe de governança precisa de isolamento |
+| **Workspace compartilhado com RBAC** | Eficiente em custos; use RBAC em nível de tabela para restringir acesso |
+| **Workspace por assinatura** | Requisito regulatório de residência de dados ou isolamento |
 
-### Azure Workbooks for Governance Dashboards
+### Azure Workbooks para Dashboards de Governança
 
-**Azure Workbooks** provide interactive reports combining text, KQL queries, metrics, and parameters. They're ideal for governance dashboards because they:
+**Azure Workbooks** fornecem relatórios interativos combinando texto, consultas KQL, métricas e parâmetros. São ideais para dashboards de governança porque:
 
-- Require no external tooling
-- Support parameters (e.g., select a subscription or time range)
-- Can be shared via Azure Portal or exported as ARM/Bicep templates
-- Integrate directly with Log Analytics and Azure Resource Graph
+- Não requerem ferramentas externas
+- Suportam parâmetros (ex.: selecionar uma assinatura ou intervalo de tempo)
+- Podem ser compartilhados via Portal Azure ou exportados como templates ARM/Bicep
+- Integram-se diretamente com Log Analytics e Azure Resource Graph
 
-**Recommended governance workbooks:**
+**Workbooks de governança recomendados:**
 
-| Workbook | Content |
-|----------|---------|
-| **RBAC Overview** | Role assignments by scope, recent changes, PIM activations |
-| **Policy Compliance** | Non-compliant resources, compliance trends, remediation status |
-| **Resource Inventory** | Resources by type, region, tag compliance, orphaned resources |
-| **Cost Governance** | Budget utilization, anomalies, Advisor recommendations |
-| **Security Posture** | Secure Score trends, Defender alerts, vulnerability status |
+| Workbook | Conteúdo |
+|----------|----------|
+| **Visão Geral de RBAC** | Atribuições de função por escopo, alterações recentes, ativações PIM |
+| **Conformidade de Política** | Recursos não conformes, tendências de conformidade, status de remediação |
+| **Inventário de Recursos** | Recursos por tipo, região, conformidade de tags, recursos órfãos |
+| **Governança de Custos** | Utilização de orçamento, anomalias, recomendações do Advisor |
+| **Postura de Segurança** | Tendências do Secure Score, alertas do Defender, status de vulnerabilidades |
 
-### Alert Rules for Governance Events
+### Regras de Alerta para Eventos de Governança
 
-Configure **alert rules** to notify governance teams when critical events occur:
+Configure **regras de alerta** para notificar equipes de governança quando eventos críticos ocorrerem:
 
-| Event | KQL Query Target | Alert Severity |
-|-------|-------------------|----------------|
-| New Owner role assignment | Activity Log — role assignments | Sev 1 (Critical) |
-| Resource lock removed | Activity Log — lock operations | Sev 2 (Warning) |
-| Policy assignment deleted | Activity Log — policy operations | Sev 1 (Critical) |
-| Resource deleted in production | Activity Log — delete operations | Sev 2 (Warning) |
-| Subscription moved | Activity Log — subscription operations | Sev 1 (Critical) |
-| Custom role definition modified | Activity Log — role definitions | Sev 2 (Warning) |
-
----
-
-## Best Practices
-
-1. **Centralize Activity Logs** — send all subscription Activity Logs to a single Log Analytics workspace
-2. **Retain data appropriately** — 90 days in Log Analytics for interactive queries; archive to storage for compliance (1–7 years)
-3. **Collect Microsoft Entra ID logs** — sign-in and audit logs are essential for governance; configure Entra ID diagnostic settings
-4. **Create governance-specific alert rules** — alert on RBAC changes, policy deletions, and resource lock removals
-5. **Build Workbooks, not one-off queries** — reusable Workbooks provide consistent reporting across the team
-6. **Use action groups for alerts** — route governance alerts to on-call channels, not just email
-7. **Apply workspace RBAC** — restrict who can query sensitive governance data
-8. **Tag your monitoring resources** — the governance workspace and alerts should be tagged and budgeted
-9. **Review alerts regularly** — tune alert rules to reduce noise and ensure signal
-10. **Integrate with Microsoft Sentinel** — for advanced threat detection and investigation of governance violations
+| Evento | Alvo da Consulta KQL | Severidade do Alerta |
+|--------|----------------------|---------------------|
+| Nova atribuição de função Owner | Activity Log — atribuições de função | Sev 1 (Crítico) |
+| Resource lock removido | Activity Log — operações de lock | Sev 2 (Aviso) |
+| Atribuição de política excluída | Activity Log — operações de política | Sev 1 (Crítico) |
+| Recurso excluído em produção | Activity Log — operações de exclusão | Sev 2 (Aviso) |
+| Assinatura movida | Activity Log — operações de assinatura | Sev 1 (Crítico) |
+| Definição de função customizada modificada | Activity Log — definições de função | Sev 2 (Aviso) |
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Not collecting Activity Logs centrally | No visibility into cross-subscription operations | Configure diagnostic settings on every subscription |
-| Default 90-day retention only | Historical governance data lost | Archive to storage account for long-term retention |
-| Alert fatigue | Critical alerts ignored | Tune alert rules; use severity levels; route to appropriate channels |
-| No Entra ID logs | Cannot correlate sign-ins with governance events | Configure Entra ID diagnostic settings |
-| Workspace sprawl | Data scattered across many workspaces | Consolidate into one or few governance workspaces |
-| No RBAC on workspace | Sensitive governance data accessible to all | Apply table-level or workspace-level RBAC |
+1. **Centralize Activity Logs** — envie todos os Activity Logs de assinatura para um único workspace do Log Analytics
+2. **Retenha dados adequadamente** — 90 dias no Log Analytics para consultas interativas; arquive em armazenamento para conformidade (1–7 anos)
+3. **Colete logs do Microsoft Entra ID** — logs de sign-in e auditoria são essenciais para governança; configure Diagnostic Settings do Entra ID
+4. **Crie regras de alerta específicas para governança** — alerte sobre alterações de RBAC, exclusões de política e remoções de resource locks
+5. **Construa Workbooks, não consultas pontuais** — Workbooks reutilizáveis fornecem relatórios consistentes para toda a equipe
+6. **Use action groups para alertas** — direcione alertas de governança para canais de plantão, não apenas e-mail
+7. **Aplique RBAC no workspace** — restrinja quem pode consultar dados sensíveis de governança
+8. **Marque seus recursos de monitoramento** — o workspace de governança e os alertas devem ser tagueados e orçados
+9. **Revise alertas regularmente** — ajuste regras de alerta para reduzir ruído e garantir sinal
+10. **Integre com Microsoft Sentinel** — para detecção avançada de ameaças e investigação de violações de governança
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### KQL: Tracking RBAC Role Assignments
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Não coletar Activity Logs centralmente | Sem visibilidade em operações entre assinaturas | Configure diagnostic settings em cada assinatura |
+| Apenas retenção padrão de 90 dias | Dados históricos de governança perdidos | Arquive em conta de armazenamento para retenção de longo prazo |
+| Fadiga de alertas | Alertas críticos ignorados | Ajuste regras de alerta; use níveis de severidade; direcione para canais apropriados |
+| Sem logs do Entra ID | Não é possível correlacionar sign-ins com eventos de governança | Configure diagnostic settings do Entra ID |
+| Proliferação de workspaces | Dados espalhados em muitos workspaces | Consolide em um ou poucos workspaces de governança |
+| Sem RBAC no workspace | Dados sensíveis de governança acessíveis a todos | Aplique RBAC em nível de tabela ou workspace |
+
+---
+
+## Exemplos de Código
+
+### KQL: Rastreando Atribuições de Função RBAC
 
 ```kql
 // All RBAC role assignment changes in the last 7 days
@@ -214,7 +214,7 @@ AzureActivity
 | order by DeletionCount desc
 ```
 
-### Bicep: Diagnostic Settings for Governance
+### Bicep: Diagnostic Settings para Governança
 
 ```bicep
 // governance-diagnostics.bicep
@@ -254,7 +254,7 @@ resource activityLogDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-0
 }
 ```
 
-### Bicep: Log Analytics Workspace for Governance
+### Bicep: Workspace do Log Analytics para Governança
 
 ```bicep
 // log-analytics.bicep
@@ -294,7 +294,7 @@ output workspaceName string = workspace.name
 output customerId string = workspace.properties.customerId
 ```
 
-### Bicep: Alert Rule for RBAC Changes
+### Bicep: Regra de Alerta para Alterações de RBAC
 
 ```bicep
 // rbac-change-alert.bicep
@@ -349,7 +349,7 @@ resource rbacAlert 'Microsoft.Insights/scheduledQueryRules@2022-06-15' = {
 
 ---
 
-## References
+## Referências
 
 - [Azure Monitor overview](https://learn.microsoft.com/en-us/azure/azure-monitor/overview)
 - [Activity Log](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log)
@@ -363,6 +363,6 @@ resource rbacAlert 'Microsoft.Insights/scheduledQueryRules@2022-06-15' = {
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [Cost Automation](../part-5-cost-finops/ch19-cost-automation.md) | [Resource Graph](ch21-resource-graph.md) |

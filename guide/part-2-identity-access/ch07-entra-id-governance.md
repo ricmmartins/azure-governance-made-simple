@@ -1,245 +1,245 @@
-# Chapter 7 — Microsoft Entra ID Governance
+# Capítulo 7 — Microsoft Entra ID Governance
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-Granting access is easy. Governing it over time — that's the hard part.
+Conceder acesso é fácil. Governá-lo ao longo do tempo — essa é a parte difícil.
 
-**Microsoft Entra ID Governance** is a suite of capabilities that helps you balance *productivity* (people get the access they need, when they need it) with *security* (access is appropriate, reviewed, and revoked when no longer required). It sits on top of the Microsoft Entra ID identity platform and addresses the full lifecycle of identity governance:
+**Microsoft Entra ID Governance** é um conjunto de capacidades que ajuda a equilibrar *produtividade* (pessoas obtêm o acesso que precisam, quando precisam) com *segurança* (o acesso é apropriado, revisado e revogado quando não é mais necessário). Ele se baseia na plataforma de identidade do Microsoft Entra ID e aborda o ciclo de vida completo da governança de identidade:
 
-| Capability | Purpose |
-|-----------|---------|
-| **Privileged Identity Management (PIM)** | Just-in-time, time-bound, approval-gated privileged access |
-| **Access Reviews** | Periodic recertification of who has access to what |
-| **Entitlement Management** | Self-service access packages with policies and expiration |
-| **Lifecycle Workflows** | Automated onboarding, role changes, and offboarding |
-| **AI Agent Identity Governance** | Governance controls for AI agent and workload identities |
+| Capacidade | Propósito |
+|------------|-----------|
+| **Privileged Identity Management (PIM)** | Acesso privilegiado just-in-time, com tempo limitado e aprovação |
+| **Access Reviews** | Recertificação periódica de quem tem acesso a quê |
+| **Entitlement Management** | Pacotes de acesso self-service com políticas e expiração |
+| **Lifecycle Workflows** | Onboarding, mudanças de função e offboarding automatizados |
+| **AI Agent Identity Governance** | Controles de governança para identidades de agentes de IA e cargas de trabalho |
 
-Each of these works independently, but together they form a comprehensive governance strategy that keeps access right-sized and auditable.
+Cada um funciona de forma independente, mas juntos formam uma estratégia abrangente de governança que mantém o acesso dimensionado corretamente e auditável.
 
 ---
 
 ## 7.1 Privileged Identity Management (PIM)
 
-### What PIM Is and Why It Matters
+### O que é PIM e Por Que Importa
 
-Standing privileged access is one of the most common attack vectors in cloud environments. If a Global Administrator account is compromised, the blast radius is your entire tenant. **Privileged Identity Management (PIM)** eliminates standing privileges by converting permanent role assignments into *eligible* assignments that must be **activated** on demand.
+Acesso privilegiado permanente é um dos vetores de ataque mais comuns em ambientes de nuvem. Se uma conta de Global Administrator for comprometida, o raio de explosão é todo o seu tenant. **Privileged Identity Management (PIM)** elimina privilégios permanentes convertendo atribuições de função permanentes em atribuições *elegíveis* que devem ser **ativadas** sob demanda.
 
-Think of it this way: instead of giving someone a master key they carry around 24/7, you give them the ability to *request* the key for a limited window, with an approval workflow and an audit trail.
+Pense assim: em vez de dar a alguém uma chave-mestra que carregam 24 horas por dia, você dá a capacidade de *solicitar* a chave por uma janela limitada, com um fluxo de aprovação e uma trilha de auditoria.
 
-### How It Works
+### Como Funciona
 
 ![PIM Activation Flow](/images/pim-activation-flow.svg)
 
-1. **Eligible assignment** — the user is *eligible* for a role but doesn't have it active. No permissions until they activate.
-2. **Activation** — the user requests activation through the Azure portal, Microsoft Graph API, or PowerShell. They must satisfy any configured requirements (MFA, justification, approval).
-3. **Time-bound access** — once activated, the role is active for a maximum duration (e.g., 8 hours) and then automatically deactivates.
-4. **Audit trail** — every activation, approval, and expiry is logged and available in the Microsoft Entra audit log.
+1. **Atribuição elegível** — o usuário é *elegível* para uma função, mas não a tem ativa. Nenhuma permissão até que ative.
+2. **Ativação** — o usuário solicita ativação pelo portal do Azure, Microsoft Graph API ou PowerShell. Deve satisfazer quaisquer requisitos configurados (MFA, justificativa, aprovação).
+3. **Acesso com tempo limitado** — uma vez ativada, a função fica ativa por uma duração máxima (ex.: 8 horas) e então é automaticamente desativada.
+4. **Trilha de auditoria** — toda ativação, aprovação e expiração é registrada e disponível no log de auditoria do Microsoft Entra.
 
-### PIM for Azure Resources vs. PIM for Microsoft Entra ID Roles
+### PIM para Azure Resources vs. PIM para Funções do Microsoft Entra ID
 
-| Dimension | PIM for Azure Resources | PIM for Entra ID Roles |
-|-----------|------------------------|----------------------|
-| **Scope** | Management group, subscription, resource group, or resource | Tenant-wide Entra ID directory roles |
-| **Roles** | Azure RBAC roles (Owner, Contributor, custom roles, etc.) | Entra ID roles (Global Administrator, User Administrator, etc.) |
-| **Activation** | Per-scope activation | Tenant-level activation |
-| **Use case** | Govern who can manage Azure infrastructure | Govern who can manage identity and tenant configuration |
+| Dimensão | PIM para Azure Resources | PIM para Funções do Entra ID |
+|----------|--------------------------|------------------------------|
+| **Escopo** | Management group, subscription, resource group ou recurso | Funções de diretório do Entra ID em todo o tenant |
+| **Funções** | Funções Azure RBAC (Owner, Contributor, custom roles, etc.) | Funções do Entra ID (Global Administrator, User Administrator, etc.) |
+| **Ativação** | Ativação por escopo | Ativação no nível do tenant |
+| **Caso de uso** | Governar quem pode gerenciar infraestrutura Azure | Governar quem pode gerenciar identidade e configuração do tenant |
 
-> **Key point:** You should configure PIM for *both* Azure resources and Entra ID roles. A compromised Global Administrator can reset any password; a compromised subscription Owner can delete any resource.
+> **Ponto-chave:** Você deve configurar PIM para *ambos* — recursos Azure e funções do Entra ID. Um Global Administrator comprometido pode redefinir qualquer senha; um Owner de subscription comprometido pode excluir qualquer recurso.
 
-### Best Practices
+### Melhores Práticas
 
-1. **Require MFA for every activation** — this is the single most effective control. Even if credentials are compromised, the attacker cannot activate the role without the second factor.
+1. **Exija MFA para toda ativação** — este é o controle mais eficaz. Mesmo que as credenciais sejam comprometidas, o atacante não consegue ativar a função sem o segundo fator.
 
-2. **Set maximum activation duration to the minimum practical window** — 8 hours is a common default, but many tasks require only 1–2 hours. Shorter windows reduce exposure.
+2. **Defina a duração máxima de ativação para a janela mínima prática** — 8 horas é o padrão comum, mas muitas tarefas exigem apenas 1–2 horas. Janelas mais curtas reduzem a exposição.
 
-3. **Configure approval workflows for high-impact roles** — roles like Owner, Global Administrator, and Security Administrator should require approval from a designated approver.
+3. **Configure fluxos de aprovação para funções de alto impacto** — funções como Owner, Global Administrator e Security Administrator devem exigir aprovação de um aprovador designado.
 
-4. **Use eligible assignments, not permanent** — the only permanent assignments should be break-glass accounts (and those should be monitored with alerts).
+4. **Use atribuições elegíveis, não permanentes** — as únicas atribuições permanentes devem ser contas break-glass (e essas devem ser monitoradas com alertas).
 
-5. **Enable PIM alerts** — configure notifications for activations and when eligible assignments are about to expire.
+5. **Habilite alertas do PIM** — configure notificações para ativações e quando atribuições elegíveis estiverem prestes a expirar.
 
-6. **Pair PIM with Access Reviews** — set up recurring reviews of who is *eligible* for privileged roles (see section 7.2).
+6. **Combine PIM com Access Reviews** — configure revisões recorrentes de quem é *elegível* para funções privilegiadas (veja a seção 7.2).
 
 ---
 
 ## 7.2 Access Reviews
 
-### What Access Reviews Are
+### O que são Access Reviews
 
-Access reviews are a built-in mechanism for periodically verifying that users still need the access they've been granted. Without them, access accumulates over time — a phenomenon sometimes called *"privilege creep"* or *"access barnacles."*
+Access reviews são um mecanismo integrado para verificar periodicamente se os usuários ainda precisam do acesso que lhes foi concedido. Sem elas, o acesso se acumula ao longo do tempo — um fenômeno às vezes chamado de *"privilege creep"* ou *"acúmulo de acessos"*.
 
-Microsoft Entra access reviews can target:
+As access reviews do Microsoft Entra podem ter como alvo:
 
-- **Group memberships** — is each member still appropriate?
-- **Application assignments** — should this user still have access to this SaaS app?
-- **Azure role assignments** — does this person still need Contributor on this subscription?
-- **Microsoft Entra ID role assignments** — should this user still be eligible for Global Reader?
-- **Access package assignments** — has the user's project ended?
+- **Associações a grupos** — cada membro ainda é apropriado?
+- **Atribuições de aplicativos** — este usuário ainda deve ter acesso a este app SaaS?
+- **Atribuições de funções Azure** — esta pessoa ainda precisa de Contributor nesta subscription?
+- **Atribuições de funções do Microsoft Entra ID** — este usuário ainda deve ser elegível para Global Reader?
+- **Atribuições de pacotes de acesso** — o projeto do usuário terminou?
 
-### How It Works
+### Como Funciona
 
-1. **Create a review** — an administrator defines the scope (which group, role, or package), the reviewers (self-review, manager, resource owner, or specific users), and the recurrence (one-time, weekly, monthly, quarterly).
-2. **Review period opens** — reviewers receive an email and a link to the My Access portal where they approve or deny each user's continued access.
-3. **Auto-remediation** — when the review period closes, denied users can be automatically removed. No manual clean-up required.
-4. **Audit log** — all decisions are recorded and exportable.
+1. **Criar uma revisão** — um administrador define o escopo (qual grupo, função ou pacote), os revisores (autorrevisão, gerente, proprietário do recurso ou usuários específicos) e a recorrência (única, semanal, mensal, trimestral).
+2. **Período de revisão inicia** — os revisores recebem um e-mail e um link para o portal My Access onde aprovam ou negam o acesso continuado de cada usuário.
+3. **Remediação automática** — quando o período de revisão encerra, usuários negados podem ser removidos automaticamente. Nenhuma limpeza manual necessária.
+4. **Log de auditoria** — todas as decisões são registradas e exportáveis.
 
-### Best Practices
+### Melhores Práticas
 
-1. **Run quarterly reviews at minimum** — annual reviews let stale access persist too long. Quarterly strikes a good balance between security and reviewer fatigue.
+1. **Execute revisões trimestrais no mínimo** — revisões anuais permitem que acessos obsoletos persistam por tempo demais. Trimestral atinge um bom equilíbrio entre segurança e fadiga dos revisores.
 
-2. **Enable auto-remove for denied access** — manual follow-up is unreliable. Let the system enforce the decision.
+2. **Habilite remoção automática para acessos negados** — acompanhamento manual não é confiável. Deixe o sistema executar a decisão.
 
-3. **Involve resource owners as reviewers** — managers may not know what a resource group contains. The team that owns the resource is better positioned to judge.
+3. **Envolva proprietários de recursos como revisores** — gerentes podem não saber o que um resource group contém. A equipe que possui o recurso está mais bem posicionada para julgar.
 
-4. **Use multi-stage reviews for sensitive resources** — a first pass by the user's manager, followed by a second pass by the resource owner.
+4. **Use revisões em múltiplos estágios para recursos sensíveis** — uma primeira passagem pelo gerente do usuário, seguida por uma segunda passagem pelo proprietário do recurso.
 
-5. **Review PIM eligible assignments** — don't just review active access; review who is *eligible* to activate privileged roles.
+5. **Revise atribuições elegíveis do PIM** — não revise apenas o acesso ativo; revise quem é *elegível* para ativar funções privilegiadas.
 
 ---
 
 ## 7.3 Entitlement Management
 
-### What Entitlement Management Is
+### O que é Entitlement Management
 
-Entitlement management lets you bundle related access rights — group memberships, application assignments, SharePoint sites, and Azure roles — into **access packages**. Users can then request these packages through a self-service portal, with policy-driven approval, expiration, and periodic review built in.
+Entitlement Management permite agrupar direitos de acesso relacionados — associações a grupos, atribuições de aplicativos, sites do SharePoint e funções Azure — em **pacotes de acesso (access packages)**. Os usuários podem então solicitar esses pacotes por meio de um portal self-service, com aprovação orientada por políticas, expiração e revisão periódica incorporadas.
 
-Think of an access package as a "project starter kit": when someone joins the Contoso Analytics project, they request the *Contoso Analytics* access package and automatically receive the security group memberships, the Power BI workspace access, and the Contributor role on the project's resource group.
+Pense em um access package como um "kit inicial de projeto": quando alguém entra no projeto Contoso Analytics, solicita o access package *Contoso Analytics* e recebe automaticamente as associações ao security group, o acesso ao workspace do Power BI e a função Contributor no resource group do projeto.
 
-### Key Concepts
+### Conceitos-Chave
 
-| Concept | Description |
-|---------|-------------|
-| **Access Package** | A named bundle of resource access (groups, apps, roles, sites). |
-| **Catalog** | A container for organizing access packages. Often aligned with business units or projects. |
-| **Policy** | Rules governing who can request, who approves, how long access lasts, and whether reviews are required. |
-| **Connected Organization** | An external organization whose users can request access packages — critical for B2B collaboration. |
-| **Automatic Assignment Policy** | Rules that automatically assign or remove access packages based on user attributes (e.g., department = "Engineering"). |
+| Conceito | Descrição |
+|----------|-----------|
+| **Access Package** | Um pacote nomeado de acesso a recursos (grupos, apps, funções, sites). |
+| **Catalog** | Um container para organizar access packages. Frequentemente alinhado com unidades de negócio ou projetos. |
+| **Policy** | Regras que governam quem pode solicitar, quem aprova, quanto tempo o acesso dura e se revisões são necessárias. |
+| **Connected Organization** | Uma organização externa cujos usuários podem solicitar access packages — crítico para colaboração B2B. |
+| **Automatic Assignment Policy** | Regras que atribuem ou removem automaticamente access packages com base em atributos do usuário (ex.: department = "Engineering"). |
 
-### Best Practices
+### Melhores Práticas
 
-1. **Use access packages for project-based access** — when a project starts, create a package. When it ends, expire the package. No leftover permissions.
+1. **Use access packages para acesso baseado em projetos** — quando um projeto começa, crie um pacote. Quando termina, expire o pacote. Sem permissões residuais.
 
-2. **Set expiration policies** — every assignment should have a maximum duration. Users can request renewal, which triggers a fresh approval cycle.
+2. **Defina políticas de expiração** — toda atribuição deve ter uma duração máxima. Usuários podem solicitar renovação, o que dispara um novo ciclo de aprovação.
 
-3. **Delegate catalog management to business owners** — IT shouldn't be the bottleneck for creating packages. Let department leads manage their own catalogs.
+3. **Delegue o gerenciamento de catálogos para proprietários de negócio** — TI não deve ser o gargalo para criar pacotes. Deixe líderes de departamento gerenciarem seus próprios catálogos.
 
-4. **Combine with access reviews** — access packages can require periodic access reviews, ensuring that long-lived assignments are still valid.
+4. **Combine com access reviews** — access packages podem exigir revisões periódicas de acesso, garantindo que atribuições de longa duração ainda sejam válidas.
 
-5. **Use automatic assignment policies** — for access that is universal within a department (e.g., all engineers need the CI/CD tool), use attribute-based automatic assignment rather than requiring individual requests.
+5. **Use políticas de atribuição automática** — para acesso universal dentro de um departamento (ex.: todos os engenheiros precisam da ferramenta de CI/CD), use atribuição automática baseada em atributos em vez de exigir solicitações individuais.
 
 ---
 
 ## 7.4 Lifecycle Workflows
 
-### What Lifecycle Workflows Are
+### O que são Lifecycle Workflows
 
-Lifecycle Workflows automate identity-related tasks triggered by changes in a user's lifecycle — hiring, role changes, and departure. Instead of relying on IT tickets and manual checklists, you define **workflows** that execute automatically when specific conditions are met.
+Lifecycle Workflows automatizam tarefas relacionadas a identidade disparadas por mudanças no ciclo de vida do usuário — contratação, mudanças de função e desligamento. Em vez de depender de chamados de TI e checklists manuais, você define **workflows** que executam automaticamente quando condições específicas são atendidas.
 
-### Scenarios
+### Cenários
 
-| Scenario | Trigger | Example Tasks |
-|----------|---------|---------------|
-| **Pre-hire** | Before the employee's start date | Generate a temporary access pass, create the user account, send a welcome email |
-| **Joiner** | Employee's first day (or hire date attribute) | Add to default groups, assign licenses, provision access packages |
-| **Mover** | Department or job title changes | Update group memberships, revoke old access packages, assign new packages |
-| **Leaver** | Last working day or termination date | Revoke all access, remove from groups, disable account, trigger data retention |
+| Cenário | Gatilho | Tarefas de Exemplo |
+|---------|---------|-------------------|
+| **Pré-contratação** | Antes da data de início do funcionário | Gerar um temporary access pass, criar a conta de usuário, enviar e-mail de boas-vindas |
+| **Joiner** | Primeiro dia do funcionário (ou atributo de data de contratação) | Adicionar a grupos padrão, atribuir licenças, provisionar access packages |
+| **Mover** | Mudanças de departamento ou cargo | Atualizar associações a grupos, revogar access packages antigos, atribuir novos pacotes |
+| **Leaver** | Último dia de trabalho ou data de desligamento | Revogar todo acesso, remover de grupos, desabilitar conta, disparar retenção de dados |
 
-### Attribute-Based Triggers
+### Gatilhos Baseados em Atributos
 
-Lifecycle Workflows are driven by **user attributes** in Microsoft Entra ID — primarily `employeeHireDate`, `employeeLeaveDateTime`, `department`, `jobTitle`, and `companyName`. Workflows evaluate these attributes on a schedule and fire when conditions are met.
+Lifecycle Workflows são orientados por **atributos de usuário** no Microsoft Entra ID — principalmente `employeeHireDate`, `employeeLeaveDateTime`, `department`, `jobTitle` e `companyName`. Os workflows avaliam esses atributos em um agendamento e disparam quando as condições são atendidas.
 
-As of 2026, Microsoft has expanded the set of supported trigger attributes, including custom security attributes and HR-provisioned extension attributes, giving you much finer control over when workflows fire (e.g., trigger on `costCenter` change or `employeeType` transition from contractor to full-time).
+A partir de 2026, a Microsoft expandiu o conjunto de atributos de gatilho suportados, incluindo custom security attributes e extension attributes provisionados por RH, proporcionando controle muito mais refinado sobre quando os workflows disparam (ex.: disparar na mudança de `costCenter` ou transição de `employeeType` de terceirizado para efetivo).
 
-### Integration with HR Systems
+### Integração com Sistemas de RH
 
-Lifecycle Workflows are most powerful when combined with **inbound provisioning from HR systems** (Workday, SAP SuccessFactors, or custom HR via the inbound provisioning API). The HR system becomes the authoritative source of lifecycle events:
+Lifecycle Workflows são mais poderosos quando combinados com **provisionamento de entrada de sistemas de RH** (Workday, SAP SuccessFactors ou RH customizado via API de inbound provisioning). O sistema de RH se torna a fonte autoritativa de eventos do ciclo de vida:
 
 ![Lifecycle Workflow Flow](/images/lifecycle-workflow-flow.svg)
 
-### Best Practices
+### Melhores Práticas
 
-1. **Automate Day 1 provisioning** — new hires should have accounts, group memberships, and licenses before they walk through the door.
+1. **Automatize o provisionamento do Dia 1** — novos funcionários devem ter contas, associações a grupos e licenças antes de entrarem pela porta.
 
-2. **Automate Day 0 offboarding** — the moment HR marks someone as terminated, disable the account and revoke access. Don't wait for a helpdesk ticket.
+2. **Automatize o offboarding do Dia 0** — no momento em que o RH marca alguém como desligado, desabilite a conta e revogue o acesso. Não espere por um chamado de helpdesk.
 
-3. **Use the mover scenario** — it's the most overlooked. When someone transfers departments, their old access should be removed and new access granted automatically.
+3. **Use o cenário de mover** — é o mais negligenciado. Quando alguém transfere de departamento, o acesso antigo deve ser removido e o novo acesso concedido automaticamente.
 
-4. **Test workflows in a non-production tenant** — lifecycle workflows can have wide-reaching effects. Test thoroughly.
+4. **Teste workflows em um tenant de não-produção** — lifecycle workflows podem ter efeitos abrangentes. Teste cuidadosamente.
 
-5. **Monitor workflow execution** — review the Lifecycle Workflows audit log regularly to catch failures.
+5. **Monitore a execução dos workflows** — revise o log de auditoria de Lifecycle Workflows regularmente para identificar falhas.
 
 ---
 
 ## 7.5 AI Agent Identity Governance
 
-### The Challenge: AI as a First-Class Identity
+### O Desafio: IA como Identidade de Primeira Classe
 
-As organizations deploy AI agents — autonomous systems that call APIs, access data, and make decisions — a new governance challenge emerges. Traditional governance assumes a human is in the loop. AI agents operate autonomously, often at scale and speed that makes manual oversight impractical.
+À medida que organizações implantam agentes de IA — sistemas autônomos que chamam APIs, acessam dados e tomam decisões — um novo desafio de governança emerge. A governança tradicional pressupõe que há um humano no loop. Agentes de IA operam de forma autônoma, frequentemente em escala e velocidade que tornam a supervisão manual impraticável.
 
 ### Microsoft Entra Agent ID
 
-Microsoft has introduced **Agent ID** as a first-class identity type within Microsoft Entra ID. An Agent ID represents an AI agent or autonomous workload and is distinct from service principals and managed identities:
+A Microsoft introduziu o **Agent ID** como um tipo de identidade de primeira classe dentro do Microsoft Entra ID. Um Agent ID representa um agente de IA ou carga de trabalho autônoma e é distinto de service principals e managed identities:
 
-- **Purpose-built for AI agents** — Agent IDs carry metadata about the agent's purpose, owning team, and operational constraints.
-- **Governance-aware** — Agent IDs integrate with Conditional Access, PIM, and access reviews just like user and workload identities.
-- **Auditable** — every action taken by an Agent ID is logged with the agent's identity, making it possible to trace autonomous decisions back to a specific agent and its configuration.
+- **Projetado para agentes de IA** — Agent IDs carregam metadados sobre o propósito do agente, equipe proprietária e restrições operacionais.
+- **Consciente de governança** — Agent IDs se integram com Conditional Access, PIM e access reviews assim como identidades de usuário e carga de trabalho.
+- **Auditável** — toda ação tomada por um Agent ID é registrada com a identidade do agente, tornando possível rastrear decisões autônomas até um agente específico e sua configuração.
 
-### Governance and Access Policies for AI Agents
+### Governança e Políticas de Acesso para Agentes de IA
 
-The principles of governance apply to AI agents just as they do to human users — arguably more so, given their speed and autonomy:
+Os princípios de governança se aplicam a agentes de IA assim como a usuários humanos — possivelmente ainda mais, dada sua velocidade e autonomia:
 
-| Principle | How It Applies to AI Agents |
-|-----------|---------------------------|
-| **Least privilege** | Grant agents only the data and API access they need. A summarization agent doesn't need write access to production databases. |
-| **Time-bound access** | Use PIM-style eligible assignments so agents activate elevated permissions only when needed. |
-| **Conditional Access** | Apply Conditional Access policies to Agent IDs — restrict by network location, require compliant device context for the orchestrator, and enforce token lifetime limits. |
-| **Access reviews** | Include Agent IDs in periodic access reviews. When an agent is decommissioned or its scope changes, its access should be revoked. |
-| **Risk evaluation** | Microsoft Entra ID Protection can evaluate sign-in risk for Agent IDs in real time, detecting anomalous patterns such as unusual API call volumes or access from unexpected locations. |
+| Princípio | Como se Aplica a Agentes de IA |
+|-----------|-------------------------------|
+| **Menor privilégio** | Conceda aos agentes apenas o acesso a dados e APIs que precisam. Um agente de sumarização não precisa de acesso de escrita a bancos de dados de produção. |
+| **Acesso com tempo limitado** | Use atribuições elegíveis no estilo PIM para que agentes ativem permissões elevadas apenas quando necessário. |
+| **Conditional Access** | Aplique políticas de Conditional Access a Agent IDs — restrinja por localização de rede, exija contexto de dispositivo em conformidade para o orquestrador e aplique limites de tempo de vida de token. |
+| **Access reviews** | Inclua Agent IDs em revisões periódicas de acesso. Quando um agente é descomissionado ou seu escopo muda, seu acesso deve ser revogado. |
+| **Avaliação de risco** | Microsoft Entra ID Protection pode avaliar risco de login para Agent IDs em tempo real, detectando padrões anômalos como volumes incomuns de chamadas de API ou acesso de localizações inesperadas. |
 
-### Best Practices
+### Melhores Práticas
 
-1. **Treat every AI agent as a distinct identity** — don't share service principals across agents. Each agent should have its own Agent ID with clear ownership.
+1. **Trate cada agente de IA como uma identidade distinta** — não compartilhe service principals entre agentes. Cada agente deve ter seu próprio Agent ID com propriedade clara.
 
-2. **Assign an owner to every Agent ID** — just like applications, agents need a human or team accountable for their access and behavior.
+2. **Atribua um proprietário a cada Agent ID** — assim como aplicações, agentes precisam de um humano ou equipe responsável por seu acesso e comportamento.
 
-3. **Apply Conditional Access policies** — agents shouldn't be exempt from your security posture. Use workload identity Conditional Access.
+3. **Aplique políticas de Conditional Access** — agentes não devem ser isentos da sua postura de segurança. Use Conditional Access de identidade de carga de trabalho.
 
-4. **Include agents in access reviews** — quarterly reviews should cover Agent IDs alongside user and service principal access.
+4. **Inclua agentes nas access reviews** — revisões trimestrais devem cobrir Agent IDs junto com acesso de usuários e service principals.
 
-5. **Monitor with Microsoft Entra workload identity logs** — track token issuance, API calls, and anomalous activity for every Agent ID.
-
----
-
-## Common Pitfalls
-
-| Pitfall | Why It Hurts | Fix |
-|---------|-------------|-----|
-| Leaving permanent Global Admin assignments | If any of those accounts are compromised, the attacker has full tenant control. | Convert to PIM eligible assignments; keep at most two break-glass accounts as permanent. |
-| Skipping access reviews because "we trust our people" | Access accumulates silently. After 18 months, half the assignments are stale. | Mandate quarterly reviews for all privileged roles and sensitive groups. |
-| Using entitlement management without expiration | Access packages become just another way to grant permanent access. | Always set a maximum assignment duration. |
-| Not automating offboarding | Former employees retain access for days or weeks after departure. | Implement lifecycle workflows connected to your HR system. |
-| Ignoring AI agent governance | Agents accumulate permissions, act autonomously, and nobody reviews their access. | Register agents with Agent ID, apply Conditional Access, and include in access reviews. |
+5. **Monitore com logs de identidade de carga de trabalho do Microsoft Entra** — rastreie emissão de tokens, chamadas de API e atividade anômala para cada Agent ID.
 
 ---
 
-## References
+## Armadilhas Comuns
 
-- [What is Microsoft Entra ID Governance?](https://learn.microsoft.com/entra/id-governance/identity-governance-overview)
-- [Privileged Identity Management documentation](https://learn.microsoft.com/entra/id-governance/privileged-identity-management/pim-configure)
-- [Access reviews overview](https://learn.microsoft.com/entra/id-governance/access-reviews-overview)
-- [Entitlement management overview](https://learn.microsoft.com/entra/id-governance/entitlement-management-overview)
-- [Lifecycle Workflows overview](https://learn.microsoft.com/entra/id-governance/what-are-lifecycle-workflows)
-- [Workload identity federation](https://learn.microsoft.com/entra/workload-id/workload-identity-federation)
-- [Microsoft Entra ID Protection for workload identities](https://learn.microsoft.com/entra/id-protection/concept-workload-identity-risk)
-- [RBAC — Chapter 6](ch06-rbac.md)
-- [Managed Identities — Chapter 8](ch08-managed-identities.md)
+| Armadilha | Por Que Prejudica | Correção |
+|-----------|-------------------|----------|
+| Deixar atribuições permanentes de Global Admin | Se qualquer uma dessas contas for comprometida, o atacante tem controle total do tenant. | Converta para atribuições elegíveis do PIM; mantenha no máximo duas contas break-glass como permanentes. |
+| Pular access reviews porque "confiamos em nossas pessoas" | O acesso se acumula silenciosamente. Após 18 meses, metade das atribuições são obsoletas. | Exija revisões trimestrais para todas as funções privilegiadas e grupos sensíveis. |
+| Usar entitlement management sem expiração | Access packages se tornam apenas mais uma forma de conceder acesso permanente. | Sempre defina uma duração máxima de atribuição. |
+| Não automatizar o offboarding | Ex-funcionários mantêm acesso por dias ou semanas após o desligamento. | Implemente lifecycle workflows conectados ao seu sistema de RH. |
+| Ignorar governança de agentes de IA | Agentes acumulam permissões, agem de forma autônoma e ninguém revisa seu acesso. | Registre agentes com Agent ID, aplique Conditional Access e inclua nas access reviews. |
 
 ---
 
-Previous | Next
+## Referências
+
+- [O que é Microsoft Entra ID Governance?](https://learn.microsoft.com/entra/id-governance/identity-governance-overview)
+- [Documentação do Privileged Identity Management](https://learn.microsoft.com/entra/id-governance/privileged-identity-management/pim-configure)
+- [Visão geral das Access Reviews](https://learn.microsoft.com/entra/id-governance/access-reviews-overview)
+- [Visão geral do Entitlement Management](https://learn.microsoft.com/entra/id-governance/entitlement-management-overview)
+- [Visão geral dos Lifecycle Workflows](https://learn.microsoft.com/entra/id-governance/what-are-lifecycle-workflows)
+- [Workload Identity Federation](https://learn.microsoft.com/entra/workload-id/workload-identity-federation)
+- [Microsoft Entra ID Protection para identidades de carga de trabalho](https://learn.microsoft.com/entra/id-protection/concept-workload-identity-risk)
+- [RBAC — Capítulo 6](ch06-rbac.md)
+- [Managed Identities — Capítulo 8](ch08-managed-identities.md)
+
+---
+
+Anterior | Próximo
 :--- | :---
-[Chapter 6 — RBAC](ch06-rbac.md) | [Chapter 8 — Managed Identities & Workload Identity](ch08-managed-identities.md)
+[Capítulo 6 — RBAC](ch06-rbac.md) | [Capítulo 8 — Managed Identities & Workload Identity](ch08-managed-identities.md)

@@ -1,249 +1,249 @@
-# Chapter 4 — The Azure Resource Hierarchy
+# Capítulo 4 — A Hierarquia de Recursos do Azure
 
 > **Last verified: 2026-04-06**
 
 ---
 
-## Overview
+## Visão Geral
 
-Every Azure deployment — from a single virtual machine to a multi-region enterprise platform — exists within a well-defined resource hierarchy. Understanding this hierarchy is not optional; it is the **structural foundation** upon which all governance controls are built.
+Toda implantação no Azure — de uma única máquina virtual a uma plataforma empresarial multi-região — existe dentro de uma hierarquia de recursos bem definida. Entender essa hierarquia não é opcional; é a **base estrutural** sobre a qual todos os controles de governança são construídos.
 
-The hierarchy has four levels:
+A hierarquia tem quatro níveis:
 
-![Azure Resource Hierarchy](/images/resource-hierarchy-simple.svg)
+![Hierarquia de Recursos do Azure](/images/resource-hierarchy-simple.svg)
 
-**Governance controls — RBAC role assignments, Azure Policy, budgets — are applied at any level and inherited downward.** This inheritance model is what makes Azure governance scalable. A policy assigned at a management group automatically applies to every subscription, resource group, and resource beneath it.
+**Controles de governança — atribuições de função RBAC, Azure Policy, orçamentos — são aplicados em qualquer nível e herdados para baixo.** Esse modelo de herança é o que torna a governança do Azure escalável. Uma política atribuída em um management group se aplica automaticamente a cada assinatura, resource group e recurso abaixo dele.
 
-This chapter covers each level in detail: what it is, how to design it, and the governance implications of your design decisions.
-
----
-
-## Architecture
-
-The Azure resource hierarchy is a tree structure with four levels. Governance controls applied at any level are inherited by all child levels:
-
-![Azure Resource Hierarchy — Detailed CAF Landing Zone Structure](/images/resource-hierarchy-detailed.svg)
-
-Each level serves a distinct purpose. The sections below cover them in detail.
+Este capítulo cobre cada nível em detalhe: o que é, como projetá-lo e as implicações de governança das suas decisões de design.
 
 ---
 
-## 4.1 — Microsoft Entra ID Tenant
+## Arquitetura
 
-### What It Is
+A hierarquia de recursos do Azure é uma estrutura em árvore com quatro níveis. Controles de governança aplicados em qualquer nível são herdados por todos os níveis filhos:
 
-The **Microsoft Entra ID tenant** is the identity foundation of your Azure environment. It is the top-level container for all identities — users, groups, service principals, and managed identities — and the trust anchor for every Azure subscription.
+![Hierarquia de Recursos do Azure — Estrutura Detalhada de Landing Zone do CAF](/images/resource-hierarchy-detailed.svg)
 
-When you create your first Azure subscription, a Microsoft Entra ID tenant is automatically created. The tenant receives a default domain in the format `yourname.onmicrosoft.com`, which you can customize to your organization's domain (e.g., `contoso.com`).
+Cada nível serve a um propósito distinto. As seções abaixo cobrem-nos em detalhe.
 
-> **Key concept:** A tenant is not just "a representation of your company's domain." It is the **security boundary** for identity and access management. Everything inside the tenant shares a common identity plane; everything outside it is a separate trust domain.
+---
 
-### Tenant Components
+## 4.1 — Tenant do Microsoft Entra ID
 
-| Component | Purpose |
+### O Que É
+
+O **tenant do Microsoft Entra ID** é a base de identidade do seu ambiente Azure. É o contêiner de nível superior para todas as identidades — usuários, grupos, service principals e managed identities — e a âncora de confiança para toda assinatura do Azure.
+
+Quando você cria sua primeira assinatura do Azure, um tenant do Microsoft Entra ID é criado automaticamente. O tenant recebe um domínio padrão no formato `seunome.onmicrosoft.com`, que você pode personalizar para o domínio da sua organização (ex.: `contoso.com`).
+
+> **Conceito-chave:** Um tenant não é apenas "uma representação do domínio da sua empresa." É o **limite de segurança** para gerenciamento de identidade e acesso. Tudo dentro do tenant compartilha um plano de identidade comum; tudo fora dele é um domínio de confiança separado.
+
+### Componentes do Tenant
+
+| Componente | Propósito |
 |---|---|
-| **Users** | Human identities that authenticate to Azure and other Microsoft services. |
-| **Groups** | Collections of users (or other groups) used to simplify RBAC assignments. Prefer groups over individual user assignments. |
-| **Service Principals** | Identities for applications and automation. Created when you register an app in Microsoft Entra ID. |
-| **Managed Identities** | Azure-managed service principals that eliminate the need for credentials in code. Prefer these for Azure-to-Azure authentication. |
-| **Enterprise Applications** | Third-party or Microsoft SaaS applications integrated via SAML, OIDC, or SCIM. |
-| **Conditional Access Policies** | Rules that enforce access requirements (MFA, compliant device, approved location) based on signals. |
+| **Usuários** | Identidades humanas que se autenticam no Azure e em outros serviços Microsoft. |
+| **Grupos** | Coleções de usuários (ou outros grupos) usados para simplificar atribuições RBAC. Prefira grupos a atribuições individuais de usuários. |
+| **Service Principals** | Identidades para aplicações e automação. Criados quando você registra um app no Microsoft Entra ID. |
+| **Managed Identities** | Service principals gerenciados pelo Azure que eliminam a necessidade de credenciais no código. Prefira-os para autenticação Azure-para-Azure. |
+| **Enterprise Applications** | Aplicações SaaS de terceiros ou da Microsoft integradas via SAML, OIDC ou SCIM. |
+| **Políticas de Conditional Access** | Regras que aplicam requisitos de acesso (MFA, dispositivo compatível, localização aprovada) com base em sinais. |
 
-### How It Works
+### Como Funciona
 
-1. A user authenticates to **Microsoft Entra ID** and receives a token.
-2. The token is presented to **Azure Resource Manager** with a request (e.g., "create a VM").
-3. Azure Resource Manager checks the user's **RBAC role assignments** at the target scope.
-4. If authorized, Azure Resource Manager evaluates **Azure Policy** to determine if the resource configuration is compliant.
-5. The resource is created (or the request is denied).
+1. Um usuário se autentica no **Microsoft Entra ID** e recebe um token.
+2. O token é apresentado ao **Azure Resource Manager** com uma solicitação (ex.: "criar uma VM").
+3. O Azure Resource Manager verifica as **atribuições de função RBAC** do usuário no escopo alvo.
+4. Se autorizado, o Azure Resource Manager avalia o **Azure Policy** para determinar se a configuração do recurso está em conformidade.
+5. O recurso é criado (ou a solicitação é negada).
 
 ### Microsoft Entra ID vs. Active Directory Domain Services
 
-These are distinct services. Understanding the difference prevents costly architectural mistakes:
+Estes são serviços distintos. Entender a diferença previne erros arquiteturais custosos:
 
-| Aspect | Microsoft Entra ID | Active Directory Domain Services (AD DS) |
+| Aspecto | Microsoft Entra ID | Active Directory Domain Services (AD DS) |
 |---|---|---|
-| **Purpose** | Cloud identity and access management for Azure, Microsoft 365, and SaaS apps | On-premises directory services, Group Policy, Kerberos/NTLM authentication |
-| **Protocols** | OAuth 2.0, OpenID Connect, SAML | Kerberos, NTLM, LDAP |
-| **Structure** | Flat (no OUs or GPOs) | Hierarchical (domains, OUs, forests) |
-| **Scope** | Cloud and hybrid | On-premises |
+| **Propósito** | Gerenciamento de identidade e acesso em nuvem para Azure, Microsoft 365 e apps SaaS | Serviços de diretório on-premises, Group Policy, autenticação Kerberos/NTLM |
+| **Protocolos** | OAuth 2.0, OpenID Connect, SAML | Kerberos, NTLM, LDAP |
+| **Estrutura** | Plana (sem OUs ou GPOs) | Hierárquica (domínios, OUs, florestas) |
+| **Escopo** | Nuvem e híbrido | On-premises |
 
-For hybrid scenarios, use **Microsoft Entra Connect** or **Microsoft Entra Cloud Sync** to synchronize on-premises AD DS identities to your Microsoft Entra ID tenant. This enables single sign-on across cloud and on-premises resources.
+Para cenários híbridos, use o **Microsoft Entra Connect** ou **Microsoft Entra Cloud Sync** para sincronizar identidades do AD DS on-premises para seu tenant do Microsoft Entra ID. Isso permite single sign-on entre recursos na nuvem e on-premises.
 
-### Multi-Tenant Considerations
+### Considerações Multi-Tenant
 
-Most organizations should operate with a **single Microsoft Entra ID tenant**. Multiple tenants introduce complexity:
+A maioria das organizações deve operar com um **único tenant do Microsoft Entra ID**. Múltiplos tenants introduzem complexidade:
 
-- Identities cannot be shared across tenants natively.
-- Azure Policy and RBAC do not span tenants.
-- Cross-tenant resource access requires explicit configuration (e.g., Azure Lighthouse, cross-tenant access settings).
+- Identidades não podem ser compartilhadas entre tenants nativamente.
+- Azure Policy e RBAC não abrangem tenants.
+- O acesso a recursos entre tenants requer configuração explícita (ex.: Azure Lighthouse, configurações de acesso entre tenants).
 
-Common reasons for multiple tenants include mergers/acquisitions, regulatory isolation requirements, or separate development/production identity boundaries. If you must operate multiple tenants, use **Microsoft Entra External ID cross-tenant access settings** to manage trust relationships.
+Razões comuns para múltiplos tenants incluem fusões/aquisições, requisitos de isolamento regulatório ou limites separados de identidade entre desenvolvimento/produção. Se você precisar operar múltiplos tenants, use as **configurações de acesso entre tenants do Microsoft Entra External ID** para gerenciar relacionamentos de confiança.
 
-### Best Practices for Tenant Governance
+### Melhores Práticas para Governança de Tenant
 
-1. **Secure the tenant with Conditional Access.** Require MFA for all users, block legacy authentication, and enforce device compliance for sensitive workloads.
-2. **Enable Privileged Identity Management (PIM).** Eliminate standing privileged access. All elevated roles should require just-in-time activation with approval and time limits.
-3. **Conduct access reviews.** Use Microsoft Entra access reviews to periodically certify that users and groups still need their assigned roles.
-4. **Use managed identities everywhere.** For Azure resources that need to authenticate to other Azure services, managed identities eliminate credential management entirely.
-5. **Protect the Global Administrator role.** Limit to 2–3 break-glass accounts. Require MFA. Monitor sign-ins with Entra ID Protection.
+1. **Proteja o tenant com Conditional Access.** Exija MFA para todos os usuários, bloqueie autenticação legada e aplique conformidade de dispositivo para cargas de trabalho sensíveis.
+2. **Habilite o Privileged Identity Management (PIM).** Elimine acesso privilegiado permanente. Todas as funções elevadas devem exigir ativação just-in-time com aprovação e limites de tempo.
+3. **Conduza revisões de acesso.** Use as revisões de acesso do Microsoft Entra para certificar periodicamente que usuários e grupos ainda precisam de suas funções atribuídas.
+4. **Use managed identities em todos os lugares.** Para recursos do Azure que precisam se autenticar em outros serviços do Azure, managed identities eliminam o gerenciamento de credenciais inteiramente.
+5. **Proteja a função de Global Administrator.** Limite a 2–3 contas de emergência. Exija MFA. Monitore sign-ins com Entra ID Protection.
 
-### Pro Tips
+### Dicas Profissionais
 
 - [Microsoft Entra ID Governance](https://learn.microsoft.com/entra/id-governance/identity-governance-overview)
-- [Microsoft Entra access reviews](https://learn.microsoft.com/entra/id-governance/access-reviews-overview)
-- [Compare Microsoft Entra ID and AD DS](https://learn.microsoft.com/entra/fundamentals/compare)
+- [Revisões de acesso do Microsoft Entra](https://learn.microsoft.com/entra/id-governance/access-reviews-overview)
+- [Comparar Microsoft Entra ID e AD DS](https://learn.microsoft.com/entra/fundamentals/compare)
 
 ---
 
 ## 4.2 — Management Groups
 
-### What They Are
+### O Que São
 
-**Management groups** are containers above subscriptions that let you organize subscriptions into a hierarchy and apply governance controls — RBAC, Azure Policy, budgets — at scale. Whatever you apply at a management group is **inherited** by every subscription (and every resource) beneath it.
+**Management groups** são contêineres acima das assinaturas que permitem organizar assinaturas em uma hierarquia e aplicar controles de governança — RBAC, Azure Policy, orçamentos — em escala. O que você aplica em um management group é **herdado** por cada assinatura (e cada recurso) abaixo dele.
 
-Management groups solve a critical problem: without them, governance controls must be applied to each subscription individually. In an environment with dozens or hundreds of subscriptions, this approach does not scale and inevitably leads to inconsistency.
+Management groups resolvem um problema crítico: sem eles, os controles de governança devem ser aplicados a cada assinatura individualmente. Em um ambiente com dezenas ou centenas de assinaturas, essa abordagem não escala e inevitavelmente leva a inconsistências.
 
-### How Management Groups Work
+### Como os Management Groups Funcionam
 
-- Every Microsoft Entra ID tenant has a **root management group** (automatically created).
-- You can create up to **6 levels of depth** below the root management group.
-- Each management group can contain other management groups or subscriptions.
-- A subscription can belong to only one management group at a time.
-- You can move subscriptions between management groups without disruption.
+- Todo tenant do Microsoft Entra ID tem um **management group raiz** (criado automaticamente).
+- Você pode criar até **6 níveis de profundidade** abaixo do management group raiz.
+- Cada management group pode conter outros management groups ou assinaturas.
+- Uma assinatura pode pertencer a apenas um management group de cada vez.
+- Você pode mover assinaturas entre management groups sem interrupção.
 
-### The CAF Recommended Management Group Hierarchy
+### A Hierarquia de Management Groups Recomendada pelo CAF
 
-The Cloud Adoption Framework recommends the following hierarchy as a starting point. You can adapt it to your organization's needs, but this structure has been validated across thousands of enterprise deployments:
+O Cloud Adoption Framework recomenda a seguinte hierarquia como ponto de partida. Você pode adaptá-la às necessidades da sua organização, mas essa estrutura foi validada em milhares de implantações empresariais:
 
-![CAF Recommended Management Group Hierarchy](/images/caf-mg-hierarchy.svg)
+![Hierarquia de Management Groups Recomendada pelo CAF](/images/caf-mg-hierarchy.svg)
 
-### Governance Inheritance in Action
+### Herança de Governança em Ação
 
-![Governance Inheritance in Action](/images/governance-inheritance-action.svg)
+![Herança de Governança em Ação](/images/governance-inheritance-action.svg)
 
-A key benefit: if a subscription owner tries to remove an inherited policy or role assignment, **they cannot**. Inherited controls are immutable at child scopes. This ensures that security controls applied by a central team (e.g., a SOC) remain in place regardless of what subscription owners do.
+Um benefício-chave: se um proprietário de assinatura tentar remover uma política ou atribuição de função herdada, **ele não consegue**. Controles herdados são imutáveis nos escopos filhos. Isso garante que os controles de segurança aplicados por uma equipe central (ex.: um SOC) permaneçam em vigor independentemente do que os proprietários de assinatura façam.
 
-### Moving Subscriptions
+### Movendo Assinaturas
 
-If you initially made wrong decisions about your hierarchy — or if an application moves from development to production — you can create new management groups and move subscriptions without downtime. The subscription inherits the policies and RBAC of its new parent management group.
+Se você inicialmente tomou decisões erradas sobre sua hierarquia — ou se uma aplicação passa de desenvolvimento para produção — você pode criar novos management groups e mover assinaturas sem tempo de inatividade. A assinatura herda as políticas e RBAC do seu novo management group pai.
 
-### Best Practices for Management Groups
+### Melhores Práticas para Management Groups
 
-1. **Keep the hierarchy shallow.** 2–3 levels below the root is sufficient for most organizations. Deep hierarchies are harder to reason about.
-2. **Do not assign workloads to the root management group.** The root should contain only policies that apply universally (e.g., audit logging, allowed regions).
-3. **Use Sandbox for experimentation.** Give developers a safe space with relaxed policies but strict cost limits.
-4. **Use Decommissioned for cleanup.** Move subscriptions here before deletion to ensure resources are inventoried and data is retained per policy.
-5. **Avoid assigning the Owner role at the management group level.** Owner at the root management group gives control over every subscription in the tenant.
+1. **Mantenha a hierarquia rasa.** 2–3 níveis abaixo da raiz é suficiente para a maioria das organizações. Hierarquias profundas são mais difíceis de entender.
+2. **Não atribua cargas de trabalho ao management group raiz.** A raiz deve conter apenas políticas que se aplicam universalmente (ex.: logging de auditoria, regiões permitidas).
+3. **Use Sandbox para experimentação.** Dê aos desenvolvedores um espaço seguro com políticas relaxadas mas limites de custo rigorosos.
+4. **Use Decommissioned para limpeza.** Mova assinaturas para cá antes da exclusão para garantir que os recursos sejam inventariados e os dados retidos conforme a política.
+5. **Evite atribuir a função Owner no nível do management group.** Owner no management group raiz dá controle sobre todas as assinaturas no tenant.
 
-### Pro Tip
+### Dica Profissional
 
-- [Management groups overview](https://learn.microsoft.com/azure/governance/management-groups/overview)
-- [CAF management group and subscription organization](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups)
+- [Visão geral de management groups](https://learn.microsoft.com/azure/governance/management-groups/overview)
+- [Design de management group e organização de assinaturas do CAF](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups)
 
 ---
 
-## 4.3 — Subscriptions
+## 4.3 — Assinaturas
 
-### What They Are
+### O Que São
 
-A **subscription** is a logical container for Azure resources. It serves multiple purposes simultaneously:
+Uma **assinatura** é um contêiner lógico para recursos do Azure. Ela serve a múltiplos propósitos simultaneamente:
 
-| Purpose | Description |
+| Propósito | Descrição |
 |---|---|
-| **Billing boundary** | All resources in a subscription are billed together. |
-| **Scale boundary** | Each subscription has [service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits) (e.g., max VMs per region, max VNets). |
-| **Policy boundary** | Azure Policy can be scoped to a subscription. |
-| **Access boundary** | RBAC assignments at the subscription level grant access to all resources within it. |
+| **Limite de faturamento** | Todos os recursos em uma assinatura são faturados juntos. |
+| **Limite de escala** | Cada assinatura tem [limites de serviço](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits) (ex.: máximo de VMs por região, máximo de VNets). |
+| **Limite de política** | O Azure Policy pode ter escopo de assinatura. |
+| **Limite de acesso** | Atribuições RBAC no nível da assinatura concedem acesso a todos os recursos dentro dela. |
 
-### Subscription and Identity
+### Assinatura e Identidade
 
-A subscription has a **trust relationship** with a Microsoft Entra ID tenant for authentication and authorization:
+Uma assinatura tem uma **relação de confiança** com um tenant do Microsoft Entra ID para autenticação e autorização:
 
-- The same Microsoft Entra ID tenant can be trusted by **multiple subscriptions**.
-- Each subscription trusts **exactly one** Microsoft Entra ID tenant.
-- This means you can manage a unified user base across many subscriptions from a single tenant.
+- O mesmo tenant do Microsoft Entra ID pode ser confiado por **múltiplas assinaturas**.
+- Cada assinatura confia em **exatamente um** tenant do Microsoft Entra ID.
+- Isso significa que você pode gerenciar uma base de usuários unificada em muitas assinaturas a partir de um único tenant.
 
-After creating or synchronizing users in Microsoft Entra ID, you grant those Entra ID users access to subscriptions and resources via RBAC role assignments.
+Após criar ou sincronizar usuários no Microsoft Entra ID, você concede a esses usuários do Entra ID acesso a assinaturas e recursos por meio de atribuições de função RBAC.
 
-### Roles and Assignments
+### Funções e Atribuições
 
-There are two distinct categories of roles:
+Existem duas categorias distintas de funções:
 
-1. **Azure roles (RBAC):** Granted in the context of Azure resources. These roles use [Role-Based Access Control](https://learn.microsoft.com/azure/role-based-access-control/overview) and are assigned at management group, subscription, resource group, or resource scope. The three fundamental roles are Owner, Contributor, and Reader. Beyond these, there are over 500 built-in roles for specific services ([see the full list](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)). You can also create [custom roles](https://learn.microsoft.com/azure/role-based-access-control/custom-roles) for fine-grained control.
+1. **Funções do Azure (RBAC):** Concedidas no contexto de recursos do Azure. Essas funções usam [Role-Based Access Control](https://learn.microsoft.com/azure/role-based-access-control/overview) e são atribuídas no escopo de management group, assinatura, resource group ou recurso. As três funções fundamentais são Owner, Contributor e Reader. Além destas, existem mais de 500 funções internas para serviços específicos ([veja a lista completa](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)). Você também pode criar [funções personalizadas](https://learn.microsoft.com/azure/role-based-access-control/custom-roles) para controle granular.
 
-2. **Microsoft Entra ID roles:** Used exclusively for managing Microsoft Entra ID resources (users, groups, app registrations). These roles are separate from Azure RBAC roles.
+2. **Funções do Microsoft Entra ID:** Usadas exclusivamente para gerenciar recursos do Microsoft Entra ID (usuários, grupos, registros de app). Essas funções são separadas das funções RBAC do Azure.
 
-![Azure roles vs Entra ID roles](../../images/ad-rbac-roles.png)
+![Funções do Azure vs funções do Entra ID](../../images/ad-rbac-roles.png)
 
-### Designing Your Subscription Strategy
+### Projetando Sua Estratégia de Assinatura
 
-Having at least two subscriptions — one for the **production** environment and one for non-production — is a recommended starting point for environment segregation and access control. Depending on the size and compliance requirements of your environment, you may need additional subscriptions.
+Ter pelo menos duas assinaturas — uma para o ambiente de **produção** e uma para não-produção — é um ponto de partida recomendado para segregação de ambiente e controle de acesso. Dependendo do tamanho e dos requisitos de conformidade do seu ambiente, você pode precisar de assinaturas adicionais.
 
-Use the [subscription design decision guide](https://learn.microsoft.com/azure/cloud-adoption-framework/decision-guides/subscriptions/) to determine the best approach for your organization. Key questions to ask:
+Use o [guia de decisão de design de assinatura](https://learn.microsoft.com/azure/cloud-adoption-framework/decision-guides/subscriptions/) para determinar a melhor abordagem para sua organização. Perguntas-chave a fazer:
 
-- Do we need to separate workloads by compliance boundary?
-- Do we need to isolate billing for different business units?
-- Are we approaching subscription-level service limits?
+- Precisamos separar cargas de trabalho por limite de conformidade?
+- Precisamos isolar faturamento para diferentes unidades de negócio?
+- Estamos nos aproximando dos limites de serviço no nível da assinatura?
 
 ### Subscription Vending
 
-At scale, manually creating and configuring subscriptions is slow and error-prone. **Subscription vending** is the practice of automating subscription creation through a self-service process:
+Em escala, criar e configurar assinaturas manualmente é lento e propenso a erros. **Subscription vending** é a prática de automatizar a criação de assinaturas por meio de um processo de autoatendimento:
 
-1. A team requests a new subscription (e.g., via a ServiceNow form or a Git pull request).
-2. Automation (Bicep, Terraform, or Azure DevOps pipelines) creates the subscription, places it in the correct management group, assigns baseline policies, configures RBAC, sets up networking, and applies tags.
-3. The team receives a production-ready subscription in minutes, not weeks.
+1. Uma equipe solicita uma nova assinatura (ex.: via formulário ServiceNow ou um pull request no Git).
+2. Automação (Bicep, Terraform ou pipelines do Azure DevOps) cria a assinatura, coloca-a no management group correto, atribui políticas de base, configura RBAC, configura rede e aplica tags.
+3. A equipe recebe uma assinatura pronta para produção em minutos, não semanas.
 
-See the [CAF subscription vending guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending) for implementation patterns.
+Veja a [orientação de subscription vending do CAF](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending) para padrões de implementação.
 
 ### Azure Landing Zones
 
-The [Azure Landing Zone architecture](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/) provides a modular, scalable design for organizing subscriptions. It addresses:
+A [arquitetura Azure Landing Zone](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/) fornece um design modular e escalável para organizar assinaturas. Ela aborda:
 
-- Enrollment and Microsoft Entra ID tenants
-- Identity and access management
-- Management group and subscription organization
-- Network topology and connectivity
-- Management and monitoring
-- Business continuity and disaster recovery
-- Security, governance, and compliance
-- Platform automation and DevOps
+- Enrollment e tenants do Microsoft Entra ID
+- Gerenciamento de identidade e acesso
+- Organização de management groups e assinaturas
+- Topologia de rede e conectividade
+- Gerenciamento e monitoramento
+- Continuidade de negócios e recuperação de desastres
+- Segurança, governança e conformidade
+- Automação de plataforma e DevOps
 
-![Landing zone architecture](../../images/landing-zone.png)
+![Arquitetura de landing zone](../../images/landing-zone.png)
 
-The landing zone architecture supports different network topologies. For example, the **Hub and Spoke** topology maps to subscriptions as follows:
+A arquitetura de landing zone suporta diferentes topologias de rede. Por exemplo, a topologia **Hub and Spoke** mapeia para assinaturas da seguinte forma:
 
-- A **shared services subscription** (Hub Virtual Network)
-- A **production subscription** (Spoke 1 Virtual Network)
-- A **non-production subscription** (Spoke 2 Virtual Network)
+- Uma **assinatura de serviços compartilhados** (Hub Virtual Network)
+- Uma **assinatura de produção** (Spoke 1 Virtual Network)
+- Uma **assinatura de não-produção** (Spoke 2 Virtual Network)
 
-Hub and Spoke references:
-- [Hub-spoke network topology](https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)
-- [Define an Azure network topology](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/define-an-azure-network-topology)
+Referências de Hub and Spoke:
+- [Topologia de rede hub-spoke](https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)
+- [Definir uma topologia de rede Azure](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/define-an-azure-network-topology)
 
-### Azure Landing Zone Accelerator Reference Implementations
+### Implementações de Referência do Azure Landing Zone Accelerator
 
-The Azure Landing Zone Accelerator (formerly "Enterprise-Scale") offers reference implementations that can be deployed and scaled without refactoring:
+O Azure Landing Zone Accelerator (anteriormente "Enterprise-Scale") oferece implementações de referência que podem ser implantadas e escaladas sem refatoração:
 
-| Implementation | Description | Link |
+| Implementação | Descrição | Link |
 |---|---|---|
-| **Foundation** (formerly Wingtip) | Minimal landing zone without hybrid connectivity | [GitHub](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/README.md) |
-| **Hub and Spoke** (formerly AdventureWorks) | Landing zone with hub-spoke network topology | [GitHub](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/adventureworks/README.md) |
-| **Virtual WAN** (formerly Contoso) | Landing zone with Azure Virtual WAN network topology | [GitHub](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/contoso/Readme.md) |
+| **Foundation** (anteriormente Wingtip) | Landing zone mínima sem conectividade híbrida | [GitHub](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/README.md) |
+| **Hub and Spoke** (anteriormente AdventureWorks) | Landing zone com topologia de rede hub-spoke | [GitHub](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/adventureworks/README.md) |
+| **Virtual WAN** (anteriormente Contoso) | Landing zone com topologia de rede Azure Virtual WAN | [GitHub](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/contoso/Readme.md) |
 
-### Subscription Lifecycle
+### Ciclo de Vida da Assinatura
 
-Subscription data is retained for a period after cancellation, and cancelled subscriptions remain visible in the Portal and APIs. Review the [cancellation process documentation](https://learn.microsoft.com/azure/cost-management-billing/manage/cancel-azure-subscription) before decommissioning.
+Os dados da assinatura são retidos por um período após o cancelamento, e assinaturas canceladas permanecem visíveis no Portal e APIs. Revise a [documentação do processo de cancelamento](https://learn.microsoft.com/azure/cost-management-billing/manage/cancel-azure-subscription) antes de descomissionar.
 
-### Best Practices for Subscriptions
+### Melhores Práticas para Assinaturas
 
-1. **Use subscriptions as scale and isolation boundaries.** Separate production from non-production. Separate workloads with different compliance requirements.
-2. **Automate subscription creation.** Use subscription vending to ensure every new subscription is configured consistently.
-3. **Place every subscription in a management group.** Subscriptions outside the hierarchy miss inherited policies and RBAC.
-4. **Monitor subscription-level service limits.** Use Azure Resource Graph to track usage against limits before hitting ceilings.
-5. **Assign Contributor (not Owner) to workload teams.** Reserve Owner for the platform team. Use PIM for temporary Owner elevation.
+1. **Use assinaturas como limites de escala e isolamento.** Separe produção de não-produção. Separe cargas de trabalho com diferentes requisitos de conformidade.
+2. **Automatize a criação de assinaturas.** Use subscription vending para garantir que cada nova assinatura seja configurada de forma consistente.
+3. **Coloque cada assinatura em um management group.** Assinaturas fora da hierarquia perdem políticas e RBAC herdados.
+4. **Monitore limites de serviço no nível da assinatura.** Use o Azure Resource Graph para acompanhar o uso contra os limites antes de atingir tetos.
+5. **Atribua Contributor (não Owner) para equipes de carga de trabalho.** Reserve Owner para a equipe de plataforma. Use PIM para elevação temporária de Owner.
 
-### Pro Tip
+### Dica Profissional
 
 - [Azure Landing Zone Accelerator](https://github.com/Azure/Enterprise-Scale)
 - [Subscription vending](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending)
@@ -252,44 +252,44 @@ Subscription data is retained for a period after cancellation, and cancelled sub
 
 ## 4.4 — Resource Groups
 
-### What They Are
+### O Que São
 
-A **resource group** is a logical container within a subscription that holds related Azure resources. Every Azure resource must belong to exactly one resource group.
+Um **resource group** é um contêiner lógico dentro de uma assinatura que mantém recursos do Azure relacionados. Todo recurso do Azure deve pertencer a exatamente um resource group.
 
-Resource groups are powered by **Azure Resource Manager (ARM)**, which replaced the legacy Azure Service Manager (ASM) deployment model. ARM introduced structured resource organization, declarative deployments, and dependency management.
+Resource groups são alimentados pelo **Azure Resource Manager (ARM)**, que substituiu o modelo de implantação legado Azure Service Manager (ASM). O ARM introduziu organização estruturada de recursos, implantações declarativas e gerenciamento de dependências.
 
-### Resource Group Design Patterns
+### Padrões de Design de Resource Groups
 
-How you organize resources into resource groups has governance implications. Here are three common patterns:
+Como você organiza recursos em resource groups tem implicações de governança. Aqui estão três padrões comuns:
 
-| Pattern | When to Use | Example |
+| Padrão | Quando Usar | Exemplo |
 |---|---|---|
-| **By application** | Resources share the same application lifecycle | `rg-webapp-prod-westeu` contains the App Service, SQL Database, Key Vault, and Application Insights for a single app |
-| **By lifecycle** | Resources are created and deleted together | `rg-networking-prod-westeu` contains all VNets and firewalls, which have a longer lifecycle than application resources |
-| **By billing / cost center** | Resources must be tracked to a specific budget | `rg-marketing-analytics-prod` contains all resources charged to the marketing department |
+| **Por aplicação** | Recursos compartilham o mesmo ciclo de vida da aplicação | `rg-webapp-prod-westeu` contém o App Service, SQL Database, Key Vault e Application Insights para um único app |
+| **Por ciclo de vida** | Recursos são criados e excluídos juntos | `rg-networking-prod-westeu` contém todos os VNets e firewalls, que têm um ciclo de vida mais longo que os recursos de aplicação |
+| **Por faturamento / centro de custo** | Recursos devem ser rastreados para um orçamento específico | `rg-marketing-analytics-prod` contém todos os recursos cobrados do departamento de marketing |
 
-> **Practical guidance:** The "by application" pattern is the most common and the safest default. It ensures that deleting a resource group removes all components of an application without affecting other workloads.
+> **Orientação prática:** O padrão "por aplicação" é o mais comum e o padrão mais seguro. Ele garante que excluir um resource group remove todos os componentes de uma aplicação sem afetar outras cargas de trabalho.
 
-### How Resource Groups Work
+### Como os Resource Groups Funcionam
 
-- A resource group has a **location** (region), but this only stores the resource group's metadata. Resources inside the group can be in any region.
-- **RBAC, Azure Policy, tags, and resource locks** can all be applied at the resource group level.
-- Deleting a resource group **deletes all resources within it** — use resource locks to prevent accidental deletion of critical groups.
-- Resources can be **moved** between resource groups (with some service-specific limitations).
+- Um resource group tem uma **localização** (região), mas isso apenas armazena os metadados do resource group. Recursos dentro do grupo podem estar em qualquer região.
+- **RBAC, Azure Policy, tags e resource locks** podem todos ser aplicados no nível do resource group.
+- Excluir um resource group **exclui todos os recursos dentro dele** — use resource locks para prevenir exclusão acidental de grupos críticos.
+- Recursos podem ser **movidos** entre resource groups (com algumas limitações específicas de serviço).
 
-### Best Practices for Resource Groups
+### Melhores Práticas para Resource Groups
 
-1. **Use a consistent naming convention.** Example: `rg-{workload}-{environment}-{region}` → `rg-payments-prod-westeu`.
-2. **Apply tags at the resource group level.** Tags on a resource group are **not** inherited by resources within it. Use Azure Policy to propagate tags if needed.
-3. **Use resource locks on critical resource groups.** Apply a `CanNotDelete` lock to prevent accidental deletion of production resource groups.
-4. **Design for lifecycle management.** Group resources that share the same create/update/delete lifecycle. This makes cleanup and redeployment straightforward.
-5. **Keep resource groups focused.** A resource group with 200+ resources is hard to manage. Split by application or service boundary.
+1. **Use uma convenção de nomenclatura consistente.** Exemplo: `rg-{workload}-{environment}-{region}` → `rg-payments-prod-westeu`.
+2. **Aplique tags no nível do resource group.** Tags em um resource group **não** são herdadas pelos recursos dentro dele. Use Azure Policy para propagar tags se necessário.
+3. **Use resource locks em resource groups críticos.** Aplique um lock `CanNotDelete` para prevenir exclusão acidental de resource groups de produção.
+4. **Projete para gerenciamento de ciclo de vida.** Agrupe recursos que compartilham o mesmo ciclo de vida de criação/atualização/exclusão. Isso torna a limpeza e reimplantação diretas.
+5. **Mantenha resource groups focados.** Um resource group com mais de 200 recursos é difícil de gerenciar. Divida por aplicação ou limite de serviço.
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Bicep — Create a Resource Group with Tags
+### Bicep — Criar um Resource Group com Tags
 
 ```bicep
 targetScope = 'subscription'
@@ -315,7 +315,7 @@ output resourceGroupName string = rg.name
 output resourceGroupId string = rg.id
 ```
 
-### Azure CLI — Create a Resource Group
+### Azure CLI — Criar um Resource Group
 
 ```bash
 az group create \
@@ -324,7 +324,7 @@ az group create \
   --tags Environment=prod Application=payments CostCenter=CC-4521
 ```
 
-### Azure CLI — Apply a Resource Lock
+### Azure CLI — Aplicar um Resource Lock
 
 ```bash
 az lock create \
@@ -334,7 +334,7 @@ az lock create \
   --notes "Production resource group — do not delete"
 ```
 
-### Bicep — Management Group Hierarchy (Full Example)
+### Bicep — Hierarquia de Management Groups (Exemplo Completo)
 
 ```bicep
 targetScope = 'tenant'
@@ -397,49 +397,49 @@ resource decommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' = {
 
 ---
 
-## Hands-On Exercise
+## Exercício Prático
 
-**Scenario:** You are designing the resource hierarchy for a mid-size company that has three business units (Engineering, Marketing, Finance), two environments (production, non-production), and plans to grow from 5 to 30 subscriptions over the next 18 months.
+**Cenário:** Você está projetando a hierarquia de recursos para uma empresa de médio porte que tem três unidades de negócio (Engenharia, Marketing, Finanças), dois ambientes (produção, não-produção) e planeja crescer de 5 para 30 assinaturas nos próximos 18 meses.
 
-1. **Design a management group hierarchy.** Draw it out (text or diagram) using the CAF reference as a starting point. Decide where each business unit's subscriptions will live.
-2. **Define a subscription naming convention.** For example: `sub-{businessunit}-{workload}-{environment}`.
-3. **Define a resource group naming convention.** For example: `rg-{workload}-{environment}-{region}`.
-4. **Identify which Azure Policies** you would assign at the root management group versus at the landing zone management group.
-5. **Deploy the Bicep code sample above** to create your management group hierarchy in a test environment.
+1. **Projete uma hierarquia de management groups.** Desenhe-a (texto ou diagrama) usando a referência do CAF como ponto de partida. Decida onde as assinaturas de cada unidade de negócio viverão.
+2. **Defina uma convenção de nomenclatura de assinaturas.** Por exemplo: `sub-{unidadedenegocio}-{workload}-{environment}`.
+3. **Defina uma convenção de nomenclatura de resource groups.** Por exemplo: `rg-{workload}-{environment}-{region}`.
+4. **Identifique quais Azure Policies** você atribuiria no management group raiz versus no management group de landing zone.
+5. **Implante o exemplo de código Bicep acima** para criar sua hierarquia de management groups em um ambiente de teste.
 
 ---
 
-## Common Pitfalls
+## Armadilhas Comuns
 
-| Pitfall | Why It Hurts | What to Do Instead |
+| Armadilha | Por Que Prejudica | O Que Fazer em Vez Disso |
 |---|---|---|
-| No management group hierarchy | Policies must be assigned per-subscription; new subscriptions are ungoverned | Implement the CAF hierarchy before adding more subscriptions |
-| Treating the tenant as just an identity provider | Missing Conditional Access, PIM, and access reviews creates security gaps | Govern the tenant as a critical security boundary |
-| Too many subscriptions without a naming convention | Impossible to identify purpose, owner, or environment | Define naming before creating subscriptions |
-| All resources in one resource group | Deleting the group or applying RBAC becomes all-or-nothing | Group by application lifecycle |
-| Granting Owner at subscription scope | Over-privileged users can bypass governance controls | Use Contributor + PIM for elevation |
+| Sem hierarquia de management group | Políticas devem ser atribuídas por assinatura; novas assinaturas ficam sem governança | Implemente a hierarquia do CAF antes de adicionar mais assinaturas |
+| Tratar o tenant apenas como um provedor de identidade | Falta de Conditional Access, PIM e revisões de acesso cria lacunas de segurança | Governe o tenant como um limite de segurança crítico |
+| Muitas assinaturas sem convenção de nomenclatura | Impossível identificar propósito, proprietário ou ambiente | Defina nomenclatura antes de criar assinaturas |
+| Todos os recursos em um resource group | Excluir o grupo ou aplicar RBAC se torna tudo-ou-nada | Agrupe por ciclo de vida da aplicação |
+| Conceder Owner no escopo da assinatura | Usuários com excesso de privilégio podem contornar controles de governança | Use Contributor + PIM para elevação |
 
 ---
 
-## References
+## Referências
 
-| Resource | Link |
+| Recurso | Link |
 |---|---|
-| Microsoft Entra ID overview | [learn.microsoft.com/entra/fundamentals/whatis](https://learn.microsoft.com/entra/fundamentals/whatis) |
+| Visão geral do Microsoft Entra ID | [learn.microsoft.com/entra/fundamentals/whatis](https://learn.microsoft.com/entra/fundamentals/whatis) |
 | Microsoft Entra ID Governance | [learn.microsoft.com/entra/id-governance/identity-governance-overview](https://learn.microsoft.com/entra/id-governance/identity-governance-overview) |
-| Compare Microsoft Entra ID and AD DS | [learn.microsoft.com/entra/fundamentals/compare](https://learn.microsoft.com/entra/fundamentals/compare) |
-| Management groups overview | [learn.microsoft.com/azure/governance/management-groups/overview](https://learn.microsoft.com/azure/governance/management-groups/overview) |
-| CAF management group design | [learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups) |
-| Azure subscription service limits | [learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits) |
-| Subscription decision guide | [learn.microsoft.com/azure/cloud-adoption-framework/decision-guides/subscriptions/](https://learn.microsoft.com/azure/cloud-adoption-framework/decision-guides/subscriptions/) |
-| Azure Landing Zone overview | [learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/) |
+| Comparar Microsoft Entra ID e AD DS | [learn.microsoft.com/entra/fundamentals/compare](https://learn.microsoft.com/entra/fundamentals/compare) |
+| Visão geral de management groups | [learn.microsoft.com/azure/governance/management-groups/overview](https://learn.microsoft.com/azure/governance/management-groups/overview) |
+| Design de management group do CAF | [learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups) |
+| Limites de serviço de assinatura do Azure | [learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits) |
+| Guia de decisão de assinatura | [learn.microsoft.com/azure/cloud-adoption-framework/decision-guides/subscriptions/](https://learn.microsoft.com/azure/cloud-adoption-framework/decision-guides/subscriptions/) |
+| Visão geral do Azure Landing Zone | [learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/) |
 | Subscription vending | [learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending) |
-| Azure RBAC built-in roles | [learn.microsoft.com/azure/role-based-access-control/built-in-roles](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles) |
-| Azure Resource Manager overview | [learn.microsoft.com/azure/azure-resource-manager/management/overview](https://learn.microsoft.com/azure/azure-resource-manager/management/overview) |
-| Resource groups principles | [learn.microsoft.com/training/modules/control-and-organize-with-azure-resource-manager/2-principles-of-resource-groups](https://learn.microsoft.com/training/modules/control-and-organize-with-azure-resource-manager/2-principles-of-resource-groups) |
+| Funções internas do Azure RBAC | [learn.microsoft.com/azure/role-based-access-control/built-in-roles](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles) |
+| Visão geral do Azure Resource Manager | [learn.microsoft.com/azure/azure-resource-manager/management/overview](https://learn.microsoft.com/azure/azure-resource-manager/management/overview) |
+| Princípios de resource groups | [learn.microsoft.com/training/modules/control-and-organize-with-azure-resource-manager/2-principles-of-resource-groups](https://learn.microsoft.com/training/modules/control-and-organize-with-azure-resource-manager/2-principles-of-resource-groups) |
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Chapter 3 — Governance Maturity Model](ch03-governance-maturity-model.md) | [Chapter 5 — Naming and Tagging Strategy](ch05-naming-tagging-strategy.md) |
+| [Capítulo 3 — Modelo de Maturidade de Governança](ch03-governance-maturity-model.md) | [Capítulo 5 — Estratégia de Nomenclatura e Etiquetagem](ch05-naming-tagging-strategy.md) |

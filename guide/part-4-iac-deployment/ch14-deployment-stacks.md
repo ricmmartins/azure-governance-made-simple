@@ -1,50 +1,50 @@
-# Chapter 14 — Deployment Stacks
+# Capítulo 14 — Deployment Stacks
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Azure Blueprints is deprecated and reaches end of life on July 11, 2026. Deployment Stacks are the recommended replacement, generally available (GA) since May 2024.**
+**O Azure Blueprints está descontinuado e atinge o fim da vida útil em 11 de julho de 2026. Deployment Stacks são a substituição recomendada, com disponibilidade geral (GA) desde maio de 2024.**
 
-A **Deployment Stack** is an Azure resource that manages a collection of deployed resources as a single, atomic unit. When you create or update a Deployment Stack, you submit a Bicep file (or ARM JSON template), and Azure ensures that all resources defined in the template are deployed, updated, or cleaned up as a group.
+Um **Deployment Stack** é um recurso do Azure que gerencia uma coleção de recursos implantados como uma única unidade atômica. Quando você cria ou atualiza um Deployment Stack, você envia um arquivo Bicep (ou template ARM JSON), e o Azure garante que todos os recursos definidos no template sejam implantados, atualizados ou limpos como um grupo.
 
-Deployment Stacks solve a fundamental governance challenge: **how do you ensure that a set of resources stays consistent with its intended configuration, and how do you prevent unauthorized changes to governed resources?**
+Deployment Stacks resolvem um desafio fundamental de governança: **como garantir que um conjunto de recursos permaneça consistente com sua configuração pretendida, e como prevenir alterações não autorizadas em recursos governados?**
 
-Key capabilities:
+Capacidades principais:
 
-- **Atomic lifecycle management** — create, update, and delete a set of resources as one unit
-- **Deny settings** — prevent modifications or deletions to managed resources, even by subscription owners
-- **ActionOnUnmanage** — control what happens to resources removed from the template (delete, detach, or keep)
-- **Cross-scope deployment** — a stack at the subscription scope can deploy resources into multiple resource groups
-- **Governance enforcement** — deny settings act as a resource-level lock that is managed by the stack, not by individual RBAC assignments
+- **Gerenciamento de ciclo de vida atômico** — crie, atualize e exclua um conjunto de recursos como uma unidade
+- **Deny settings** — previnem modificações ou exclusões em recursos gerenciados, mesmo por proprietários da subscription
+- **ActionOnUnmanage** — controla o que acontece com recursos removidos do template (excluir, desanexar ou manter)
+- **Implantação cross-scope** — um stack no escopo de subscription pode implantar recursos em múltiplos resource groups
+- **Aplicação de governança** — deny settings atuam como um lock em nível de recurso gerenciado pelo stack, não por atribuições RBAC individuais
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Deployment Stack Scopes
+### Escopos de Deployment Stack
 
-A Deployment Stack can be created at three scopes, each determining the blast radius and management hierarchy:
+Um Deployment Stack pode ser criado em três escopos, cada um determinando o raio de impacto e a hierarquia de gerenciamento:
 
-| Stack Scope | Can Deploy Resources To | Use Case |
-|-------------|------------------------|----------|
-| **Resource Group** | The same resource group | Single-application resource collections |
-| **Subscription** | Any resource group within the subscription | Cross-resource-group deployments, subscription-level resources |
-| **Management Group** | Any subscription/resource group within the management group | Enterprise-wide governance baselines |
+| Escopo do Stack | Pode Implantar Recursos Em | Caso de Uso |
+|-----------------|---------------------------|-------------|
+| **Resource Group** | O mesmo resource group | Coleções de recursos de uma única aplicação |
+| **Subscription** | Qualquer resource group dentro da subscription | Implantações cross-resource-group, recursos em nível de subscription |
+| **Management Group** | Qualquer subscription/resource group dentro do management group | Baselines de governança empresarial |
 
 ### Deny Settings
 
-Deny settings are the most powerful governance feature of Deployment Stacks. They prevent modifications to managed resources regardless of the user's RBAC role:
+Deny settings são o recurso de governança mais poderoso dos Deployment Stacks. Eles previnem modificações em recursos gerenciados independentemente da role RBAC do usuário:
 
-| Deny Setting | Effect |
+| Deny Setting | Efeito |
 |--------------|--------|
-| `None` | No deny assignments applied — anyone with RBAC permissions can modify resources |
-| `DenyDelete` | Managed resources cannot be deleted, but can be modified |
-| `DenyWriteAndDelete` | Managed resources cannot be modified or deleted |
+| `None` | Nenhuma deny assignment aplicada — qualquer pessoa com permissões RBAC pode modificar recursos |
+| `DenyDelete` | Recursos gerenciados não podem ser excluídos, mas podem ser modificados |
+| `DenyWriteAndDelete` | Recursos gerenciados não podem ser modificados ou excluídos |
 
-Deny settings are implemented through **deny assignments**, a feature of Azure RBAC. You can exclude specific principals (e.g., a break-glass account) or specific actions from the deny assignment:
+Deny settings são implementados através de **deny assignments**, um recurso do Azure RBAC. Você pode excluir principals específicos (ex.: uma conta break-glass) ou ações específicas da deny assignment:
 
 ```bash
 az stack sub create \
@@ -58,46 +58,46 @@ az stack sub create \
 
 ### ActionOnUnmanage
 
-When you update a Deployment Stack and remove a resource from the template, the `ActionOnUnmanage` setting determines what happens to the orphaned resource:
+Quando você atualiza um Deployment Stack e remove um recurso do template, a configuração `ActionOnUnmanage` determina o que acontece com o recurso órfão:
 
-| Policy | Behavior |
-|--------|----------|
-| `deleteAll` | The resource is deleted from Azure |
-| `deleteResources` | Resources are deleted; resource groups and management groups are detached |
-| `detachAll` | The resource continues to exist but is no longer managed by the stack |
+| Política | Comportamento |
+|----------|---------------|
+| `deleteAll` | O recurso é excluído do Azure |
+| `deleteResources` | Recursos são excluídos; resource groups e management groups são desanexados |
+| `detachAll` | O recurso continua existindo mas não é mais gerenciado pelo stack |
 
-This is critical for governance — it prevents "resource sprawl" where resources are removed from templates but continue to exist (and cost money) in Azure.
+Isso é crítico para governança — previne o "espalhamento de recursos" onde recursos são removidos dos templates mas continuam existindo (e custando dinheiro) no Azure.
 
-### How a Stack Lifecycle Works
+### Como o Ciclo de Vida de um Stack Funciona
 
-1. **Create** — you submit a Bicep template to create a stack; Azure deploys all resources and records them as "managed"
-2. **Update** — you modify the template and update the stack; Azure computes the diff, deploys changes, and applies the `ActionOnUnmanage` policy to removed resources
-3. **Deny** — deny assignments are applied to all managed resources according to the deny settings
-4. **Delete** — when the stack is deleted, the `ActionOnUnmanage` policy determines whether managed resources are deleted or detached
+1. **Criação** — você envia um template Bicep para criar um stack; o Azure implanta todos os recursos e os registra como "gerenciados"
+2. **Atualização** — você modifica o template e atualiza o stack; o Azure calcula o diff, implanta as alterações e aplica a política `ActionOnUnmanage` aos recursos removidos
+3. **Negação** — deny assignments são aplicadas a todos os recursos gerenciados de acordo com os deny settings
+4. **Exclusão** — quando o stack é excluído, a política `ActionOnUnmanage` determina se os recursos gerenciados são excluídos ou desanexados
 
 ---
 
 ## Blueprints vs. Deployment Stacks
 
-For teams migrating from Azure Blueprints, this comparison highlights key differences:
+Para equipes migrando do Azure Blueprints, esta comparação destaca as principais diferenças:
 
-| Feature | Azure Blueprints (Deprecated) | Deployment Stacks |
-|---------|-------------------------------|-------------------|
-| **Status** | Deprecated (EOL July 11, 2026) | GA since May 2024 |
-| **Template language** | ARM JSON only | Bicep or ARM JSON |
-| **Scope** | Management group, subscription | Resource group, subscription, management group |
-| **Artifact types** | Policy, RBAC, ARM, resource groups | Any resources deployable via Bicep/ARM |
-| **Versioning** | Built-in blueprint versions | Use source control and Template Specs |
-| **Locking** | Blueprint-level locking (limited) | Deny assignments with fine-grained exclusions |
-| **Orphan handling** | Manual cleanup | Automatic via ActionOnUnmanage |
-| **CI/CD integration** | Limited | Full CLI/PowerShell/REST integration |
-| **Module support** | None | Bicep modules, AVM, registries |
-| **What-If support** | No | Yes |
-| **State tracking** | Blueprint assignment object | Stack resource with managed resource list |
+| Recurso | Azure Blueprints (Descontinuado) | Deployment Stacks |
+|---------|----------------------------------|-------------------|
+| **Status** | Descontinuado (EOL 11 de julho de 2026) | GA desde maio de 2024 |
+| **Linguagem de template** | Somente ARM JSON | Bicep ou ARM JSON |
+| **Escopo** | Management group, subscription | Resource group, subscription, management group |
+| **Tipos de artefato** | Policy, RBAC, ARM, resource groups | Qualquer recurso implantável via Bicep/ARM |
+| **Versionamento** | Versões de blueprint integradas | Use controle de versão e Template Specs |
+| **Bloqueio** | Bloqueio em nível de blueprint (limitado) | Deny assignments com exclusões granulares |
+| **Tratamento de órfãos** | Limpeza manual | Automático via ActionOnUnmanage |
+| **Integração CI/CD** | Limitada | Integração completa via CLI/PowerShell/REST |
+| **Suporte a módulos** | Nenhum | Módulos Bicep, AVM, registros |
+| **Suporte What-If** | Não | Sim |
+| **Rastreamento de estado** | Objeto de assignment do blueprint | Recurso stack com lista de recursos gerenciados |
 
-### Migration Guide: Blueprints to Deployment Stacks
+### Guia de Migração: Blueprints para Deployment Stacks
 
-**Step 1: Inventory your Blueprints**
+**Passo 1: Inventarie seus Blueprints**
 
 ```bash
 # List all blueprint definitions
@@ -107,22 +107,22 @@ az blueprint list --management-group 'my-mg'
 az blueprint assignment list --subscription 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 ```
 
-**Step 2: Convert artifacts to Bicep**
+**Passo 2: Converta artefatos para Bicep**
 
-Each Blueprint artifact type maps to a Bicep construct:
+Cada tipo de artefato Blueprint mapeia para um construto Bicep:
 
-| Blueprint Artifact | Bicep Equivalent |
-|-------------------|------------------|
-| ARM template artifact | Bicep module or inline resource |
-| Policy assignment artifact | `Microsoft.Authorization/policyAssignments` resource |
-| Role assignment artifact | `Microsoft.Authorization/roleAssignments` resource |
-| Resource group artifact | `Microsoft.Resources/resourceGroups` resource (at subscription scope) |
+| Artefato Blueprint | Equivalente Bicep |
+|-------------------|-------------------|
+| Artefato de template ARM | Módulo Bicep ou recurso inline |
+| Artefato de policy assignment | Recurso `Microsoft.Authorization/policyAssignments` |
+| Artefato de role assignment | Recurso `Microsoft.Authorization/roleAssignments` |
+| Artefato de resource group | Recurso `Microsoft.Resources/resourceGroups` (no escopo de subscription) |
 
-**Step 3: Create a Bicep template that includes all artifacts**
+**Passo 3: Crie um template Bicep que inclua todos os artefatos**
 
-Consolidate all Blueprint artifacts into a single Bicep file (or a main file with modules).
+Consolide todos os artefatos Blueprint em um único arquivo Bicep (ou um arquivo principal com módulos).
 
-**Step 4: Deploy as a Deployment Stack**
+**Passo 4: Implante como um Deployment Stack**
 
 ```bash
 az stack sub create \
@@ -133,9 +133,9 @@ az stack sub create \
   --action-on-unmanage detachAll
 ```
 
-**Step 5: Validate and remove the Blueprint assignment**
+**Passo 5: Valide e remova o assignment do Blueprint**
 
-After verifying the Deployment Stack is correctly managing all resources:
+Após verificar que o Deployment Stack está gerenciando corretamente todos os recursos:
 
 ```bash
 az blueprint assignment delete \
@@ -145,35 +145,35 @@ az blueprint assignment delete \
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Use `DenyWriteAndDelete` for production baselines** — this provides the strongest protection for governance-critical resources
-2. **Exclude break-glass accounts** — always configure `deny-settings-excluded-principals` with your emergency access accounts
-3. **Start with `detachAll` for ActionOnUnmanage** — while learning Deployment Stacks, use `detachAll` to avoid accidental resource deletion
-4. **Use subscription-scope stacks for governance** — deploy policy assignments, RBAC, and resource groups from a single subscription-scoped stack
-5. **Pin Bicep module versions** — reference specific versions of AVM or registry modules to prevent unexpected changes
-6. **Integrate with CI/CD** — automate stack updates through pipelines with What-If and approval gates (see [Chapter 16](ch16-governance-cicd.md))
-7. **Use consistent naming** — name stacks descriptively (e.g., `governance-baseline`, `app-infrastructure-prod`)
-8. **Review managed resources regularly** — use `az stack sub show` to audit which resources are managed by each stack
-
----
-
-## Common Pitfalls
-
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Using `deleteAll` without testing | Accidental deletion of resources | Start with `detachAll`; move to `deleteResources` after validation |
-| Not excluding break-glass accounts from deny settings | Emergency operations blocked | Always exclude emergency access principals |
-| Deploying at the wrong scope | Resources deployed to unexpected locations | Verify `targetScope` matches the stack scope |
-| Forgetting deny settings protect against *everyone* | Administrators locked out of their own resources | Plan exclusions and document them |
-| Not using What-If before stack updates | Unexpected changes to production resources | Always preview changes with `--confirm-with-what-if` |
-| Treating stacks like one-time deployments | Drift accumulates over time | Update stacks regularly from CI/CD pipelines |
+1. **Use `DenyWriteAndDelete` para baselines de produção** — isso fornece a proteção mais forte para recursos críticos de governança
+2. **Exclua contas break-glass** — sempre configure `deny-settings-excluded-principals` com suas contas de acesso emergencial
+3. **Comece com `detachAll` para ActionOnUnmanage** — enquanto aprende Deployment Stacks, use `detachAll` para evitar exclusão acidental de recursos
+4. **Use stacks no escopo de subscription para governança** — implante policy assignments, RBAC e resource groups a partir de um único stack no escopo de subscription
+5. **Fixe versões de módulos Bicep** — referencie versões específicas de módulos AVM ou do registro para prevenir alterações inesperadas
+6. **Integre com CI/CD** — automatize atualizações de stacks através de pipelines com What-If e gates de aprovação (veja [Capítulo 16](ch16-governance-cicd.md))
+7. **Use nomenclatura consistente** — nomeie stacks de forma descritiva (ex.: `governance-baseline`, `app-infrastructure-prod`)
+8. **Revise recursos gerenciados regularmente** — use `az stack sub show` para auditar quais recursos são gerenciados por cada stack
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Creating a Deployment Stack via Azure CLI
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Usar `deleteAll` sem testar | Exclusão acidental de recursos | Comece com `detachAll`; mude para `deleteResources` após validação |
+| Não excluir contas break-glass dos deny settings | Operações de emergência bloqueadas | Sempre exclua principals de acesso emergencial |
+| Implantar no escopo errado | Recursos implantados em locais inesperados | Verifique se `targetScope` corresponde ao escopo do stack |
+| Esquecer que deny settings protegem contra *todos* | Administradores bloqueados de seus próprios recursos | Planeje exclusões e documente-as |
+| Não usar What-If antes de atualizações de stack | Alterações inesperadas em recursos de produção | Sempre visualize alterações com `--confirm-with-what-if` |
+| Tratar stacks como implantações únicas | Drift se acumula ao longo do tempo | Atualize stacks regularmente a partir de pipelines CI/CD |
+
+---
+
+## Exemplos de Código
+
+### Criando um Deployment Stack via Azure CLI
 
 ```bash
 # Create a subscription-scoped Deployment Stack with deny settings
@@ -214,7 +214,7 @@ az stack sub delete \
   --yes
 ```
 
-### Creating a Deployment Stack via Bicep (Governance Baseline)
+### Criando um Deployment Stack via Bicep (Baseline de Governança)
 
 ```bicep
 // governance-baseline.bicep
@@ -286,7 +286,7 @@ module logAnalytics 'modules/logAnalytics.bicep' = {
 }
 ```
 
-Deploy this as a Deployment Stack:
+Implante como um Deployment Stack:
 
 ```bash
 az stack sub create \
@@ -302,17 +302,17 @@ az stack sub create \
 
 ---
 
-## References
+## Referências
 
-- [Deployment Stacks overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks)
-- [Create a Deployment Stack with Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks-create)
-- [Deployment Stack deny settings](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks-deny-settings)
-- [Azure Blueprints deprecation announcement](https://learn.microsoft.com/en-us/azure/governance/blueprints/overview)
-- [Migrate from Blueprints to Deployment Stacks](https://learn.microsoft.com/en-us/azure/governance/blueprints/migrate-to-deployment-stacks)
-- [az stack CLI reference](https://learn.microsoft.com/en-us/cli/azure/stack)
+- [Visão geral de Deployment Stacks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks)
+- [Criar um Deployment Stack com Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks-create)
+- [Deny settings de Deployment Stack](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks-deny-settings)
+- [Anúncio de descontinuação do Azure Blueprints](https://learn.microsoft.com/en-us/azure/governance/blueprints/overview)
+- [Migrar de Blueprints para Deployment Stacks](https://learn.microsoft.com/en-us/azure/governance/blueprints/migrate-to-deployment-stacks)
+- [Referência CLI az stack](https://learn.microsoft.com/en-us/cli/azure/stack)
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [Bicep & Azure Verified Modules](ch13-bicep-avm.md) | [Template Specs](ch15-template-specs.md) |

@@ -1,58 +1,58 @@
-# Chapter 6 — Role-Based Access Control (RBAC)
+# Capítulo 6 — Role-Based Access Control (RBAC)
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-Role-Based Access Control (RBAC) is the authorization system built into Azure Resource Manager. It lets you grant precisely the permissions people and workloads need — nothing more, nothing less. Instead of handing out blanket access to a subscription, you define *who* can do *what* at a specific *scope*.
+Role-Based Access Control (RBAC) é o sistema de autorização integrado ao Azure Resource Manager. Ele permite conceder exatamente as permissões que pessoas e cargas de trabalho precisam — nada mais, nada menos. Em vez de conceder acesso amplo a uma assinatura, você define *quem* pode fazer *o quê* em um *escopo* específico.
 
-Azure now ships with **over 300 built-in roles**, covering everything from broad "Contributor" access down to narrow, service-specific roles like *Cosmos DB Operator* or *Key Vault Secrets User*. When none of those fit, you can craft a **custom role** tailored to your organization.
+O Azure hoje conta com **mais de 300 funções internas (built-in roles)**, cobrindo desde acesso amplo de "Contributor" até funções restritas e específicas de serviço como *Cosmos DB Operator* ou *Key Vault Secrets User*. Quando nenhuma delas atende, você pode criar uma **custom role** personalizada para sua organização.
 
 ![rbac](../../images/rbac.png)
 
 ---
 
-## How It Works
+## Como Funciona
 
-Every RBAC assignment is the intersection of three things:
+Toda atribuição de RBAC é a interseção de três elementos:
 
-| Concept | Description |
-|---------|-------------|
-| **Security Principal** | The identity requesting access — a user, group, service principal, or managed identity (see [Chapter 8](ch08-managed-identities.md)). |
-| **Role Definition** | A collection of allowed (and denied) actions. Can be built-in or custom. |
-| **Scope** | Where the permissions apply — management group, subscription, resource group, or individual resource. |
+| Conceito | Descrição |
+|----------|-----------|
+| **Security Principal** | A identidade solicitando acesso — um usuário, grupo, service principal ou managed identity (veja o [Capítulo 8](ch08-managed-identities.md)). |
+| **Role Definition** | Uma coleção de ações permitidas (e negadas). Pode ser built-in ou custom. |
+| **Scope** | Onde as permissões se aplicam — management group, subscription, resource group ou recurso individual. |
 
-### Scope hierarchy
+### Hierarquia de escopo
 
-Permissions are **inherited** top-down. A role assigned at the subscription scope applies to every resource group and resource beneath it.
+As permissões são **herdadas** de cima para baixo. Uma função atribuída no escopo da subscription se aplica a todos os resource groups e recursos abaixo dela.
 
 ![RBAC Scope Hierarchy](/images/rbac-scope-hierarchy.svg)
 
 ![scope](../../images/scope.png)
 
-### Role types
+### Tipos de função
 
-| Type | Description |
-|------|-------------|
-| **Built-in roles** | Over 300 predefined roles maintained by Microsoft (e.g., Owner, Contributor, Reader, plus service-specific roles). |
-| **Custom roles** | Roles you create when built-in roles don't match your requirements. Custom roles can be scoped to management groups, subscriptions, or resource groups. |
+| Tipo | Descrição |
+|------|-----------|
+| **Built-in roles** | Mais de 300 funções predefinidas mantidas pela Microsoft (ex.: Owner, Contributor, Reader, além de funções específicas de serviço). |
+| **Custom roles** | Funções que você cria quando as built-in roles não atendem aos seus requisitos. Custom roles podem ter escopo em management groups, subscriptions ou resource groups. |
 
 ---
 
-## Attribute-Based Access Control (ABAC) — Conditions in RBAC
+## Attribute-Based Access Control (ABAC) — Condições no RBAC
 
-Standard RBAC answers *"Can this principal perform this action at this scope?"*. ABAC adds a fourth dimension: **conditions** based on resource attributes.
+O RBAC padrão responde *"Este principal pode executar esta ação neste escopo?"*. O ABAC adiciona uma quarta dimensão: **condições** baseadas em atributos de recursos.
 
-For example, you can grant a principal the *Storage Blob Data Reader* role but add a condition that restricts access to blobs tagged with `project=alpha`. This is expressed through **role assignment conditions** written in a declarative condition language.
+Por exemplo, você pode conceder a um principal a função *Storage Blob Data Reader*, mas adicionar uma condição que restringe o acesso a blobs marcados com `project=alpha`. Isso é expresso por meio de **condições de atribuição de função** escritas em uma linguagem declarativa de condições.
 
-### When to use ABAC
+### Quando usar ABAC
 
-- **Storage accounts** — restrict read/write to blobs matching specific tags, container names, or blob index tags.
-- **Fine-grained data-plane control** — when you need permissions more granular than a role definition alone can provide, without creating dozens of custom roles.
+- **Storage accounts** — restringir leitura/escrita a blobs que correspondam a tags específicas, nomes de containers ou blob index tags.
+- **Controle granular no plano de dados** — quando você precisa de permissões mais granulares do que uma role definition sozinha pode oferecer, sem criar dezenas de custom roles.
 
-### Example condition (conceptual)
+### Exemplo de condição (conceitual)
 
 ```
 (
@@ -61,17 +61,17 @@ For example, you can grant a principal the *Storage Blob Data Reader* role but a
 )
 ```
 
-> **Note:** ABAC conditions are currently supported on a subset of Azure services, with Azure Storage being the most mature. Check the [ABAC conditions documentation](https://learn.microsoft.com/azure/role-based-access-control/conditions-overview) for the latest service support.
+> **Nota:** As condições ABAC atualmente são suportadas em um subconjunto de serviços do Azure, sendo o Azure Storage o mais maduro. Consulte a [documentação de condições ABAC](https://learn.microsoft.com/azure/role-based-access-control/conditions-overview) para o suporte mais atualizado de serviços.
 
 ---
 
-## Custom Role Creation
+## Criação de Custom Roles
 
-When the 300+ built-in roles aren't granular enough, create a custom role. Custom roles can include any combination of `Actions`, `NotActions`, `DataActions`, and `NotDataActions`.
+Quando as mais de 300 built-in roles não são granulares o suficiente, crie uma custom role. Custom roles podem incluir qualquer combinação de `Actions`, `NotActions`, `DataActions` e `NotDataActions`.
 
-### Bicep example — custom role definition
+### Exemplo Bicep — definição de custom role
 
-The following Bicep template creates a custom role called *VM Restart Operator* scoped to a subscription, allowing only the restart action on virtual machines:
+O seguinte template Bicep cria uma custom role chamada *VM Restart Operator* com escopo em uma subscription, permitindo apenas a ação de reinicialização em máquinas virtuais:
 
 ```bicep
 targetScope = 'subscription'
@@ -103,47 +103,47 @@ resource customRole 'Microsoft.Authorization/roleDefinitions@2022-04-01' = {
 }
 ```
 
-> **Limits:** Each Microsoft Entra ID tenant can have up to 5,000 custom roles. Custom roles can be scoped to management groups — use this to share a role across multiple subscriptions.
+> **Limites:** Cada tenant do Microsoft Entra ID pode ter até 5.000 custom roles. Custom roles podem ter escopo em management groups — use isso para compartilhar uma função entre múltiplas subscriptions.
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Apply least privilege** — assign only the permissions required for the task. Avoid Owner or Contributor when a narrower role exists.
+1. **Aplique o princípio do menor privilégio** — atribua apenas as permissões necessárias para a tarefa. Evite Owner ou Contributor quando uma função mais restrita existir.
 
-2. **Use Microsoft Entra ID groups, not individual assignments** — assign roles to groups and manage membership. This scales better and is far easier to audit.
+2. **Use grupos do Microsoft Entra ID, não atribuições individuais** — atribua funções a grupos e gerencie a associação. Isso escala melhor e é muito mais fácil de auditar.
 
-3. **Avoid Owner at subscription scope** — Owner includes full access *plus* the ability to assign roles to others. Reserve it for break-glass accounts only.
+3. **Evite Owner no escopo da subscription** — Owner inclui acesso total *mais* a capacidade de atribuir funções a outros. Reserve para contas break-glass apenas.
 
-4. **Use Privileged Identity Management (PIM) for elevated access** — instead of standing privileged assignments, use PIM to enable just-in-time activation with approval workflows and time-bound access. See [Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md) for a deep dive.
+4. **Use Privileged Identity Management (PIM) para acesso elevado** — em vez de atribuições privilegiadas permanentes, use PIM para habilitar ativação just-in-time com fluxos de aprovação e acesso com tempo limitado. Veja o [Capítulo 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md) para um aprofundamento.
 
-5. **Review assignments regularly** — stale assignments are a governance risk. Combine RBAC with Access Reviews (also in [Chapter 7](ch07-entra-id-governance.md)) to automate periodic reviews.
+5. **Revise atribuições regularmente** — atribuições obsoletas são um risco de governança. Combine RBAC com Access Reviews (também no [Capítulo 7](ch07-entra-id-governance.md)) para automatizar revisões periódicas.
 
-6. **Scope assignments as narrowly as possible** — prefer resource-group-scoped or resource-scoped assignments over subscription-level ones.
+6. **Defina escopos de atribuição o mais restrito possível** — prefira atribuições com escopo de resource group ou recurso em vez de atribuições no nível da subscription.
 
-7. **Leverage deny assignments when needed** — Azure Blueprints (deprecated, EOL July 2026) and Deployment Stacks can create deny assignments that block specific actions, even for Owners.
+7. **Utilize deny assignments quando necessário** — Azure Blueprints (descontinuado, EOL julho 2026) e Deployment Stacks podem criar deny assignments que bloqueiam ações específicas, mesmo para Owners.
 
-8. **Audit with Azure Activity Log and Resource Graph** — use `Microsoft.Authorization/roleAssignments` operations in the Activity Log, and query role assignments at scale with Azure Resource Graph.
-
----
-
-## Common Pitfalls
-
-| Pitfall | Why It Hurts | Fix |
-|---------|-------------|-----|
-| Assigning Owner at subscription scope "just to unblock the team" | Anyone with Owner can grant themselves — or others — any permission. | Use Contributor + a narrow custom role for the specific gap. |
-| Assigning roles to individual users | Hard to audit, inconsistent when people change teams. | Always assign to Microsoft Entra ID groups. |
-| Ignoring inherited assignments | A broad role at the management group trickles down everywhere. | Periodically review effective access with `az role assignment list`. |
-| Creating too many custom roles | Each tenant can have up to 5,000, but managing hundreds is painful. | Evaluate built-in roles first; use ABAC conditions before creating new roles. |
-| Forgetting data-plane roles | Control-plane Contributor does **not** give data-plane access (e.g., reading blobs). | Assign the appropriate data-plane role (e.g., *Storage Blob Data Reader*). |
+8. **Audite com Azure Activity Log e Resource Graph** — use operações de `Microsoft.Authorization/roleAssignments` no Activity Log e consulte atribuições de função em escala com o Azure Resource Graph.
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Assign a built-in role via Azure CLI
+| Armadilha | Por Que Prejudica | Correção |
+|-----------|-------------------|----------|
+| Atribuir Owner no escopo da subscription "só para desbloquear o time" | Qualquer pessoa com Owner pode conceder a si mesma — ou a outros — qualquer permissão. | Use Contributor + uma custom role restrita para a lacuna específica. |
+| Atribuir funções a usuários individuais | Difícil de auditar, inconsistente quando pessoas mudam de equipe. | Sempre atribua a grupos do Microsoft Entra ID. |
+| Ignorar atribuições herdadas | Uma função ampla no management group se propaga para todos os níveis abaixo. | Revise periodicamente o acesso efetivo com `az role assignment list`. |
+| Criar custom roles demais | Cada tenant pode ter até 5.000, mas gerenciar centenas é doloroso. | Avalie built-in roles primeiro; use condições ABAC antes de criar novas funções. |
+| Esquecer funções do plano de dados | Contributor no plano de controle **não** concede acesso ao plano de dados (ex.: leitura de blobs). | Atribua a função de plano de dados apropriada (ex.: *Storage Blob Data Reader*). |
 
-The following command assigns the **Reader** role to a Microsoft Entra ID group on a resource group:
+---
+
+## Exemplos de Código
+
+### Atribuir uma built-in role via Azure CLI
+
+O comando a seguir atribui a função **Reader** a um grupo do Microsoft Entra ID em um resource group:
 
 ```bash
 # Assign the "Reader" role to a group at a resource group scope
@@ -154,9 +154,9 @@ az role assignment create \
   --scope "/subscriptions/<subscription-id>/resourceGroups/<rg-name>"
 ```
 
-> **Tip:** Always specify `--assignee-principal-type` to avoid ambiguous look-ups and speed up assignment creation.
+> **Dica:** Sempre especifique `--assignee-principal-type` para evitar buscas ambíguas e acelerar a criação da atribuição.
 
-### List all role assignments on a subscription
+### Listar todas as atribuições de função em uma subscription
 
 ```bash
 az role assignment list \
@@ -164,7 +164,7 @@ az role assignment list \
   --output table
 ```
 
-### Query role assignments at scale with Azure Resource Graph
+### Consultar atribuições de função em escala com Azure Resource Graph
 
 ```kusto
 authorizationresources
@@ -177,17 +177,17 @@ authorizationresources
 
 ---
 
-## References
+## Referências
 
-- [Azure RBAC overview](https://learn.microsoft.com/azure/role-based-access-control/overview)
-- [Azure built-in roles](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)
-- [Custom roles for Azure resources](https://learn.microsoft.com/azure/role-based-access-control/custom-roles)
-- [ABAC conditions in Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/conditions-overview)
-- [Manage access with Azure RBAC (Microsoft Learn training)](https://learn.microsoft.com/training/modules/manage-subscription-access-azure-rbac/)
-- [Privileged Identity Management — Chapter 7](ch07-entra-id-governance.md)
+- [Visão geral do Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
+- [Funções internas do Azure](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)
+- [Custom roles para recursos do Azure](https://learn.microsoft.com/azure/role-based-access-control/custom-roles)
+- [Condições ABAC no Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/conditions-overview)
+- [Gerenciar acesso com Azure RBAC (treinamento Microsoft Learn)](https://learn.microsoft.com/training/modules/manage-subscription-access-azure-rbac/)
+- [Privileged Identity Management — Capítulo 7](ch07-entra-id-governance.md)
 
 ---
 
-Previous | Next
+Anterior | Próximo
 :--- | :---
-[Part 1 — Foundations](../part-1-foundations/ch01-why-governance-matters.md) | [Chapter 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md)
+[Parte 1 — Fundamentos](../part-1-foundations/ch01-why-governance-matters.md) | [Capítulo 7 — Microsoft Entra ID Governance](ch07-entra-id-governance.md)

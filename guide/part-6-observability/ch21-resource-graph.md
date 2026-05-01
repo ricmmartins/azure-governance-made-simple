@@ -1,65 +1,65 @@
-# Chapter 21 — Azure Resource Graph
+# Capítulo 21 — Azure Resource Graph
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Azure Resource Graph** is a query engine that lets you explore your Azure resources at scale — across subscriptions and management groups — with near-instant results. Unlike the Azure Portal's resource list (which queries each resource provider individually), Resource Graph maintains a pre-indexed cache of resource metadata, enabling complex queries to return in seconds.
+**Azure Resource Graph** é um mecanismo de consulta que permite explorar seus recursos do Azure em escala — entre assinaturas e management groups — com resultados quase instantâneos. Diferente da lista de recursos do Portal Azure (que consulta cada resource provider individualmente), o Resource Graph mantém um cache pré-indexado de metadados de recursos, permitindo que consultas complexas retornem em segundos.
 
-For governance teams, Resource Graph is indispensable:
+Para equipes de governança, o Resource Graph é indispensável:
 
-- **Inventory management** — know exactly what's deployed across all subscriptions
-- **Tag compliance** — find resources that don't meet tagging standards
-- **Orphan detection** — identify unused resources consuming budget
-- **Policy compliance** — query policy state across the organization
-- **RBAC auditing** — explore role assignments across scopes
-- **Security posture** — find misconfigured resources before attackers do
+- **Gestão de inventário** — saber exatamente o que está implantado em todas as assinaturas
+- **Conformidade de tags** — encontrar recursos que não atendem aos padrões de tags
+- **Detecção de órfãos** — identificar recursos não utilizados que consomem orçamento
+- **Conformidade de políticas** — consultar o estado de políticas em toda a organização
+- **Auditoria de RBAC** — explorar atribuições de função entre escopos
+- **Postura de segurança** — encontrar recursos mal configurados antes que atacantes o façam
 
-Resource Graph uses the **Kusto Query Language (KQL)** — the same language used by Log Analytics, Microsoft Sentinel, and Azure Data Explorer.
+O Resource Graph usa a **Kusto Query Language (KQL)** — a mesma linguagem utilizada pelo Log Analytics, Microsoft Sentinel e Azure Data Explorer.
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Architecture
+### Arquitetura
 
-Resource Graph indexes data from Azure Resource Manager (ARM) and various resource providers. When you submit a query, it runs against this pre-built index rather than calling individual resource providers:
+O Resource Graph indexa dados do Azure Resource Manager (ARM) e de vários resource providers. Quando você submete uma consulta, ela é executada contra esse índice pré-construído em vez de chamar resource providers individuais:
 
 ![Resource Graph Query Engine](/images/resource-graph-engine.svg)
 
-### Resource Graph Tables
+### Tabelas do Resource Graph
 
-| Table | Content |
-|-------|---------|
-| `Resources` | All Azure resources (VMs, storage, networking, etc.) |
-| `ResourceContainers` | Subscriptions, resource groups, management groups |
-| `AdvisorResources` | Azure Advisor recommendations |
-| `AlertsManagementResources` | Azure Monitor alert instances |
-| `ExtendedLocationResources` | Azure Arc-enabled resources |
-| `GuestConfigurationResources` | Guest configuration (machine configuration) assignments |
-| `HealthResources` | Resource health status |
-| `IoTSecurityResources` | IoT security recommendations |
-| `KubernetesConfigurationResources` | Azure Arc-enabled Kubernetes configurations |
-| `PatchAssessmentResources` | OS patch assessment results |
-| `PolicyResources` | Azure Policy compliance state |
-| `SecurityResources` | Microsoft Defender for Cloud data |
-| `ServiceHealthResources` | Azure service health events |
+| Tabela | Conteúdo |
+|--------|----------|
+| `Resources` | Todos os recursos do Azure (VMs, storage, networking, etc.) |
+| `ResourceContainers` | Assinaturas, grupos de recursos, management groups |
+| `AdvisorResources` | Recomendações do Azure Advisor |
+| `AlertsManagementResources` | Instâncias de alerta do Azure Monitor |
+| `ExtendedLocationResources` | Recursos habilitados para Azure Arc |
+| `GuestConfigurationResources` | Atribuições de configuração de convidado (machine configuration) |
+| `HealthResources` | Status de saúde dos recursos |
+| `IoTSecurityResources` | Recomendações de segurança IoT |
+| `KubernetesConfigurationResources` | Configurações de Kubernetes habilitado para Azure Arc |
+| `PatchAssessmentResources` | Resultados de avaliação de patches do SO |
+| `PolicyResources` | Estado de conformidade do Azure Policy |
+| `SecurityResources` | Dados do Microsoft Defender for Cloud |
+| `ServiceHealthResources` | Eventos de saúde de serviço do Azure |
 
 ### Resource Graph Explorer
 
-The **Resource Graph Explorer** is the Azure Portal's built-in query interface. Access it at: **Portal → Azure Resource Graph Explorer** or navigate to `portal.azure.com/#view/HubsExtension/ArgQueryBlade`.
+O **Resource Graph Explorer** é a interface de consulta integrada do Portal Azure. Acesse em: **Portal → Azure Resource Graph Explorer** ou navegue para `portal.azure.com/#view/HubsExtension/ArgQueryBlade`.
 
-Features:
-- Interactive KQL editor with IntelliSense
-- Schema browser for all available tables and columns
-- Save and share queries
-- Export results to CSV
-- Pin results to dashboards
-- Scope queries to specific subscriptions or management groups
+Recursos:
+- Editor KQL interativo com IntelliSense
+- Navegador de schema para todas as tabelas e colunas disponíveis
+- Salvar e compartilhar consultas
+- Exportar resultados para CSV
+- Fixar resultados em dashboards
+- Limitar consultas a assinaturas ou management groups específicos
 
-### Programmatic Access
+### Acesso Programático
 
 #### Azure CLI
 
@@ -102,11 +102,11 @@ az rest --method post \
 
 ---
 
-## Top 20 Governance Queries
+## Top 20 Consultas de Governança
 
-*For the complete query reference with full explanations, see [Appendix D — Top 20 Resource Graph Governance Queries](../appendices/appendix-d-resource-graph-queries.md).*
+*Para a referência completa de consultas com explicações detalhadas, veja o [Apêndice D — Top 20 Consultas de Governança com Resource Graph](../appendices/appendix-d-resource-graph-queries.md).*
 
-### 1. Find All Resources Without Tags
+### 1. Encontrar Todos os Recursos Sem Tags
 
 ```kql
 Resources
@@ -115,7 +115,7 @@ Resources
 | order by type asc
 ```
 
-### 2. List Non-Compliant Resources
+### 2. Listar Recursos Não Conformes
 
 ```kql
 PolicyResources
@@ -129,7 +129,7 @@ PolicyResources
 | order by policyDefinitionName asc
 ```
 
-### 3. Inventory Resources by Region
+### 3. Inventário de Recursos por Região
 
 ```kql
 Resources
@@ -137,7 +137,7 @@ Resources
 | order by ResourceCount desc
 ```
 
-### 4. Find Orphaned Resources (Unattached Disks)
+### 4. Encontrar Recursos Órfãos (Discos Não Anexados)
 
 ```kql
 Resources
@@ -149,7 +149,7 @@ Resources
 | order by diskSizeGB desc
 ```
 
-### 5. Query RBAC Assignments Across Subscriptions
+### 5. Consultar Atribuições de RBAC Entre Assinaturas
 
 ```kql
 AuthorizationResources
@@ -163,7 +163,7 @@ AuthorizationResources
 | order by scope asc
 ```
 
-### 6. Count Resources by Type
+### 6. Contagem de Recursos por Tipo
 
 ```kql
 Resources
@@ -172,7 +172,7 @@ Resources
 | take 20
 ```
 
-### 7. Find Resources by Tag Value
+### 7. Encontrar Recursos por Valor de Tag
 
 ```kql
 Resources
@@ -181,7 +181,7 @@ Resources
 | order by type asc
 ```
 
-### 8. List VMs by Size/SKU
+### 8. Listar VMs por Tamanho/SKU
 
 ```kql
 Resources
@@ -196,7 +196,7 @@ Resources
 | order by vmSize asc
 ```
 
-### 9. Find Resources Without Locks
+### 9. Encontrar Recursos Sem Locks
 
 ```kql
 resources
@@ -212,7 +212,7 @@ resources
 | take 100
 ```
 
-### 10. Query Policy Compliance State
+### 10. Consultar Estado de Conformidade de Política
 
 ```kql
 PolicyResources
@@ -228,7 +228,7 @@ PolicyResources
 | order by NonCompliant desc
 ```
 
-### 11. Find Public IP Addresses Not Attached to Any Resource
+### 11. Encontrar IPs Públicos Não Anexados a Nenhum Recurso
 
 ```kql
 Resources
@@ -239,7 +239,7 @@ Resources
     sku = tostring(sku.name)
 ```
 
-### 12. List Network Security Groups with "Allow All" Inbound Rules
+### 12. Listar Network Security Groups com Regras de Entrada "Allow All"
 
 ```kql
 Resources
@@ -252,7 +252,7 @@ Resources
 | project name, resourceGroup, subscriptionId, ruleName = tostring(rule.name)
 ```
 
-### 13. Find Storage Accounts Allowing Public Blob Access
+### 13. Encontrar Storage Accounts Permitindo Acesso Público a Blobs
 
 ```kql
 Resources
@@ -261,7 +261,7 @@ Resources
 | project name, resourceGroup, subscriptionId, location
 ```
 
-### 14. List Subscriptions in Each Management Group
+### 14. Listar Assinaturas em Cada Management Group
 
 ```kql
 ResourceContainers
@@ -271,7 +271,7 @@ ResourceContainers
 | order by mgParent asc
 ```
 
-### 15. Find Resources Missing a Specific Required Tag
+### 15. Encontrar Recursos Sem uma Tag Obrigatória Específica
 
 ```kql
 Resources
@@ -280,7 +280,7 @@ Resources
 | order by Count desc
 ```
 
-### 16. Identify Unused Network Interfaces
+### 16. Identificar Interfaces de Rede Não Utilizadas
 
 ```kql
 Resources
@@ -289,7 +289,7 @@ Resources
 | project name, resourceGroup, subscriptionId, location
 ```
 
-### 17. List Key Vaults Without Soft Delete Enabled
+### 17. Listar Key Vaults Sem Soft Delete Habilitado
 
 ```kql
 Resources
@@ -298,9 +298,9 @@ Resources
 | project name, resourceGroup, subscriptionId, location
 ```
 
-### 18. Find SQL Databases Without Transparent Data Encryption
+### 18. Encontrar SQL Databases Sem Transparent Data Encryption
 
-Transparent Data Encryption (TDE) is exposed as a child resource (`microsoft.sql/servers/databases/transparentdataencryption`), not as an inline property on the database resource itself.
+Transparent Data Encryption (TDE) é exposto como um recurso filho (`microsoft.sql/servers/databases/transparentdataencryption`), não como uma propriedade inline no recurso de banco de dados.
 
 ```kql
 resources
@@ -309,7 +309,7 @@ resources
 | project databaseId = tolower(substring(id, 0, indexof(id, '/transparentDataEncryption'))), state = properties.state
 ```
 
-### 19. Resource Count by Subscription
+### 19. Contagem de Recursos por Assinatura
 
 ```kql
 Resources
@@ -323,7 +323,7 @@ Resources
 | order by Count desc
 ```
 
-### 20. Tag Compliance Summary (Percentage of Resources Tagged)
+### 20. Resumo de Conformidade de Tags (Percentual de Recursos com Tags)
 
 ```kql
 Resources
@@ -337,9 +337,9 @@ Resources
 
 ---
 
-## Integration with Azure Workbooks
+## Integração com Azure Workbooks
 
-Resource Graph queries can be embedded directly in **Azure Workbooks** to create governance dashboards:
+Consultas do Resource Graph podem ser incorporadas diretamente em **Azure Workbooks** para criar dashboards de governança:
 
 ```json
 {
@@ -349,44 +349,44 @@ Resource Graph queries can be embedded directly in **Azure Workbooks** to create
 }
 ```
 
-Common Workbook patterns:
+Padrões comuns de Workbook:
 
-- **Parameter-driven queries** — let users select a subscription or management group scope
-- **Combined views** — show Resource Graph data alongside Log Analytics data
-- **Drilldowns** — click a bar in a chart to see detailed resources
-- **Scheduled refresh** — Workbooks refresh on view; pin to dashboards for scheduled updates
-
----
-
-## Best Practices
-
-1. **Use Resource Graph for inventory, not monitoring** — it shows current state, not historical trends (use Log Analytics for history)
-2. **Scope queries appropriately** — avoid scanning all subscriptions unless necessary; scope to management groups or specific subscriptions
-3. **Save and share queries** — use Resource Graph Explorer's save feature to build a team query library
-4. **Combine with Workbooks** — embed Resource Graph queries in governance Workbooks for executive dashboards
-5. **Automate with CLI/PowerShell** — schedule governance queries as part of CI/CD or cron jobs
-6. **Use `join` for enrichment** — join the `Resources` table with `PolicyResources`, `AuthorizationResources`, and `ResourceContainers` for richer results
-7. **Monitor for orphaned resources regularly** — run orphan detection queries weekly and report findings to resource owners
-8. **Export large result sets** — for datasets exceeding portal limits, use the CLI with `--first 1000` or paginate via REST API
-9. **Pin queries to dashboards** — share governance metrics with leadership via Azure Portal dashboards
-10. **Use `mv-expand` for arrays** — many resource properties are arrays (e.g., NSG rules, tags); use `mv-expand` to flatten and analyze
+- **Consultas orientadas por parâmetros** — permitir que usuários selecionem um escopo de assinatura ou management group
+- **Visões combinadas** — mostrar dados do Resource Graph junto com dados do Log Analytics
+- **Drilldowns** — clicar em uma barra no gráfico para ver os recursos detalhados
+- **Atualização programada** — Workbooks atualizam ao visualizar; fixe em dashboards para atualizações agendadas
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Assuming real-time data | Resource Graph has near-real-time indexing (seconds to minutes delay) | Don't use for real-time monitoring; use Activity Log alerts instead |
-| Not scoping queries | Slow queries; unnecessary data retrieval | Always scope to relevant subscriptions or management groups |
-| Ignoring pagination | Results truncated at 1,000 rows | Use `$skipToken` for REST API or `--first` and `--skip` for CLI |
-| Complex joins without filters | Timeouts or throttling | Filter each side of the join before joining |
-| Not leveraging `PolicyResources` table | Writing custom queries for data that's already in Policy state | Query `PolicyResources` directly for compliance data |
-| Hardcoding subscription IDs | Queries break when subscriptions change | Use management group scoping or dynamic subscription lists |
+1. **Use Resource Graph para inventário, não monitoramento** — ele mostra o estado atual, não tendências históricas (use Log Analytics para histórico)
+2. **Limite o escopo das consultas adequadamente** — evite varrer todas as assinaturas a menos que necessário; limite a management groups ou assinaturas específicas
+3. **Salve e compartilhe consultas** — use o recurso de salvamento do Resource Graph Explorer para construir uma biblioteca de consultas da equipe
+4. **Combine com Workbooks** — incorpore consultas do Resource Graph em Workbooks de governança para dashboards executivos
+5. **Automatize com CLI/PowerShell** — agende consultas de governança como parte de CI/CD ou cron jobs
+6. **Use `join` para enriquecimento** — faça join da tabela `Resources` com `PolicyResources`, `AuthorizationResources` e `ResourceContainers` para resultados mais ricos
+7. **Monitore recursos órfãos regularmente** — execute consultas de detecção de órfãos semanalmente e reporte achados aos proprietários de recursos
+8. **Exporte conjuntos grandes de resultados** — para datasets que excedem os limites do portal, use a CLI com `--first 1000` ou pagine via REST API
+9. **Fixe consultas em dashboards** — compartilhe métricas de governança com a liderança via dashboards do Portal Azure
+10. **Use `mv-expand` para arrays** — muitas propriedades de recursos são arrays (ex.: regras de NSG, tags); use `mv-expand` para achatar e analisar
 
 ---
 
-## References
+## Armadilhas Comuns
+
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Assumir dados em tempo real | Resource Graph tem indexação quase em tempo real (segundos a minutos de atraso) | Não use para monitoramento em tempo real; use alertas do Activity Log em vez disso |
+| Não limitar escopo de consultas | Consultas lentas; recuperação desnecessária de dados | Sempre limite a assinaturas ou management groups relevantes |
+| Ignorar paginação | Resultados truncados em 1.000 linhas | Use `$skipToken` para REST API ou `--first` e `--skip` para CLI |
+| Joins complexos sem filtros | Timeouts ou throttling | Filtre cada lado do join antes de fazer o join |
+| Não aproveitar a tabela `PolicyResources` | Escrever consultas customizadas para dados que já estão no estado de Policy | Consulte `PolicyResources` diretamente para dados de conformidade |
+| Hardcoding de IDs de assinatura | Consultas quebram quando assinaturas mudam | Use escopo de management group ou listas dinâmicas de assinaturas |
+
+---
+
+## Referências
 
 - [Azure Resource Graph overview](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview)
 - [Resource Graph query language (KQL)](https://learn.microsoft.com/en-us/azure/governance/resource-graph/concepts/query-language)
@@ -400,6 +400,6 @@ Common Workbook patterns:
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [Azure Monitor](ch20-azure-monitor.md) | [AzGovViz](ch22-azgovviz.md) |

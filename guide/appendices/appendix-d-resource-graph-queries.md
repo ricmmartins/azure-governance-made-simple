@@ -1,20 +1,20 @@
-# Appendix D — Resource Graph Queries
+# Apêndice D — Queries do Resource Graph
 
 > Last verified: 2026-04-06
 
 ---
 
-The top 20 governance queries for Azure Resource Graph. These queries can be run in the Azure Portal (Resource Graph Explorer), Azure CLI, Azure PowerShell, or programmatically via the REST API.
+As 20 principais queries de governança para Azure Resource Graph. Estas queries podem ser executadas no Portal Azure (Resource Graph Explorer), Azure CLI, Azure PowerShell ou programaticamente via API REST.
 
-> **Tip:** Bookmark the [Azure Resource Graph Explorer](https://portal.azure.com/#blade/HubsExtension/ArgQueryBlade) in the Azure Portal for quick access.
+> **Dica:** Adicione aos favoritos o [Azure Resource Graph Explorer](https://portal.azure.com/#blade/HubsExtension/ArgQueryBlade) no Portal Azure para acesso rápido.
 
 ---
 
-## Resource Inventory (Queries 1–5)
+## Inventário de Recursos (Queries 1–5)
 
-### 1. All Resources — Complete Inventory
+### 1. Todos os Recursos — Inventário Completo
 
-List every resource across all subscriptions with key metadata.
+Listar todos os recursos em todas as subscriptions com metadados-chave.
 
 ```kusto
 resources
@@ -24,9 +24,9 @@ resources
 
 ---
 
-### 2. Resource Count by Type
+### 2. Contagem de Recursos por Tipo
 
-Understand the composition of your Azure environment.
+Entender a composição do seu ambiente Azure.
 
 ```kusto
 resources
@@ -36,9 +36,9 @@ resources
 
 ---
 
-### 3. Resource Count by Region
+### 3. Contagem de Recursos por Região
 
-Identify how resources are distributed geographically.
+Identificar como os recursos estão distribuídos geograficamente.
 
 ```kusto
 resources
@@ -48,9 +48,9 @@ resources
 
 ---
 
-### 4. Resources by Tag
+### 4. Recursos por Tag
 
-Find all resources with a specific tag value (e.g., Environment=Production).
+Encontrar todos os recursos com um valor de tag específico (ex.: Environment=Production).
 
 ```kusto
 resources
@@ -61,9 +61,9 @@ resources
 
 ---
 
-### 5. Resource Count by Subscription
+### 5. Contagem de Recursos por Subscription
 
-See how resources are distributed across subscriptions.
+Ver como os recursos estão distribuídos entre subscriptions.
 
 ```kusto
 resources
@@ -79,11 +79,11 @@ resources
 
 ---
 
-## Compliance (Queries 6–10)
+## Conformidade (Queries 6–10)
 
-### 6. Non-Compliant Resources (Policy)
+### 6. Recursos Não Conformes (Policy)
 
-List all resources that are non-compliant with Azure Policy.
+Listar todos os recursos não conformes com Azure Policy.
 
 ```kusto
 policyresources
@@ -98,9 +98,9 @@ policyresources
 
 ---
 
-### 7. Policy Assignment Summary
+### 7. Resumo de Atribuições de Política
 
-List all policy assignments with their scope and enforcement mode.
+Listar todas as atribuições de política com seu escopo e modo de enforcement.
 
 ```kusto
 policyresources
@@ -114,9 +114,9 @@ policyresources
 
 ---
 
-### 8. Untagged Resources
+### 8. Recursos Sem Tags
 
-Find resources that are missing critical governance tags.
+Encontrar recursos que estão sem tags críticas de governança.
 
 ```kusto
 resources
@@ -125,7 +125,7 @@ resources
 | order by type asc, name asc
 ```
 
-To check for a specific missing tag:
+Para verificar uma tag específica ausente:
 
 ```kusto
 resources
@@ -136,9 +136,9 @@ resources
 
 ---
 
-### 9. Resources Without Resource Locks
+### 9. Recursos Sem Resource Locks
 
-Identify resources that have no locks applied. Locks do not expose a `properties.resourceId` field; instead, the locked resource's scope is derived by truncating the lock's own resource ID at `/providers/Microsoft.Authorization/locks/`.
+Identificar recursos que não possuem locks aplicados. Locks não expõem um campo `properties.resourceId`; em vez disso, o escopo do recurso bloqueado é derivado truncando o ID do próprio lock em `/providers/Microsoft.Authorization/locks/`.
 
 ```kusto
 resources
@@ -153,7 +153,7 @@ resources
 | order by type asc
 ```
 
-Alternative — list resource groups without locks:
+Alternativa — listar resource groups sem locks:
 
 ```kusto
 resourcecontainers
@@ -170,9 +170,9 @@ resourcecontainers
 
 ---
 
-### 10. Orphaned Resources
+### 10. Recursos Órfãos
 
-Find potentially orphaned resources (unattached disks, unused public IPs, empty NICs).
+Encontrar recursos potencialmente órfãos (discos não anexados, IPs públicos não utilizados, NICs vazias).
 
 ```kusto
 // Unattached managed disks
@@ -203,11 +203,11 @@ resources
 
 ---
 
-## Identity (Queries 11–15)
+## Identidade (Queries 11–15)
 
-### 11. RBAC Role Assignments
+### 11. Atribuições de Role RBAC
 
-List all role assignments across subscriptions.
+Listar todas as atribuições de role entre subscriptions.
 
 ```kusto
 authorizationresources
@@ -222,9 +222,9 @@ authorizationresources
 
 ---
 
-### 12. Service Principals with Role Assignments
+### 12. Service Principals com Atribuições de Role
 
-Identify service principals that have Azure role assignments.
+Identificar service principals que possuem atribuições de role Azure.
 
 ```kusto
 authorizationresources
@@ -239,9 +239,9 @@ authorizationresources
 
 ---
 
-### 13. Managed Identities in Use
+### 13. Managed Identities em Uso
 
-List all managed identities (system-assigned and user-assigned) across resources.
+Listar todas as managed identities (system-assigned e user-assigned) entre recursos.
 
 ```kusto
 resources
@@ -253,9 +253,9 @@ resources
 
 ---
 
-### 14. Resources with System-Assigned Managed Identity
+### 14. Recursos com Managed Identity System-Assigned
 
-Find resources using system-assigned managed identities.
+Encontrar recursos usando managed identities system-assigned.
 
 ```kusto
 resources
@@ -267,9 +267,9 @@ resources
 
 ---
 
-### 15. User-Assigned Managed Identity Usage
+### 15. Uso de Managed Identity User-Assigned
 
-List user-assigned managed identities and the resources they are assigned to.
+Listar managed identities user-assigned e os recursos aos quais estão atribuídas.
 
 ```kusto
 resources
@@ -281,11 +281,11 @@ resources
 
 ---
 
-## Cost & Operations (Queries 16–20)
+## Custo e Operações (Queries 16–20)
 
-### 16. Resource Count Over Time (Snapshot)
+### 16. Contagem de Recursos ao Longo do Tempo (Snapshot)
 
-Count total resources per subscription (use as a baseline for trending).
+Contar total de recursos por subscription (use como baseline para tendências).
 
 ```kusto
 resources
@@ -299,13 +299,13 @@ resources
 | order by ResourceCount desc
 ```
 
-> **Note:** Resource Graph provides a point-in-time snapshot. For historical trending, export this query's results on a schedule (e.g., daily via Azure Automation or Logic Apps) and store in Log Analytics.
+> **Nota:** Resource Graph fornece um snapshot point-in-time. Para tendências históricas, exporte os resultados desta query em um agendamento (ex.: diariamente via Azure Automation ou Logic Apps) e armazene no Log Analytics.
 
 ---
 
-### 17. Recent Resource Changes (Change Analysis)
+### 17. Alterações Recentes em Recursos (Change Analysis)
 
-Query recent changes using the Resource Graph change tracking.
+Consultar alterações recentes usando o rastreamento de mudanças do Resource Graph.
 
 ```kusto
 resourcechanges
@@ -321,9 +321,9 @@ resourcechanges
 
 ---
 
-### 18. Azure Advisor Recommendations
+### 18. Recomendações do Azure Advisor
 
-List active Advisor recommendations across subscriptions.
+Listar recomendações ativas do Advisor entre subscriptions.
 
 ```kusto
 advisorresources
@@ -337,9 +337,9 @@ advisorresources
 
 ---
 
-### 19. Resource Health Status
+### 19. Status de Saúde dos Recursos
 
-Check the health status of Azure resources.
+Verificar o status de saúde dos recursos Azure.
 
 ```kusto
 healthresources
@@ -354,9 +354,9 @@ healthresources
 
 ---
 
-### 20. Management Group Hierarchy
+### 20. Hierarquia de Management Groups
 
-Visualize the entire management group structure.
+Visualizar toda a estrutura de management groups.
 
 ```kusto
 resourcecontainers
@@ -369,7 +369,7 @@ resourcecontainers
 
 ---
 
-## Running Resource Graph Queries
+## Executando Queries do Resource Graph
 
 ### Azure CLI
 
@@ -385,7 +385,7 @@ Search-AzGraph -Query "resources | summarize count() by type | order by count_ d
 
 ### Bicep (Deployment Script)
 
-For scheduled queries, use Azure Automation Runbooks or Logic Apps with the Resource Graph REST API:
+Para queries agendadas, use Azure Automation Runbooks ou Logic Apps com a API REST do Resource Graph:
 
 ```
 POST https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2022-10-01
@@ -396,6 +396,6 @@ POST https://management.azure.com/providers/Microsoft.ResourceGraph/resources?ap
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Appendix C — Policy Starter Kit](appendix-c-policy-starter-kit.md) | [Appendix E — Learning Resources](appendix-e-learning-resources.md) |
+| [Apêndice C — Kit Inicial de Políticas](appendix-c-policy-starter-kit.md) | [Apêndice E — Recursos de Aprendizado](appendix-e-learning-resources.md) |

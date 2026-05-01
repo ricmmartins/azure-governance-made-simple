@@ -1,189 +1,189 @@
-# Chapter 11 — Microsoft Defender for Cloud
+# Capítulo 11 — Microsoft Defender for Cloud
 
 > Last verified: 2026-04-06
 
-Microsoft Defender for Cloud is the centralized security management and threat protection service for Azure, hybrid, and multi-cloud environments. For governance teams, Defender for Cloud provides the security posture management layer that translates security policies into actionable recommendations and measurable metrics. This chapter covers how to use Defender for Cloud as a governance tool — not just a security product.
+Microsoft Defender for Cloud é o serviço centralizado de gerenciamento de segurança e proteção contra ameaças para ambientes Azure, híbridos e multi-cloud. Para equipes de governança, o Defender for Cloud fornece a camada de gerenciamento de postura de segurança que traduz políticas de segurança em recomendações acionáveis e métricas mensuráveis. Este capítulo cobre como usar o Defender for Cloud como uma ferramenta de governança — não apenas um produto de segurança.
 
 ---
 
-## Overview
+## Visão Geral
 
-Microsoft Defender for Cloud provides two core capabilities:
+O Microsoft Defender for Cloud fornece duas capacidades centrais:
 
-1. **Cloud Security Posture Management (CSPM)** — Continuously assesses your environment, identifies misconfigurations, and provides security recommendations with a quantifiable Secure Score.
+1. **Cloud Security Posture Management (CSPM)** — Avalia continuamente seu ambiente, identifica configurações incorretas e fornece recomendações de segurança com um Secure Score quantificável.
 
-2. **Cloud Workload Protection (CWP)** — Provides threat detection and advanced protection for specific workload types (VMs, containers, databases, storage, App Service, Key Vault, DNS, and more).
+2. **Cloud Workload Protection (CWP)** — Fornece detecção de ameaças e proteção avançada para tipos específicos de carga de trabalho (VMs, containers, bancos de dados, armazenamento, App Service, Key Vault, DNS e mais).
 
-For governance purposes, CSPM is the primary focus. It gives you a measurable, trackable view of your security posture and integrates directly with Azure Policy to enforce security standards.
+Para fins de governança, CSPM é o foco principal. Ele oferece uma visão mensurável e rastreável da sua postura de segurança e se integra diretamente com o Azure Policy para aplicar padrões de segurança.
 
 ---
 
-## How It Works
+## Como Funciona
 
 ### Cloud Security Posture Management (CSPM)
 
-CSPM continuously evaluates your Azure resources against security best practices and reports findings as **security recommendations**. Every Azure subscription automatically gets the **foundational CSPM** capabilities at no cost.
+O CSPM avalia continuamente seus recursos Azure contra melhores práticas de segurança e reporta achados como **recomendações de segurança**. Toda assinatura Azure recebe automaticamente as capacidades de **CSPM fundamental** sem custo.
 
-#### Free Tier (Foundational CSPM)
+#### Camada Gratuita (CSPM Fundamental)
 
-Included with every Azure subscription:
+Incluída em toda assinatura Azure:
 
-- Security recommendations based on the Microsoft Cloud Security Benchmark (MCSB).
-- Secure Score calculation.
-- Azure Policy integration for security standards.
-- Asset inventory.
-- Regulatory compliance dashboard with MCSB.
+- Recomendações de segurança baseadas no Microsoft Cloud Security Benchmark (MCSB).
+- Cálculo do Secure Score.
+- Integração com Azure Policy para padrões de segurança.
+- Inventário de ativos.
+- Painel de conformidade regulatória com MCSB.
 
-#### Paid Tier (Defender CSPM)
+#### Camada Paga (Defender CSPM)
 
-Adds advanced capabilities:
+Adiciona capacidades avançadas:
 
-- **Attack path analysis** — Identifies paths an attacker could take through your environment, combining misconfigurations, overly permissive access, and network exposure.
-- **Cloud security graph** — Queryable graph database of all resources, identities, and their relationships for risk analysis.
-- **Agentless scanning** — Scans VMs for vulnerabilities and secrets without installing agents.
-- **Data-aware security posture** — Discovers and classifies sensitive data in storage and databases.
-- **Governance rules** — Assigns recommendations to specific owners with due dates and tracking.
-- **External attack surface management (EASM)** — Discovers and monitors internet-facing assets.
+- **Análise de caminho de ataque** — Identifica caminhos que um atacante poderia percorrer em seu ambiente, combinando configurações incorretas, acesso excessivamente permissivo e exposição de rede.
+- **Grafo de segurança na nuvem** — Banco de dados de grafo consultável de todos os recursos, identidades e seus relacionamentos para análise de risco.
+- **Varredura sem agente** — Varre VMs em busca de vulnerabilidades e segredos sem instalar agentes.
+- **Postura de segurança ciente de dados** — Descobre e classifica dados sensíveis em armazenamento e bancos de dados.
+- **Regras de governança** — Atribui recomendações a proprietários específicos com datas de vencimento e rastreamento.
+- **Gerenciamento de superfície de ataque externa (EASM)** — Descobre e monitora ativos expostos à internet.
 
 ### Secure Score
 
-**Secure Score** is a numerical measurement (0–100%) of your security posture. It is calculated based on the ratio of healthy (compliant) resources to total assessed resources, weighted by the severity and importance of each recommendation.
+**Secure Score** é uma medida numérica (0–100%) da sua postura de segurança. É calculado com base na proporção de recursos saudáveis (conformes) em relação ao total de recursos avaliados, ponderado pela severidade e importância de cada recomendação.
 
-#### How Secure Score Works
+#### Como o Secure Score Funciona
 
-1. Defender for Cloud evaluates your resources against all active security recommendations.
-2. Each **security control** has a **max score** value (e.g., 10 points for the Enable MFA control). Your current score for each control depends on how many of its recommendations you have remediated.
-3. The **current score** for a recommendation is proportional to the percentage of compliant resources.
-4. The total Secure Score is the sum of all current scores divided by the sum of all max scores.
+1. O Defender for Cloud avalia seus recursos contra todas as recomendações de segurança ativas.
+2. Cada **controle de segurança** possui um **valor de pontuação máxima** (ex.: 10 pontos para o controle Habilitar MFA). Sua pontuação atual para cada controle depende de quantas de suas recomendações você remediou.
+3. A **pontuação atual** para uma recomendação é proporcional à porcentagem de recursos conformes.
+4. O Secure Score total é a soma de todas as pontuações atuais dividida pela soma de todas as pontuações máximas.
 
 ```
-Secure Score = Σ(current scores) / Σ(max scores) × 100
+Secure Score = Σ(pontuações atuais) / Σ(pontuações máximas) × 100
 ```
 
-#### Using Secure Score as a Governance Metric
+#### Usando o Secure Score como Métrica de Governança
 
-Secure Score is one of the most effective governance metrics because:
+O Secure Score é uma das métricas de governança mais eficazes porque:
 
-- **It is quantifiable** — Track a number over time rather than subjective assessments.
-- **It is actionable** — Each point maps to specific remediation actions.
-- **It is comparable** — Compare Secure Score across subscriptions, management groups, and business units.
-- **It drives accountability** — Set Secure Score targets per team and track progress.
+- **É quantificável** — Rastrear um número ao longo do tempo em vez de avaliações subjetivas.
+- **É acionável** — Cada ponto mapeia para ações de remediação específicas.
+- **É comparável** — Comparar Secure Score entre assinaturas, grupos de gerenciamento e unidades de negócio.
+- **Gera responsabilização** — Definir metas de Secure Score por equipe e rastrear progresso.
 
-**Governance target example:**
+**Exemplo de meta de governança:**
 
-| Audience | Target | Review Cadence |
-|----------|--------|---------------|
-| Platform team | ≥ 85% | Weekly |
-| Application teams | ≥ 70% | Bi-weekly |
-| New subscriptions | ≥ 60% within 30 days | Monthly |
+| Público | Meta | Cadência de Revisão |
+|---------|------|---------------------|
+| Equipe de plataforma | ≥ 85% | Semanal |
+| Equipes de aplicação | ≥ 70% | Quinzenal |
+| Novas assinaturas | ≥ 60% em 30 dias | Mensal |
 
-### Security Recommendations
+### Recomendações de Segurança
 
-Security recommendations are the individual findings that Defender for Cloud generates. Each recommendation includes:
+Recomendações de segurança são os achados individuais que o Defender for Cloud gera. Cada recomendação inclui:
 
-- **Description** — What the issue is.
-- **Severity** — High, Medium, or Low.
-- **Affected resources** — Which specific resources are non-compliant.
-- **Remediation steps** — How to fix the issue (often with a "Quick Fix" button).
-- **Associated policy** — The Azure Policy definition that evaluates this control.
+- **Descrição** — Qual é o problema.
+- **Severidade** — Alta, Média ou Baixa.
+- **Recursos afetados** — Quais recursos específicos estão não conformes.
+- **Passos de remediação** — Como corrigir o problema (frequentemente com um botão "Quick Fix").
+- **Policy associada** — A definição de Azure Policy que avalia este controle.
 
-Recommendations are grouped into **security controls**, which align with the MCSB control domains. Examples of security controls:
+Recomendações são agrupadas em **controles de segurança**, que se alinham com os domínios de controle do MCSB. Exemplos de controles de segurança:
 
-| Security Control | Max Score | Example Recommendations |
-|-----------------|-----------|------------------------|
-| Enable MFA | 10 | MFA should be enabled on accounts with owner permissions |
-| Manage access and permissions | 4 | External accounts with owner permissions should be removed |
-| Enable encryption at rest | 4 | Storage accounts should use customer-managed keys |
-| Restrict unauthorized network access | 4 | Storage accounts should restrict network access |
-| Enable endpoint protection | 6 | Endpoint protection should be installed on machines |
-| Apply system updates | 6 | System updates should be installed on your machines |
+| Controle de Segurança | Pontuação Máx. | Exemplos de Recomendações |
+|----------------------|----------------|--------------------------|
+| Habilitar MFA | 10 | MFA deve estar habilitado em contas com permissões de proprietário |
+| Gerenciar acesso e permissões | 4 | Contas externas com permissões de proprietário devem ser removidas |
+| Habilitar criptografia em repouso | 4 | Contas de armazenamento devem usar chaves gerenciadas pelo cliente |
+| Restringir acesso de rede não autorizado | 4 | Contas de armazenamento devem restringir acesso de rede |
+| Habilitar proteção de endpoint | 6 | Proteção de endpoint deve estar instalada nas máquinas |
+| Aplicar atualizações do sistema | 6 | Atualizações do sistema devem ser instaladas em suas máquinas |
 
-### Security Recommendations as Governance Signals
+### Recomendações de Segurança como Sinais de Governança
 
-Recommendations serve as governance signals that can be operationalized:
+Recomendações servem como sinais de governança que podem ser operacionalizados:
 
-1. **Assignment** — Use Defender for Cloud governance rules to assign recommendations to specific owners with due dates.
-2. **Tracking** — Monitor remediation progress through the Defender for Cloud portal or via Azure Resource Graph.
-3. **Escalation** — Set up alerts when recommendations remain unresolved past their due date.
-4. **Reporting** — Export recommendation data to Power BI or your GRC platform for executive reporting.
+1. **Atribuição** — Use regras de governança do Defender for Cloud para atribuir recomendações a proprietários específicos com datas de vencimento.
+2. **Rastreamento** — Monitore o progresso da remediação através do portal do Defender for Cloud ou via Azure Resource Graph.
+3. **Escalação** — Configure alertas quando recomendações permanecem sem resolução além da data de vencimento.
+4. **Relatórios** — Exporte dados de recomendações para Power BI ou sua plataforma GRC para relatórios executivos.
 
-### Defender Plans Overview
+### Visão Geral dos Planos Defender
 
-Beyond CSPM, Defender for Cloud offers workload-specific protection plans. For governance, the key decision is which plans to enable:
+Além do CSPM, o Defender for Cloud oferece planos de proteção específicos por carga de trabalho. Para governança, a decisão chave é quais planos habilitar:
 
-| Defender Plan | What It Protects | Governance Value |
-|--------------|-----------------|-----------------|
-| **Defender for Servers** | VMs, Arc-enabled servers | Vulnerability assessment, file integrity monitoring, adaptive application controls |
-| **Defender for Containers** | AKS, container registries, Kubernetes | Runtime threat detection, image vulnerability scanning, Kubernetes policy enforcement |
-| **Defender for Databases** | Azure SQL, Cosmos DB, open-source DBs | Vulnerability assessment, threat detection for data workloads |
-| **Defender for Storage** | Blob, File, Data Lake | Malware scanning, sensitive data threat detection |
-| **Defender for Key Vault** | Key Vault | Detects unusual access patterns to secrets and keys |
-| **Defender for App Service** | App Service, Functions | Detects attacks targeting web applications |
-| *(Defender for DNS was retired in August 2023; DNS protection is now included in Defender for Servers Plan 2.)* | | |
-| **Defender for Resource Manager**| ARM API | Detects suspicious management operations |
-| **Defender CSPM** | All resources | Attack path analysis, cloud security graph, governance rules |
+| Plano Defender | O Que Protege | Valor para Governança |
+|----------------|--------------|----------------------|
+| **Defender for Servers** | VMs, servidores habilitados para Arc | Avaliação de vulnerabilidades, monitoramento de integridade de arquivos, controles adaptativos de aplicação |
+| **Defender for Containers** | AKS, registros de container, Kubernetes | Detecção de ameaças em runtime, varredura de vulnerabilidades de imagens, aplicação de policy do Kubernetes |
+| **Defender for Databases** | Azure SQL, Cosmos DB, DBs open-source | Avaliação de vulnerabilidades, detecção de ameaças para cargas de trabalho de dados |
+| **Defender for Storage** | Blob, File, Data Lake | Varredura de malware, detecção de ameaças a dados sensíveis |
+| **Defender for Key Vault** | Key Vault | Detecta padrões incomuns de acesso a segredos e chaves |
+| **Defender for App Service** | App Service, Functions | Detecta ataques direcionados a aplicações web |
+| *(Defender for DNS foi descontinuado em agosto de 2023; a proteção DNS agora está incluída no Defender for Servers Plan 2.)* | | |
+| **Defender for Resource Manager**| ARM API | Detecta operações de gerenciamento suspeitas |
+| **Defender CSPM** | Todos os recursos | Análise de caminho de ataque, grafo de segurança na nuvem, regras de governança |
 
-**Governance recommendation:** At minimum, enable **Defender CSPM** and **Defender for Resource Manager** across all subscriptions. These provide the governance-relevant capabilities (posture management and control-plane threat detection) at reasonable cost.
+**Recomendação de governança:** No mínimo, habilite **Defender CSPM** e **Defender for Resource Manager** em todas as assinaturas. Estes fornecem as capacidades relevantes para governança (gerenciamento de postura e detecção de ameaças no plano de controle) a um custo razoável.
 
-### Integration with Azure Policy
+### Integração com Azure Policy
 
-Defender for Cloud is deeply integrated with Azure Policy:
+O Defender for Cloud é profundamente integrado com o Azure Policy:
 
-1. **The MCSB initiative is a policy initiative** — When you onboard a subscription to Defender for Cloud, the MCSB initiative is automatically assigned. It contains hundreds of policy definitions that evaluate your resources.
+1. **A iniciativa MCSB é uma iniciativa de policy** — Quando você integra uma assinatura ao Defender for Cloud, a iniciativa MCSB é automaticamente atribuída. Ela contém centenas de definições de policy que avaliam seus recursos.
 
-2. **Security recommendations are policy evaluations** — Each security recommendation corresponds to one or more Azure Policy definitions. The compliance state reported by Defender for Cloud comes from Azure Policy's evaluation engine.
+2. **Recomendações de segurança são avaliações de policy** — Cada recomendação de segurança corresponde a uma ou mais definições de Azure Policy. O estado de conformidade reportado pelo Defender for Cloud vem do motor de avaliação do Azure Policy.
 
-3. **Regulatory compliance initiatives are policy initiatives** — The compliance standards you add in Defender for Cloud (NIST, CIS, PCI-DSS, etc.) are Azure Policy initiatives assigned to your subscription.
+3. **Iniciativas de conformidade regulatória são iniciativas de policy** — Os padrões de conformidade que você adiciona no Defender for Cloud (NIST, CIS, PCI-DSS, etc.) são iniciativas de Azure Policy atribuídas à sua assinatura.
 
-4. **Remediation uses Azure Policy remediation** — When you remediate a recommendation that uses `DeployIfNotExists`, Defender for Cloud triggers an Azure Policy remediation task.
+4. **Remediação usa remediação do Azure Policy** — Quando você remedia uma recomendação que usa `DeployIfNotExists`, o Defender for Cloud dispara uma tarefa de remediação do Azure Policy.
 
-This integration means that everything you learn about Azure Policy (Chapter 9) directly applies to Defender for Cloud. Defender for Cloud is, in many ways, a governance-friendly UX layer on top of Azure Policy.
-
----
-
-## Best Practices
-
-1. **Enable foundational CSPM on all subscriptions** — The free tier provides Secure Score, security recommendations, and the compliance dashboard at no cost. There is no reason not to enable it everywhere.
-
-2. **Enable Defender CSPM for production workloads** — The paid CSPM tier adds attack path analysis and governance rules, which are essential for mature governance programs.
-
-3. **Track Secure Score over time** — Set up a weekly or monthly process to review Secure Score trends. Use Azure Resource Graph to export historical data.
-
-4. **Use governance rules to assign owners** — Defender for Cloud's governance rules let you assign specific recommendations to resource owners with due dates. This creates accountability.
-
-5. **Use recommendations to drive remediation** — Prioritize recommendations by impact (max score contribution) and severity. Focus on High-severity findings first.
-
-6. **Set Secure Score targets per business unit** — Different teams may have different baseline requirements. Set achievable targets and increase them over time.
-
-7. **Integrate with your ITSM workflow** — Configure Defender for Cloud to create tickets in your ITSM system (ServiceNow, Jira) when new high-severity recommendations are detected.
-
-8. **Export data to Log Analytics** — Configure continuous export of Defender for Cloud data to a Log Analytics workspace for custom dashboards, alerting, and long-term retention.
-
-9. **Review and rationalize Defender plans** — Not every plan is needed for every subscription. Enable plans based on the workload types present in each subscription.
-
-10. **Do not disable default policy assignments** — Some teams disable the MCSB initiative to reduce "noise." This removes your governance visibility. Instead, use exemptions for specific findings that are not applicable.
+Essa integração significa que tudo que você aprende sobre Azure Policy (Capítulo 9) se aplica diretamente ao Defender for Cloud. O Defender for Cloud é, de muitas formas, uma camada de UX amigável para governança sobre o Azure Policy.
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-1. **Treating Secure Score as a vanity metric** — A high Secure Score is meaningless if it is achieved by disabling policies or creating blanket exemptions. Focus on genuine remediation.
+1. **Habilite o CSPM fundamental em todas as assinaturas** — A camada gratuita fornece Secure Score, recomendações de segurança e o painel de conformidade sem custo. Não há razão para não habilitá-lo em todos os lugares.
 
-2. **Ignoring Defender for Cloud alerts** — Teams that do not integrate Defender for Cloud into their incident response workflow miss real threats. Configure alert routing and response playbooks.
+2. **Habilite o Defender CSPM para cargas de trabalho de produção** — A camada paga de CSPM adiciona análise de caminho de ataque e regras de governança, que são essenciais para programas de governança maduros.
 
-3. **Enabling all Defender plans without cost analysis** — Defender plans incur costs per resource per month. Enable plans deliberately based on workload requirements and risk assessment.
+3. **Rastreie o Secure Score ao longo do tempo** — Configure um processo semanal ou mensal para revisar tendências do Secure Score. Use o Azure Resource Graph para exportar dados históricos.
 
-4. **Not configuring continuous export** — Without continuous export, Defender for Cloud data is only available in the portal. Export to Log Analytics for queryability, alerting, and retention.
+4. **Use regras de governança para atribuir proprietários** — As regras de governança do Defender for Cloud permitem atribuir recomendações específicas a proprietários de recursos com datas de vencimento. Isso cria responsabilização.
 
-5. **Conflating CSPM with CWP** — CSPM (posture management) and CWP (threat protection) serve different purposes. CSPM is for governance; CWP is for security operations. Both are needed, but they serve different teams and workflows.
+5. **Use recomendações para impulsionar a remediação** — Priorize recomendações por impacto (contribuição de pontuação máxima) e severidade. Foque em achados de Alta severidade primeiro.
 
-6. **Expecting real-time Secure Score updates** — Secure Score is not updated in real-time. It refreshes periodically (typically every few hours). Do not use it for real-time compliance gates.
+6. **Defina metas de Secure Score por unidade de negócio** — Diferentes equipes podem ter diferentes requisitos de baseline. Defina metas alcançáveis e aumente-as ao longo do tempo.
+
+7. **Integre com seu workflow de ITSM** — Configure o Defender for Cloud para criar tickets no seu sistema ITSM (ServiceNow, Jira) quando novas recomendações de alta severidade forem detectadas.
+
+8. **Exporte dados para Log Analytics** — Configure exportação contínua dos dados do Defender for Cloud para um workspace Log Analytics para dashboards personalizados, alertas e retenção de longo prazo.
+
+9. **Revise e racionalize planos Defender** — Nem todo plano é necessário para toda assinatura. Habilite planos com base nos tipos de carga de trabalho presentes em cada assinatura.
+
+10. **Não desabilite atribuições de policy padrão** — Algumas equipes desabilitam a iniciativa MCSB para reduzir "ruído". Isso remove sua visibilidade de governança. Em vez disso, use isenções para achados específicos que não são aplicáveis.
 
 ---
 
-## Code Samples
+## Armadilhas Comuns
 
-### Azure Resource Graph: Query Secure Score
+1. **Tratar o Secure Score como métrica de vaidade** — Um Secure Score alto é sem sentido se alcançado desabilitando policies ou criando isenções generalizadas. Foque em remediação genuína.
+
+2. **Ignorar alertas do Defender for Cloud** — Equipes que não integram o Defender for Cloud em seu workflow de resposta a incidentes perdem ameaças reais. Configure roteamento de alertas e playbooks de resposta.
+
+3. **Habilitar todos os planos Defender sem análise de custos** — Planos Defender incorrem em custos por recurso por mês. Habilite planos deliberadamente com base nos requisitos de carga de trabalho e avaliação de risco.
+
+4. **Não configurar exportação contínua** — Sem exportação contínua, os dados do Defender for Cloud estão disponíveis apenas no portal. Exporte para Log Analytics para consultabilidade, alertas e retenção.
+
+5. **Confundir CSPM com CWP** — CSPM (gerenciamento de postura) e CWP (proteção contra ameaças) servem propósitos diferentes. CSPM é para governança; CWP é para operações de segurança. Ambos são necessários, mas servem diferentes equipes e workflows.
+
+6. **Esperar atualizações do Secure Score em tempo real** — O Secure Score não é atualizado em tempo real. Ele é atualizado periodicamente (tipicamente a cada poucas horas). Não o use para gates de conformidade em tempo real.
+
+---
+
+## Exemplos de Código
+
+### Azure Resource Graph: Consultar Secure Score
 
 ```kusto
 SecurityResources
@@ -199,7 +199,7 @@ SecurityResources
 | order by scorePercentage asc
 ```
 
-### Azure Resource Graph: Query Security Recommendations
+### Azure Resource Graph: Consultar Recomendações de Segurança
 
 ```kusto
 SecurityResources
@@ -213,29 +213,29 @@ SecurityResources
 | take 20
 ```
 
-### Azure CLI: Enable Defender CSPM
+### Azure CLI: Habilitar Defender CSPM
 
 ```bash
-# Enable Defender CSPM on a subscription
+# Habilitar Defender CSPM em uma assinatura
 az security pricing create \
   --name "CloudPosture" \
   --tier "Standard"
 ```
 
-### Azure CLI: Enable Defender for Servers
+### Azure CLI: Habilitar Defender for Servers
 
 ```bash
-# Enable Defender for Servers Plan 2
+# Habilitar Defender for Servers Plan 2
 az security pricing create \
   --name "VirtualMachines" \
   --tier "Standard" \
   --subplan "P2"
 ```
 
-### Azure CLI: Configure Continuous Export
+### Azure CLI: Configurar Exportação Contínua
 
 ```bash
-# Configure continuous export of Defender for Cloud data to Log Analytics
+# Configurar exportação contínua dos dados do Defender for Cloud para Log Analytics
 az security automation create \
   --name "export-to-law" \
   --resource-group "security-rg" \
@@ -247,7 +247,7 @@ az security automation create \
   }]'
 ```
 
-### Bicep: Enable Defender for Cloud Pricing Tiers
+### Bicep: Habilitar Camadas de Preço do Defender for Cloud
 
 ```bicep
 targetScope = 'subscription'
@@ -271,21 +271,21 @@ resource defenderPricing 'Microsoft.Security/pricings@2024-01-01' = [for plan in
 
 ---
 
-## References
+## Referências
 
-- [What is Microsoft Defender for Cloud?](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction)
+- [O que é Microsoft Defender for Cloud?](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction)
 - [Cloud Security Posture Management (CSPM)](https://learn.microsoft.com/en-us/azure/defender-for-cloud/concept-cloud-security-posture-management)
-- [Secure Score in Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/secure-score-security-controls)
-- [Security recommendations reference](https://learn.microsoft.com/en-us/azure/defender-for-cloud/recommendations-reference)
-- [Defender for Cloud pricing](https://learn.microsoft.com/en-us/azure/defender-for-cloud/plan-defender-for-cloud)
-- [Governance rules in Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/governance-rules)
-- [Continuous export of Defender for Cloud data](https://learn.microsoft.com/en-us/azure/defender-for-cloud/continuous-export)
-- [Azure Resource Graph queries for Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/resource-graph-samples)
+- [Secure Score no Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/secure-score-security-controls)
+- [Referência de recomendações de segurança](https://learn.microsoft.com/en-us/azure/defender-for-cloud/recommendations-reference)
+- [Preços do Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/plan-defender-for-cloud)
+- [Regras de governança no Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/governance-rules)
+- [Exportação contínua de dados do Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/continuous-export)
+- [Consultas do Azure Resource Graph para Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/resource-graph-samples)
 - [Microsoft Cloud Security Benchmark](https://learn.microsoft.com/en-us/security/benchmark/azure/overview)
-- [Defender for Cloud integration with Azure Policy](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference)
+- [Integração do Defender for Cloud com Azure Policy](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference)
 
 ---
 
-Previous | Next
+Anterior | Próximo
 :--- | :---
-[Chapter 10 — Regulatory Compliance](/guide/part-3-policy-compliance/ch10-regulatory-compliance.md) | [Chapter 12 — Resource Locks](/guide/part-3-policy-compliance/ch12-resource-locks.md)
+[Capítulo 10 — Conformidade Regulatória](/guide/part-3-policy-compliance/ch10-regulatory-compliance.md) | [Capítulo 12 — Resource Locks](/guide/part-3-policy-compliance/ch12-resource-locks.md)

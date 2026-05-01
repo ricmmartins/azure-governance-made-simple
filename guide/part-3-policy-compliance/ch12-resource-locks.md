@@ -1,129 +1,129 @@
-# Chapter 12 — Resource Locks
+# Capítulo 12 — Resource Locks
 
 > Last verified: 2026-04-06
 
-Resource Locks are a simple but powerful governance mechanism that prevents accidental deletion or modification of critical Azure resources. When human error or automation mistakes can cost hours of downtime or data loss, a well-placed lock is your last line of defense.
+Resource Locks são um mecanismo de governança simples, mas poderoso, que previne a exclusão ou modificação acidental de recursos críticos do Azure. Quando erros humanos ou falhas de automação podem custar horas de indisponibilidade ou perda de dados, um lock bem posicionado é sua última linha de defesa.
 
 ---
 
-## Overview
+## Visão Geral
 
-Azure Resource Locks allow you to place a restriction on Azure resources that overrides any RBAC permissions a user might have. Even an Owner of a subscription cannot delete a resource that has a **CanNotDelete** lock — they must first remove the lock.
+Os Azure Resource Locks permitem que você coloque uma restrição em recursos do Azure que substitui quaisquer permissões RBAC que um usuário possa ter. Mesmo um Owner de uma assinatura não pode excluir um recurso que possui um lock **CanNotDelete** — ele deve primeiro remover o lock.
 
-There are two lock types:
+Existem dois tipos de lock:
 
-| Lock Type | Effect |
-|-----------|--------|
-| **CanNotDelete** (Delete) | Authorized users can read and modify the resource but cannot delete it. |
-| **ReadOnly** | Authorized users can read the resource but cannot modify or delete it. Equivalent to granting all users the Reader role for that resource. |
+| Tipo de Lock | Efeito |
+|-------------|--------|
+| **CanNotDelete** (Delete) | Usuários autorizados podem ler e modificar o recurso, mas não podem excluí-lo. |
+| **ReadOnly** | Usuários autorizados podem ler o recurso, mas não podem modificá-lo ou excluí-lo. Equivalente a conceder a todos os usuários o role Reader para aquele recurso. |
 
-### Lock Inheritance
+### Herança de Lock
 
-When you apply a lock at a parent scope, all resources within that scope inherit the lock. Resources added later also inherit the parent's lock. The most restrictive lock in the inheritance chain takes precedence.
+Quando você aplica um lock em um escopo pai, todos os recursos dentro desse escopo herdam o lock. Recursos adicionados posteriormente também herdam o lock do pai. O lock mais restritivo na cadeia de herança tem precedência.
 
-For example, a **ReadOnly** lock on a resource group applies to every resource in that group — even if individual resources do not have their own locks.
-
----
-
-## How It Works
-
-### Management Plane vs. Data Plane
-
-Resource Manager locks apply only to operations on the **management plane** — that is, operations sent to `https://management.azure.com`. Locks do **not** restrict how resources perform their own data-plane functions.
-
-| Scenario | Locked? |
-|----------|---------|
-| Deleting an Azure SQL Database | ✅ Blocked by CanNotDelete lock |
-| Modifying SQL Database configuration (tier, size) | ✅ Blocked by ReadOnly lock |
-| Inserting, updating, or deleting rows in the database | ❌ Not blocked (data-plane operation) |
-| Deleting a Storage Account | ✅ Blocked by CanNotDelete lock |
-| Uploading or deleting blobs in the storage account | ❌ Not blocked (data-plane operation) |
-| Listing storage account keys | ✅ Blocked by ReadOnly lock (POST operation on management plane) |
-
-This distinction is critical: **locks protect the resource itself, not the data inside it.** Data-plane security requires RBAC, network rules, and encryption.
-
-### ReadOnly Lock Gotchas
-
-Applying a **ReadOnly** lock can lead to unexpected results because some operations that appear to be read-only actually require write access on the management plane:
-
-- **Storage account key listing** — A ReadOnly lock on a storage account prevents all users from listing keys, because the list-keys operation is a POST request that returns values available for write operations.
-
-- **App Service deployment** — A ReadOnly lock on an App Service resource prevents the Kudu console and deployment operations from working, because deployment requires write access to the site configuration.
-
-- **Virtual Machine restart** — A ReadOnly lock prevents restarting a VM because the restart operation is a POST action on the management plane.
-
-- **Resource tag updates** — Tags are management-plane properties. A ReadOnly lock prevents any tag modifications, which can break tag-based automation or cost allocation workflows.
+Por exemplo, um lock **ReadOnly** em um grupo de recursos se aplica a todos os recursos naquele grupo — mesmo que recursos individuais não tenham seus próprios locks.
 
 ---
 
-## Resource Locks vs. Deployment Stack Deny Settings
+## Como Funciona
 
-Azure Deployment Stacks provide an alternative mechanism for protecting resources through **deny settings**. Here is how the two compare:
+### Plano de Gerenciamento vs. Plano de Dados
 
-| Aspect | Resource Locks | Deployment Stack Deny Settings |
-|--------|---------------|-------------------------------|
-| **Scope** | Any resource, resource group, or subscription | Resources managed by the deployment stack |
-| **Granularity** | CanNotDelete or ReadOnly on any resource | DenyDelete, DenyWriteAndDelete on stack-managed resources |
-| **Bypass** | Must remove the lock (requires `Microsoft.Authorization/locks/delete` permission) | Configurable exclude principals and exclude actions |
-| **Lifecycle** | Independent of deployment — must be managed separately | Tied to the deployment stack lifecycle |
-| **Drift protection** | No — locks do not detect or prevent configuration drift | Yes — deny settings prevent out-of-band modifications to stack-managed resources |
-| **Cleanup** | Locks remain even if the resource is orphaned from IaC | Stack deletion can automatically clean up managed resources |
-| **Use case** | Protect critical shared resources (hub VNet, DNS zones, Key Vaults) | Protect IaC-managed environments from manual changes |
-| **Complexity** | Simple — one API call to create a lock | Requires adoption of Deployment Stacks as your deployment model |
+Resource Manager locks se aplicam apenas a operações no **plano de gerenciamento** — ou seja, operações enviadas para `https://management.azure.com`. Locks **não** restringem como os recursos executam suas próprias funções de plano de dados.
 
-**Recommendation:** Use Resource Locks for critical infrastructure resources that must never be deleted regardless of who manages them. Use Deployment Stack deny settings when you want to enforce infrastructure-as-code discipline and prevent drift on deployed environments.
+| Cenário | Bloqueado? |
+|---------|-----------|
+| Excluir um Azure SQL Database | ✅ Bloqueado por lock CanNotDelete |
+| Modificar configuração do SQL Database (camada, tamanho) | ✅ Bloqueado por lock ReadOnly |
+| Inserir, atualizar ou excluir linhas no banco de dados | ❌ Não bloqueado (operação de plano de dados) |
+| Excluir uma Storage Account | ✅ Bloqueado por lock CanNotDelete |
+| Fazer upload ou excluir blobs na conta de armazenamento | ❌ Não bloqueado (operação de plano de dados) |
+| Listar chaves da conta de armazenamento | ✅ Bloqueado por lock ReadOnly (operação POST no plano de gerenciamento) |
 
----
+Essa distinção é crítica: **locks protegem o recurso em si, não os dados dentro dele.** A segurança do plano de dados requer RBAC, regras de rede e criptografia.
 
-## Best Practices
+### Armadilhas do Lock ReadOnly
 
-1. **Lock production shared infrastructure** — Apply CanNotDelete locks to resources that are shared across teams and expensive to recreate: hub virtual networks, DNS zones, ExpressRoute circuits, Log Analytics workspaces, Key Vaults.
+Aplicar um lock **ReadOnly** pode levar a resultados inesperados porque algumas operações que parecem ser somente leitura na verdade requerem acesso de escrita no plano de gerenciamento:
 
-2. **Use CanNotDelete over ReadOnly** — ReadOnly locks are very restrictive and frequently cause unexpected issues. Prefer CanNotDelete unless you have a specific need to prevent all modifications.
+- **Listagem de chaves da conta de armazenamento** — Um lock ReadOnly em uma conta de armazenamento impede todos os usuários de listar chaves, porque a operação list-keys é uma requisição POST que retorna valores disponíveis para operações de escrita.
 
-3. **Lock at the resource level, not resource group** — Locking an entire resource group prevents deletion of any resource in the group, which can interfere with normal operations like scaling or updating individual resources.
+- **Deploy do App Service** — Um lock ReadOnly em um recurso App Service impede o console Kudu e operações de deploy de funcionar, porque o deploy requer acesso de escrita à configuração do site.
 
-4. **Automate lock creation** — Include lock creation in your IaC templates (Bicep, Terraform, ARM) so locks are applied consistently and automatically.
+- **Reinício de Máquina Virtual** — Um lock ReadOnly impede reiniciar uma VM porque a operação de reinício é uma ação POST no plano de gerenciamento.
 
-5. **Document lock ownership** — Maintain a record of who created each lock and why. This prevents "orphaned locks" where no one remembers why the lock exists or feels authorized to remove it.
-
-6. **Review locks periodically** — Locks on decommissioned resources waste time and cause confusion. Include lock review in your periodic governance audits.
-
-7. **Use Azure Policy to enforce locks** — Create a `DeployIfNotExists` policy that automatically creates CanNotDelete locks on critical resource types (e.g., all Key Vaults, all virtual networks).
+- **Atualizações de tags de recurso** — Tags são propriedades do plano de gerenciamento. Um lock ReadOnly impede qualquer modificação de tags, o que pode quebrar automação baseada em tags ou workflows de alocação de custos.
 
 ---
 
-## Common Pitfalls
+## Resource Locks vs. Configurações de Deny do Deployment Stack
 
-1. **Locks blocking auto-scaling** — A CanNotDelete lock on a Virtual Machine Scale Set does not prevent scaling in most cases, but a ReadOnly lock will block scale operations because they modify the resource. A ReadOnly lock on an App Service Plan will prevent scaling the plan up or out.
+Azure Deployment Stacks fornecem um mecanismo alternativo para proteger recursos através de **configurações de deny**. Veja como os dois se comparam:
 
-2. **Locks blocking certificate rotation** — A ReadOnly lock on a Key Vault prevents uploading new certificate versions. If your certificate rotation automation fails silently due to a lock, you may not discover the issue until the certificate expires and your application goes down.
+| Aspecto | Resource Locks | Configurações de Deny do Deployment Stack |
+|---------|---------------|-------------------------------------------|
+| **Escopo** | Qualquer recurso, grupo de recursos ou assinatura | Recursos gerenciados pelo deployment stack |
+| **Granularidade** | CanNotDelete ou ReadOnly em qualquer recurso | DenyDelete, DenyWriteAndDelete em recursos gerenciados pelo stack |
+| **Bypass** | Deve remover o lock (requer permissão `Microsoft.Authorization/locks/delete`) | Principals e ações de exclusão configuráveis |
+| **Ciclo de vida** | Independente do deploy — deve ser gerenciado separadamente | Vinculado ao ciclo de vida do deployment stack |
+| **Proteção contra drift** | Não — locks não detectam ou previnem drift de configuração | Sim — configurações de deny previnem modificações fora de banda em recursos gerenciados pelo stack |
+| **Limpeza** | Locks permanecem mesmo se o recurso for órfão do IaC | Exclusão do stack pode limpar automaticamente recursos gerenciados |
+| **Caso de uso** | Proteger recursos compartilhados críticos (hub VNet, zonas DNS, Key Vaults) | Proteger ambientes gerenciados por IaC contra mudanças manuais |
+| **Complexidade** | Simples — uma chamada de API para criar um lock | Requer adoção de Deployment Stacks como modelo de deploy |
 
-3. **Locks preventing resource group deletion** — A CanNotDelete lock on any resource within a resource group prevents the entire resource group from being deleted. This is by design (deleting a resource group deletes all its resources), but it surprises teams trying to clean up environments.
-
-4. **Locks interfering with CI/CD pipelines** — Deployment pipelines that delete and recreate resources will fail if those resources are locked. Design your pipelines to use incremental deployments rather than delete-and-replace patterns.
-
-5. **Locks not protecting data** — Teams sometimes assume a CanNotDelete lock on a storage account protects the data inside it. It does not — anyone with data-plane access can still delete blobs, tables, or queues.
-
-6. **Forgetting to lock dependent resources** — Locking a database but not its server, or locking a VM but not its OS disk, leaves gaps in protection. Identify all dependent resources and lock them together.
-
-7. **ReadOnly locks breaking diagnostics** — A ReadOnly lock on a resource can prevent Azure Monitor from updating diagnostic settings, which may break log collection silently.
+**Recomendação:** Use Resource Locks para recursos de infraestrutura críticos que nunca devem ser excluídos independentemente de quem os gerencia. Use configurações de deny do Deployment Stack quando quiser impor disciplina de infraestrutura como código e prevenir drift em ambientes implantados.
 
 ---
 
-## Code Samples
+## Melhores Práticas
 
-### Azure CLI: Create a CanNotDelete Lock
+1. **Proteja infraestrutura compartilhada de produção com lock** — Aplique locks CanNotDelete em recursos compartilhados entre equipes e caros de recriar: redes virtuais hub, zonas DNS, circuitos ExpressRoute, workspaces Log Analytics, Key Vaults.
+
+2. **Use CanNotDelete em vez de ReadOnly** — Locks ReadOnly são muito restritivos e frequentemente causam problemas inesperados. Prefira CanNotDelete a menos que tenha uma necessidade específica de prevenir todas as modificações.
+
+3. **Aplique lock no nível do recurso, não do grupo de recursos** — Bloquear um grupo de recursos inteiro previne exclusão de qualquer recurso no grupo, o que pode interferir com operações normais como escalonamento ou atualização de recursos individuais.
+
+4. **Automatize a criação de locks** — Inclua a criação de locks nos seus templates IaC (Bicep, Terraform, ARM) para que locks sejam aplicados consistente e automaticamente.
+
+5. **Documente a propriedade do lock** — Mantenha um registro de quem criou cada lock e por quê. Isso previne "locks órfãos" onde ninguém lembra por que o lock existe ou se sente autorizado a removê-lo.
+
+6. **Revise locks periodicamente** — Locks em recursos descomissionados desperdiçam tempo e causam confusão. Inclua revisão de locks nas suas auditorias periódicas de governança.
+
+7. **Use Azure Policy para aplicar locks** — Crie uma policy `DeployIfNotExists` que automaticamente cria locks CanNotDelete em tipos de recursos críticos (ex.: todos os Key Vaults, todas as redes virtuais).
+
+---
+
+## Armadilhas Comuns
+
+1. **Locks bloqueando auto-scaling** — Um lock CanNotDelete em um Virtual Machine Scale Set não previne escalonamento na maioria dos casos, mas um lock ReadOnly bloqueará operações de escala porque elas modificam o recurso. Um lock ReadOnly em um App Service Plan impedirá escalar o plano para cima ou para fora.
+
+2. **Locks bloqueando rotação de certificados** — Um lock ReadOnly em um Key Vault impede o upload de novas versões de certificados. Se sua automação de rotação de certificados falhar silenciosamente devido a um lock, você pode não descobrir o problema até que o certificado expire e sua aplicação fique indisponível.
+
+3. **Locks prevenindo exclusão de grupo de recursos** — Um lock CanNotDelete em qualquer recurso dentro de um grupo de recursos impede que o grupo de recursos inteiro seja excluído. Isso é por design (excluir um grupo de recursos exclui todos os seus recursos), mas surpreende equipes tentando limpar ambientes.
+
+4. **Locks interferindo com pipelines CI/CD** — Pipelines de deploy que excluem e recriam recursos falharão se esses recursos estiverem com lock. Projete seus pipelines para usar deploys incrementais em vez de padrões de delete-and-replace.
+
+5. **Locks não protegendo dados** — Equipes às vezes assumem que um lock CanNotDelete em uma conta de armazenamento protege os dados dentro dela. Não protege — qualquer pessoa com acesso ao plano de dados ainda pode excluir blobs, tabelas ou filas.
+
+6. **Esquecer de aplicar lock em recursos dependentes** — Aplicar lock em um banco de dados mas não no seu servidor, ou lock em uma VM mas não no seu disco de SO, deixa lacunas na proteção. Identifique todos os recursos dependentes e aplique lock neles juntos.
+
+7. **Locks ReadOnly quebrando diagnósticos** — Um lock ReadOnly em um recurso pode impedir o Azure Monitor de atualizar configurações de diagnóstico, o que pode quebrar silenciosamente a coleta de logs.
+
+---
+
+## Exemplos de Código
+
+### Azure CLI: Criar um Lock CanNotDelete
 
 ```bash
-# Create a CanNotDelete lock on a resource group
+# Criar um lock CanNotDelete em um grupo de recursos
 az lock create \
   --name "protect-production" \
   --resource-group "prod-networking-rg" \
   --lock-type CanNotDelete \
   --notes "Protects production networking resources. Contact: platform-team@contoso.com"
 
-# Create a CanNotDelete lock on a specific resource
+# Criar um lock CanNotDelete em um recurso específico
 az lock create \
   --name "protect-keyvault" \
   --resource-group "prod-security-rg" \
@@ -133,10 +133,10 @@ az lock create \
   --notes "Protects production Key Vault. Do not remove without approval."
 ```
 
-### Azure CLI: Create a ReadOnly Lock
+### Azure CLI: Criar um Lock ReadOnly
 
 ```bash
-# Create a ReadOnly lock on a virtual network
+# Criar um lock ReadOnly em uma rede virtual
 az lock create \
   --name "readonly-hub-vnet" \
   --resource-group "prod-networking-rg" \
@@ -146,19 +146,19 @@ az lock create \
   --notes "Prevents modification of hub virtual network configuration."
 ```
 
-### Azure CLI: List and Delete Locks
+### Azure CLI: Listar e Excluir Locks
 
 ```bash
-# List all locks in a resource group
+# Listar todos os locks em um grupo de recursos
 az lock list --resource-group "prod-networking-rg" --output table
 
-# Delete a lock by name
+# Excluir um lock por nome
 az lock delete \
   --name "protect-production" \
   --resource-group "prod-networking-rg"
 ```
 
-### Bicep: Create a CanNotDelete Lock on a Key Vault
+### Bicep: Criar um Lock CanNotDelete em um Key Vault
 
 ```bicep
 @description('The name of the Key Vault to protect.')
@@ -192,7 +192,7 @@ resource keyVaultLock 'Microsoft.Authorization/locks@2020-05-01' = {
 }
 ```
 
-### Bicep: Create Locks on Multiple Critical Resources
+### Bicep: Criar Locks em Múltiplos Recursos Críticos
 
 ```bicep
 @description('The name of the virtual network to protect.')
@@ -243,7 +243,7 @@ resource lawLock 'Microsoft.Authorization/locks@2020-05-01' = {
 }
 ```
 
-### Azure Policy: Automatically Deploy Locks on Key Vaults
+### Azure Policy: Implantar Locks Automaticamente em Key Vaults
 
 ```json
 {
@@ -303,16 +303,16 @@ resource lawLock 'Microsoft.Authorization/locks@2020-05-01' = {
 
 ---
 
-## References
+## Referências
 
-- [Lock resources to prevent unexpected changes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources)
+- [Bloquear recursos para prevenir mudanças inesperadas](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources)
 - [Azure Deployment Stacks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks)
-- [Microsoft.Authorization/locks Bicep reference](https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/locks)
-- [az lock CLI reference](https://learn.microsoft.com/en-us/cli/azure/lock)
-- [Management plane and data plane](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane)
+- [Referência Bicep Microsoft.Authorization/locks](https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/locks)
+- [Referência CLI az lock](https://learn.microsoft.com/en-us/cli/azure/lock)
+- [Plano de gerenciamento e plano de dados](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane)
 
 ---
 
-Previous | Next
+Anterior | Próximo
 :--- | :---
-[Chapter 11 — Microsoft Defender for Cloud](/guide/part-3-policy-compliance/ch11-defender-for-cloud.md) | [Chapter 13 — Bicep & AVM](/guide/part-4-iac-deployment/ch13-bicep-avm.md)
+[Capítulo 11 — Microsoft Defender for Cloud](/guide/part-3-policy-compliance/ch11-defender-for-cloud.md) | [Capítulo 13 — Bicep & AVM](/guide/part-4-iac-deployment/ch13-bicep-avm.md)

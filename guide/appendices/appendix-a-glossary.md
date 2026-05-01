@@ -1,156 +1,156 @@
-# Appendix A — Glossary
+# Apêndice A — Glossário
 
 > Last verified: 2026-04-06
 
 ---
 
-A comprehensive glossary of Azure governance terms used throughout this book.
+Um glossário abrangente de termos de governança Azure utilizados ao longo deste livro.
 
 ---
 
 **ABAC (Attribute-Based Access Control)**
-An authorization system that grants access based on attributes (tags, resource properties, environment) rather than fixed role assignments. Azure RBAC supports ABAC conditions for Azure Storage and other services.
+Um sistema de autorização que concede acesso baseado em atributos (tags, propriedades de recursos, ambiente) em vez de atribuições fixas de roles. O Azure RBAC suporta condições ABAC para Azure Storage e outros serviços.
 
 **Access Review**
-A scheduled Microsoft Entra ID process where designated reviewers verify that users, groups, or service principals still need their assigned access. Used to enforce the principle of least privilege over time.
+Um processo agendado do Microsoft Entra ID onde revisores designados verificam se usuários, grupos ou service principals ainda precisam do acesso atribuído. Usado para aplicar o princípio de menor privilégio ao longo do tempo.
 
 **ALZ (Azure Landing Zone)**
-A pre-configured Azure environment that follows the Cloud Adoption Framework best practices for governance, security, networking, and identity. Provides a scalable foundation for workload deployment.
+Um ambiente Azure pré-configurado que segue as melhores práticas do Cloud Adoption Framework para governança, segurança, rede e identidade. Fornece uma fundação escalável para implantação de workloads.
 
 **Azure Arc**
-A service that extends Azure governance and management to resources running outside of Azure, including on-premises servers, Kubernetes clusters, and resources in other clouds.
+Um serviço que estende a governança e o gerenciamento do Azure para recursos executando fora do Azure, incluindo servidores on-premises, clusters Kubernetes e recursos em outras clouds.
 
 **Azure Firewall**
-A managed, cloud-based network security service that protects Azure Virtual Network resources. Often deployed in the hub VNet of a hub-and-spoke topology.
+Um serviço gerenciado de segurança de rede baseado em cloud que protege recursos do Azure Virtual Network. Frequentemente implantado na VNet hub de uma topologia hub-and-spoke.
 
 **Azure Machine Configuration**
-An Azure Policy feature (formerly Guest Configuration) that audits and enforces settings inside virtual machine operating systems. Works with both Azure VMs and Arc-enabled servers.
+Um recurso do Azure Policy (anteriormente Guest Configuration) que audita e aplica configurações dentro dos sistemas operacionais de máquinas virtuais. Funciona tanto com VMs Azure quanto com servidores Arc-enabled.
 
 **Azure Monitor**
-A comprehensive monitoring platform that collects, analyzes, and acts on telemetry data from Azure and on-premises resources. Includes Log Analytics, Metrics, Alerts, and Workbooks.
+Uma plataforma abrangente de monitoramento que coleta, analisa e atua sobre dados de telemetria de recursos Azure e on-premises. Inclui Log Analytics, Metrics, Alerts e Workbooks.
 
 **Azure Policy**
-A service for creating, assigning, and managing policies that enforce rules and effects over Azure resources. Policies ensure resources stay compliant with organizational standards.
+Um serviço para criar, atribuir e gerenciar políticas que aplicam regras e efeitos sobre recursos Azure. Políticas garantem que recursos permaneçam em conformidade com padrões organizacionais.
 
 **Azure Resource Graph**
-A service that enables efficient querying of Azure resources at scale using the Kusto Query Language (KQL). Used for inventory, compliance reporting, and governance dashboards.
+Um serviço que permite consultas eficientes de recursos Azure em escala usando Kusto Query Language (KQL). Usado para inventário, relatórios de conformidade e dashboards de governança.
 
 **Bicep**
-A domain-specific language (DSL) for deploying Azure resources declaratively. Bicep is the recommended Infrastructure as Code language for Azure-native deployments.
+Uma linguagem de domínio específico (DSL) para implantar recursos Azure de forma declarativa. Bicep é a linguagem de Infrastructure as Code recomendada para deployments Azure-native.
 
 **CAF (Cloud Adoption Framework)**
-Microsoft's comprehensive framework of best practices, documentation, and tools to help organizations adopt the cloud successfully. Includes guidance for governance, security, management, and more.
+O framework abrangente de melhores práticas, documentação e ferramentas da Microsoft para ajudar organizações a adotar a cloud com sucesso. Inclui orientações para governança, segurança, gerenciamento e mais.
 
 **Conditional Access**
-A Microsoft Entra ID feature that enforces access controls based on conditions such as user location, device compliance, risk level, and application sensitivity.
+Um recurso do Microsoft Entra ID que aplica controles de acesso baseados em condições como localização do usuário, conformidade do dispositivo, nível de risco e sensibilidade da aplicação.
 
 **CSPM (Cloud Security Posture Management)**
-A category of security tools that continuously assess cloud environments for security risks and misconfigurations. Microsoft Defender for Cloud provides CSPM capabilities.
+Uma categoria de ferramentas de segurança que avaliam continuamente ambientes cloud para riscos e configurações incorretas de segurança. Microsoft Defender for Cloud fornece capacidades de CSPM.
 
 **Deny Assignment**
-An Azure RBAC mechanism that blocks specific actions for specific principals, even if a role assignment grants them access. Used internally by Deployment Stacks.
+Um mecanismo do Azure RBAC que bloqueia ações específicas para principals específicos, mesmo que uma atribuição de role conceda acesso. Usado internamente por Deployment Stacks.
 
 **Deployment Stack**
-An Azure Resource Manager resource that manages a group of deployed resources as a single unit. Supports deny settings to prevent out-of-band changes and cleanup of orphaned resources on deletion.
+Um recurso do Azure Resource Manager que gerencia um grupo de recursos implantados como uma única unidade. Suporta deny settings para prevenir alterações fora de banda e limpeza de recursos órfãos ao excluir.
 
 **Diagnostic Settings**
-Configuration that routes Azure resource logs and metrics to destinations such as Log Analytics workspaces, Storage Accounts, or Event Hubs.
+Configuração que direciona logs e métricas de recursos Azure para destinos como workspaces do Log Analytics, Storage Accounts ou Event Hubs.
 
 **Entitlement Management**
-A Microsoft Entra ID Identity Governance feature that automates access request workflows, access assignments, reviews, and expiration for groups, applications, and SharePoint sites.
+Um recurso do Microsoft Entra ID Identity Governance que automatiza workflows de solicitação de acesso, atribuições, revisões e expiração para grupos, aplicações e sites SharePoint.
 
 **EPAC (Enterprise Policy as Code)**
-An open-source framework for managing Azure Policy at enterprise scale using Git repositories and CI/CD pipelines. Maintained by Microsoft.
+Um framework open-source para gerenciar Azure Policy em escala enterprise usando repositórios Git e pipelines CI/CD. Mantido pela Microsoft.
 
 **FinOps**
-A cloud financial management discipline that brings financial accountability to cloud spending through collaboration between engineering, finance, and business teams.
+Uma disciplina de gerenciamento financeiro cloud que traz responsabilidade financeira para gastos em cloud através da colaboração entre equipes de engenharia, finanças e negócios.
 
 **Identity Governance**
-A Microsoft Entra ID capability that includes Access Reviews, Entitlement Management, PIM, and lifecycle workflows to manage the identity lifecycle and access.
+Uma capacidade do Microsoft Entra ID que inclui Access Reviews, Entitlement Management, PIM e workflows de ciclo de vida para gerenciar o ciclo de vida de identidades e acesso.
 
 **Initiative (Policy Set)**
-A collection of Azure Policy definitions that are assigned together to simplify management and compliance tracking. Also known as a Policy Set Definition.
+Uma coleção de definições de Azure Policy que são atribuídas juntas para simplificar o gerenciamento e monitoramento de conformidade. Também conhecida como Policy Set Definition.
 
 **KQL (Kusto Query Language)**
-The query language used by Azure Resource Graph, Log Analytics, and Azure Data Explorer. Essential for governance reporting and diagnostics.
+A linguagem de consulta usada pelo Azure Resource Graph, Log Analytics e Azure Data Explorer. Essencial para relatórios de governança e diagnósticos.
 
 **Landing Zone**
-See ALZ (Azure Landing Zone).
+Veja ALZ (Azure Landing Zone).
 
 **Management Group**
-A container above subscriptions in the Azure resource hierarchy. Provides a way to apply governance conditions (policies, RBAC, budgets) across multiple subscriptions.
+Um contêiner acima das subscriptions na hierarquia de recursos Azure. Fornece uma forma de aplicar condições de governança (políticas, RBAC, budgets) em múltiplas subscriptions.
 
 **Managed Identity**
-An identity in Microsoft Entra ID that is automatically managed by Azure. Eliminates the need to manage credentials. Available as system-assigned (tied to a resource) or user-assigned (independent).
+Uma identidade no Microsoft Entra ID que é automaticamente gerenciada pelo Azure. Elimina a necessidade de gerenciar credenciais. Disponível como system-assigned (vinculada a um recurso) ou user-assigned (independente).
 
 **MCSB (Microsoft Cloud Security Benchmark)**
-A set of security best practices and recommendations for Azure, aligned with common compliance frameworks. The default security baseline in Microsoft Defender for Cloud.
+Um conjunto de melhores práticas e recomendações de segurança para Azure, alinhado com frameworks de conformidade comuns. A baseline de segurança padrão no Microsoft Defender for Cloud.
 
 **Microsoft Defender for Cloud**
-A cloud-native application protection platform (CNAPP) that provides security posture management, workload protection, and compliance assessments for Azure, hybrid, and multi-cloud environments.
+Uma plataforma de proteção de aplicações cloud-native (CNAPP) que fornece gerenciamento de postura de segurança, proteção de workloads e avaliações de conformidade para ambientes Azure, híbridos e multi-cloud.
 
 **Microsoft Entra ID**
-Microsoft's cloud-based identity and access management service. Provides authentication, authorization, Conditional Access, and identity governance.
+O serviço de gerenciamento de identidade e acesso baseado em cloud da Microsoft. Fornece autenticação, autorização, Conditional Access e governança de identidade.
 
 **Microsoft Purview**
-A unified data governance platform for discovering, classifying, and protecting data across on-premises, multi-cloud, and SaaS environments.
+Uma plataforma unificada de governança de dados para descobrir, classificar e proteger dados em ambientes on-premises, multi-cloud e SaaS.
 
 **PIM (Privileged Identity Management)**
-A Microsoft Entra ID service that provides just-in-time, time-limited, and approval-based access to privileged roles. Reduces the risk of standing administrative access.
+Um serviço do Microsoft Entra ID que fornece acesso just-in-time, limitado no tempo e baseado em aprovação para roles privilegiados. Reduz o risco de acesso administrativo permanente.
 
 **Policy as Code**
-The practice of managing Azure Policy definitions, initiatives, and assignments in a Git repository and deploying them through CI/CD pipelines.
+A prática de gerenciar definições, initiatives e atribuições de Azure Policy em um repositório Git e implantá-las através de pipelines CI/CD.
 
 **Policy Effect**
-The action Azure Policy takes when a policy rule is matched. Effects include Audit, Deny, DeployIfNotExists, Modify, Append, Disabled, and Manual.
+A ação que o Azure Policy executa quando uma regra de política é correspondida. Efeitos incluem Audit, Deny, DeployIfNotExists, Modify, Append, Disabled e Manual.
 
 **Policy Exemption**
-A mechanism to exclude a specific resource, resource group, or subscription from a policy assignment. Exemptions should be temporary and documented.
+Um mecanismo para excluir um recurso específico, resource group ou subscription de uma atribuição de política. Exemptions devem ser temporárias e documentadas.
 
 **RBAC (Role-Based Access Control)**
-An authorization system that provides fine-grained access management for Azure resources. Users, groups, and service principals are assigned roles at specific scopes.
+Um sistema de autorização que fornece gerenciamento de acesso granular para recursos Azure. Usuários, grupos e service principals recebem roles em escopos específicos.
 
 **Resource Group**
-A logical container for Azure resources that share the same lifecycle. Resources in a group are deployed, updated, and deleted together.
+Um contêiner lógico para recursos Azure que compartilham o mesmo ciclo de vida. Recursos em um grupo são implantados, atualizados e excluídos juntos.
 
 **Resource Lock**
-A mechanism that prevents accidental deletion (CanNotDelete) or modification (ReadOnly) of Azure resources. Applied at the resource, resource group, or subscription level.
+Um mecanismo que previne exclusão acidental (CanNotDelete) ou modificação (ReadOnly) de recursos Azure. Aplicado no nível de recurso, resource group ou subscription.
 
 **Scope**
-The level in the Azure hierarchy at which a governance control (policy, RBAC, lock) is applied. Scopes include management group, subscription, resource group, and individual resource.
+O nível na hierarquia Azure no qual um controle de governança (política, RBAC, lock) é aplicado. Escopos incluem management group, subscription, resource group e recurso individual.
 
 **Secure Score**
-A numerical representation (0–100) of an organization's security posture in Microsoft Defender for Cloud. Higher scores indicate fewer security risks.
+Uma representação numérica (0–100) da postura de segurança de uma organização no Microsoft Defender for Cloud. Scores mais altos indicam menos riscos de segurança.
 
 **Sensitivity Label**
-A classification marker from Microsoft Purview Information Protection that defines the sensitivity of content (e.g., Public, Confidential, Highly Confidential) and applies protection controls.
+Um marcador de classificação do Microsoft Purview Information Protection que define a sensibilidade do conteúdo (ex.: Público, Confidencial, Altamente Confidencial) e aplica controles de proteção.
 
 **Sovereign Cloud**
-A physically and/or logically isolated Azure environment designed to meet specific government data sovereignty requirements (e.g., Azure Government, Azure China).
+Um ambiente Azure física e/ou logicamente isolado, projetado para atender requisitos específicos de soberania de dados governamentais (ex.: Azure Government, Azure China).
 
 **Subscription**
-A logical container for Azure resources that serves as a billing boundary, access control boundary, and scale unit. Each subscription is associated with a single Microsoft Entra ID tenant.
+Um contêiner lógico para recursos Azure que serve como limite de cobrança, limite de controle de acesso e unidade de escala. Cada subscription é associada a um único tenant Microsoft Entra ID.
 
 **Subscription Vending**
-The automated process of creating and configuring new Azure subscriptions with standardized governance controls (policies, RBAC, networking, tags).
+O processo automatizado de criar e configurar novas subscriptions Azure com controles de governança padronizados (políticas, RBAC, rede, tags).
 
 **Tag**
-A key-value pair applied to Azure resources and resource groups for organization, cost tracking, and governance. Tags are metadata, not access controls.
+Um par chave-valor aplicado a recursos Azure e resource groups para organização, monitoramento de custos e governança. Tags são metadados, não controles de acesso.
 
 **Template Spec**
-A resource type for storing an ARM template or Bicep template in Azure for later deployment. Supports versioning and RBAC-controlled access.
+Um tipo de recurso para armazenar um template ARM ou Bicep no Azure para deployment posterior. Suporta versionamento e acesso controlado por RBAC.
 
 **Tenant**
-The top-level organizational entity in Microsoft Entra ID. Represents a dedicated instance of Entra ID that an organization receives when it signs up for a Microsoft cloud service.
+A entidade organizacional de nível superior no Microsoft Entra ID. Representa uma instância dedicada do Entra ID que uma organização recebe ao se inscrever em um serviço cloud da Microsoft.
 
 **Terraform**
-An open-source Infrastructure as Code tool by HashiCorp that supports Azure (via the AzureRM provider) and many other cloud platforms.
+Uma ferramenta open-source de Infrastructure as Code da HashiCorp que suporta Azure (via provider AzureRM) e muitas outras plataformas cloud.
 
 **Workload Identity Federation**
-A mechanism that allows external identity providers (GitHub Actions, Azure DevOps, Kubernetes) to obtain tokens from Microsoft Entra ID without storing secrets. Eliminates the need for client secrets or certificates.
+Um mecanismo que permite que provedores de identidade externos (GitHub Actions, Azure DevOps, Kubernetes) obtenham tokens do Microsoft Entra ID sem armazenar segredos. Elimina a necessidade de client secrets ou certificados.
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [FAQ](../part-8-synthesis/ch30-faq.md) | [Appendix B — Decision Trees](appendix-b-decision-trees.md) |
+| [FAQ](../part-8-synthesis/ch30-faq.md) | [Apêndice B — Árvores de Decisão](appendix-b-decision-trees.md) |

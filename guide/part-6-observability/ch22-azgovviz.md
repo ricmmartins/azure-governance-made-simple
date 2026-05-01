@@ -1,84 +1,84 @@
-# Chapter 22 — AzGovViz (Azure Governance Visualizer)
+# Capítulo 22 — AzGovViz (Azure Governance Visualizer)
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**AzGovViz** (Azure Governance Visualizer) is an open-source PowerShell tool that provides a comprehensive, visual representation of your Azure governance implementation. It iterates through your entire management group hierarchy — from the tenant root down to individual subscriptions — and captures data on Azure Policy, RBAC, Blueprints (legacy), and resource configurations.
+**AzGovViz** (Azure Governance Visualizer) é uma ferramenta open-source em PowerShell que fornece uma representação visual abrangente da sua implementação de governança no Azure. Ela itera por toda a hierarquia de management groups — desde a raiz do tenant até assinaturas individuais — e captura dados sobre Azure Policy, RBAC, Blueprints (legado) e configurações de recursos.
 
-The output is a rich HTML report that governance teams can use to:
+A saída é um relatório HTML rico que equipes de governança podem usar para:
 
-- **Understand the current governance posture** at a glance
-- **Identify gaps** — missing policies, overly broad RBAC assignments, orphaned resources
-- **Audit changes** — compare reports over time to detect governance drift
-- **Communicate** — share visual reports with stakeholders who don't use the Azure Portal
+- **Entender a postura atual de governança** em uma visão rápida
+- **Identificar lacunas** — políticas ausentes, atribuições de RBAC excessivamente amplas, recursos órfãos
+- **Auditar alterações** — comparar relatórios ao longo do tempo para detectar desvios de governança
+- **Comunicar** — compartilhar relatórios visuais com stakeholders que não utilizam o Portal Azure
 
-AzGovViz is maintained by Julian Hayward and the Azure community:
+AzGovViz é mantido por Julian Hayward e pela comunidade Azure:
 - **GitHub:** [github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting)
 
 ---
 
-## How It Works
+## Como Funciona
 
-### What AzGovViz Captures
+### O Que o AzGovViz Captura
 
-AzGovViz queries the Azure Resource Manager API and produces reports covering:
+O AzGovViz consulta a API do Azure Resource Manager e produz relatórios cobrindo:
 
-| Area | Details |
-|------|---------|
-| **Management Group hierarchy** | Visual tree map of MG structure with subscription placement |
-| **Azure Policy** | Policy definitions (built-in and custom), initiative assignments, compliance state |
-| **RBAC** | Role assignments at every scope, custom role definitions, PIM eligibility |
-| **Resources** | Resource counts by type, region, and subscription |
-| **Blueprints** (legacy) | Blueprint definitions and assignments |
-| **Diagnostics** | Subscriptions missing diagnostic settings |
-| **Microsoft Defender for Cloud** | Secure Score, defender plan status |
-| **Cost** | Consumption data (optional) |
-| **Network** | Private endpoints, virtual networks (optional) |
+| Área | Detalhes |
+|------|----------|
+| **Hierarquia de Management Groups** | Mapa visual em árvore da estrutura de MGs com posicionamento de assinaturas |
+| **Azure Policy** | Definições de política (built-in e customizadas), atribuições de iniciativas, estado de conformidade |
+| **RBAC** | Atribuições de função em cada escopo, definições de funções customizadas, elegibilidade PIM |
+| **Recursos** | Contagens de recursos por tipo, região e assinatura |
+| **Blueprints** (legado) | Definições e atribuições de Blueprints |
+| **Diagnósticos** | Assinaturas sem diagnostic settings |
+| **Microsoft Defender for Cloud** | Secure Score, status dos planos do Defender |
+| **Custos** | Dados de consumo (opcional) |
+| **Rede** | Private endpoints, redes virtuais (opcional) |
 
-### Output Components
+### Componentes da Saída
 
-AzGovViz generates three main report sections:
+O AzGovViz gera três seções principais de relatório:
 
-#### 1. Hierarchy Map
+#### 1. Mapa de Hierarquia
 
-An interactive visual tree showing your management group hierarchy with subscriptions nested underneath. Each node is clickable and shows details about the management group or subscription.
+Uma árvore visual interativa mostrando sua hierarquia de management groups com assinaturas aninhadas abaixo. Cada nó é clicável e mostra detalhes sobre o management group ou assinatura.
 
-#### 2. Tenant Summary
+#### 2. Resumo do Tenant
 
-A high-level dashboard with aggregated statistics:
-- Total management groups, subscriptions, and resources
-- Policy definitions and assignments (built-in vs. custom)
-- RBAC role assignments and custom role definitions
-- Orphaned resources and role assignments
-- Policy compliance percentages
+Um dashboard de alto nível com estatísticas agregadas:
+- Total de management groups, assinaturas e recursos
+- Definições e atribuições de políticas (built-in vs. customizadas)
+- Atribuições de função RBAC e definições de funções customizadas
+- Recursos e atribuições de função órfãs
+- Percentuais de conformidade de política
 
 #### 3. Scope Insights
 
-Detailed drill-downs for each management group and subscription:
-- Policy assignments at this scope (inherited vs. direct)
-- RBAC role assignments (inherited vs. direct)
-- Resource inventory
-- Tag compliance
-- Diagnostic settings status
+Drill-downs detalhados para cada management group e assinatura:
+- Atribuições de política neste escopo (herdadas vs. diretas)
+- Atribuições de função RBAC (herdadas vs. diretas)
+- Inventário de recursos
+- Conformidade de tags
+- Status de diagnostic settings
 
 ---
 
-## Setup and Prerequisites
+## Setup e Pré-requisitos
 
-### Requirements
+### Requisitos
 
-| Requirement | Details |
-|-------------|---------|
-| **PowerShell** | PowerShell 7.x (cross-platform) |
-| **Azure PowerShell modules** | `Az.Accounts`, `Az.Resources` (automatically handled) |
-| **Permissions** | `Reader` on the root management group (minimum) |
-| **Microsoft Entra ID** | `Directory Reader` role for user/group resolution (recommended) |
-| **Git** | For cloning the repository |
+| Requisito | Detalhes |
+|-----------|----------|
+| **PowerShell** | PowerShell 7.x (multiplataforma) |
+| **Módulos Azure PowerShell** | `Az.Accounts`, `Az.Resources` (tratados automaticamente) |
+| **Permissões** | `Reader` no management group raiz (mínimo) |
+| **Microsoft Entra ID** | Função `Directory Reader` para resolução de usuários/grupos (recomendado) |
+| **Git** | Para clonar o repositório |
 
-### Installation
+### Instalação
 
 ```powershell
 # Clone the repository
@@ -89,16 +89,16 @@ cd Azure-MG-Sub-Governance-Reporting
 $PSVersionTable.PSVersion
 ```
 
-### Required Azure Permissions
+### Permissões Azure Necessárias
 
-The identity running AzGovViz needs:
+A identidade que executa o AzGovViz precisa de:
 
-| Permission | Scope | Purpose |
-|------------|-------|---------|
-| `Reader` | Root management group | Read all resources, policies, and RBAC |
-| `Directory Reader` | Microsoft Entra ID | Resolve principal names (users, groups, service principals) |
+| Permissão | Escopo | Propósito |
+|-----------|--------|-----------|
+| `Reader` | Management group raiz | Ler todos os recursos, políticas e RBAC |
+| `Directory Reader` | Microsoft Entra ID | Resolver nomes de principals (usuários, grupos, service principals) |
 
-For automated runs (pipelines), create a service principal or managed identity with these permissions:
+Para execuções automatizadas (pipelines), crie um service principal ou managed identity com estas permissões:
 
 ```bash
 # Create a service principal
@@ -108,9 +108,9 @@ az ad sp create-for-rbac --name "sp-azgovviz" --role Reader \
 
 ---
 
-## Running AzGovViz
+## Executando o AzGovViz
 
-### Local Execution
+### Execução Local
 
 ```powershell
 # Connect to Azure
@@ -130,23 +130,23 @@ Connect-AzAccount
   -NoJsonExport
 ```
 
-### Common Parameters
+### Parâmetros Comuns
 
-| Parameter | Description |
-|-----------|-------------|
-| `-ManagementGroupId` | The root management group to start from |
-| `-CsvExport` | Export data to CSV files for external analysis |
-| `-DoAzureConsumption` | Include consumption/cost data (requires additional permissions) |
-| `-ThrottleLimit` | Number of parallel API calls (default: 10) |
-| `-ChangeTrackingDays` | Number of days to look back for changes (default: 14) |
-| `-NoJsonExport` | Skip JSON export (reduces output size) |
-| `-HtmlTableRowsLimit` | Limit HTML table rows (for very large tenants) |
-| `-SubscriptionId4AzContext` | Run for a specific subscription context |
-| `-ExcludedSubscriptions` | Comma-separated list of subscription IDs to exclude |
+| Parâmetro | Descrição |
+|-----------|-----------|
+| `-ManagementGroupId` | O management group raiz a partir do qual iniciar |
+| `-CsvExport` | Exportar dados para arquivos CSV para análise externa |
+| `-DoAzureConsumption` | Incluir dados de consumo/custo (requer permissões adicionais) |
+| `-ThrottleLimit` | Número de chamadas de API paralelas (padrão: 10) |
+| `-ChangeTrackingDays` | Número de dias para consultar alterações (padrão: 14) |
+| `-NoJsonExport` | Pular exportação JSON (reduz tamanho da saída) |
+| `-HtmlTableRowsLimit` | Limitar linhas em tabelas HTML (para tenants muito grandes) |
+| `-SubscriptionId4AzContext` | Executar para um contexto de assinatura específico |
+| `-ExcludedSubscriptions` | Lista separada por vírgulas de IDs de assinatura a excluir |
 
-### GitHub Actions Pipeline
+### Pipeline do GitHub Actions
 
-Create a scheduled GitHub Actions workflow to run AzGovViz automatically:
+Crie um workflow agendado do GitHub Actions para executar o AzGovViz automaticamente:
 
 ```yaml
 # .github/workflows/azgovviz.yml
@@ -203,7 +203,7 @@ jobs:
           retention-days: 90
 ```
 
-### Azure DevOps Pipeline
+### Pipeline do Azure DevOps
 
 ```yaml
 # azure-pipelines-azgovviz.yml
@@ -246,73 +246,73 @@ steps:
 
 ---
 
-## Reading and Interpreting the Output
+## Lendo e Interpretando a Saída
 
-### Hierarchy Map
+### Mapa de Hierarquia
 
-The hierarchy map is an interactive SVG/HTML tree:
+O mapa de hierarquia é uma árvore interativa em SVG/HTML:
 
-- **Color coding** — management groups and subscriptions are color-coded by depth
-- **Hover details** — hover over any node to see policy counts, RBAC assignments, and resource counts
-- **Click to drill down** — click a node to navigate to its Scope Insights section
+- **Codificação por cores** — management groups e assinaturas são coloridos por profundidade
+- **Detalhes ao passar o mouse** — passe o mouse sobre qualquer nó para ver contagens de políticas, atribuições de RBAC e contagens de recursos
+- **Clique para drill-down** — clique em um nó para navegar até sua seção de Scope Insights
 
-**What to look for:**
-- Subscriptions in the wrong management group
-- Management groups with no policies assigned
-- Orphaned subscriptions (not in any governance-managed MG)
+**O que procurar:**
+- Assinaturas no management group errado
+- Management groups sem políticas atribuídas
+- Assinaturas órfãs (não em nenhum MG gerenciado pela governança)
 
-### Tenant Summary
+### Resumo do Tenant
 
-The tenant summary provides aggregate metrics. Key indicators to review:
+O resumo do tenant fornece métricas agregadas. Indicadores-chave para revisar:
 
-| Metric | Healthy | Concerning |
-|--------|---------|------------|
-| **Custom policy definitions** | Documented, well-named | Large number of untested custom policies |
-| **Orphaned role assignments** | 0 | Any orphaned assignments (deleted principals) |
-| **Policy compliance** | >95% | <80% |
-| **Custom role definitions** | Minimal, well-scoped | Many custom roles with broad permissions |
-| **Resources without tags** | <5% | >20% |
+| Métrica | Saudável | Preocupante |
+|---------|----------|-------------|
+| **Definições de política customizadas** | Documentadas, bem nomeadas | Grande número de políticas customizadas não testadas |
+| **Atribuições de função órfãs** | 0 | Qualquer atribuição órfã (principals excluídos) |
+| **Conformidade de política** | >95% | <80% |
+| **Definições de funções customizadas** | Mínimas, com escopo bem definido | Muitas funções customizadas com permissões amplas |
+| **Recursos sem tags** | <5% | >20% |
 
 ### Scope Insights
 
-For each management group and subscription, Scope Insights shows:
+Para cada management group e assinatura, o Scope Insights mostra:
 
-- **Inherited vs. direct policies** — are governance policies properly inherited from parent MGs?
-- **RBAC assignments** — who has access at this scope? Any direct Owner assignments?
-- **Resource breakdown** — what's deployed? Is it what's expected?
-- **Diagnostic settings** — is Activity Log forwarding configured?
-
----
-
-## Best Practices
-
-1. **Run weekly** — schedule automated runs every Monday morning to maintain current visibility
-2. **Store output in a storage account** — upload HTML reports to a blob container with a static website for easy sharing
-3. **Share with the governance team** — distribute links to the latest report in team channels
-4. **Compare reports over time** — use the change tracking feature to detect governance drift
-5. **Use OIDC authentication in pipelines** — avoid storing service principal secrets; use workload identity federation
-6. **Start from the root MG** — always scan the entire hierarchy to catch governance gaps
-7. **Enable CSV export** — CSV files are easier to import into Power BI or Excel for custom analysis
-8. **Review orphaned role assignments** — these indicate deleted users/groups that still have RBAC entries
-9. **Set up alerting on report failures** — if AzGovViz fails, your governance visibility is stale
-10. **Combine with Resource Graph** — use AzGovViz for the visual overview and Resource Graph for targeted queries
+- **Políticas herdadas vs. diretas** — as políticas de governança estão sendo herdadas corretamente dos MGs pais?
+- **Atribuições de RBAC** — quem tem acesso neste escopo? Alguma atribuição direta de Owner?
+- **Detalhamento de recursos** — o que está implantado? É o esperado?
+- **Diagnostic settings** — o encaminhamento do Activity Log está configurado?
 
 ---
 
-## Common Pitfalls
+## Melhores Práticas
 
-| Pitfall | Impact | Mitigation |
-|---------|--------|------------|
-| Insufficient permissions | Incomplete reports; missing data | Ensure `Reader` on root MG and `Directory Reader` in Entra ID |
-| Running too infrequently | Governance drift goes undetected | Schedule weekly automated runs |
-| Not sharing the report | Only the person running AzGovViz benefits | Store in a shared location (storage account, wiki, SharePoint) |
-| Large tenants causing timeouts | Report generation fails | Increase `ThrottleLimit`; use `ExcludedSubscriptions` for non-governed subs |
-| Using interactive login in pipelines | Pipeline fails on auth | Use service principal or managed identity with OIDC |
-| Not reviewing the output | Reports are generated but never read | Schedule monthly governance review meetings using the report as the agenda |
+1. **Execute semanalmente** — agende execuções automáticas toda segunda-feira de manhã para manter a visibilidade atual
+2. **Armazene a saída em uma conta de armazenamento** — faça upload de relatórios HTML para um container de blob com website estático para fácil compartilhamento
+3. **Compartilhe com a equipe de governança** — distribua links para o relatório mais recente nos canais da equipe
+4. **Compare relatórios ao longo do tempo** — use o recurso de change tracking para detectar desvios de governança
+5. **Use autenticação OIDC em pipelines** — evite armazenar secrets de service principal; use workload identity federation
+6. **Comece pelo MG raiz** — sempre escaneie toda a hierarquia para capturar lacunas de governança
+7. **Habilite exportação CSV** — arquivos CSV são mais fáceis de importar no Power BI ou Excel para análise customizada
+8. **Revise atribuições de função órfãs** — estas indicam usuários/grupos excluídos que ainda possuem entradas de RBAC
+9. **Configure alertas sobre falhas do relatório** — se o AzGovViz falhar, sua visibilidade de governança está desatualizada
+10. **Combine com Resource Graph** — use AzGovViz para a visão geral visual e Resource Graph para consultas direcionadas
 
 ---
 
-## References
+## Armadilhas Comuns
+
+| Armadilha | Impacto | Mitigação |
+|-----------|---------|-----------|
+| Permissões insuficientes | Relatórios incompletos; dados ausentes | Garanta `Reader` no MG raiz e `Directory Reader` no Entra ID |
+| Executar com pouca frequência | Desvios de governança passam despercebidos | Agende execuções automáticas semanais |
+| Não compartilhar o relatório | Apenas a pessoa que executa o AzGovViz se beneficia | Armazene em local compartilhado (conta de armazenamento, wiki, SharePoint) |
+| Tenants grandes causando timeouts | Geração de relatório falha | Aumente `ThrottleLimit`; use `ExcludedSubscriptions` para assinaturas não governadas |
+| Usar login interativo em pipelines | Pipeline falha na autenticação | Use service principal ou managed identity com OIDC |
+| Não revisar a saída | Relatórios são gerados mas nunca lidos | Agende reuniões mensais de revisão de governança usando o relatório como agenda |
+
+---
+
+## Referências
 
 - [AzGovViz GitHub repository](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting)
 - [AzGovViz setup guide](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting/blob/main/setup.md)
@@ -324,6 +324,6 @@ For each management group and subscription, Scope Insights shows:
 
 ---
 
-| Previous | Next |
-|:---------|:-----|
+| Anterior | Próximo |
+|:---------|:--------|
 | [Resource Graph](ch21-resource-graph.md) | — |

@@ -1,40 +1,40 @@
-# Chapter 24 — Azure Arc
+# Capítulo 24 — Azure Arc
 
 > Last verified: 2026-04-06
 
 ---
 
-## Overview
+## Visão Geral
 
-**Azure Arc** extends Azure's governance and management capabilities to resources running outside of Azure — whether on-premises, in other clouds (AWS, GCP), or at the edge. With Azure Arc, you can project non-Azure resources into Azure Resource Manager (ARM), enabling you to use the same governance tools (Azure Policy, RBAC, tags, monitoring) on all your infrastructure, regardless of where it runs.
+O **Azure Arc** estende as capacidades de governança e gerenciamento do Azure para recursos executados fora do Azure — seja on-premises, em outras nuvens (AWS, GCP) ou na borda. Com o Azure Arc, você pode projetar recursos não-Azure no Azure Resource Manager (ARM), permitindo usar as mesmas ferramentas de governança (Azure Policy, RBAC, tags, monitoramento) em toda sua infraestrutura, independentemente de onde ela é executada.
 
-Azure Arc answers a critical governance question: *How do I apply consistent policies, access controls, and monitoring across a hybrid and multi-cloud estate?*
+O Azure Arc responde a uma questão crítica de governança: *Como aplico políticas consistentes, controles de acesso e monitoramento em um ambiente híbrido e multi-cloud?*
 
-### What Azure Arc Enables
+### O Que o Azure Arc Habilita
 
-| Capability | Without Arc | With Arc |
+| Capacidade | Sem Arc | Com Arc |
 |---|---|---|
-| Azure Policy | Azure resources only | Any connected server or Kubernetes cluster |
-| RBAC | Azure resources only | Arc-enabled resources get ARM resource IDs |
-| Tagging | Azure resources only | Tag on-premises servers, multi-cloud VMs |
-| Azure Monitor | Azure resources only | Monitor any connected machine |
-| Microsoft Defender for Cloud | Azure resources only | Security posture for hybrid resources |
-| Update Manager | Azure VMs only | Patch any connected server |
+| Azure Policy | Apenas recursos Azure | Qualquer servidor ou cluster Kubernetes conectado |
+| RBAC | Apenas recursos Azure | Recursos habilitados para Arc recebem IDs de recurso ARM |
+| Tagging | Apenas recursos Azure | Tagueie servidores on-premises, VMs multi-cloud |
+| Azure Monitor | Apenas recursos Azure | Monitore qualquer máquina conectada |
+| Microsoft Defender for Cloud | Apenas recursos Azure | Postura de segurança para recursos híbridos |
+| Update Manager | Apenas VMs Azure | Aplique patches em qualquer servidor conectado |
 
 ---
 
-## How It Works
+## Como Funciona
 
-### Arc-Enabled Servers
+### Servidores Habilitados para Arc
 
-Arc-enabled servers allow you to manage Windows and Linux physical servers and virtual machines hosted outside of Azure as if they were Azure resources.
+Os servidores habilitados para Arc permitem gerenciar servidores físicos Windows e Linux e máquinas virtuais hospedadas fora do Azure como se fossem recursos Azure.
 
-**How it works:**
+**Como funciona:**
 
-1. Install the **Azure Connected Machine agent** on the target server
-2. The agent establishes a secure outbound connection to Azure (no inbound ports required)
-3. The server appears as a resource in Azure Resource Manager with a full resource ID
-4. You can now apply Azure Policy, assign RBAC roles, tag the resource, and configure monitoring
+1. Instale o **Azure Connected Machine agent** no servidor alvo
+2. O agente estabelece uma conexão de saída segura para o Azure (nenhuma porta de entrada necessária)
+3. O servidor aparece como um recurso no Azure Resource Manager com um ID de recurso completo
+4. Agora você pode aplicar Azure Policy, atribuir roles RBAC, taguear o recurso e configurar monitoramento
 
 ```bash
 # Install the Azure Connected Machine agent (Linux)
@@ -50,25 +50,25 @@ azcmagent connect \
   --tags "Environment=Production,CostCenter=IT"
 ```
 
-**At-scale onboarding:**
+**Onboarding em escala:**
 
-For large environments, use one of these approaches instead of manual installation:
+Para ambientes grandes, use uma dessas abordagens em vez da instalação manual:
 
-- **Service principal** — Script the agent installation with a service principal for unattended onboarding
-- **Group Policy** — Deploy the agent via Group Policy for domain-joined Windows servers
-- **Ansible/Chef/Puppet** — Use configuration management tools for Linux/Windows fleets
-- **VMware vCenter integration** — Azure Arc-enabled VMware vSphere for vCenter-managed VMs
-- **SCVMM integration** — Azure Arc-enabled System Center Virtual Machine Manager
+- **Service principal** — Script de instalação do agente com service principal para onboarding não assistido
+- **Group Policy** — Implante o agente via Group Policy para servidores Windows associados ao domínio
+- **Ansible/Chef/Puppet** — Use ferramentas de gerenciamento de configuração para frotas Linux/Windows
+- **Integração com VMware vCenter** — Azure Arc-enabled VMware vSphere para VMs gerenciadas pelo vCenter
+- **Integração com SCVMM** — Azure Arc-enabled System Center Virtual Machine Manager
 
-### Arc-Enabled Kubernetes
+### Kubernetes Habilitado para Arc
 
-Arc-enabled Kubernetes lets you attach and manage Kubernetes clusters running anywhere — AKS on Azure Stack HCI, EKS, GKE, Rancher, or self-managed clusters.
+O Kubernetes habilitado para Arc permite conectar e gerenciar clusters Kubernetes executados em qualquer lugar — AKS no Azure Stack HCI, EKS, GKE, Rancher ou clusters autogerenciados.
 
-**How it works:**
+**Como funciona:**
 
-1. Install the Arc agents on the Kubernetes cluster using Helm or the Azure CLI
-2. The cluster is represented as a resource in Azure Resource Manager
-3. You can then apply Azure Policy for Kubernetes (Gatekeeper-based), GitOps configurations, and monitoring
+1. Instale os agentes Arc no cluster Kubernetes usando Helm ou o Azure CLI
+2. O cluster é representado como um recurso no Azure Resource Manager
+3. Você pode então aplicar Azure Policy for Kubernetes (baseado em Gatekeeper), configurações GitOps e monitoramento
 
 ```bash
 # Connect a Kubernetes cluster to Azure Arc
@@ -79,29 +79,29 @@ az connectedk8s connect \
   --tags "Environment=Production"
 ```
 
-**Key capabilities for Arc-enabled Kubernetes:**
+**Principais capacidades para Kubernetes habilitado para Arc:**
 
-- **Azure Policy for Kubernetes** — Enforce pod security, container image restrictions, and namespace policies
-- **GitOps with Flux** — Deploy configurations and applications from Git repositories
-- **Azure Monitor Container Insights** — Monitor cluster health and performance
-- **Microsoft Defender for Containers** — Runtime threat detection for Arc-enabled clusters
-- **Azure Key Vault Secrets Provider** — Mount secrets from Key Vault into pods
+- **Azure Policy for Kubernetes** — Aplique segurança de pods, restrições de imagens de contêiner e políticas de namespace
+- **GitOps com Flux** — Implante configurações e aplicações a partir de repositórios Git
+- **Azure Monitor Container Insights** — Monitore a saúde e desempenho do cluster
+- **Microsoft Defender for Containers** — Detecção de ameaças em tempo de execução para clusters habilitados para Arc
+- **Azure Key Vault Secrets Provider** — Monte secrets do Key Vault em pods
 
 ### Azure Policy via Arc
 
-One of the most powerful governance capabilities of Azure Arc is the ability to apply Azure Policy to non-Azure resources.
+Uma das capacidades de governança mais poderosas do Azure Arc é a habilidade de aplicar Azure Policy a recursos não-Azure.
 
-**For Arc-enabled servers:**
+**Para servidores habilitados para Arc:**
 
-Azure Machine Configuration (formerly Guest Configuration) policies can audit and enforce settings inside the operating system:
+As políticas do Azure Machine Configuration (anteriormente Guest Configuration) podem auditar e aplicar configurações dentro do sistema operacional:
 
-| Policy Category | Examples |
+| Categoria de Política | Exemplos |
 |---|---|
-| Security baselines | Ensure password complexity, audit log retention |
-| Software inventory | Audit installed applications |
-| Configuration drift | Detect and remediate configuration changes |
-| Compliance | Enforce CIS benchmarks, STIG compliance |
-| Certificate management | Monitor certificate expiration |
+| Baselines de segurança | Garantir complexidade de senha, retenção de logs de auditoria |
+| Inventário de software | Auditar aplicações instaladas |
+| Desvio de configuração | Detectar e remediar alterações de configuração |
+| Conformidade | Aplicar benchmarks CIS, conformidade STIG |
+| Gerenciamento de certificados | Monitorar expiração de certificados |
 
 ```json
 {
@@ -117,33 +117,33 @@ Azure Machine Configuration (formerly Guest Configuration) policies can audit an
 }
 ```
 
-**For Arc-enabled Kubernetes:**
+**Para Kubernetes habilitado para Arc:**
 
-Azure Policy for Kubernetes translates policies into OPA Gatekeeper constraints:
+O Azure Policy for Kubernetes traduz políticas em constraints do OPA Gatekeeper:
 
-- Enforce that containers can only pull images from approved registries
-- Require resource limits (CPU and memory) on all containers
-- Prevent privileged containers
-- Enforce namespace-level network policies
+- Garantir que contêineres só possam baixar imagens de registros aprovados
+- Exigir limites de recursos (CPU e memória) em todos os contêineres
+- Prevenir contêineres privilegiados
+- Aplicar políticas de rede no nível de namespace
 
-### RBAC and Monitoring for Arc-Managed Resources
+### RBAC e Monitoramento para Recursos Gerenciados por Arc
 
 **RBAC:**
 
-Since Arc-enabled resources have full Azure Resource Manager resource IDs, standard Azure RBAC works seamlessly:
+Como recursos habilitados para Arc têm IDs de recurso completos do Azure Resource Manager, o RBAC padrão do Azure funciona perfeitamente:
 
 ```
 /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.HybridCompute/machines/{machineName}
 ```
 
-You can assign built-in roles like Reader, Contributor, or custom roles scoped to Arc-enabled resources, resource groups, or subscriptions.
+Você pode atribuir roles integradas como Reader, Contributor ou roles customizadas com escopo para recursos habilitados para Arc, resource groups ou subscriptions.
 
-**Monitoring:**
+**Monitoramento:**
 
-- Install the Azure Monitor Agent (AMA) on Arc-enabled servers to collect logs and metrics
-- Configure Data Collection Rules (DCRs) to route data to Log Analytics workspaces
-- Use the same Azure Monitor workbooks and alerts that you use for Azure VMs
-- Enable VM Insights for performance monitoring and dependency mapping
+- Instale o Azure Monitor Agent (AMA) em servidores habilitados para Arc para coletar logs e métricas
+- Configure Data Collection Rules (DCRs) para rotear dados para workspaces do Log Analytics
+- Use os mesmos workbooks e alertas do Azure Monitor que você usa para VMs Azure
+- Habilite VM Insights para monitoramento de desempenho e mapeamento de dependências
 
 ```bash
 # Install Azure Monitor Agent on an Arc-enabled server
@@ -158,41 +158,41 @@ az connectedmachine extension create \
 
 ---
 
-## Best Practices
+## Melhores Práticas
 
-1. **Start with inventory** — Before onboarding, inventory all non-Azure resources. Understand what you have, where it runs, and what governance gaps exist.
+1. **Comece com inventário** — Antes do onboarding, faça o inventário de todos os recursos não-Azure. Entenda o que você tem, onde é executado e quais lacunas de governança existem.
 
-2. **Use resource groups strategically** — Organize Arc-enabled resources into resource groups by location, function, or business unit — just as you would for native Azure resources.
+2. **Use resource groups estrategicamente** — Organize recursos habilitados para Arc em resource groups por localização, função ou unidade de negócio — assim como faria para recursos nativos Azure.
 
-3. **Tag consistently** — Apply the same tagging strategy to Arc-enabled resources as you do to Azure-native resources. This enables unified cost tracking and governance reporting.
+3. **Tagueie consistentemente** — Aplique a mesma estratégia de tagging aos recursos habilitados para Arc que aplica aos recursos nativos Azure. Isso permite rastreamento de custos e relatórios de governança unificados.
 
-4. **Onboard at scale** — Manual agent installation does not scale. Use automation (Group Policy, Ansible, service principals) from the start.
+4. **Faça onboarding em escala** — Instalação manual do agente não escala. Use automação (Group Policy, Ansible, service principals) desde o início.
 
-5. **Apply policies incrementally** — Start with Audit-mode policies to understand your compliance posture. Switch to Deny or DeployIfNotExists only after remediating existing violations.
+5. **Aplique políticas incrementalmente** — Comece com políticas em modo Audit para entender sua postura de conformidade. Mude para Deny ou DeployIfNotExists apenas após remediar violações existentes.
 
-6. **Secure the agent connection** — The Connected Machine agent uses outbound HTTPS. Ensure your firewall allows the required endpoints. Use private endpoints for sensitive environments.
+6. **Proteja a conexão do agente** — O Connected Machine agent usa HTTPS de saída. Garanta que seu firewall permita os endpoints necessários. Use private endpoints para ambientes sensíveis.
 
-7. **Monitor agent health** — Set up alerts for agent heartbeat failures. An offline agent means a blind spot in your governance.
+7. **Monitore a saúde do agente** — Configure alertas para falhas de heartbeat do agente. Um agente offline significa um ponto cego na sua governança.
 
-8. **Use Azure Machine Configuration for OS-level governance** — Azure Policy alone governs the resource plane. Machine Configuration extends governance inside the operating system.
+8. **Use Azure Machine Configuration para governança no nível do SO** — Azure Policy sozinha governa o plano de recursos. Machine Configuration estende a governança para dentro do sistema operacional.
 
 ---
 
-## Common Pitfalls
+## Armadilhas Comuns
 
-| Pitfall | Impact | Mitigation |
+| Armadilha | Impacto | Mitigação |
 |---|---|---|
-| Forgetting to renew service principal credentials used for onboarding | New servers fail to connect | Use managed identity where possible; set calendar reminders for SP renewal |
-| Not planning network connectivity for the agent | Agent cannot reach Azure endpoints | Whitelist required URLs; consider using a proxy or private link |
-| Treating Arc as "just monitoring" | Missing the governance opportunity | Apply policies, RBAC, and tagging — not just monitoring |
-| Onboarding everything at once | Overwhelming the operations team | Onboard in phases: start with production servers, then expand |
-| Ignoring Arc-enabled Kubernetes | K8s clusters remain ungoverned | Extend Arc to Kubernetes for consistent policy enforcement |
+| Esquecer de renovar credenciais do service principal usado para onboarding | Novos servidores falham ao conectar | Use managed identity quando possível; defina lembretes no calendário para renovação do SP |
+| Não planejar conectividade de rede para o agente | Agente não consegue alcançar endpoints Azure | Libere as URLs necessárias; considere usar proxy ou private link |
+| Tratar Arc como "apenas monitoramento" | Perder a oportunidade de governança | Aplique políticas, RBAC e tagging — não apenas monitoramento |
+| Fazer onboarding de tudo de uma vez | Sobrecarregar a equipe de operações | Faça onboarding em fases: comece com servidores de produção, depois expanda |
+| Ignorar Kubernetes habilitado para Arc | Clusters K8s permanecem sem governança | Estenda o Arc para Kubernetes para aplicação consistente de políticas |
 
 ---
 
-## Code Samples
+## Exemplos de Código
 
-### Azure Policy — Require Tags on Arc-Enabled Servers
+### Azure Policy — Exigir Tags em Servidores Habilitados para Arc
 
 ```json
 {
@@ -217,7 +217,7 @@ az connectedmachine extension create \
 }
 ```
 
-### Resource Graph — Inventory All Arc-Enabled Resources
+### Resource Graph — Inventário de Todos os Recursos Habilitados para Arc
 
 ```kusto
 resources
@@ -232,7 +232,7 @@ resources
 | order by type asc, name asc
 ```
 
-### Resource Graph — Arc Agent Health
+### Resource Graph — Saúde do Agente Arc
 
 ```kusto
 resources
@@ -246,7 +246,7 @@ resources
 
 ---
 
-## References
+## Referências
 
 - [Azure Arc Overview](https://learn.microsoft.com/azure/azure-arc/overview)
 - [Arc-Enabled Servers](https://learn.microsoft.com/azure/azure-arc/servers/overview)
@@ -259,6 +259,6 @@ resources
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
 | [Azure Landing Zones](ch23-azure-landing-zones.md) | [Sovereign Landing Zones](ch25-sovereign-landing-zones.md) |

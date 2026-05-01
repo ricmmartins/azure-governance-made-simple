@@ -1,117 +1,117 @@
-# Appendix B — Decision Trees
+# Apêndice B — Árvores de Decisão
 
 > Last verified: 2026-04-06
 
 ---
 
-## Decision Tree 1: Which Governance Tool Should I Use?
+## Árvore de Decisão 1: Qual Ferramenta de Governança Devo Usar?
 
-Use this decision tree to choose the right Azure governance mechanism for your requirement.
+Use esta árvore de decisão para escolher o mecanismo de governança Azure correto para seu requisito.
 
 ```
-START: What do you want to control?
+INÍCIO: O que você deseja controlar?
 │
-├─► "What RESOURCES look like (configuration, properties)"
+├─► "Como os RECURSOS devem ser (configuração, propriedades)"
 │   │
-│   ├─► Should it prevent non-compliant resources from being created?
+│   ├─► Deve impedir que recursos não conformes sejam criados?
 │   │   │
-│   │   ├─► YES → Azure Policy (Deny effect)
-│   │   │   Example: "Block storage accounts without HTTPS"
+│   │   ├─► SIM → Azure Policy (efeito Deny)
+│   │   │   Exemplo: "Bloquear storage accounts sem HTTPS"
 │   │   │
-│   │   └─► NO → Do you want to auto-remediate?
+│   │   └─► NÃO → Você deseja auto-remediar?
 │   │       │
-│   │       ├─► YES → Azure Policy (DeployIfNotExists / Modify)
-│   │       │   Example: "Auto-enable diagnostic settings"
+│   │       ├─► SIM → Azure Policy (DeployIfNotExists / Modify)
+│   │       │   Exemplo: "Auto-habilitar diagnostic settings"
 │   │       │
-│   │       └─► NO → Azure Policy (Audit effect)
-│   │           Example: "Flag VMs without managed disks"
+│   │       └─► NÃO → Azure Policy (efeito Audit)
+│   │           Exemplo: "Sinalizar VMs sem managed disks"
 │   │
-│   └─► Is it about OS-level configuration inside a VM?
+│   └─► É sobre configuração no nível de SO dentro de uma VM?
 │       │
-│       └─► YES → Azure Machine Configuration (via Azure Policy)
-│           Example: "Ensure password complexity on Windows servers"
+│       └─► SIM → Azure Machine Configuration (via Azure Policy)
+│           Exemplo: "Garantir complexidade de senha em servidores Windows"
 │
-├─► "What USERS can do (permissions, actions)"
+├─► "O que USUÁRIOS podem fazer (permissões, ações)"
 │   │
-│   ├─► Is it about permanent access?
+│   ├─► É sobre acesso permanente?
 │   │   │
-│   │   └─► YES → Azure RBAC (role assignments)
-│   │       Example: "Developers get Contributor on dev resource group"
+│   │   └─► SIM → Azure RBAC (atribuições de role)
+│   │       Exemplo: "Desenvolvedores recebem Contributor no resource group dev"
 │   │
-│   ├─► Is it about temporary/privileged access?
+│   ├─► É sobre acesso temporário/privilegiado?
 │   │   │
-│   │   └─► YES → PIM (Privileged Identity Management)
-│   │       Example: "Admins activate Owner role for 4 hours"
+│   │   └─► SIM → PIM (Privileged Identity Management)
+│   │       Exemplo: "Admins ativam role Owner por 4 horas"
 │   │
-│   └─► Is it about conditional access (location, device, risk)?
+│   └─► É sobre acesso condicional (localização, dispositivo, risco)?
 │       │
-│       └─► YES → Microsoft Entra ID Conditional Access
-│           Example: "Require MFA from untrusted networks"
+│       └─► SIM → Microsoft Entra ID Conditional Access
+│           Exemplo: "Exigir MFA de redes não confiáveis"
 │
-├─► "Prevent accidental deletion or modification of resources"
+├─► "Prevenir exclusão ou modificação acidental de recursos"
 │   │
-│   ├─► Is it a single critical resource?
+│   ├─► É um único recurso crítico?
 │   │   │
-│   │   └─► YES → Resource Lock (CanNotDelete or ReadOnly)
-│   │       Example: "Lock the production SQL database"
+│   │   └─► SIM → Resource Lock (CanNotDelete ou ReadOnly)
+│   │       Exemplo: "Bloquear o banco de dados SQL de produção"
 │   │
-│   └─► Is it an entire deployment managed as code?
+│   └─► É um deployment inteiro gerenciado como código?
 │       │
-│       └─► YES → Deployment Stack (deny settings)
-│           Example: "Prevent out-of-band changes to the networking stack"
+│       └─► SIM → Deployment Stack (deny settings)
+│           Exemplo: "Prevenir alterações fora de banda no stack de rede"
 │
-└─► "Detect and respond to security threats"
+└─► "Detectar e responder a ameaças de segurança"
     │
     └─► Microsoft Defender for Cloud
-        ├─► Posture assessment → Defender CSPM
-        ├─► Workload protection → Defender for Servers, Containers, etc.
-        └─► Compliance tracking → Regulatory compliance dashboard
+        ├─► Avaliação de postura → Defender CSPM
+        ├─► Proteção de workloads → Defender for Servers, Containers, etc.
+        └─► Monitoramento de conformidade → Dashboard de conformidade regulatória
 ```
 
 ---
 
-## Decision Tree 2: How Should I Structure My Management Groups?
+## Árvore de Decisão 2: Como Devo Estruturar Meus Management Groups?
 
-Use this decision tree to determine the right management group design for your organization.
+Use esta árvore de decisão para determinar o design correto de management groups para sua organização.
 
 ```
-START: How many Azure subscriptions does your organization have (or plan to have)?
+INÍCIO: Quantas subscriptions Azure sua organização tem (ou planeja ter)?
 │
 ├─► 1–3 subscriptions
 │   │
-│   └─► Do you have regulatory requirements?
+│   └─► Você tem requisitos regulatórios?
 │       │
-│       ├─► NO → Minimal structure:
+│       ├─► NÃO → Estrutura mínima:
 │       │       Tenant Root Group
-│       │       └── Your Organization
-│       │           ├── Production (subscription)
-│       │           ├── Non-Production (subscription)
+│       │       └── Sua Organização
+│       │           ├── Produção (subscription)
+│       │           ├── Não-Produção (subscription)
 │       │           └── Sandbox (subscription)
 │       │
-│       │   Assign policies at the "Your Organization" level.
+│       │   Atribua políticas no nível "Sua Organização".
 │       │
-│       └─► YES → Add a Regulated management group:
+│       └─► SIM → Adicione um management group Regulado:
 │               Tenant Root Group
-│               └── Your Organization
-│                   ├── Regulated (subscriptions with compliance needs)
-│                   ├── General (other subscriptions)
+│               └── Sua Organização
+│                   ├── Regulado (subscriptions com necessidades de conformidade)
+│                   ├── Geral (outras subscriptions)
 │                   └── Sandbox
 │
 ├─► 4–20 subscriptions
 │   │
-│   └─► Do you have centralized platform services (networking, logging)?
+│   └─► Você tem serviços de plataforma centralizados (rede, logging)?
 │       │
-│       ├─► NO → Simple Landing Zone structure:
+│       ├─► NÃO → Estrutura simples de Landing Zone:
 │       │       Tenant Root Group
-│       │       └── Your Organization
-│       │           ├── Production
-│       │           ├── Non-Production
-│       │           ├── Shared Services
+│       │       └── Sua Organização
+│       │           ├── Produção
+│       │           ├── Não-Produção
+│       │           ├── Serviços Compartilhados
 │       │           └── Sandbox
 │       │
-│       └─► YES → CAF Landing Zone structure:
+│       └─► SIM → Estrutura CAF Landing Zone:
 │               Tenant Root Group
-│               └── Your Organization
+│               └── Sua Organização
 │                   ├── Platform
 │                   │   ├── Management
 │                   │   ├── Connectivity
@@ -123,9 +123,9 @@ START: How many Azure subscriptions does your organization have (or plan to have
 │
 └─► 20+ subscriptions
     │
-    └─► Full ALZ structure (recommended):
+    └─► Estrutura ALZ completa (recomendada):
             Tenant Root Group
-            └── Your Organization
+            └── Sua Organização
                 ├── Platform
                 │   ├── Management
                 │   ├── Connectivity
@@ -133,114 +133,114 @@ START: How many Azure subscriptions does your organization have (or plan to have
                 ├── Landing Zones
                 │   ├── Corp
                 │   ├── Online
-                │   └── Regulated (if needed)
+                │   └── Regulado (se necessário)
                 │       ├── HIPAA
                 │       ├── PCI
                 │       └── ...
                 ├── Sandbox
                 └── Decommissioned
 
-        Consider adding regional or business-unit
-        subdivisions under Landing Zones if you have
-        multi-region or multi-BU requirements.
+        Considere adicionar subdivisões regionais ou
+        por unidade de negócio sob Landing Zones se você
+        tiver requisitos multi-região ou multi-BU.
 ```
 
-**Key principles regardless of size:**
+**Princípios-chave independentemente do tamanho:**
 
-- Never assign policies directly at the Tenant Root Group
-- Keep depth to 3–4 levels (6 is the Azure maximum)
-- Management groups represent governance boundaries, not org chart structure
-- Plan for growth — it is easier to add management groups than to restructure
+- Nunca atribua políticas diretamente no Tenant Root Group
+- Mantenha a profundidade em 3–4 níveis (6 é o máximo do Azure)
+- Management groups representam limites de governança, não estrutura do organograma
+- Planeje para crescimento — é mais fácil adicionar management groups do que reestruturar
 
 ---
 
-## Decision Tree 3: Which Policy Effect Should I Choose?
+## Árvore de Decisão 3: Qual Efeito de Política Devo Escolher?
 
-Use this decision tree to select the appropriate Azure Policy effect for your requirement.
+Use esta árvore de decisão para selecionar o efeito de Azure Policy apropriado para seu requisito.
 
 ```
-START: What should happen when a resource matches the policy rule?
+INÍCIO: O que deve acontecer quando um recurso corresponde à regra da política?
 │
-├─► "I want to BLOCK non-compliant resources from being created or modified"
+├─► "Quero BLOQUEAR recursos não conformes de serem criados ou modificados"
 │   │
 │   └─► Use: Deny
 │       │
-│       ├─► CAUTION: Deny affects ALL users, including admins
-│       ├─► TIP: Test with Audit first, then switch to Deny
-│       └─► EXAMPLE: "Deny storage accounts without TLS 1.2"
+│       ├─► CUIDADO: Deny afeta TODOS os usuários, incluindo admins
+│       ├─► DICA: Teste com Audit primeiro, depois mude para Deny
+│       └─► EXEMPLO: "Negar storage accounts sem TLS 1.2"
 │
-├─► "I want to FLAG non-compliant resources but not block them"
+├─► "Quero SINALIZAR recursos não conformes mas não bloqueá-los"
 │   │
 │   └─► Use: Audit
 │       │
-│       ├─► Resources appear as "Non-compliant" in the compliance dashboard
-│       ├─► No enforcement — resources are still created/modified normally
-│       └─► EXAMPLE: "Audit VMs without managed disks"
+│       ├─► Recursos aparecem como "Não conforme" no dashboard de conformidade
+│       ├─► Sem enforcement — recursos ainda são criados/modificados normalmente
+│       └─► EXEMPLO: "Auditar VMs sem managed disks"
 │
-├─► "I want to AUTOMATICALLY FIX non-compliant resources"
+├─► "Quero CORRIGIR AUTOMATICAMENTE recursos não conformes"
 │   │
-│   ├─► Does the fix involve deploying a RELATED resource?
+│   ├─► A correção envolve implantar um RECURSO RELACIONADO?
 │   │   │
-│   │   └─► YES → Use: DeployIfNotExists (DINE)
+│   │   └─► SIM → Use: DeployIfNotExists (DINE)
 │   │       │
-│   │       ├─► Deploys a related resource if it does not exist
-│   │       ├─► Requires a managed identity for remediation
-│   │       ├─► Can run on existing resources via remediation tasks
-│   │       └─► EXAMPLE: "Deploy diagnostic settings if not configured"
+│   │       ├─► Implanta um recurso relacionado se não existir
+│   │       ├─► Requer uma managed identity para remediação
+│   │       ├─► Pode executar em recursos existentes via tarefas de remediação
+│   │       └─► EXEMPLO: "Implantar diagnostic settings se não configurados"
 │   │
-│   └─► Does the fix involve MODIFYING properties on the resource itself?
+│   └─► A correção envolve MODIFICAR propriedades no próprio recurso?
 │       │
-│       └─► YES → Use: Modify
+│       └─► SIM → Use: Modify
 │           │
-│           ├─► Adds, updates, or removes properties (typically tags)
-│           ├─► Requires a managed identity for remediation
-│           └─► EXAMPLE: "Inherit the Environment tag from resource group"
+│           ├─► Adiciona, atualiza ou remove propriedades (tipicamente tags)
+│           ├─► Requer uma managed identity para remediação
+│           └─► EXEMPLO: "Herdar a tag Environment do resource group"
 │
-├─► "I want to ADD data to a resource during creation"
+├─► "Quero ADICIONAR dados a um recurso durante a criação"
 │   │
 │   └─► Use: Append
 │       │
-│       ├─► Adds properties to the resource during create/update
-│       ├─► Limited use cases — Modify is generally preferred
-│       └─► EXAMPLE: "Append IP restrictions to a web app"
+│       ├─► Adiciona propriedades ao recurso durante create/update
+│       ├─► Casos de uso limitados — Modify é geralmente preferível
+│       └─► EXEMPLO: "Adicionar restrições de IP a um web app"
 │
-├─► "I want the policy to EXIST but not evaluate"
+├─► "Quero que a política EXISTA mas não avalie"
 │   │
 │   └─► Use: Disabled
 │       │
-│       ├─► Policy is assigned but has no effect
-│       ├─► Useful for testing or temporary deactivation
-│       └─► Prefer policy exemptions over Disabled for specific scopes
+│       ├─► Política está atribuída mas não tem efeito
+│       ├─► Útil para testes ou desativação temporária
+│       └─► Prefira policy exemptions em vez de Disabled para escopos específicos
 │
-└─► "I need MANUAL attestation for compliance"
+└─► "Preciso de ATESTAÇÃO MANUAL para conformidade"
     │
     └─► Use: Manual
         │
-        ├─► Compliance is determined by manual attestation, not automation
-        ├─► Used for controls that cannot be evaluated automatically
-        └─► EXAMPLE: "Verify disaster recovery test was conducted"
+        ├─► Conformidade é determinada por atestação manual, não automação
+        ├─► Usado para controles que não podem ser avaliados automaticamente
+        └─► EXEMPLO: "Verificar se teste de recuperação de desastres foi conduzido"
 ```
 
-**Quick reference table:**
+**Tabela de referência rápida:**
 
-| Effect | Blocks Creation? | Auto-Remediates? | Use Case |
+| Efeito | Bloqueia Criação? | Auto-Remedia? | Caso de Uso |
 |---|---|---|---|
-| **Deny** | ✅ Yes | ❌ No | Hard enforcement — must comply |
-| **Audit** | ❌ No | ❌ No | Visibility — understand compliance |
-| **DeployIfNotExists** | ❌ No | ✅ Yes (related resource) | Auto-deploy missing configurations |
-| **Modify** | ❌ No | ✅ Yes (same resource) | Auto-fix properties (tags, settings) |
-| **Append** | ❌ No | ❌ No (at create/update only) | Add properties during deployment |
-| **Disabled** | ❌ No | ❌ No | Temporarily turn off a policy |
-| **Manual** | ❌ No | ❌ No | Human-attested compliance |
+| **Deny** | ✅ Sim | ❌ Não | Enforcement rígido — deve estar conforme |
+| **Audit** | ❌ Não | ❌ Não | Visibilidade — entender conformidade |
+| **DeployIfNotExists** | ❌ Não | ✅ Sim (recurso relacionado) | Auto-implantar configurações ausentes |
+| **Modify** | ❌ Não | ✅ Sim (mesmo recurso) | Auto-corrigir propriedades (tags, configurações) |
+| **Append** | ❌ Não | ❌ Não (apenas em create/update) | Adicionar propriedades durante deployment |
+| **Disabled** | ❌ Não | ❌ Não | Desativar temporariamente uma política |
+| **Manual** | ❌ Não | ❌ Não | Conformidade atestada por humano |
 
-**Recommended adoption path:**
+**Caminho de adoção recomendado:**
 
-1. Start with **Audit** to understand your current compliance posture
-2. Enable **DeployIfNotExists** / **Modify** for auto-remediation of common issues
-3. Switch to **Deny** for critical controls once teams are aware and existing resources are compliant
+1. Comece com **Audit** para entender sua postura atual de conformidade
+2. Habilite **DeployIfNotExists** / **Modify** para auto-remediação de problemas comuns
+3. Mude para **Deny** para controles críticos quando as equipes estiverem cientes e recursos existentes estiverem conformes
 
 ---
 
-| Previous | Next |
+| Anterior | Próximo |
 |:---|:---|
-| [Appendix A — Glossary](appendix-a-glossary.md) | [Appendix C — Policy Starter Kit](appendix-c-policy-starter-kit.md) |
+| [Apêndice A — Glossário](appendix-a-glossary.md) | [Apêndice C — Kit Inicial de Políticas](appendix-c-policy-starter-kit.md) |
