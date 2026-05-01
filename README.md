@@ -3,6 +3,7 @@
 [![Book](https://img.shields.io/badge/📖_Read_Online-azgovernance.com-blue?style=for-the-badge)](https://azgovernance.com/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-green.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
+🌐 **Available in:** [🇺🇸 English (this branch)](.) | [🇧🇷 Português-Brasil](https://github.com/ricmmartins/azure-governance-made-simple/tree/pt-br)
 
 > **The comprehensive, open-source reference guide to Azure Governance — from foundations to enterprise scale.**
 
