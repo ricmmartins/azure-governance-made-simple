@@ -5,6 +5,8 @@
 
 🌐 **Available in:** [🇺🇸 English (this branch)](.) | [🇧🇷 Português-Brasil](https://github.com/ricmmartins/azure-governance-made-simple/tree/pt-br)
 
+> **Note:** The default branch is now `en-us`. The Portuguese-Brasil translation lives on the `pt-br` branch.
+
 > **The comprehensive, open-source reference guide to Azure Governance — from foundations to enterprise scale.**
 
 ## About This Book
