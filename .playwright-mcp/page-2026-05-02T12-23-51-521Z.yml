@@ -1,0 +1,197 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fricmmartins%2Fazure-governance-made-simple%2Fgraphs%2Fcontributors
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Frepos%2Finsights%2Fcontributors%2Findex&source=header-repo&source_repo=ricmmartins%2Fazure-governance-made-simple
+            - button "Appearance settings" [ref=e58] [cursor=pointer]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "ricmmartins" [ref=e70] [cursor=pointer]:
+            - /url: /ricmmartins
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "azure-governance-made-simple" [ref=e73] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "You must be signed in to change notification settings" [ref=e77] [cursor=pointer]:
+                - /url: /login?return_to=%2Fricmmartins%2Fazure-governance-made-simple
+                - img [ref=e78]
+                - text: Notifications
+            - listitem [ref=e80]:
+              - link "Fork 12" [ref=e81] [cursor=pointer]:
+                - /url: /login?return_to=%2Fricmmartins%2Fazure-governance-made-simple
+                - img [ref=e82]
+                - text: Fork
+                - generic "12" [ref=e84]
+            - listitem [ref=e85]:
+              - link "You must be signed in to star a repository" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fricmmartins%2Fazure-governance-made-simple
+                - img [ref=e88]
+                - text: Star
+                - generic "33 users starred this repository" [ref=e90]: "33"
+      - navigation "Repository" [ref=e91]:
+        - list [ref=e92]:
+          - listitem [ref=e93]:
+            - link "Code" [ref=e94] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple
+              - img [ref=e95]
+              - generic [ref=e97]: Code
+          - listitem [ref=e98]:
+            - link "Issues" [ref=e99] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/issues
+              - img [ref=e100]
+              - generic [ref=e103]: Issues
+          - listitem [ref=e104]:
+            - link "Pull requests" [ref=e105] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/pulls
+              - img [ref=e106]
+              - generic [ref=e108]: Pull requests
+          - listitem [ref=e109]:
+            - link "Actions" [ref=e110] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/actions
+              - img [ref=e111]
+              - generic [ref=e113]: Actions
+          - listitem [ref=e114]:
+            - link "Projects" [ref=e115] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/projects
+              - img [ref=e116]
+              - generic [ref=e118]: Projects
+          - listitem [ref=e119]:
+            - link "Wiki" [ref=e120] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/wiki
+              - img [ref=e121]
+              - generic [ref=e123]: Wiki
+          - listitem [ref=e124]:
+            - link "Security and quality" [ref=e125] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/security
+              - img [ref=e126]
+              - generic [ref=e128]: Security and quality
+          - listitem [ref=e129]:
+            - link "Insights" [ref=e130] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/pulse
+              - img [ref=e131]
+              - generic [ref=e133]: Insights
+    - generic [ref=e135]:
+      - 'heading "Insights: ricmmartins/azure-governance-made-simple" [level=1] [ref=e136]'
+      - generic [ref=e138]:
+        - navigation "Insights" [ref=e140]:
+          - link "Pulse" [ref=e141] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/pulse
+          - link "Contributors" [ref=e142]:
+            - /url: /ricmmartins/azure-governance-made-simple/graphs/contributors
+          - link "Community standards" [ref=e143] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/community
+          - link "Commits" [ref=e144] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/graphs/commit-activity
+          - link "Code frequency" [ref=e145] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/graphs/code-frequency
+          - link "Dependency graph" [ref=e146] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/network/dependencies
+          - link "Network" [ref=e147] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/network
+          - link "Forks" [ref=e148] [cursor=pointer]:
+            - /url: /ricmmartins/azure-governance-made-simple/forks
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - heading "Contributors" [level=1] [ref=e155]
+              - paragraph [ref=e156]: Contributions per week to en-us, excluding merge commits
+            - generic [ref=e157]:
+              - 'button "Period: All" [ref=e158] [cursor=pointer]':
+                - generic [ref=e160]: "Period: All"
+                - generic:
+                  - img
+              - 'button "Contributions: Commits" [ref=e161] [cursor=pointer]':
+                - generic [ref=e163]: "Contributions: Commits"
+                - generic:
+                  - img
+          - generic [ref=e164]:
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - img [ref=e173]
+                - generic [ref=e176]: Loading
+              - paragraph [ref=e178]: Crunching the latest data, just for you. Hang tight…
+            - list
+  - contentinfo [ref=e179]:
+    - heading "Footer" [level=2] [ref=e180]
+    - generic [ref=e181]:
+      - generic [ref=e182]:
+        - link "GitHub Homepage" [ref=e183] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e184]
+        - generic [ref=e186]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e187]:
+        - heading "Footer navigation" [level=3] [ref=e188]
+        - list "Footer navigation" [ref=e189]:
+          - listitem [ref=e190]:
+            - link "Terms" [ref=e191] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e192]:
+            - link "Privacy" [ref=e193] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e194]:
+            - link "Security" [ref=e195] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e196]:
+            - link "Status" [ref=e197] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e198]:
+            - link "Community" [ref=e199] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e200]:
+            - link "Docs" [ref=e201] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e202]:
+            - link "Contact" [ref=e203] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e204]:
+            - button "Manage cookies" [ref=e206] [cursor=pointer]
+          - listitem [ref=e207]:
+            - button "Do not share my personal information" [ref=e209] [cursor=pointer]

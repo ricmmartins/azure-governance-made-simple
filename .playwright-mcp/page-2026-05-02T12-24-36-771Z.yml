@@ -1,0 +1,1025 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fricmmartins%2Fazure-governance-made-simple
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=ricmmartins%2Fazure-governance-made-simple
+            - button "Appearance settings" [ref=e58] [cursor=pointer]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "ricmmartins" [ref=e70] [cursor=pointer]:
+            - /url: /ricmmartins
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "azure-governance-made-simple" [ref=e73] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "You must be signed in to change notification settings" [ref=e77] [cursor=pointer]:
+                - /url: /login?return_to=%2Fricmmartins%2Fazure-governance-made-simple
+                - img [ref=e78]
+                - text: Notifications
+            - listitem [ref=e80]:
+              - link "Fork 12" [ref=e81] [cursor=pointer]:
+                - /url: /login?return_to=%2Fricmmartins%2Fazure-governance-made-simple
+                - img [ref=e82]
+                - text: Fork
+                - generic "12" [ref=e84]
+            - listitem [ref=e85]:
+              - link "You must be signed in to star a repository" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fricmmartins%2Fazure-governance-made-simple
+                - img [ref=e88]
+                - text: Star
+                - generic "33 users starred this repository" [ref=e90]: "33"
+      - navigation "Repository" [ref=e91]:
+        - list [ref=e92]:
+          - listitem [ref=e93]:
+            - link "Code" [ref=e94] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple
+              - img [ref=e95]
+              - generic [ref=e97]: Code
+          - listitem [ref=e98]:
+            - link "Issues" [ref=e99] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/issues
+              - img [ref=e100]
+              - generic [ref=e103]: Issues
+          - listitem [ref=e104]:
+            - link "Pull requests" [ref=e105] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/pulls
+              - img [ref=e106]
+              - generic [ref=e108]: Pull requests
+          - listitem [ref=e109]:
+            - link "Actions" [ref=e110] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/actions
+              - img [ref=e111]
+              - generic [ref=e113]: Actions
+          - listitem [ref=e114]:
+            - link "Projects" [ref=e115] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/projects
+              - img [ref=e116]
+              - generic [ref=e118]: Projects
+          - listitem [ref=e119]:
+            - link "Wiki" [ref=e120] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/wiki
+              - img [ref=e121]
+              - generic [ref=e123]: Wiki
+          - listitem [ref=e124]:
+            - link "Security and quality" [ref=e125] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/security
+              - img [ref=e126]
+              - generic [ref=e128]: Security and quality
+          - listitem [ref=e129]:
+            - link "Insights" [ref=e130] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/pulse
+              - img [ref=e131]
+              - generic [ref=e133]: Insights
+    - generic [ref=e146]:
+      - heading "ricmmartins/azure-governance-made-simple" [level=1] [ref=e148]
+      - generic [ref=e149]:
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - button "en-us branch" [ref=e156] [cursor=pointer]:
+                - generic [ref=e157]:
+                  - generic [ref=e159]:
+                    - img [ref=e161]
+                    - generic [ref=e164]: en-us
+                  - generic:
+                    - img
+              - generic [ref=e165]:
+                - link "Go to Branches page" [ref=e166] [cursor=pointer]:
+                  - /url: /ricmmartins/azure-governance-made-simple/branches
+                  - img [ref=e167]
+                - link "Go to Tags page" [ref=e169] [cursor=pointer]:
+                  - /url: /ricmmartins/azure-governance-made-simple/tags
+                  - img [ref=e170]
+            - generic [ref=e172]:
+              - generic [ref=e176]:
+                - img [ref=e178]
+                - combobox "Go to file" [ref=e180]
+              - button "Code" [ref=e181] [cursor=pointer]:
+                - generic [ref=e182]:
+                  - generic:
+                    - img
+                  - generic [ref=e183]: Code
+                  - generic:
+                    - img
+          - generic [ref=e184]:
+            - generic [ref=e185]:
+              - heading "Folders and files" [level=2] [ref=e186]
+              - table "Folders and files" [ref=e187]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e188]:
+                  - 'row "Latest commit ricmmartins commits by ricmmartins docs: update README note about default branch rename to en-us Commit b25a701 · May 1, 2026yesterday History 408 Commits" [ref=e189]':
+                    - 'cell "Latest commit ricmmartins commits by ricmmartins docs: update README note about default branch rename to en-us Commit b25a701 · May 1, 2026yesterday History 408 Commits" [ref=e190]':
+                      - generic [ref=e191]:
+                        - heading "Latest commit" [level=2] [ref=e192]
+                        - generic [ref=e193]:
+                          - generic [ref=e195]:
+                            - link "ricmmartins" [ref=e196] [cursor=pointer]:
+                              - /url: /ricmmartins
+                              - img "ricmmartins" [ref=e197]
+                            - link "commits by ricmmartins" [ref=e198] [cursor=pointer]:
+                              - /url: /ricmmartins/azure-governance-made-simple/commits?author=ricmmartins
+                              - text: ricmmartins
+                          - 'link "docs: update README note about default branch rename to en-us" [ref=e202] [cursor=pointer]':
+                            - /url: /ricmmartins/azure-governance-made-simple/commit/b25a7016e2d7f9ceb2c5e147d00e1cba43fddd03
+                        - generic [ref=e203]:
+                          - generic [ref=e205]:
+                            - link "Commit b25a701" [ref=e206] [cursor=pointer]:
+                              - /url: /ricmmartins/azure-governance-made-simple/commit/b25a7016e2d7f9ceb2c5e147d00e1cba43fddd03
+                              - text: b25a701
+                            - text: ·
+                            - generic "May 1, 2026, 11:06 AM EDT" [ref=e207]: May 1, 2026yesterday
+                          - generic [ref=e208]:
+                            - heading "History" [level=2] [ref=e209]
+                            - link "408 Commits" [ref=e210] [cursor=pointer]:
+                              - /url: /ricmmartins/azure-governance-made-simple/commits/en-us/
+                              - generic [ref=e211]:
+                                - generic:
+                                  - img
+                                - generic [ref=e212]: 408 Commits
+                  - row ".copilot, (Directory) Add governance hierarchy diagram (SVG) and draw.io MCP config Apr 29, 20263 days ago" [ref=e213]:
+                    - cell ".copilot, (Directory)" [ref=e214]:
+                      - generic [ref=e215]:
+                        - img [ref=e216]
+                        - link ".copilot, (Directory)" [ref=e221] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/tree/en-us/.copilot
+                          - text: .copilot
+                    - cell "Add governance hierarchy diagram (SVG) and draw.io MCP config" [ref=e222]:
+                      - link "Add governance hierarchy diagram (SVG) and draw.io MCP config" [ref=e225] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/355a2d50111844f7e8722cc7596864b62b75a4fe
+                    - cell "Apr 29, 20263 days ago" [ref=e226]:
+                      - generic [ref=e227]: Apr 29, 20263 days ago
+                  - row ".github/workflows, (Directory) Migrate from GitBook to VitePress with GitHub Pages deployment Apr 6, 2026last month" [ref=e228]:
+                    - cell ".github/workflows, (Directory)" [ref=e229]:
+                      - generic [ref=e230]:
+                        - img [ref=e231]
+                        - link ".github/workflows, (Directory)" [ref=e236] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/tree/en-us/.github/workflows
+                          - text: .github/workflows
+                    - cell "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e237]:
+                      - link "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e240] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/81b0cddc8181c515fe5e49e130b8541ce30aee39
+                    - cell "Apr 6, 2026last month" [ref=e241]:
+                      - generic [ref=e242]: Apr 6, 2026last month
+                  - row ".vitepress, (Directory) Shorten site title to fix sidebar overflow Apr 7, 2026last month" [ref=e243]:
+                    - cell ".vitepress, (Directory)" [ref=e244]:
+                      - generic [ref=e245]:
+                        - img [ref=e246]
+                        - link ".vitepress, (Directory)" [ref=e251] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/tree/en-us/.vitepress
+                          - text: .vitepress
+                    - cell "Shorten site title to fix sidebar overflow" [ref=e252]:
+                      - link "Shorten site title to fix sidebar overflow" [ref=e255] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/4689cde177132bf7dec2afdceacf0456e572e41e
+                    - cell "Apr 7, 2026last month" [ref=e256]:
+                      - generic [ref=e257]: Apr 7, 2026last month
+                  - row "guide, (Directory) Fix 9 diagrams with overlapping lines + add 2 new ch29 diagrams Apr 29, 20263 days ago" [ref=e258]:
+                    - cell "guide, (Directory)" [ref=e259]:
+                      - generic [ref=e260]:
+                        - img [ref=e261]
+                        - link "guide, (Directory)" [ref=e266] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/tree/en-us/guide
+                          - text: guide
+                    - cell "Fix 9 diagrams with overlapping lines + add 2 new ch29 diagrams" [ref=e267]:
+                      - link "Fix 9 diagrams with overlapping lines + add 2 new ch29 diagrams" [ref=e270] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/955da74d1e5cf64892e36b0fdf7479c198b4ce2c
+                    - cell "Apr 29, 20263 days ago" [ref=e271]:
+                      - generic [ref=e272]: Apr 29, 20263 days ago
+                  - row "images, (Directory) Improve EPAC and git branching diagrams for readability Apr 29, 20263 days ago" [ref=e273]:
+                    - cell "images, (Directory)" [ref=e274]:
+                      - generic [ref=e275]:
+                        - img [ref=e276]
+                        - link "images, (Directory)" [ref=e281] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/tree/en-us/images
+                          - text: images
+                    - cell "Improve EPAC and git branching diagrams for readability" [ref=e282]:
+                      - link "Improve EPAC and git branching diagrams for readability" [ref=e285] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/3ae92067913d6eb6548d559d91ed1cffbe453f10
+                    - cell "Apr 29, 20263 days ago" [ref=e286]:
+                      - generic [ref=e287]: Apr 29, 20263 days ago
+                  - row "public, (Directory) Add Azure Governance shield favicon Apr 7, 2026last month" [ref=e288]:
+                    - cell "public, (Directory)" [ref=e289]:
+                      - generic [ref=e290]:
+                        - img [ref=e291]
+                        - link "public, (Directory)" [ref=e296] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/tree/en-us/public
+                          - text: public
+                    - cell "Add Azure Governance shield favicon" [ref=e297]:
+                      - link "Add Azure Governance shield favicon" [ref=e300] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/3482d24b621474664a7eef7f81baf246c52253d6
+                    - cell "Apr 7, 2026last month" [ref=e301]:
+                      - generic [ref=e302]: Apr 7, 2026last month
+                  - row ".gitignore, (File) Migrate from GitBook to VitePress with GitHub Pages deployment Apr 6, 2026last month" [ref=e303]:
+                    - cell ".gitignore, (File)" [ref=e304]:
+                      - generic [ref=e305]:
+                        - img [ref=e306]
+                        - link ".gitignore, (File)" [ref=e311] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/.gitignore
+                          - text: .gitignore
+                    - cell "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e312]:
+                      - link "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e315] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/81b0cddc8181c515fe5e49e130b8541ce30aee39
+                    - cell "Apr 6, 2026last month" [ref=e316]:
+                      - generic [ref=e317]: Apr 6, 2026last month
+                  - 'row "CONTRIBUTING.md, (File) Restructure book: 8 parts, 36 chapters, 6 appendices Apr 6, 2026last month" [ref=e318]':
+                    - cell "CONTRIBUTING.md, (File)" [ref=e319]:
+                      - generic [ref=e320]:
+                        - img [ref=e321]
+                        - link "CONTRIBUTING.md, (File)" [ref=e326] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/CONTRIBUTING.md
+                          - text: CONTRIBUTING.md
+                    - 'cell "Restructure book: 8 parts, 36 chapters, 6 appendices" [ref=e327]':
+                      - 'link "Restructure book: 8 parts, 36 chapters, 6 appendices" [ref=e330] [cursor=pointer]':
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/432a8c84f38cd6df7b0cfa7e4a0c60a29f4b5eca
+                    - cell "Apr 6, 2026last month" [ref=e331]:
+                      - generic [ref=e332]: Apr 6, 2026last month
+                  - row "LICENSE, (File) Initial commit Dec 7, 20206 years ago" [ref=e333]:
+                    - cell "LICENSE, (File)" [ref=e334]:
+                      - generic [ref=e335]:
+                        - img [ref=e336]
+                        - link "LICENSE, (File)" [ref=e341] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/LICENSE
+                          - text: LICENSE
+                    - cell "Initial commit" [ref=e342]:
+                      - link "Initial commit" [ref=e345] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/310533bdf751d73d26c86cf10d03774f49e29f8d
+                    - cell "Dec 7, 20206 years ago" [ref=e346]:
+                      - generic [ref=e347]: Dec 7, 20206 years ago
+                  - 'row "README.md, (File) docs: update README note about default branch rename to en-us May 1, 2026yesterday" [ref=e348]':
+                    - cell "README.md, (File)" [ref=e349]:
+                      - generic [ref=e350]:
+                        - img [ref=e351]
+                        - link "README.md, (File)" [ref=e356] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/README.md
+                          - text: README.md
+                    - 'cell "docs: update README note about default branch rename to en-us" [ref=e357]':
+                      - 'link "docs: update README note about default branch rename to en-us" [ref=e360] [cursor=pointer]':
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/b25a7016e2d7f9ceb2c5e147d00e1cba43fddd03
+                    - cell "May 1, 2026yesterday" [ref=e361]:
+                      - generic [ref=e362]: May 1, 2026yesterday
+                  - row "SUMMARY.md, (File) Add SUMMARY.md for GitBook navigation Apr 6, 2026last month" [ref=e363]:
+                    - cell "SUMMARY.md, (File)" [ref=e364]:
+                      - generic [ref=e365]:
+                        - img [ref=e366]
+                        - link "SUMMARY.md, (File)" [ref=e371] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/SUMMARY.md
+                          - text: SUMMARY.md
+                    - cell "Add SUMMARY.md for GitBook navigation" [ref=e372]:
+                      - link "Add SUMMARY.md for GitBook navigation" [ref=e375] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/47021a54ce07ef0464dffd883e0115bb8ae0c20b
+                    - cell "Apr 6, 2026last month" [ref=e376]:
+                      - generic [ref=e377]: Apr 6, 2026last month
+                  - row "index.md, (File) Remove azure_governance.png references Apr 7, 2026last month" [ref=e378]:
+                    - cell "index.md, (File)" [ref=e379]:
+                      - generic [ref=e380]:
+                        - img [ref=e381]
+                        - link "index.md, (File)" [ref=e386] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/index.md
+                          - text: index.md
+                    - cell "Remove azure_governance.png references" [ref=e387]:
+                      - link "Remove azure_governance.png references" [ref=e390] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/1b60bfcbb8a26d0a6d99620e3e444ad3b55dd870
+                    - cell "Apr 7, 2026last month" [ref=e391]:
+                      - generic [ref=e392]: Apr 7, 2026last month
+                  - row "package-lock.json, (File) Migrate from GitBook to VitePress with GitHub Pages deployment Apr 6, 2026last month" [ref=e393]:
+                    - cell "package-lock.json, (File)" [ref=e394]:
+                      - generic [ref=e395]:
+                        - img [ref=e396]
+                        - link "package-lock.json, (File)" [ref=e401] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/package-lock.json
+                          - text: package-lock.json
+                    - cell "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e402]:
+                      - link "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e405] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/81b0cddc8181c515fe5e49e130b8541ce30aee39
+                    - cell "Apr 6, 2026last month" [ref=e406]:
+                      - generic [ref=e407]: Apr 6, 2026last month
+                  - row "package.json, (File) Migrate from GitBook to VitePress with GitHub Pages deployment Apr 6, 2026last month" [ref=e408]:
+                    - cell "package.json, (File)" [ref=e409]:
+                      - generic [ref=e410]:
+                        - img [ref=e411]
+                        - link "package.json, (File)" [ref=e416] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/package.json
+                          - text: package.json
+                    - cell "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e417]:
+                      - link "Migrate from GitBook to VitePress with GitHub Pages deployment" [ref=e420] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/commit/81b0cddc8181c515fe5e49e130b8541ce30aee39
+                    - cell "Apr 6, 2026last month" [ref=e421]:
+                      - generic [ref=e422]: Apr 6, 2026last month
+            - generic [ref=e424]:
+              - generic [ref=e425]:
+                - heading "Repository files navigation" [level=2] [ref=e426]
+                - navigation "Repository files" [ref=e427]:
+                  - list [ref=e428]:
+                    - listitem [ref=e429]:
+                      - link "README" [ref=e430] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e432]
+                        - generic [ref=e434]: README
+                    - listitem [ref=e435]:
+                      - link "Contributing" [ref=e436] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e438]
+                        - generic [ref=e440]: Contributing
+                    - listitem [ref=e441]:
+                      - link "GPL-3.0 license" [ref=e442] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e444]
+                        - generic [ref=e446]: GPL-3.0 license
+                - button "Outline" [ref=e447] [cursor=pointer]:
+                  - img [ref=e448]
+              - article [ref=e451]:
+                - generic [ref=e452]:
+                  - heading "Azure Governance Made Simple" [level=1] [ref=e453]
+                  - 'link "Permalink: Azure Governance Made Simple" [ref=e454] [cursor=pointer]':
+                    - /url: "#azure-governance-made-simple"
+                    - img [ref=e455]
+                - paragraph [ref=e457]:
+                  - link "Book" [ref=e458] [cursor=pointer]:
+                    - /url: https://azgovernance.com/
+                    - img "Book" [ref=e459]
+                  - 'link "License: GPL v3" [ref=e460] [cursor=pointer]':
+                    - /url: https://www.gnu.org/licenses/gpl-3.0
+                    - 'img "License: GPL v3" [ref=e461]'
+                - paragraph [ref=e462]:
+                  - text: 🌐
+                  - strong [ref=e463]: "Available in:"
+                  - link "🇺🇸 English (this branch)" [ref=e464] [cursor=pointer]:
+                    - /url: /ricmmartins/azure-governance-made-simple/blob/en-us
+                  - text: "|"
+                  - link "🇧🇷 Português-Brasil" [ref=e465] [cursor=pointer]:
+                    - /url: https://github.com/ricmmartins/azure-governance-made-simple/tree/pt-br
+                - blockquote [ref=e466]:
+                  - paragraph [ref=e467]:
+                    - strong [ref=e468]: "Note:"
+                    - text: The default branch is now
+                    - code [ref=e469]: en-us
+                    - text: . The Portuguese-Brasil translation lives on the
+                    - code [ref=e470]: pt-br
+                    - text: branch.
+                - blockquote [ref=e471]:
+                  - paragraph [ref=e472]:
+                    - strong [ref=e473]: The comprehensive, open-source reference guide to Azure Governance — from foundations to enterprise scale.
+                - generic [ref=e474]:
+                  - heading "About This Book" [level=2] [ref=e475]
+                  - 'link "Permalink: About This Book" [ref=e476] [cursor=pointer]':
+                    - /url: "#about-this-book"
+                    - img [ref=e477]
+                - paragraph [ref=e479]:
+                  - strong [ref=e480]: Azure Governance Made Simple
+                  - text: is a practitioner-oriented guide to designing, implementing, and operating cloud governance on Microsoft Azure. Written for Azure architects, platform engineers, Cloud Center of Excellence (CCoE) teams, and IT leaders, it provides the depth needed to build governance frameworks that balance developer agility with organizational control.
+                - paragraph [ref=e481]: "This book covers the full governance lifecycle:"
+                - list [ref=e482]:
+                  - listitem [ref=e483]:
+                    - strong [ref=e484]: Identity & Access
+                    - text: — RBAC, Microsoft Entra ID Governance, PIM, managed identities
+                  - listitem [ref=e485]:
+                    - strong [ref=e486]: Policy & Compliance
+                    - text: — Azure Policy deep dives, regulatory frameworks, Microsoft Defender for Cloud
+                  - listitem [ref=e487]:
+                    - strong [ref=e488]: Infrastructure as Code
+                    - text: — Bicep, Azure Verified Modules, Deployment Stacks, governance CI/CD pipelines
+                  - listitem [ref=e489]:
+                    - strong [ref=e490]: Cost Governance
+                    - text: — Azure Cost Management, FinOps practices, budget automation
+                  - listitem [ref=e491]:
+                    - strong [ref=e492]: Observability
+                    - text: — Azure Monitor dashboards, Azure Resource Graph queries, AzGovViz
+                  - listitem [ref=e493]:
+                    - strong [ref=e494]: Governance at Scale
+                    - text: — Azure Landing Zones, Azure Arc, sovereign clouds, data governance with Microsoft Purview, AI governance
+                - paragraph [ref=e495]:
+                  - text: All content is aligned with the
+                  - link "Microsoft Cloud Adoption Framework" [ref=e496] [cursor=pointer]:
+                    - /url: https://learn.microsoft.com/azure/cloud-adoption-framework/
+                  - text: and the
+                  - link "Azure Well-Architected Framework" [ref=e497] [cursor=pointer]:
+                    - /url: https://learn.microsoft.com/azure/well-architected/
+                  - text: .
+                - generic [ref=e498]:
+                  - heading "What Makes This Book Different" [level=3] [ref=e499]
+                  - 'link "Permalink: What Makes This Book Different" [ref=e500] [cursor=pointer]':
+                    - /url: "#what-makes-this-book-different"
+                    - img [ref=e501]
+                - table [ref=e504]:
+                  - rowgroup [ref=e505]:
+                    - row "Feature Details" [ref=e506]:
+                      - columnheader "Feature" [ref=e507]
+                      - columnheader "Details" [ref=e508]
+                  - rowgroup [ref=e509]:
+                    - row "Practitioner-first Every chapter includes architecture context, best practices, common pitfalls, and hands-on exercises with real Bicep, CLI, and KQL code" [ref=e510]:
+                      - cell "Practitioner-first" [ref=e511]:
+                        - strong [ref=e512]: Practitioner-first
+                      - cell "Every chapter includes architecture context, best practices, common pitfalls, and hands-on exercises with real Bicep, CLI, and KQL code" [ref=e513]
+                    - row "Maturity model A Crawl → Walk → Run framework helps teams adopt governance incrementally, not as a big-bang project" [ref=e514]:
+                      - cell "Maturity model" [ref=e515]:
+                        - strong [ref=e516]: Maturity model
+                      - cell "A Crawl → Walk → Run framework helps teams adopt governance incrementally, not as a big-bang project" [ref=e517]
+                    - row "Decision trees Visual flowcharts for choosing between management groups vs. subscriptions, built-in vs. custom policies, and more" [ref=e518]:
+                      - cell "Decision trees" [ref=e519]:
+                        - strong [ref=e520]: Decision trees
+                      - cell "Visual flowcharts for choosing between management groups vs. subscriptions, built-in vs. custom policies, and more" [ref=e521]
+                    - row "Policy starter kit 39 production-ready Azure Policy definitions organized by governance pillar" [ref=e522]:
+                      - cell "Policy starter kit" [ref=e523]:
+                        - strong [ref=e524]: Policy starter kit
+                      - cell "39 production-ready Azure Policy definitions organized by governance pillar" [ref=e525]
+                    - row "Resource Graph queries 20 ready-to-run KQL queries for governance visibility across your entire Azure estate" [ref=e526]:
+                      - cell "Resource Graph queries" [ref=e527]:
+                        - strong [ref=e528]: Resource Graph queries
+                      - cell "20 ready-to-run KQL queries for governance visibility across your entire Azure estate" [ref=e529]
+                    - row "Current as of April 2026 Reflects the latest Azure service names, GA features, and deprecations (Entra ID, Deployment Stacks GA, Blueprints EOL)" [ref=e530]:
+                      - cell "Current as of April 2026" [ref=e531]:
+                        - strong [ref=e532]: Current as of April 2026
+                      - cell "Reflects the latest Azure service names, GA features, and deprecations (Entra ID, Deployment Stacks GA, Blueprints EOL)" [ref=e533]
+                - separator [ref=e534]
+                - generic [ref=e535]:
+                  - heading "📖 Read the Book" [level=2] [ref=e536]
+                  - 'link "Permalink: 📖 Read the Book" [ref=e537] [cursor=pointer]':
+                    - /url: "#-read-the-book"
+                    - img [ref=e538]
+                - paragraph [ref=e540]:
+                  - strong [ref=e541]: "Online:"
+                  - link "azgovernance.com" [ref=e542] [cursor=pointer]:
+                    - /url: https://azgovernance.com/
+                - separator [ref=e543]
+                - generic [ref=e544]:
+                  - heading "Table of Contents" [level=2] [ref=e545]
+                  - 'link "Permalink: Table of Contents" [ref=e546] [cursor=pointer]':
+                    - /url: "#table-of-contents"
+                    - img [ref=e547]
+                - generic [ref=e549]:
+                  - heading "Part I — Foundations" [level=3] [ref=e550]
+                  - 'link "Permalink: Part I — Foundations" [ref=e551] [cursor=pointer]':
+                    - /url: "#part-i--foundations"
+                    - img [ref=e552]
+                - table [ref=e555]:
+                  - rowgroup [ref=e556]:
+                    - row "# Chapter Description" [ref=e557]:
+                      - columnheader "#" [ref=e558]
+                      - columnheader "Chapter" [ref=e559]
+                      - columnheader "Description" [ref=e560]
+                  - rowgroup [ref=e561]:
+                    - row "1 Why Azure Governance Matters The business case for governance — risks, benefits, and the cost of doing nothing" [ref=e562]:
+                      - cell "1" [ref=e563]
+                      - cell "Why Azure Governance Matters" [ref=e564]:
+                        - link "Why Azure Governance Matters" [ref=e565] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch01-why-governance-matters.md
+                      - cell "The business case for governance — risks, benefits, and the cost of doing nothing" [ref=e566]
+                    - row "2 Governance at a Glance End-to-end governance architecture map and pillar overview" [ref=e567]:
+                      - cell "2" [ref=e568]
+                      - cell "Governance at a Glance" [ref=e569]:
+                        - link "Governance at a Glance" [ref=e570] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch02-governance-at-a-glance.md
+                      - cell "End-to-end governance architecture map and pillar overview" [ref=e571]
+                    - row "3 Cloud Governance Maturity Model Crawl → Walk → Run assessment framework with self-assessment checklist" [ref=e572]:
+                      - cell "3" [ref=e573]
+                      - cell "Cloud Governance Maturity Model" [ref=e574]:
+                        - link "Cloud Governance Maturity Model" [ref=e575] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch03-governance-maturity-model.md
+                      - cell "Crawl → Walk → Run assessment framework with self-assessment checklist" [ref=e576]
+                    - row "4 The Azure Resource Hierarchy Tenants, management groups, subscriptions, and resource groups — design patterns and anti-patterns" [ref=e577]:
+                      - cell "4" [ref=e578]
+                      - cell "The Azure Resource Hierarchy" [ref=e579]:
+                        - link "The Azure Resource Hierarchy" [ref=e580] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch04-resource-hierarchy.md
+                      - cell "Tenants, management groups, subscriptions, and resource groups — design patterns and anti-patterns" [ref=e581]
+                    - row "5 Naming & Tagging Strategy Naming conventions, tagging taxonomy, and policy enforcement for tags" [ref=e582]:
+                      - cell "5" [ref=e583]
+                      - cell "Naming & Tagging Strategy" [ref=e584]:
+                        - link "Naming & Tagging Strategy" [ref=e585] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch05-naming-tagging-strategy.md
+                      - cell "Naming conventions, tagging taxonomy, and policy enforcement for tags" [ref=e586]
+                - generic [ref=e587]:
+                  - heading "Part II — Identity & Access Governance" [level=3] [ref=e588]
+                  - 'link "Permalink: Part II — Identity & Access Governance" [ref=e589] [cursor=pointer]':
+                    - /url: "#part-ii--identity--access-governance"
+                    - img [ref=e590]
+                - table [ref=e593]:
+                  - rowgroup [ref=e594]:
+                    - row "# Chapter Description" [ref=e595]:
+                      - columnheader "#" [ref=e596]
+                      - columnheader "Chapter" [ref=e597]
+                      - columnheader "Description" [ref=e598]
+                  - rowgroup [ref=e599]:
+                    - row "6 Role-Based Access Control (RBAC) Built-in vs. custom roles, scope strategy, least-privilege patterns" [ref=e600]:
+                      - cell "6" [ref=e601]
+                      - cell "Role-Based Access Control (RBAC)" [ref=e602]:
+                        - link "Role-Based Access Control (RBAC)" [ref=e603] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-2-identity-access/ch06-rbac.md
+                      - cell "Built-in vs. custom roles, scope strategy, least-privilege patterns" [ref=e604]
+                    - row "7 Microsoft Entra ID Governance PIM, access reviews, entitlement management, lifecycle workflows" [ref=e605]:
+                      - cell "7" [ref=e606]
+                      - cell "Microsoft Entra ID Governance" [ref=e607]:
+                        - link "Microsoft Entra ID Governance" [ref=e608] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-2-identity-access/ch07-entra-id-governance.md
+                      - cell "PIM, access reviews, entitlement management, lifecycle workflows" [ref=e609]
+                    - row "8 Managed Identities & Workload Identity System vs. user-assigned identities, workload identity federation" [ref=e610]:
+                      - cell "8" [ref=e611]
+                      - cell "Managed Identities & Workload Identity" [ref=e612]:
+                        - link "Managed Identities & Workload Identity" [ref=e613] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-2-identity-access/ch08-managed-identities.md
+                      - cell "System vs. user-assigned identities, workload identity federation" [ref=e614]
+                - generic [ref=e615]:
+                  - heading "Part III — Policy & Compliance" [level=3] [ref=e616]
+                  - 'link "Permalink: Part III — Policy & Compliance" [ref=e617] [cursor=pointer]':
+                    - /url: "#part-iii--policy--compliance"
+                    - img [ref=e618]
+                - table [ref=e621]:
+                  - rowgroup [ref=e622]:
+                    - row "# Chapter Description" [ref=e623]:
+                      - columnheader "#" [ref=e624]
+                      - columnheader "Chapter" [ref=e625]
+                      - columnheader "Description" [ref=e626]
+                  - rowgroup [ref=e627]:
+                    - row "9 Azure Policy — Deep Dive Core concepts, effects, Machine Configuration, EPAC, remediation, 39 starter policies" [ref=e628]:
+                      - cell "9" [ref=e629]
+                      - cell "Azure Policy — Deep Dive" [ref=e630]:
+                        - link "Azure Policy — Deep Dive" [ref=e631] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-3-policy-compliance/ch09-azure-policy.md
+                      - cell "Core concepts, effects, Machine Configuration, EPAC, remediation, 39 starter policies" [ref=e632]
+                    - row "10 Regulatory Compliance Microsoft Cloud Security Benchmark, compliance frameworks, audit evidence" [ref=e633]:
+                      - cell "10" [ref=e634]
+                      - cell "Regulatory Compliance" [ref=e635]:
+                        - link "Regulatory Compliance" [ref=e636] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-3-policy-compliance/ch10-regulatory-compliance.md
+                      - cell "Microsoft Cloud Security Benchmark, compliance frameworks, audit evidence" [ref=e637]
+                    - row "11 Microsoft Defender for Cloud CSPM, workload protection plans, security posture governance" [ref=e638]:
+                      - cell "11" [ref=e639]
+                      - cell "Microsoft Defender for Cloud" [ref=e640]:
+                        - link "Microsoft Defender for Cloud" [ref=e641] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-3-policy-compliance/ch11-defender-for-cloud.md
+                      - cell "CSPM, workload protection plans, security posture governance" [ref=e642]
+                    - row "12 Resource Locks CanNotDelete vs. ReadOnly locks, automation patterns, who-locked-what queries" [ref=e643]:
+                      - cell "12" [ref=e644]
+                      - cell "Resource Locks" [ref=e645]:
+                        - link "Resource Locks" [ref=e646] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-3-policy-compliance/ch12-resource-locks.md
+                      - cell "CanNotDelete vs. ReadOnly locks, automation patterns, who-locked-what queries" [ref=e647]
+                - generic [ref=e648]:
+                  - heading "Part IV — Infrastructure as Code & Deployment Governance" [level=3] [ref=e649]
+                  - 'link "Permalink: Part IV — Infrastructure as Code & Deployment Governance" [ref=e650] [cursor=pointer]':
+                    - /url: "#part-iv--infrastructure-as-code--deployment-governance"
+                    - img [ref=e651]
+                - table [ref=e654]:
+                  - rowgroup [ref=e655]:
+                    - row "# Chapter Description" [ref=e656]:
+                      - columnheader "#" [ref=e657]
+                      - columnheader "Chapter" [ref=e658]
+                      - columnheader "Description" [ref=e659]
+                  - rowgroup [ref=e660]:
+                    - row "13 Bicep & Azure Verified Modules Bicep fundamentals, AVM registry, governance-as-code patterns" [ref=e661]:
+                      - cell "13" [ref=e662]
+                      - cell "Bicep & Azure Verified Modules" [ref=e663]:
+                        - link "Bicep & Azure Verified Modules" [ref=e664] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-4-iac-deployment/ch13-bicep-avm.md
+                      - cell "Bicep fundamentals, AVM registry, governance-as-code patterns" [ref=e665]
+                    - row "14 Deployment Stacks Managed resource lifecycle, deny settings, drift protection" [ref=e666]:
+                      - cell "14" [ref=e667]
+                      - cell "Deployment Stacks" [ref=e668]:
+                        - link "Deployment Stacks" [ref=e669] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-4-iac-deployment/ch14-deployment-stacks.md
+                      - cell "Managed resource lifecycle, deny settings, drift protection" [ref=e670]
+                    - row "15 Template Specs & Reusable Modules Centralized template catalogs, versioning strategy" [ref=e671]:
+                      - cell "15" [ref=e672]
+                      - cell "Template Specs & Reusable Modules" [ref=e673]:
+                        - link "Template Specs & Reusable Modules" [ref=e674] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-4-iac-deployment/ch15-template-specs.md
+                      - cell "Centralized template catalogs, versioning strategy" [ref=e675]
+                    - row "16 Governance CI/CD Pipelines GitHub Actions and Azure DevOps pipelines for policy-as-code" [ref=e676]:
+                      - cell "16" [ref=e677]
+                      - cell "Governance CI/CD Pipelines" [ref=e678]:
+                        - link "Governance CI/CD Pipelines" [ref=e679] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-4-iac-deployment/ch16-governance-cicd.md
+                      - cell "GitHub Actions and Azure DevOps pipelines for policy-as-code" [ref=e680]
+                - generic [ref=e681]:
+                  - heading "Part V — Cost Governance & FinOps" [level=3] [ref=e682]
+                  - 'link "Permalink: Part V — Cost Governance & FinOps" [ref=e683] [cursor=pointer]':
+                    - /url: "#part-v--cost-governance--finops"
+                    - img [ref=e684]
+                - table [ref=e687]:
+                  - rowgroup [ref=e688]:
+                    - row "# Chapter Description" [ref=e689]:
+                      - columnheader "#" [ref=e690]
+                      - columnheader "Chapter" [ref=e691]
+                      - columnheader "Description" [ref=e692]
+                  - rowgroup [ref=e693]:
+                    - row "17 Azure Cost Management Cost analysis, exports, anomaly detection, advisor recommendations" [ref=e694]:
+                      - cell "17" [ref=e695]
+                      - cell "Azure Cost Management" [ref=e696]:
+                        - link "Azure Cost Management" [ref=e697] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-5-cost-finops/ch17-cost-management.md
+                      - cell "Cost analysis, exports, anomaly detection, advisor recommendations" [ref=e698]
+                    - row "18 FinOps Practices on Azure FinOps Framework adoption, team models, showback/chargeback" [ref=e699]:
+                      - cell "18" [ref=e700]
+                      - cell "FinOps Practices on Azure" [ref=e701]:
+                        - link "FinOps Practices on Azure" [ref=e702] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-5-cost-finops/ch18-finops.md
+                      - cell "FinOps Framework adoption, team models, showback/chargeback" [ref=e703]
+                    - row "19 Budgets, Alerts & Cost Automation Automated budget enforcement with Action Groups and Logic Apps" [ref=e704]:
+                      - cell "19" [ref=e705]
+                      - cell "Budgets, Alerts & Cost Automation" [ref=e706]:
+                        - link "Budgets, Alerts & Cost Automation" [ref=e707] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-5-cost-finops/ch19-cost-automation.md
+                      - cell "Automated budget enforcement with Action Groups and Logic Apps" [ref=e708]
+                - generic [ref=e709]:
+                  - heading "Part VI — Governance Observability" [level=3] [ref=e710]
+                  - 'link "Permalink: Part VI — Governance Observability" [ref=e711] [cursor=pointer]':
+                    - /url: "#part-vi--governance-observability"
+                    - img [ref=e712]
+                - table [ref=e715]:
+                  - rowgroup [ref=e716]:
+                    - row "# Chapter Description" [ref=e717]:
+                      - columnheader "#" [ref=e718]
+                      - columnheader "Chapter" [ref=e719]
+                      - columnheader "Description" [ref=e720]
+                  - rowgroup [ref=e721]:
+                    - row "20 Azure Monitor & Dashboards Activity log governance, diagnostic settings, Azure Workbooks" [ref=e722]:
+                      - cell "20" [ref=e723]
+                      - cell "Azure Monitor & Dashboards" [ref=e724]:
+                        - link "Azure Monitor & Dashboards" [ref=e725] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-6-observability/ch20-azure-monitor.md
+                      - cell "Activity log governance, diagnostic settings, Azure Workbooks" [ref=e726]
+                    - row "21 Azure Resource Graph KQL queries for governance visibility across your estate" [ref=e727]:
+                      - cell "21" [ref=e728]
+                      - cell "Azure Resource Graph" [ref=e729]:
+                        - link "Azure Resource Graph" [ref=e730] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-6-observability/ch21-resource-graph.md
+                      - cell "KQL queries for governance visibility across your estate" [ref=e731]
+                    - row "22 Azure Governance Visualizer AzGovViz setup, CI/CD integration, interpreting the output" [ref=e732]:
+                      - cell "22" [ref=e733]
+                      - cell "Azure Governance Visualizer" [ref=e734]:
+                        - link "Azure Governance Visualizer" [ref=e735] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-6-observability/ch22-azgovviz.md
+                      - cell "AzGovViz setup, CI/CD integration, interpreting the output" [ref=e736]
+                - generic [ref=e737]:
+                  - heading "Part VII — Governance at Scale" [level=3] [ref=e738]
+                  - 'link "Permalink: Part VII — Governance at Scale" [ref=e739] [cursor=pointer]':
+                    - /url: "#part-vii--governance-at-scale"
+                    - img [ref=e740]
+                - table [ref=e743]:
+                  - rowgroup [ref=e744]:
+                    - row "# Chapter Description" [ref=e745]:
+                      - columnheader "#" [ref=e746]
+                      - columnheader "Chapter" [ref=e747]
+                      - columnheader "Description" [ref=e748]
+                  - rowgroup [ref=e749]:
+                    - row "23 Azure Landing Zones ALZ architecture, platform vs. application landing zones" [ref=e750]:
+                      - cell "23" [ref=e751]
+                      - cell "Azure Landing Zones" [ref=e752]:
+                        - link "Azure Landing Zones" [ref=e753] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-7-at-scale/ch23-azure-landing-zones.md
+                      - cell "ALZ architecture, platform vs. application landing zones" [ref=e754]
+                    - row "24 Azure Arc Hybrid and multicloud governance with Arc-enabled servers and Kubernetes" [ref=e755]:
+                      - cell "24" [ref=e756]
+                      - cell "Azure Arc" [ref=e757]:
+                        - link "Azure Arc" [ref=e758] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-7-at-scale/ch24-azure-arc.md
+                      - cell "Hybrid and multicloud governance with Arc-enabled servers and Kubernetes" [ref=e759]
+                    - row "25 Sovereign Landing Zones Data residency, sovereign clouds, confidential computing" [ref=e760]:
+                      - cell "25" [ref=e761]
+                      - cell "Sovereign Landing Zones" [ref=e762]:
+                        - link "Sovereign Landing Zones" [ref=e763] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-7-at-scale/ch25-sovereign-landing-zones.md
+                      - cell "Data residency, sovereign clouds, confidential computing" [ref=e764]
+                    - row "26 Data Governance with Microsoft Purview Data catalog, classification, lineage, and access policies" [ref=e765]:
+                      - cell "26" [ref=e766]
+                      - cell "Data Governance with Microsoft Purview" [ref=e767]:
+                        - link "Data Governance with Microsoft Purview" [ref=e768] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-7-at-scale/ch26-data-governance-purview.md
+                      - cell "Data catalog, classification, lineage, and access policies" [ref=e769]
+                    - row "27 AI Governance & Responsible AI Azure AI governance controls, content safety, model monitoring" [ref=e770]:
+                      - cell "27" [ref=e771]
+                      - cell "AI Governance & Responsible AI" [ref=e772]:
+                        - link "AI Governance & Responsible AI" [ref=e773] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-7-at-scale/ch27-ai-governance.md
+                      - cell "Azure AI governance controls, content safety, model monitoring" [ref=e774]
+                - generic [ref=e775]:
+                  - heading "Part VIII — Putting It All Together" [level=3] [ref=e776]
+                  - 'link "Permalink: Part VIII — Putting It All Together" [ref=e777] [cursor=pointer]':
+                    - /url: "#part-viii--putting-it-all-together"
+                    - img [ref=e778]
+                - table [ref=e781]:
+                  - rowgroup [ref=e782]:
+                    - row "# Chapter Description" [ref=e783]:
+                      - columnheader "#" [ref=e784]
+                      - columnheader "Chapter" [ref=e785]
+                      - columnheader "Description" [ref=e786]
+                  - rowgroup [ref=e787]:
+                    - row "28 Governance Roadmap 90-day implementation plan aligned to the maturity model" [ref=e788]:
+                      - cell "28" [ref=e789]
+                      - cell "Governance Roadmap" [ref=e790]:
+                        - link "Governance Roadmap" [ref=e791] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-8-synthesis/ch28-governance-roadmap.md
+                      - cell "90-day implementation plan aligned to the maturity model" [ref=e792]
+                    - 'row "29 Real-World Case Studies Three scenarios: startup, enterprise migration, regulated industry" [ref=e793]':
+                      - cell "29" [ref=e794]
+                      - cell "Real-World Case Studies" [ref=e795]:
+                        - link "Real-World Case Studies" [ref=e796] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-8-synthesis/ch29-case-studies.md
+                      - 'cell "Three scenarios: startup, enterprise migration, regulated industry" [ref=e797]'
+                    - row "30 Frequently Asked Questions Answers to the 20 most common Azure governance questions" [ref=e798]:
+                      - cell "30" [ref=e799]
+                      - cell "Frequently Asked Questions" [ref=e800]:
+                        - link "Frequently Asked Questions" [ref=e801] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-8-synthesis/ch30-faq.md
+                      - cell "Answers to the 20 most common Azure governance questions" [ref=e802]
+                - generic [ref=e803]:
+                  - heading "Appendices" [level=3] [ref=e804]
+                  - 'link "Permalink: Appendices" [ref=e805] [cursor=pointer]':
+                    - /url: "#appendices"
+                    - img [ref=e806]
+                - table [ref=e809]:
+                  - rowgroup [ref=e810]:
+                    - row "Appendix Description" [ref=e811]:
+                      - columnheader [ref=e812]
+                      - columnheader "Appendix" [ref=e813]
+                      - columnheader "Description" [ref=e814]
+                  - rowgroup [ref=e815]:
+                    - row "A Glossary Definitions of key Azure governance terms" [ref=e816]:
+                      - cell "A" [ref=e817]
+                      - cell "Glossary" [ref=e818]:
+                        - link "Glossary" [ref=e819] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-a-glossary.md
+                      - cell "Definitions of key Azure governance terms" [ref=e820]
+                    - row "B Decision Trees Visual flowcharts for common governance decisions" [ref=e821]:
+                      - cell "B" [ref=e822]
+                      - cell "Decision Trees" [ref=e823]:
+                        - link "Decision Trees" [ref=e824] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-b-decision-trees.md
+                      - cell "Visual flowcharts for common governance decisions" [ref=e825]
+                    - row "C Policy Starter Kit 39 production-ready policy definitions by governance pillar" [ref=e826]:
+                      - cell "C" [ref=e827]
+                      - cell "Policy Starter Kit" [ref=e828]:
+                        - link "Policy Starter Kit" [ref=e829] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-c-policy-starter-kit.md
+                      - cell "39 production-ready policy definitions by governance pillar" [ref=e830]
+                    - row "D Resource Graph Queries 20 ready-to-run KQL queries for governance reporting" [ref=e831]:
+                      - cell "D" [ref=e832]
+                      - cell "Resource Graph Queries" [ref=e833]:
+                        - link "Resource Graph Queries" [ref=e834] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-d-resource-graph-queries.md
+                      - cell "20 ready-to-run KQL queries for governance reporting" [ref=e835]
+                    - row "E Learning Resources Microsoft Learn paths, certifications, and community resources" [ref=e836]:
+                      - cell "E" [ref=e837]
+                      - cell "Learning Resources" [ref=e838]:
+                        - link "Learning Resources" [ref=e839] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-e-learning-resources.md
+                      - cell "Microsoft Learn paths, certifications, and community resources" [ref=e840]
+                    - row "F Changelog Version history and update log" [ref=e841]:
+                      - cell "F" [ref=e842]
+                      - cell "Changelog" [ref=e843]:
+                        - link "Changelog" [ref=e844] [cursor=pointer]:
+                          - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-f-changelog.md
+                      - cell "Version history and update log" [ref=e845]
+                - separator [ref=e846]
+                - generic [ref=e847]:
+                  - heading "🚀 Quick Start" [level=2] [ref=e848]
+                  - 'link "Permalink: 🚀 Quick Start" [ref=e849] [cursor=pointer]':
+                    - /url: "#-quick-start"
+                    - img [ref=e850]
+                - paragraph [ref=e852]: "If you're new to Azure governance, start here:"
+                - list [ref=e853]:
+                  - listitem [ref=e854]:
+                    - strong [ref=e855]:
+                      - link "Chapter 1 — Why Governance Matters" [ref=e856] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch01-why-governance-matters.md
+                    - text: — Understand the business case
+                  - listitem [ref=e857]:
+                    - strong [ref=e858]:
+                      - link "Chapter 2 — Governance at a Glance" [ref=e859] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch02-governance-at-a-glance.md
+                    - text: — See the big picture
+                  - listitem [ref=e860]:
+                    - strong [ref=e861]:
+                      - link "Chapter 3 — Maturity Model" [ref=e862] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-1-foundations/ch03-governance-maturity-model.md
+                    - text: — Assess where you are today
+                  - listitem [ref=e863]:
+                    - strong [ref=e864]:
+                      - link "Chapter 28 — Governance Roadmap" [ref=e865] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/part-8-synthesis/ch28-governance-roadmap.md
+                    - text: — Get a 90-day plan
+                - paragraph [ref=e866]: "If you're building a governance framework for an existing Azure environment:"
+                - list [ref=e867]:
+                  - listitem [ref=e868]:
+                    - strong [ref=e869]:
+                      - link "Appendix B — Decision Trees" [ref=e870] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-b-decision-trees.md
+                    - text: — Make key design decisions
+                  - listitem [ref=e871]:
+                    - strong [ref=e872]:
+                      - link "Appendix C — Policy Starter Kit" [ref=e873] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-c-policy-starter-kit.md
+                    - text: — Deploy baseline policies
+                  - listitem [ref=e874]:
+                    - strong [ref=e875]:
+                      - link "Appendix D — Resource Graph Queries" [ref=e876] [cursor=pointer]:
+                        - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/guide/appendices/appendix-d-resource-graph-queries.md
+                    - text: — Assess your current state
+                - separator [ref=e877]
+                - generic [ref=e878]:
+                  - heading "Contributing" [level=2] [ref=e879]
+                  - 'link "Permalink: Contributing" [ref=e880] [cursor=pointer]':
+                    - /url: "#contributing"
+                    - img [ref=e881]
+                - paragraph [ref=e883]: Contributions are welcome! Whether it's fixing a typo, updating a stale link, or adding a new Resource Graph query — every contribution helps keep this resource accurate for the global Azure community.
+                - paragraph [ref=e884]:
+                  - text: Please read the
+                  - link "Contributing Guide" [ref=e885] [cursor=pointer]:
+                    - /url: /ricmmartins/azure-governance-made-simple/blob/en-us/CONTRIBUTING.md
+                  - text: before submitting a pull request. It includes terminology standards, the chapter template, and submission guidelines.
+                - generic [ref=e886]:
+                  - heading "Author" [level=2] [ref=e887]
+                  - 'link "Permalink: Author" [ref=e888] [cursor=pointer]':
+                    - /url: "#author"
+                    - img [ref=e889]
+                - paragraph [ref=e891]:
+                  - strong [ref=e892]: Ricardo Martins
+                  - text: — Cloud Solution Architect at Microsoft, focused on Azure governance, platform engineering, and the Cloud Adoption Framework.
+                - list [ref=e893]:
+                  - listitem [ref=e894]:
+                    - text: 🔗
+                    - link "ricmmartins.github.io" [ref=e895] [cursor=pointer]:
+                      - /url: https://ricmmartins.github.io/
+                  - listitem [ref=e896]:
+                    - text: 🐙
+                    - link "github.com/ricmmartins" [ref=e897] [cursor=pointer]:
+                      - /url: https://github.com/ricmmartins
+                - generic [ref=e898]:
+                  - heading "License" [level=2] [ref=e899]
+                  - 'link "Permalink: License" [ref=e900] [cursor=pointer]':
+                    - /url: "#license"
+                    - img [ref=e901]
+                - paragraph [ref=e903]:
+                  - text: This project is licensed under the
+                  - strong [ref=e904]: GPL-3.0 License
+                  - text: — see the LICENSE file at the repository root for details.
+                - separator [ref=e905]
+                - paragraph [ref=e906]:
+                  - emphasis [ref=e907]: If this book helped you, consider ⭐ starring the repository and sharing it with your team.
+        - generic [ref=e911]:
+          - generic [ref=e914]:
+            - heading "About" [level=2] [ref=e915]
+            - paragraph [ref=e916]: A straightforward guide about Azure Governance
+            - generic [ref=e917]:
+              - img [ref=e918]
+              - link "azgovernance.com/" [ref=e921] [cursor=pointer]:
+                - /url: http://azgovernance.com/
+            - heading "Resources" [level=3] [ref=e922]
+            - link "Readme" [ref=e924] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e925]
+              - text: Readme
+            - heading "License" [level=3] [ref=e927]
+            - link "GPL-3.0 license" [ref=e929] [cursor=pointer]:
+              - /url: "#GPL-3.0-1-ov-file"
+              - img [ref=e930]
+              - text: GPL-3.0 license
+            - heading "Contributing" [level=3] [ref=e932]
+            - link "Contributing" [ref=e934] [cursor=pointer]:
+              - /url: "#contributing-ov-file"
+              - img [ref=e935]
+              - text: Contributing
+            - link "Activity" [ref=e938] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/activity
+              - img [ref=e939]
+              - text: Activity
+            - heading "Stars" [level=3] [ref=e941]
+            - link "33 stars" [ref=e943] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/stargazers
+              - img [ref=e944]
+              - strong [ref=e946]: "33"
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e947]
+            - link "4 watching" [ref=e949] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/watchers
+              - img [ref=e950]
+              - strong [ref=e952]: "4"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e953]
+            - link "12 forks" [ref=e955] [cursor=pointer]:
+              - /url: /ricmmartins/azure-governance-made-simple/forks
+              - img [ref=e956]
+              - strong [ref=e958]: "12"
+              - text: forks
+            - link "Report repository" [ref=e960] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fricmmartins%2Fazure-governance-made-simple&report=ricmmartins+%28user%29
+          - generic [ref=e962]:
+            - heading "Contributors 2" [level=2] [ref=e963]:
+              - link "Contributors 2" [ref=e964] [cursor=pointer]:
+                - /url: /ricmmartins/azure-governance-made-simple/graphs/contributors
+                - text: Contributors
+                - generic "2" [ref=e965]
+            - list [ref=e966]:
+              - listitem [ref=e967]:
+                - link "@ricmmartins" [ref=e968] [cursor=pointer]:
+                  - /url: https://github.com/ricmmartins
+                  - img "@ricmmartins" [ref=e969]
+                - link "ricmmartins Ricardo Martins" [ref=e971] [cursor=pointer]:
+                  - /url: https://github.com/ricmmartins
+                  - strong [ref=e972]: ricmmartins
+                  - text: Ricardo Martins
+              - listitem [ref=e973]:
+                - link "@Copilot" [ref=e974] [cursor=pointer]:
+                  - /url: https://github.com/apps/github-copilot-cli
+                  - img "@Copilot" [ref=e975]
+                - link "Copilot" [ref=e977] [cursor=pointer]:
+                  - /url: https://github.com/apps/github-copilot-cli
+                  - strong [ref=e978]: Copilot
+          - generic [ref=e980]:
+            - heading "Languages" [level=2] [ref=e981]
+            - list [ref=e985]:
+              - listitem [ref=e986]:
+                - link "JavaScript 100.0%" [ref=e987] [cursor=pointer]:
+                  - /url: /ricmmartins/azure-governance-made-simple/search?l=javascript
+                  - img [ref=e988]
+                  - generic [ref=e990]: JavaScript
+                  - generic [ref=e991]: 100.0%
+  - contentinfo [ref=e993]:
+    - heading "Footer" [level=2] [ref=e994]
+    - generic [ref=e995]:
+      - generic [ref=e996]:
+        - link "GitHub Homepage" [ref=e997] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e998]
+        - generic [ref=e1000]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e1001]:
+        - heading "Footer navigation" [level=3] [ref=e1002]
+        - list "Footer navigation" [ref=e1003]:
+          - listitem [ref=e1004]:
+            - link "Terms" [ref=e1005] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e1006]:
+            - link "Privacy" [ref=e1007] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e1008]:
+            - link "Security" [ref=e1009] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e1010]:
+            - link "Status" [ref=e1011] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e1012]:
+            - link "Community" [ref=e1013] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e1014]:
+            - link "Docs" [ref=e1015] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e1016]:
+            - link "Contact" [ref=e1017] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e1018]:
+            - button "Manage cookies" [ref=e1020] [cursor=pointer]
+          - listitem [ref=e1021]:
+            - button "Do not share my personal information" [ref=e1023] [cursor=pointer]
